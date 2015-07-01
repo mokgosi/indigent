@@ -1,0 +1,18 @@
+{% extends "::base.html.twig" %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/pages/profile.css') }}" />
+{% endblock%}    
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/profile.js') }}"></script>
+    <script>
+        jQuery(document).ready(function () {
+            App.init(); // initlayout and core plugins
+            Profile.init();
+        });
+    </script>
+{% endblock%}    
+{% block main %}
+    {% include "FOSUserBundle:Profile:show_content.html.twig" %}
+{% endblock %}

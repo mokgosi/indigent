@@ -1,0 +1,20 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+
+    <h3 >Forget Password ?</h3>
+    <p>Enter your e-mail address below to reset your password.</p>
+
+    <div class="control-group">
+        <label class="control-label visible-ie8 visible-ie9">Email</label>
+        <div class="controls">
+            <div class="input-icon left">
+                <i class="icon-envelope"></i>
+                {{ form_widget(form.email, { 'attr': {'class': 'm-wrap placeholder-no-fix', 'placeholder':'Email'} }) }}
+            </div>
+        </div>
+    </div>
+    <div>
+        <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
+    </div>
+</form>

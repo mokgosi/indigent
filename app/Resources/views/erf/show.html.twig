@@ -1,0 +1,60 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Erf</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Erftypeid</th>
+                <td>{{ entity.erfTypeId }}</td>
+            </tr>
+            <tr>
+                <th>Erfno</th>
+                <td>{{ entity.erfNo }}</td>
+            </tr>
+            <tr>
+                <th>Erfstreetname</th>
+                <td>{{ entity.erfStreetName }}</td>
+            </tr>
+            <tr>
+                <th>Erfsectionid</th>
+                <td>{{ entity.erfSectionId }}</td>
+            </tr>
+            <tr>
+                <th>Erflocationid</th>
+                <td>{{ entity.erfLocationId }}</td>
+            </tr>
+            <tr>
+                <th>Erfownerid</th>
+                <td>{{ entity.erfOwnerId }}</td>
+            </tr>
+            <tr>
+                <th>Created</th>
+                <td>{{ entity.created|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Updated</th>
+                <td>{{ entity.updated|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('erf') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('erf_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

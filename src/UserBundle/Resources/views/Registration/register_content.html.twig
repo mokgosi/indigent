@@ -1,0 +1,97 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+    {{ form_widget(form._token) }}
+
+    {#<div>
+        <input type="submit" value="{{ 'registration.submit'|trans }}" />
+    </div>#}
+
+    <h3 >Sign Up</h3>
+    <p>Enter your personal details below:</p>
+
+    <div class="control-group">
+        <label class="control-label visible-ie8 visible-ie9">First Name</label>
+        <div class="controls">
+            <div class="input-icon left">
+                <i class="icon-font"></i>
+                {{ form_widget(form.first_name, { 'attr': {'class': 'm-wrap placeholder-no-fix', 'placeholder':'First Name'} }) }}
+            </div>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label visible-ie8 visible-ie9">Last Name</label>
+        <div class="controls">
+            <div class="input-icon left">
+                <i class="icon-font"></i>
+                {{ form_widget(form.last_name, { 'attr': {'class': 'm-wrap placeholder-no-fix', 'placeholder':'Last Name'} }) }}
+            </div>
+        </div>
+    </div>
+    <div class="control-group">
+        <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+        <label class="control-label visible-ie8 visible-ie9">Email</label>
+        <div class="controls">
+            <div class="input-icon left">
+                <i class="icon-envelope"></i>
+                {{ form_widget(form.email, { 'attr': {'class': 'm-wrap placeholder-no-fix', 'placeholder':'Email'} }) }}
+            </div>
+        </div>
+    </div>
+
+    <p>Enter your account details below:</p>
+
+    <div class="control-group">
+        <label class="control-label visible-ie8 visible-ie9">Username</label>
+        <div class="controls">
+            <div class="input-icon left">
+                <i class="icon-user"></i>
+                {{ form_widget(form.username, { 'attr': {'class': 'm-wrap placeholder-no-fix'} }) }}
+            </div>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label visible-ie8 visible-ie9">Password</label>
+        <div class="controls">
+            <div class="input-icon left">
+                <i class="icon-lock"></i>
+                {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'm-wrap placeholder-no-fix', 'placeholder': 'Password', 'autocomplete':'off'} }) }}    
+            </div>
+        </div>
+    </div>        
+    <div class="control-group">
+        <label class="control-label visible-ie8 visible-ie9">Repeat password</label>
+        <div class="controls">
+            <div class="input-icon left">
+                <i class="icon-lock"></i>
+                {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'm-wrap placeholder-no-fix', 'placeholder': 'Repeat Password', 'autocomplete':'off'} }) }}    
+            </div>
+        </div>
+    </div> 
+    <div class="control-group">
+        <label class="control-label visible-ie8 visible-ie9">Telephone</label>
+        <div class="controls">
+            <div class="input-icon left">
+                <i class="icon-lock"></i>
+                {{ form_widget(form.telephone, { 'attr': {'class': 'm-wrap placeholder-no-fix', 'placeholder': 'Telephone', 'autocomplete':'off'} }) }}    
+            </div>
+        </div>
+    </div>         
+    <div class="control-group">
+        <label class="control-label visible-ie8 visible-ie9">Mobile</label>
+        <div class="controls">
+            <div class="input-icon left">
+                <i class="icon-lock"></i>
+                {{ form_widget(form.mobile, { 'attr': {'class': 'm-wrap placeholder-no-fix', 'placeholder': 'Mobile', 'autocomplete':'off'} }) }}    
+            </div>
+        </div>
+    </div>              
+    <div class="form-actions">
+        <a href="{{ path('fos_user_security_login') }}"  id="register-back-btn" class="btn" >
+            <i class="m-icon-swapleft"></i>  Back
+        </a>
+        <button type="submit" id="register-submit-btn" class="btn green pull-right">
+            {{ 'registration.submit'|trans }} <i class="m-icon-swapright m-icon-white"></i>
+        </button>            
+    </div>
+</form>
