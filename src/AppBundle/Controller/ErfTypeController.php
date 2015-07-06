@@ -31,9 +31,9 @@ class ErfTypeController extends Controller
 
         $entities = $em->getRepository('AppBundle:ErfType')->findAll();
 
-        return array(
-            'entities' => $entities,
-        );
+        return $this->render('erftype/index.html.twig', array(
+            'entities' => $entities
+        ));
     }
     /**
      * Creates a new ErfType entity.
@@ -86,17 +86,16 @@ class ErfTypeController extends Controller
      *
      * @Route("/new", name="erftype_new")
      * @Method("GET")
-     * @Template()
      */
     public function newAction()
     {
         $entity = new ErfType();
         $form   = $this->createCreateForm($entity);
 
-        return array(
+        return $this->render('erftype/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        );
+        ));
     }
 
     /**
@@ -129,7 +128,6 @@ class ErfTypeController extends Controller
      *
      * @Route("/{id}/edit", name="erftype_edit")
      * @Method("GET")
-     * @Template()
      */
     public function editAction($id)
     {
@@ -143,12 +141,12 @@ class ErfTypeController extends Controller
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
+        
+        return $this->render('erftype/edit.html.twig', array(
+            'entity' => $entity,
+            'form'   => $editForm->createView(),
+        ));
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
     }
 
     /**

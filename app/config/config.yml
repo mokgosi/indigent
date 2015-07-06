@@ -86,3 +86,10 @@ fos_user:
     registration:
         form:
             type: app_user_registration
+    profile:
+        form:
+            type: app_user_profile
+                
+            
+fos_js_routing:
+    routes_to_expose: [ fos_user_profile_edit ]            

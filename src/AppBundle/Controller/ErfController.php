@@ -39,7 +39,6 @@ class ErfController extends Controller
      *
      * @Route("/", name="erf_create")
      * @Method("POST")
-     * @Template("AppBundle:Erf:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -55,10 +54,10 @@ class ErfController extends Controller
             return $this->redirect($this->generateUrl('erf_show', array('id' => $entity->getId())));
         }
 
-        return array(
+        return $this->render('erf/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        );
+        ));
     }
 
     /**
@@ -85,17 +84,16 @@ class ErfController extends Controller
      *
      * @Route("/new", name="erf_new")
      * @Method("GET")
-     * @Template()
      */
     public function newAction()
     {
         $entity = new Erf();
         $form   = $this->createCreateForm($entity);
 
-        return array(
+        return $this->render('erf/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        );
+        ));
     }
 
     /**

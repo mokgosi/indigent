@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\ErfTypeRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class ErfType
 {
@@ -27,6 +28,13 @@ class ErfType
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=512)
+     */
+    private $description;
 
     /**
      * @var \DateTime
@@ -41,8 +49,7 @@ class ErfType
      * @ORM\Column(name="updated", type="datetime")
      */
     private $updated;
-
-
+    
     /**
      * Get id
      *
@@ -74,6 +81,25 @@ class ErfType
     public function getName()
     {
         return $this->name;
+    }
+    
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    function getDescription() {
+        return $this->description;
+    }
+
+     /**
+     * Set description
+     *
+     * @param string $description
+     * @return ErfType
+     */
+    function setDescription($description) {
+        $this->description = $description;
     }
 
     /**
@@ -121,4 +147,18 @@ class ErfType
     {
         return $this->updated;
     }
+     
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue() {
+
+        $this->setUpdated(new \DateTime());
+
+        if ($this->getCreated() == null) {
+            $this->setCreated(new \DateTime());
+        }
+    }
+    
 }

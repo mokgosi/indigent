@@ -23,7 +23,6 @@ class SectionController extends Controller
      *
      * @Route("/", name="section")
      * @Method("GET")
-     * @Template()
      */
     public function indexAction()
     {
@@ -31,9 +30,9 @@ class SectionController extends Controller
 
         $entities = $em->getRepository('AppBundle:Section')->findAll();
 
-        return array(
-            'entities' => $entities,
-        );
+        return $this->render('section/index.html.twig', array(
+            'entities' => $entities
+        ));
     }
     /**
      * Creates a new Section entity.
@@ -86,17 +85,16 @@ class SectionController extends Controller
      *
      * @Route("/new", name="section_new")
      * @Method("GET")
-     * @Template()
      */
     public function newAction()
     {
         $entity = new Section();
         $form   = $this->createCreateForm($entity);
 
-        return array(
+        return $this->render('section/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        );
+        ));
     }
 
     /**
@@ -129,7 +127,6 @@ class SectionController extends Controller
      *
      * @Route("/{id}/edit", name="section_edit")
      * @Method("GET")
-     * @Template()
      */
     public function editAction($id)
     {
@@ -144,11 +141,11 @@ class SectionController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
+        return $this->render('section/new.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
 
     /**

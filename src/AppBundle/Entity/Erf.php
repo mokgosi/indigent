@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\ErfRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Erf
 {
@@ -57,11 +58,46 @@ class Erf
     private $erfLocationId;
     
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="erf_owner_id", type="integer")
+     * @ORM\Column(name="erf_owner_first_name", type="string", length=255)
      */
-    private $erfOwnerId;
+     private $erfOwnerFirstName;
+     
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="erf_owner_last_name", type="string", length=255)
+     */
+    private $erfOwnerLastName;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="erf_owner_mobile", type="string", length=255)
+     */
+    private $erfOwnerMobile;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="erf_owner_telephone", type="string", length=255)
+     */
+    private $erfOwnerTelephone;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="erf_owner_email", type="string", length=255)
+     */
+    private $erfOwnerEmail;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="erf_owner_address", type="string", length=255)
+     */
+    private $erfOwnerAddress;
 
     /**
      * @var \DateTime
@@ -76,6 +112,12 @@ class Erf
      * @ORM\Column(name="updated", type="datetime")
      */
     private $updated;
+    
+    
+    public function __construct() {
+        $this->created = new \DateTime();
+        $this->updated = new \DateTime();
+    }
 
     /**
      * Get id
@@ -201,7 +243,121 @@ class Erf
     {
         return $this->erfLocationId;
     }
+    
+    /**
+     * Get erfOwnerFirstName
+     *
+     * @return string
+     */
+    function getErfOwnerFirstName() {
+        return $this->erfOwnerFirstName;
+    }
 
+    /**
+     * Get erfOwnerLastName
+     *
+     * @return string
+     */
+    function getErfOwnerLastName() {
+        return $this->erfOwnerLastName;
+    }
+
+    /**
+     * Get erfOwnerMobile
+     *
+     * @return string
+     */
+    function getErfOwnerMobile() {
+        return $this->erfOwnerMobile;
+    }
+
+    /**
+     * Get erfOwnerTelephone
+     *
+     * @return string
+     */
+    function getErfOwnerTelephone() {
+        return $this->erfOwnerTelephone;
+    }
+
+    /**
+     * Get erfOwnerEmail
+     *
+     * @return string
+     */
+    function getErfOwnerEmail() {
+        return $this->erfOwnerEmail;
+    }
+    
+    /**
+     * Get erfOwnerAddress
+     *
+     * @return string
+     */
+    function getErfOwnerAddress() {
+        return $this->erfOwnerAddress;
+    }
+
+    /**
+     * Set erfOwnerFirstName
+     *
+     * @param string $erfOwnerFirstName
+     * @return Erf
+     */
+    function setErfOwnerFirstName($erfOwnerFirstName) {
+        $this->erfOwnerFirstName = $erfOwnerFirstName;
+    }
+
+    /**
+     * Set erfOwnerLastName
+     *
+     * @param string $erfOwnerLastName
+     * @return Erf
+     */
+    function setErfOwnerLastName($erfOwnerLastName) {
+        $this->erfOwnerLastName = $erfOwnerLastName;
+    }
+
+    /**
+     * Set erfOwnerMobile
+     *
+     * @param string $erfOwnerMobile
+     * @return Erf
+     */
+    function setErfOwnerMobile($erfOwnerMobile) {
+        $this->erfOwnerMobile = $erfOwnerMobile;
+    }
+
+    /**
+     * Set erfOwnerTelephone
+     *
+     * @param string $erfOwnerTelephone
+     * @return Erf
+     */
+    function setErfOwnerTelephone($erfOwnerTelephone) {
+        $this->erfOwnerTelephone = $erfOwnerTelephone;
+    }
+
+    /**
+     * Set erfOwnerEmail
+     *
+     * @param string $erfOwnerEmail
+     * @return Erf
+     */
+    function setErfOwnerEmail($erfOwnerEmail) {
+        $this->erfOwnerEmail = $erfOwnerEmail;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return Erf
+     */
+    function setErfOwnerAddress($erfOwnerAddress) {
+        $this->erfOwnerAddress = $erfOwnerAddress;
+    }
+        
     /**
      * Set created
      *
@@ -237,7 +393,7 @@ class Erf
 
         return $this;
     }
-
+        
     /**
      * Get updated
      *
@@ -249,25 +405,15 @@ class Erf
     }
 
     /**
-     * Set erfOwnerId
-     *
-     * @param integer $erfOwnerId
-     * @return Erf
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
      */
-    public function setErfOwnerId($erfOwnerId)
-    {
-        $this->erfOwnerId = $erfOwnerId;
+    public function setUpdatedAtValue() {
 
-        return $this;
-    }
+        $this->setUpdated(new \DateTime('now'));
 
-    /**
-     * Get erfOwnerId
-     *
-     * @return integer 
-     */
-    public function getErfOwnerId()
-    {
-        return $this->erfOwnerId;
+        if ($this->getCreated() == null) {
+            $this->setCreated(new \DateTime('now'));
+        }
     }
 }

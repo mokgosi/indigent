@@ -1,0 +1,1 @@
+fos.Router.setData({"base_url":"","routes":{"fos_user_profile_edit":{"tokens":[["text","\/profile\/edit"]],"defaults":[],"requirements":{"_method":"GET|POST"},"hosttokens":[]}},"prefix":"","host":"localhost","scheme":"http"});

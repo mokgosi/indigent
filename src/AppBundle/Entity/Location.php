@@ -3,15 +3,17 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Location
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\LocationRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
-class Location
-{
+class Location {
+
     /**
      * @var integer
      *
@@ -52,25 +54,25 @@ class Location
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created", type="datetime")
+     * @ORM\Column(name="created_at", type="datetime")
+     * @Assert\DateTime()
      */
-    private $created;
+    private $createdAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updated", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime")
+     * @Assert\DateTime()
      */
-    private $updated;
-
+    private $updatedAt;
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -80,8 +82,7 @@ class Location
      * @param string $name
      * @return Location
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
 
         return $this;
@@ -92,8 +93,7 @@ class Location
      *
      * @return string 
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -103,8 +103,7 @@ class Location
      * @param integer $code
      * @return Location
      */
-    public function setCode($code)
-    {
+    public function setCode($code) {
         $this->code = $code;
 
         return $this;
@@ -115,8 +114,7 @@ class Location
      *
      * @return integer 
      */
-    public function getCode()
-    {
+    public function getCode() {
         return $this->code;
     }
 
@@ -126,8 +124,7 @@ class Location
      * @param string $xCoord
      * @return Location
      */
-    public function setXCoord($xCoord)
-    {
+    public function setXCoord($xCoord) {
         $this->xCoord = $xCoord;
 
         return $this;
@@ -138,8 +135,7 @@ class Location
      *
      * @return string 
      */
-    public function getXCoord()
-    {
+    public function getXCoord() {
         return $this->xCoord;
     }
 
@@ -149,8 +145,7 @@ class Location
      * @param string $yCoord
      * @return Location
      */
-    public function setYCoord($yCoord)
-    {
+    public function setYCoord($yCoord) {
         $this->yCoord = $yCoord;
 
         return $this;
@@ -161,20 +156,18 @@ class Location
      *
      * @return string 
      */
-    public function getYCoord()
-    {
+    public function getYCoord() {
         return $this->yCoord;
     }
 
     /**
      * Set created
      *
-     * @param \DateTime $created
+     * @param \DateTime $createdAt
      * @return Location
      */
-    public function setCreated($created)
-    {
-        $this->created = $created;
+    public function setCreatedAt($createdAt) {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -184,20 +177,18 @@ class Location
      *
      * @return \DateTime 
      */
-    public function getCreated()
-    {
-        return $this->created;
+    public function getCreatedAt() {
+        return $this->createdAt;
     }
 
     /**
      * Set updated
      *
-     * @param \DateTime $updated
+     * @param \DateTime $updatedAt
      * @return Location
      */
-    public function setUpdated($updated)
-    {
-        $this->updated = $updated;
+    public function setUpdatedAt($updatedAt) {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
@@ -207,8 +198,21 @@ class Location
      *
      * @return \DateTime 
      */
-    public function getUpdated()
-    {
-        return $this->updated;
+    public function getUpdatedAt() {
+        return $this->updatedAt;
     }
+
+    /**
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps() {
+        $this->setUpdatedAt(new \DateTime('now'));
+
+        if ($this->getCreatedAt() == null) {
+            $this->setCreatedAt(new \DateTime('now'));
+        }
+    }
+
 }

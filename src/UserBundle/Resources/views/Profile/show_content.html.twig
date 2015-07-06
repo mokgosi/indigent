@@ -5,7 +5,7 @@
     <div class="row-fluid">
         <div class="span12">
             <h3 class="page-title">
-                User Profile <small>user profile sample</small>
+                User Profile <small>user profile</small>
             </h3>
             <ul class="breadcrumb">
                 <li>
@@ -59,17 +59,29 @@
                                     <div class="tab-content">
                                         <div id="tab_1-1" class="tab-pane active">
                                             <div style="height: auto;" id="accordion1-1" class="accordion collapse">
-                                                <form action="{{ path('fos_user_profile_edit') }}" method="POST" class="fos_user_profile_edit">
+                                                <form action="{{ path('fos_user_profile_edit') }}" method="POST"  {{ form_enctype(form) }} class="fos_user_profile_edit">
+                                                    
+                                                    
+                                                    {{ form_widget(form._token) }}
+                                                    <label class="control-label">Username</label>
+                                                    {{ form_widget(form.username, { 'attr': {'class': 'm-wrap span8', 'readonly':true} }) }}
+                                                    <label class="control-label">Email</label>
+                                                    {{ form_widget(form.email, { 'attr': {'class': 'm-wrap span8', 'readonly':true} }) }}
+                                                    <label class="control-label">Current Password</label>
+                                                    {{ form_widget(form.current_password, { 'attr': {'class': 'm-wrap span8'} }) }}
                                                     <label class="control-label">First Name</label>
-                                                    <input type="text" name='firstname' placeholder="John" class="m-wrap span8" />
+                                                    {{ form_widget(form.first_name, { 'attr': {'class': 'm-wrap span8'} }) }}
                                                     <label class="control-label">Last Name</label>
-                                                    <input type="text" name='lastname' placeholder="Doe" class="m-wrap span8" />
+                                                    {{ form_widget(form.last_name, { 'attr': {'class': 'm-wrap span8'} }) }}
                                                     <label class="control-label">Mobile</label>
-                                                    <input type="text" name='mobile' placeholder="072 000 0000" class="m-wrap span8" />
+                                                    {{ form_widget(form.mobile, { 'attr': {'class': 'm-wrap span8'} }) }}
                                                     <label class="control-label">Telephone</label>
-                                                    <input type="text" name='telephone' placeholder="072 000 0000" class="m-wrap span8" />
+                                                    {{ form_widget(form.telephone, { 'attr': {'class': 'm-wrap span8'} }) }}
+                                                    
+{#                                                    {{ form_widget(form) }}#}
+                                                    
                                                     <div class="submit-btn">
-                                                        <a href="#" id='updateProfile' class="btn green">Save Changes</a>
+                                                        <button type="submit" id='updateMyProfile' >Save Changes</button> 
                                                         <a href="#" class="btn">Cancel</a>
                                                     </div>
                                                 </form>

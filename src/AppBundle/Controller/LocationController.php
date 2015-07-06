@@ -23,7 +23,6 @@ class LocationController extends Controller
      *
      * @Route("/", name="location")
      * @Method("GET")
-     * @Template()
      */
     public function indexAction()
     {
@@ -31,9 +30,9 @@ class LocationController extends Controller
 
         $entities = $em->getRepository('AppBundle:Location')->findAll();
 
-        return array(
-            'entities' => $entities,
-        );
+        return $this->render('location/index.html.twig', array(
+            'entities' => $entities
+        ));
     }
     /**
      * Creates a new Location entity.
@@ -53,7 +52,8 @@ class LocationController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('location_show', array('id' => $entity->getId())));
+//            return $this->redirect($this->generateUrl('location_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('location'));
         }
 
         return array(
@@ -86,17 +86,16 @@ class LocationController extends Controller
      *
      * @Route("/new", name="location_new")
      * @Method("GET")
-     * @Template()
      */
     public function newAction()
     {
         $entity = new Location();
         $form   = $this->createCreateForm($entity);
 
-        return array(
-            'entity' => $entity,
+        return $this->render('location/new.html.twig', array(
+            'entities' => $entity,
             'form'   => $form->createView(),
-        );
+        ));
     }
 
     /**
@@ -118,10 +117,10 @@ class LocationController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        );
+         return $this->render('location/show.html.twig', array(
+            'entity' => $entity,
+            'delete_form'   => $deleteForm->createView(),
+        ));
     }
 
     /**
@@ -144,11 +143,11 @@ class LocationController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
+        return $this->render('location/edit.html.twig',  array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
 
     /**

@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\SectionRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Section
 {
@@ -27,6 +28,13 @@ class Section
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="location_id", type="integer")
+     */
+    private $locationId;
 
     /**
      * @var string
@@ -55,8 +63,7 @@ class Section
      * @ORM\Column(name="updated", type="datetime")
      */
     private $updated;
-
-
+    
     /**
      * Get id
      *
@@ -181,4 +188,38 @@ class Section
     {
         return $this->updated;
     }
+    
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue() {
+
+        $this->setUpdated(new \DateTime('now'));
+
+        if ($this->getCreated() == null) {
+            $this->setCreated(new \DateTime('now'));
+        }
+    }
+    
+    /**
+     * Get locationId
+     *
+     * @return integer
+     */
+    function getLocationId() {
+        return $this->locationId;
+    }
+
+    /**
+     * Set locationId
+     *
+     * @param integer $locationId
+     * @return Section
+     */
+    function setLocationId($locationId) {
+        $this->locationId = $locationId;
+    }
+
+
 }
