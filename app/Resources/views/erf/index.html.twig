@@ -76,7 +76,8 @@
                                     <th>Section</th>
                                     <th>Location</th>
                                     <th>Type</th>
-                                    <th>Owner</th>
+                                    <th>Owner Name</th>
+                                    <th>Owner Cellphone</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -84,11 +85,12 @@
                                 {% for entity in entities %}
                                     <tr>
                                         <td>{{ entity.erfNo }}</td>
-                                        <td>{{ entity.erfStreetName }}</td>
-                                        <td>{{ entity.erfSectionId }}</td>
-                                        <td>{{ entity.erfLocationId }}</td>
+                                        <td>{{ entity.streetName }}</td>
+                                        <td>{{ entity.sectionId }}</td>
+                                        <td>{{ entity.locationId }}</td>
                                         <td>{{ entity.erfTypeId }}</td>
-                                        <td>{{ entity.erfOwnerId }}</td>
+                                        <td>{{ entity.ownerFirstName }} {{ entity.ownerLastName }}</td>
+                                        <td>{{ entity.ownerMobile }}</td>
                                         <td>
                                             <ul>
                                                 <li>

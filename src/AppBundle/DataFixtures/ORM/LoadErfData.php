@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\HelloBundle\DataFixtures\ORM;
+namespace AppBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -16,17 +16,18 @@ class LoadErfData implements FixtureInterface
         $erf = new Erf();
         $erf->setErfTypeId(1);
         $erf->setErfNo('A200');
-        $erf->setErfStreetName('Street name 1');
-        $erf->setErfSectionId(1);
-        $erf->setErfLocationId(1);
-        $erf->setErfOwnerFirstName('Owner');
-        $erf->setErfOwnerLastName('Owner');
-        $erf->setErfOwnerMobile('0720112966');
-        $erf->setErfOwnerTelephone('0123464545');
-        $erf->setErfOwnerEmail('owner@mail.com');
-        $erf->setErfOwnerAddress('800 Church street');
-        $erf->setErfCreated(new \DateTime('now'));
-        $erf->setErfUpated(new \DateTime('now'));
+        $erf->setStreetName('Street name 1');
+        $erf->setSectionId(1);
+        $erf->setLocationId(1);
+        $erf->setOwnerFirstName('Owner');
+        $erf->setOwnerLastName('Owner');
+        $erf->setOwnerMobile('0720112966');
+        $erf->setOwnerTelephone('0123464545');
+        $erf->setOwnerEmail('owner@mail.com');
+        $erf->setOwnerAddress('800 Church street');
+        $erf->setOwnerIdNo('1234567891234');
+        $erf->setCreated(new \DateTime('now'));
+        $erf->setUpdated(new \DateTime('now'));
         
         $manager->persist($erf);
         $manager->flush();

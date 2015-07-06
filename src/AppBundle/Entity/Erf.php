@@ -39,65 +39,72 @@ class Erf
     /**
      * @var string
      *
-     * @ORM\Column(name="erf_street_name", type="string", length=255)
+     * @ORM\Column(name="street_name", type="string", length=255)
      */
-    private $erfStreetName;
+    private $streetName;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="erf_section_id", type="integer")
+     * @ORM\Column(name="section_id", type="integer")
      */
-    private $erfSectionId;
+    private $sectionId;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="erf_location_id", type="integer")
+     * @ORM\Column(name="location_id", type="integer")
      */
-    private $erfLocationId;
+    private $locationId;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="erf_owner_first_name", type="string", length=255)
+     * @ORM\Column(name="owner_first_name", type="string", length=255)
      */
-     private $erfOwnerFirstName;
+     private $ownerFirstName;
      
     /**
      * @var string
      *
-     * @ORM\Column(name="erf_owner_last_name", type="string", length=255)
+     * @ORM\Column(name="owner_last_name", type="string", length=255)
      */
-    private $erfOwnerLastName;
+    private $ownerLastName;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="erf_owner_mobile", type="string", length=255)
+     * @ORM\Column(name="owner_mobile", type="string", length=255)
      */
-    private $erfOwnerMobile;
+    private $ownerMobile;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="erf_owner_telephone", type="string", length=255)
+     * @ORM\Column(name="owner_telephone", type="string", length=255)
      */
-    private $erfOwnerTelephone;
+    private $ownerTelephone;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="erf_owner_email", type="string", length=255)
+     * @ORM\Column(name="owner_email", type="string", length=255)
      */
-    private $erfOwnerEmail;
+    private $ownerEmail;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="erf_owner_address", type="string", length=255)
+     * @ORM\Column(name="owner_address", type="string", length=255)
      */
-    private $erfOwnerAddress;
+    private $ownerAddress;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="owner_id_no", type="string", length=15)
+     */
+    private $ownerIdNo;
 
     /**
      * @var \DateTime
@@ -176,186 +183,186 @@ class Erf
     }
 
     /**
-     * Set erfStreetName
+     * Set streetName
      *
-     * @param string $erfStreetName
+     * @param string $streetName
      * @return Erf
      */
-    public function setErfStreetName($erfStreetName)
+    public function setStreetName($streetName)
     {
-        $this->erfStreetName = $erfStreetName;
+        $this->streetName = $streetName;
 
         return $this;
     }
 
     /**
-     * Get erfStreetName
+     * Get streetName
      *
      * @return string 
      */
-    public function getErfStreetName()
+    public function getStreetName()
     {
-        return $this->erfStreetName;
+        return $this->streetName;
     }
 
     /**
-     * Set erfSectionId
+     * Set sectionId
      *
-     * @param integer $erfSectionId
+     * @param integer $sectionId
      * @return Erf
      */
-    public function setErfSectionId($erfSectionId)
+    public function setSectionId($sectionId)
     {
-        $this->erfSectionId = $erfSectionId;
+        $this->sectionId = $sectionId;
 
         return $this;
     }
 
     /**
-     * Get erfSectionId
+     * Get sectionId
      *
      * @return integer 
      */
-    public function getErfSectionId()
+    public function getSectionId()
     {
-        return $this->erfSectionId;
+        return $this->sectionId;
     }
 
     /**
-     * Set erfLocationId
+     * Set locationId
      *
-     * @param integer $erfLocationId
+     * @param integer $locationId
      * @return Erf
      */
-    public function setErfLocationId($erfLocationId)
+    public function setLocationId($locationId)
     {
-        $this->erfLocationId = $erfLocationId;
+        $this->locationId = $locationId;
 
         return $this;
     }
 
     /**
-     * Get erfLocationId
+     * Get locationId
      *
      * @return integer 
      */
-    public function getErfLocationId()
+    public function getLocationId()
     {
-        return $this->erfLocationId;
+        return $this->locationId;
     }
     
     /**
-     * Get erfOwnerFirstName
+     * Get ownerFirstName
      *
      * @return string
      */
-    function getErfOwnerFirstName() {
-        return $this->erfOwnerFirstName;
+    function getOwnerFirstName() {
+        return $this->ownerFirstName;
     }
 
     /**
-     * Get erfOwnerLastName
+     * Get ownerLastName
      *
      * @return string
      */
-    function getErfOwnerLastName() {
-        return $this->erfOwnerLastName;
+    function getOwnerLastName() {
+        return $this->ownerLastName;
     }
 
     /**
-     * Get erfOwnerMobile
+     * Get ownerMobile
      *
      * @return string
      */
-    function getErfOwnerMobile() {
-        return $this->erfOwnerMobile;
+    function getOwnerMobile() {
+        return $this->ownerMobile;
     }
 
     /**
-     * Get erfOwnerTelephone
+     * Get ownerTelephone
      *
      * @return string
      */
-    function getErfOwnerTelephone() {
-        return $this->erfOwnerTelephone;
+    function getOwnerTelephone() {
+        return $this->ownerTelephone;
     }
 
     /**
-     * Get erfOwnerEmail
+     * Get ownerEmail
      *
      * @return string
      */
-    function getErfOwnerEmail() {
-        return $this->erfOwnerEmail;
+    function getOwnerEmail() {
+        return $this->ownerEmail;
     }
     
     /**
-     * Get erfOwnerAddress
+     * Get ownerAddress
      *
      * @return string
      */
-    function getErfOwnerAddress() {
-        return $this->erfOwnerAddress;
+    function getOwnerAddress() {
+        return $this->ownerAddress;
     }
 
     /**
-     * Set erfOwnerFirstName
+     * Set ownerFirstName
      *
-     * @param string $erfOwnerFirstName
+     * @param string $ownerFirstName
      * @return Erf
      */
-    function setErfOwnerFirstName($erfOwnerFirstName) {
-        $this->erfOwnerFirstName = $erfOwnerFirstName;
+    function setOwnerFirstName($ownerFirstName) {
+        $this->ownerFirstName = $ownerFirstName;
     }
 
     /**
-     * Set erfOwnerLastName
+     * Set ownerLastName
      *
-     * @param string $erfOwnerLastName
+     * @param string $ownerLastName
      * @return Erf
      */
-    function setErfOwnerLastName($erfOwnerLastName) {
-        $this->erfOwnerLastName = $erfOwnerLastName;
+    function setOwnerLastName($ownerLastName) {
+        $this->ownerLastName = $ownerLastName;
     }
 
     /**
-     * Set erfOwnerMobile
+     * Set ownerMobile
      *
-     * @param string $erfOwnerMobile
+     * @param string $ownerMobile
      * @return Erf
      */
-    function setErfOwnerMobile($erfOwnerMobile) {
-        $this->erfOwnerMobile = $erfOwnerMobile;
+    function setOwnerMobile($ownerMobile) {
+        $this->ownerMobile = $ownerMobile;
     }
 
     /**
-     * Set erfOwnerTelephone
+     * Set ownerTelephone
      *
-     * @param string $erfOwnerTelephone
+     * @param string $ownerTelephone
      * @return Erf
      */
-    function setErfOwnerTelephone($erfOwnerTelephone) {
-        $this->erfOwnerTelephone = $erfOwnerTelephone;
+    function setOwnerTelephone($ownerTelephone) {
+        $this->ownerTelephone = $ownerTelephone;
     }
 
     /**
-     * Set erfOwnerEmail
+     * Set ownerEmail
      *
-     * @param string $erfOwnerEmail
+     * @param string $ownerEmail
      * @return Erf
      */
-    function setErfOwnerEmail($erfOwnerEmail) {
-        $this->erfOwnerEmail = $erfOwnerEmail;
+    function setOwnerEmail($ownerEmail) {
+        $this->ownerEmail = $ownerEmail;
     }
 
     /**
-     * Set created
+     * Set ownerAddress
      *
-     * @param \DateTime $created
+     * @param string $ownerAddress
      * @return Erf
      */
-    function setErfOwnerAddress($erfOwnerAddress) {
-        $this->erfOwnerAddress = $erfOwnerAddress;
+    function setOwnerAddress($ownerAddress) {
+        $this->ownerAddress = $ownerAddress;
     }
         
     /**
@@ -416,4 +423,26 @@ class Erf
             $this->setCreated(new \DateTime('now'));
         }
     }
+    
+    /**
+     * Get updated
+     *
+     * @return  string
+     */
+    function getOwnerIdNo() {
+        return $this->ownerIdNo;
+    }
+
+    /**
+     * Set ownerIdNo
+     *
+     * @param string $ownerIdNo
+     * @return Erf
+     */
+    function setOwnerIdNo($ownerIdNo) {
+        $this->ownerIdNo = $ownerIdNo;
+    }
+
+
+    
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\HelloBundle\DataFixtures\ORM;
+namespace AppBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -16,8 +16,8 @@ class LoadErfTypeData implements FixtureInterface
         $erftype = new ErfType();
         $erftype->setName('Residential');
         $erftype->setDescription('Short description of erf');
-        $erftype->setErfCreated(new \DateTime('now'));
-        $erftype->setErfUpated(new \DateTime('now'));
+        $erftype->setCreated(new \DateTime('now'));
+        $erftype->setUpdated(new \DateTime('now'));
         
         $manager->persist($erftype);
         $manager->flush();

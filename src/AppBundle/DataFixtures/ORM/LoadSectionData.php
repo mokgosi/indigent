@@ -18,8 +18,8 @@ class LoadSectionData implements FixtureInterface
         $sec->setLocationId(1);
         $sec->setXCoord('012345678');
         $sec->setYCoord('-2012345678');
-        $sec->setErfCreated(new \DateTime('now'));
-        $sec->setErfUpated(new \DateTime('now'));
+        $sec->setCreated(new \DateTime('now'));
+        $sec->setUpdated(new \DateTime('now'));
         
         $manager->persist($sec);
         $manager->flush();

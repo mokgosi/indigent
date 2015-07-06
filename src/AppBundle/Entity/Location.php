@@ -54,18 +54,18 @@ class Location {
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_at", type="datetime")
+     * @ORM\Column(name="created", type="datetime")
      * @Assert\DateTime()
      */
-    private $createdAt;
+    private $created;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @ORM\Column(name="updated", type="datetime")
      * @Assert\DateTime()
      */
-    private $updatedAt;
+    private $updated;
 
     /**
      * Get id
@@ -163,11 +163,11 @@ class Location {
     /**
      * Set created
      *
-     * @param \DateTime $createdAt
+     * @param \DateTime $created
      * @return Location
      */
-    public function setCreatedAt($createdAt) {
-        $this->createdAt = $createdAt;
+    public function setCreated($created) {
+        $this->created = $created;
 
         return $this;
     }
@@ -177,18 +177,18 @@ class Location {
      *
      * @return \DateTime 
      */
-    public function getCreatedAt() {
-        return $this->createdAt;
+    public function getCreated() {
+        return $this->created;
     }
 
     /**
      * Set updated
      *
-     * @param \DateTime $updatedAt
+     * @param \DateTime $updated
      * @return Location
      */
-    public function setUpdatedAt($updatedAt) {
-        $this->updatedAt = $updatedAt;
+    public function setUpdated($updated) {
+        $this->updated = $updated;
 
         return $this;
     }
@@ -198,8 +198,8 @@ class Location {
      *
      * @return \DateTime 
      */
-    public function getUpdatedAt() {
-        return $this->updatedAt;
+    public function getUpdated() {
+        return $this->updated;
     }
 
     /**
@@ -208,10 +208,10 @@ class Location {
      * @ORM\PreUpdate
      */
     public function updatedTimestamps() {
-        $this->setUpdatedAt(new \DateTime('now'));
+        $this->setUpdated(new \DateTime('now'));
 
-        if ($this->getCreatedAt() == null) {
-            $this->setCreatedAt(new \DateTime('now'));
+        if ($this->getCreated() == null) {
+            $this->setCreated(new \DateTime('now'));
         }
     }
 

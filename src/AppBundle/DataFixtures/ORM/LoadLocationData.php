@@ -18,8 +18,8 @@ class LoadErfTypeData implements FixtureInterface
         $loc->setCode(0001);
         $loc->setXCoord('012345678');
         $loc->setYCoord('-2012345678');
-        $loc->setErfCreated(new \DateTime('now'));
-        $loc->setErfUpated(new \DateTime('now'));
+        $loc->setCreated(new \DateTime('now'));
+        $loc->setUpdated(new \DateTime('now'));
         
         $manager->persist($loc);
         $manager->flush();
