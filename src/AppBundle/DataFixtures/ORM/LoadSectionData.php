@@ -14,7 +14,7 @@ class LoadSectionData implements FixtureInterface
     public function load(ObjectManager $manager)
     {
         $sec = new Section();
-        $sec->setName('Residential');
+        $sec->setName('Section 1');
         $sec->setLocationId(1);
         $sec->setXCoord('012345678');
         $sec->setYCoord('-2012345678');

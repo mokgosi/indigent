@@ -51,7 +51,8 @@ class ErfController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('erf_show', array('id' => $entity->getId())));
+//            return $this->redirect($this->generateUrl('erf_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('erf'));
         }
 
         return $this->render('erf/new.html.twig', array(

@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Erf
@@ -11,8 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="AppBundle\Entity\ErfRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Erf
-{
+class Erf {
+
     /**
      * @var integer
      *
@@ -33,13 +34,14 @@ class Erf
      * @var string
      *
      * @ORM\Column(name="erf_no", type="string", length=10)
+     * @Assert\NotBlank()
      */
     private $erfNo;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="street_name", type="string", length=255)
+     * @ORM\Column(name="street_name", type="string", length=255, nullable=true)
      */
     private $streetName;
 
@@ -56,53 +58,54 @@ class Erf
      * @ORM\Column(name="location_id", type="integer")
      */
     private $locationId;
-    
+
     /**
      * @var string
      *
-     * @ORM\Column(name="owner_first_name", type="string", length=255)
+     * @ORM\Column(name="owner_first_name", type="string", length=255, nullable=true)
      */
-     private $ownerFirstName;
-     
+    private $ownerFirstName;
+
     /**
      * @var string
      *
-     * @ORM\Column(name="owner_last_name", type="string", length=255)
+     * @ORM\Column(name="owner_last_name", type="string", length=255, nullable=true)
      */
     private $ownerLastName;
-    
+
     /**
      * @var string
      *
-     * @ORM\Column(name="owner_mobile", type="string", length=255)
+     * @ORM\Column(name="owner_mobile", type="string", length=255, nullable=true)
      */
     private $ownerMobile;
-    
+
     /**
      * @var string
      *
-     * @ORM\Column(name="owner_telephone", type="string", length=255)
+     * @ORM\Column(name="owner_telephone", type="string", length=255, nullable=true)
      */
     private $ownerTelephone;
-    
+
     /**
      * @var string
      *
-     * @ORM\Column(name="owner_email", type="string", length=255)
+     * @ORM\Column(name="owner_email", type="string", length=255, nullable=true)
+     * @Assert\Email
      */
     private $ownerEmail;
-    
+
     /**
      * @var string
      *
-     * @ORM\Column(name="owner_address", type="string", length=255)
+     * @ORM\Column(name="owner_address", type="string", length=255, nullable=true)
      */
     private $ownerAddress;
-    
+
     /**
      * @var string
      *
-     * @ORM\Column(name="owner_id_no", type="string", length=15)
+     * @ORM\Column(name="owner_id_no", type="string", length=15, nullable=true)
      */
     private $ownerIdNo;
 
@@ -119,8 +122,25 @@ class Erf
      * @ORM\Column(name="updated", type="datetime")
      */
     private $updated;
-    
-    
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ErfType", inversedBy="erfs")
+     * @ORM\JoinColumn(name="erf_type_id", referencedColumnName="id")
+     */
+    protected $erfType;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Location", inversedBy="erfs")
+     * @ORM\JoinColumn(name="location_id", referencedColumnName="id")
+     */
+    protected $location;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Section", inversedBy="erfs")
+     * @ORM\JoinColumn(name="section_id", referencedColumnName="id")
+     */
+    protected $section;
+
     public function __construct() {
         $this->created = new \DateTime();
         $this->updated = new \DateTime();
@@ -131,8 +151,7 @@ class Erf
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -142,8 +161,7 @@ class Erf
      * @param integer $erfTypeId
      * @return Erf
      */
-    public function setErfTypeId($erfTypeId)
-    {
+    public function setErfTypeId($erfTypeId) {
         $this->erfTypeId = $erfTypeId;
 
         return $this;
@@ -154,8 +172,7 @@ class Erf
      *
      * @return integer 
      */
-    public function getErfTypeId()
-    {
+    public function getErfTypeId() {
         return $this->erfTypeId;
     }
 
@@ -165,8 +182,7 @@ class Erf
      * @param string $erfNo
      * @return Erf
      */
-    public function setErfNo($erfNo)
-    {
+    public function setErfNo($erfNo) {
         $this->erfNo = $erfNo;
 
         return $this;
@@ -177,8 +193,7 @@ class Erf
      *
      * @return string 
      */
-    public function getErfNo()
-    {
+    public function getErfNo() {
         return $this->erfNo;
     }
 
@@ -188,8 +203,7 @@ class Erf
      * @param string $streetName
      * @return Erf
      */
-    public function setStreetName($streetName)
-    {
+    public function setStreetName($streetName) {
         $this->streetName = $streetName;
 
         return $this;
@@ -200,8 +214,7 @@ class Erf
      *
      * @return string 
      */
-    public function getStreetName()
-    {
+    public function getStreetName() {
         return $this->streetName;
     }
 
@@ -211,8 +224,7 @@ class Erf
      * @param integer $sectionId
      * @return Erf
      */
-    public function setSectionId($sectionId)
-    {
+    public function setSectionId($sectionId) {
         $this->sectionId = $sectionId;
 
         return $this;
@@ -223,8 +235,7 @@ class Erf
      *
      * @return integer 
      */
-    public function getSectionId()
-    {
+    public function getSectionId() {
         return $this->sectionId;
     }
 
@@ -234,8 +245,7 @@ class Erf
      * @param integer $locationId
      * @return Erf
      */
-    public function setLocationId($locationId)
-    {
+    public function setLocationId($locationId) {
         $this->locationId = $locationId;
 
         return $this;
@@ -246,11 +256,10 @@ class Erf
      *
      * @return integer 
      */
-    public function getLocationId()
-    {
+    public function getLocationId() {
         return $this->locationId;
     }
-    
+
     /**
      * Get ownerFirstName
      *
@@ -295,7 +304,7 @@ class Erf
     function getOwnerEmail() {
         return $this->ownerEmail;
     }
-    
+
     /**
      * Get ownerAddress
      *
@@ -364,15 +373,14 @@ class Erf
     function setOwnerAddress($ownerAddress) {
         $this->ownerAddress = $ownerAddress;
     }
-        
+
     /**
      * Set created
      *
      * @param \DateTime $created
      * @return Erf
      */
-    public function setCreated($created)
-    {
+    public function setCreated($created) {
         $this->created = $created;
 
         return $this;
@@ -383,8 +391,7 @@ class Erf
      *
      * @return \DateTime 
      */
-    public function getCreated()
-    {
+    public function getCreated() {
         return $this->created;
     }
 
@@ -394,20 +401,18 @@ class Erf
      * @param \DateTime $updated
      * @return Erf
      */
-    public function setUpdated($updated)
-    {
+    public function setUpdated($updated) {
         $this->updated = $updated;
 
         return $this;
     }
-        
+
     /**
      * Get updated
      *
      * @return \DateTime 
      */
-    public function getUpdated()
-    {
+    public function getUpdated() {
         return $this->updated;
     }
 
@@ -423,7 +428,7 @@ class Erf
             $this->setCreated(new \DateTime('now'));
         }
     }
-    
+
     /**
      * Get updated
      *
@@ -443,6 +448,58 @@ class Erf
         $this->ownerIdNo = $ownerIdNo;
     }
 
+    /**
+     * Set category
+     *
+     * @param AppBundle\Entity\ErfType $erfType
+     */
+    public function setErfType(ErfType $erfType) {
+        $this->erfType = $erfType;
+    }
 
-    
+    /**
+     * Get category
+     *
+     * @return AppBundle\Entity\ErfType 
+     */
+    public function getErfType() {
+        return $this->erfType;
+    }
+
+    /**
+     * Set location
+     *
+     * @param AppBundle\Entity\Location $location
+     */
+    public function setLocation(Location $location) {
+        $this->location = $location;
+    }
+
+    /**
+     * Get location
+     *
+     * @return AppBundle\Entity\Location 
+     */
+    public function getLocation() {
+        return $this->location;
+    }
+
+    /**
+     * Set section
+     *
+     * @param AppBundle\Entity\Section $section
+     */
+    public function setSection(Section $section) {
+        $this->section = $section;
+    }
+
+    /**
+     * Get section
+     *
+     * @return AppBundle\Entity\Section 
+     */
+    public function getSection() {
+        return $this->section;
+    }
+
 }

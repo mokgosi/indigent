@@ -19,7 +19,22 @@ class LoadErfTypeData implements FixtureInterface
         $erftype->setCreated(new \DateTime('now'));
         $erftype->setUpdated(new \DateTime('now'));
         
+        $erftype1 = new ErfType();
+        $erftype1->setName('Commercial');
+        $erftype1->setDescription('Short description of erf');
+        $erftype1->setCreated(new \DateTime('now'));
+        $erftype1->setUpdated(new \DateTime('now'));
+        
+        $erftype2 = new ErfType();
+        $erftype2->setName('Business');
+        $erftype2->setDescription('Short description of erf');
+        $erftype2->setCreated(new \DateTime('now'));
+        $erftype2->setUpdated(new \DateTime('now'));
+        
         $manager->persist($erftype);
+        $manager->persist($erftype1);
+        $manager->persist($erftype2);
+        
         $manager->flush();
     }
     

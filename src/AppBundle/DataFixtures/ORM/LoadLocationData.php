@@ -14,7 +14,7 @@ class LoadErfTypeData implements FixtureInterface
     public function load(ObjectManager $manager)
     {
         $loc = new Location();
-        $loc->setName('Residential');
+        $loc->setName('Locaation 1');
         $loc->setCode(0001);
         $loc->setXCoord('012345678');
         $loc->setYCoord('-2012345678');

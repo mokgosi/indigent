@@ -66,6 +66,11 @@ class Location {
      * @Assert\DateTime()
      */
     private $updated;
+    
+     /**
+     * @ORM\OneToMany(targetEntity="Erf", mappedBy="location") 
+     */
+    protected $erfs;
 
     /**
      * Get id

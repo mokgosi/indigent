@@ -17,8 +17,8 @@ class ErfTypeType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('created')
-            ->add('updated')
+//            ->add('created')
+//            ->add('updated')
         ;
     }
     

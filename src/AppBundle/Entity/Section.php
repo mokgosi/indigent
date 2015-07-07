@@ -64,6 +64,11 @@ class Section
      */
     private $updated;
     
+     /**
+     * @ORM\OneToMany(targetEntity="Erf", mappedBy="section") 
+     */
+    protected $erfs;
+    
     /**
      * Get id
      *

@@ -40,7 +40,6 @@ class ErfTypeController extends Controller
      *
      * @Route("/", name="erftype_create")
      * @Method("POST")
-     * @Template("AppBundle:ErfType:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -53,13 +52,14 @@ class ErfTypeController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('erftype_show', array('id' => $entity->getId())));
+//            return $this->redirect($this->generateUrl('erftype_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('erftype'));
         }
 
-        return array(
+        return $this->render('erftype/new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        );
+        ));
     }
 
     /**
