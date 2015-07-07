@@ -113,6 +113,7 @@ class Erf {
      * @var \DateTime
      *
      * @ORM\Column(name="created", type="datetime")
+     * @Assert\DateTime()
      */
     private $created;
 
@@ -120,6 +121,7 @@ class Erf {
      * @var \DateTime
      *
      * @ORM\Column(name="updated", type="datetime")
+     * @Assert\DateTime()
      */
     private $updated;
 
@@ -140,6 +142,11 @@ class Erf {
      * @ORM\JoinColumn(name="section_id", referencedColumnName="id")
      */
     protected $section;
+    
+     /**
+     * @ORM\OneToMany(targetEntity="Payment", mappedBy="erf") 
+     */
+    protected $payments;
 
     public function __construct() {
         $this->created = new \DateTime();

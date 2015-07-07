@@ -127,7 +127,6 @@ class ErfController extends Controller
      *
      * @Route("/{id}/edit", name="erf_edit")
      * @Method("GET")
-     * @Template()
      */
     public function editAction($id)
     {
@@ -142,11 +141,11 @@ class ErfController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
+        return $this->render('erf/edit.html.twig', array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
 
     /**
@@ -172,7 +171,6 @@ class ErfController extends Controller
      *
      * @Route("/{id}", name="erf_update")
      * @Method("PUT")
-     * @Template("AppBundle:Erf:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -191,14 +189,15 @@ class ErfController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('erf_edit', array('id' => $id)));
+//            return $this->redirect($this->generateUrl('erf_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('erf'));
         }
 
-        return array(
+        return $this->render('erf/edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
     /**
      * Deletes a Erf entity.

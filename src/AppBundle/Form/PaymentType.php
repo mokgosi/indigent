@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ErfTypeType extends AbstractType
+class PaymentType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,8 +15,18 @@ class ErfTypeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('description')
+            ->add('receiptNo')
+            ->add('erf', 'entity', array(
+                    'class' => 'AppBundle:Erf',
+                    'property' => 'erfNo'))
+            ->add('amountDue')
+            ->add('amountReceived')
+            ->add('amountOutstanding')
+            ->add('totalOutstanding')
+            ->add('payedBy')
+            ->add('payedByAddress')
+            ->add('payedByPhone')
+            ->add('fosUserId')
         ;
     }
     
@@ -26,7 +36,7 @@ class ErfTypeType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\ErfType'
+            'data_class' => 'AppBundle\Entity\Payment'
         ));
     }
 
@@ -35,6 +45,6 @@ class ErfTypeType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_erftype';
+        return 'appbundle_payment';
     }
 }

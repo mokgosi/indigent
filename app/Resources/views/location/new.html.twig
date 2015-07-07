@@ -50,6 +50,7 @@
                                                 <div class="control-group">
                                                     <label class="control-label">Name</label>
                                                     <div class="controls">
+                                                        {{ form_errors(form.name) }}
                                                         {{ form_widget(form.name, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
                                                     </div>
                                                 </div>

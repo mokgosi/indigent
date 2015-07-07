@@ -2,11 +2,12 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\ErfType;
 
-class LoadErfTypeData implements FixtureInterface
+class LoadErfTypeData  extends AbstractFixture  implements OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
@@ -36,6 +37,8 @@ class LoadErfTypeData implements FixtureInterface
         $manager->persist($erftype2);
         
         $manager->flush();
+        
+        $this->addReference('ref-erfType', $erftype);
     }
     
     /**

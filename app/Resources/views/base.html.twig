@@ -113,37 +113,44 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                 </form>
                                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
                             </li>
-                            <li class="start active">
+                            <li class="start {% if app.request.attributes.get('_route') == 'dashboard' %}active{% endif %}">
                                 <a href="{{ path('dashboard') }}">
                                     <i class="icon-home"></i> 
                                     <span class="title">Dashboard</span>
                                     <span class="selected"></span>
                                 </a>
                             </li>
-                            <li >
+                            <li class="{{ app.request.attributes.get('_route') in ['erf','erftype','location','section','erf_edit','erf_new','erf_update','erftype_edit','erftype_new','erftype_update','location_edit','location_new','location_update','section_edit','section_new','section_update'] ? 'active' : '' }}">
                                 <a href="javascript:;">
                                     <i class="icon-table"></i> 
                                     <span class="title">ERFs</span>
                                     <span class="arrow "></span>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li >
+                                    <li class="{{ app.request.attributes.get('_route') in ['erf','erf_edit','erf_new','erf_update'] ? 'active' : '' }}">
                                         <a href="{{ path('erf') }}">
                                             Manage ERFs</a>
                                     </li>
-                                    <li >
+                                    <li class="{{ app.request.attributes.get('_route') in ['erftype','erftype_edit','erftype_new','erftype_update'] ? 'active' : '' }}" >
                                         <a href="{{ path('erftype') }}">
                                             Manage Types</a>
                                     </li>
-                                    <li >
+                                    <li class="{{ app.request.attributes.get('_route') in ['location','location_edit','location_new','location_update'] ? 'active' : '' }}" >
                                         <a href="{{ path('location') }}">
                                             Manage Locations</a>
                                     </li>
-                                    <li >
+                                    <li class="{{ app.request.attributes.get('_route') in ['section','section_edit','section_new','section_update'] ? 'active' : '' }}" >
                                         <a href="{{ path('section') }}">
                                             Manage Sections</a>
                                     </li>
                                 </ul>
+                            </li>
+                            <li >
+                                <a href="{{ path('payment') }}">
+                                    <i class="icon-th"></i> 
+                                    <span class="title">Payments</span>
+                                    <span class="arrow "></span>
+                                </a>
                             </li>
                             <li >
                                 <a href="javascript:;">

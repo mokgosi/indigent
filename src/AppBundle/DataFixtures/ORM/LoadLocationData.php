@@ -2,11 +2,12 @@
 
 namespace Acme\HelloBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\Location;
 
-class LoadErfTypeData implements FixtureInterface
+class LoadErfTypeData extends AbstractFixture  implements OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
@@ -23,6 +24,8 @@ class LoadErfTypeData implements FixtureInterface
         
         $manager->persist($loc);
         $manager->flush();
+        
+        $this->addReference('ref-location', $loc);
     }
     
     /**

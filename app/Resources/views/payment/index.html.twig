@@ -2,7 +2,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    
+
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/select2/select2_metro.css') }}" />
     <link rel="stylesheet" href="{{ asset('plugins/data-tables/DT_bootstrap.css') }}" />
 {% endblock%}    
@@ -14,8 +14,6 @@
     <script type="text/javascript" src="{{ asset('plugins/data-tables/jquery.dataTables.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/plugins/data-tables/DT_bootstrap.js') }}"></script>
     <!-- END PAGE LEVEL PLUGINS -->
-    
-    
 
 {% endblock %}
 
@@ -25,8 +23,8 @@
         <div class="row-fluid">
             <div class="span12">
                 <h3 class="page-title">
-                    Manage ERFs
-                    <small>manage erfs</small>
+                    Manage Payments
+                    <small>manage payments</small>
                 </h3>
                 <ul class="breadcrumb">
                     <li>
@@ -34,7 +32,7 @@
                         <a href="index.html">Home</a> 
                         <i class="icon-angle-right"></i>
                     </li>
-                    <li><a href="#">Manage ERFs</a></li>
+                    <li><a href="#">Manage Payments</a></li>
                 </ul>
                 <!-- END PAGE TITLE & BREADCRUMB-->
             </div>
@@ -44,7 +42,7 @@
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet box blue">
                     <div class="portlet-title">
-                        <div class="caption"><i class="icon-edit"></i>Manage ERFs</div>
+                        <div class="caption"><i class="icon-edit"></i>Manage Payments</div>
                         <div class="tools">
                             <a href="javascript:;" class="collapse"></a>
                             <a href="#portlet-config" data-toggle="modal" class="config"></a>
@@ -55,7 +53,7 @@
                     <div class="portlet-body">
                         <div class="table-toolbar">
                             <div class="btn-group">
-                                <a href="{{path('erf_new')}}" id="sample_editable_1_new" class="btn green">
+                                <a href="{{path('payment_new')}}" id="sample_editable_1_new" class="btn green">
                                     Add New <i class="icon-plus"></i>
                                 </a>
                             </div>
@@ -72,33 +70,35 @@
                         <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
                             <thead>
                                 <tr>
-                                    <th>Erf no</th>
-                                    <th>Street Name</th>
-                                    <th>Section</th>
-                                    <th>Location</th>
-                                    <th>Type</th>
-                                    <th>Owner Name</th>
-                                    <th>Owner Cellphone</th>
+                                    <th>Receipt #</th>
+                                    <th>Erf</th>
+                                    <th>Amount Due</th>
+                                    <th>Amount Received</th>
+                                    <th>Amount Outstanding</th>
+                                    <th>Total Outstanding</th>
+                                    <th>Payed by</th>
+                                    <th>Date</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for entity in entities %}
                                     <tr>
-                                        <td>{{ entity.erfNo }}</td>
-                                        <td>{{ entity.streetName }}</td>
-                                        <td>{{ entity.section.name }}</td>
-                                        <td>{{ entity.location.name }}</td>
-                                        <td>{{ entity.erfType.name }}</td>
-                                        <td>{{ entity.ownerFirstName }} {{ entity.ownerLastName }}</td>
-                                        <td>{{ entity.ownerMobile }}</td>
+                                        <td>{{ entity.receiptNo }}</td>
+                                        <td>{{ entity.erf.erfNo }}</td>
+                                        <td>{{ entity.amountDue }}</td>
+                                        <td>{{ entity.amountReceived }}</td>
+                                        <td>{{ entity.amountOutstanding }}</td>
+                                        <td>{{ entity.totalOutstanding }}</td>
+                                        <td>{{ entity.payedBy }}</td>
+                                        <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                                         <td>
                                             <ul>
                                                 <li>
-                                                    <a href="{{ path('erf_show', { 'id': entity.id }) }}">show</a>
+                                                    <a href="{{ path('payment_show', { 'id': entity.id }) }}">show</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ path('erf_edit', { 'id': entity.id }) }}">edit</a>
+                                                    <a href="{{ path('payment_edit', { 'id': entity.id }) }}">edit</a>
                                                 </li>
                                             </ul>
                                         </td>
@@ -110,5 +110,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>            
 {% endblock %}
+

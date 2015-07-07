@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Section
@@ -26,6 +27,7 @@ class Section
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $name;
     
@@ -39,14 +41,14 @@ class Section
     /**
      * @var string
      *
-     * @ORM\Column(name="x_coord", type="string", length=15)
+     * @ORM\Column(name="x_coord", type="string", length=15, nullable=true)
      */
     private $xCoord;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="y_coord", type="string", length=15)
+     * @ORM\Column(name="y_coord", type="string", length=15, nullable=true)
      */
     private $yCoord;
 
@@ -54,6 +56,7 @@ class Section
      * @var \DateTime
      *
      * @ORM\Column(name="created", type="datetime")
+     * @Assert\DateTime()
      */
     private $created;
 
@@ -61,6 +64,7 @@ class Section
      * @var \DateTime
      *
      * @ORM\Column(name="updated", type="datetime")
+     * @Assert\DateTime()
      */
     private $updated;
     
@@ -68,6 +72,12 @@ class Section
      * @ORM\OneToMany(targetEntity="Erf", mappedBy="section") 
      */
     protected $erfs;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Location", inversedBy="sections")
+     * @ORM\JoinColumn(name="location_id", referencedColumnName="id")
+     */
+    protected $location;
     
     /**
      * Get id
@@ -225,6 +235,23 @@ class Section
     function setLocationId($locationId) {
         $this->locationId = $locationId;
     }
+    
+    /**
+     * Set location
+     *
+     * @param AppBundle\Entity\Location $location
+     */
+    public function setLocation(Location $location) {
+        $this->location = $location;
+    }
 
+    /**
+     * Get location
+     *
+     * @return AppBundle\Entity\Location 
+     */
+    public function getLocation() {
+        return $this->location;
+    }
 
 }

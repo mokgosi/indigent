@@ -72,6 +72,11 @@ class Location {
      * @ORM\OneToMany(targetEntity="Erf", mappedBy="location") 
      */
     protected $erfs;
+    
+     /**
+     * @ORM\OneToMany(targetEntity="Section", mappedBy="location") 
+     */
+    protected $sections;
 
     /**
      * Get id

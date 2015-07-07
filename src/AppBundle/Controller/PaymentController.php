@@ -7,43 +7,43 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use AppBundle\Entity\Location;
-use AppBundle\Form\LocationType;
+use AppBundle\Entity\Payment;
+use AppBundle\Form\PaymentType;
 
 /**
- * Location controller.
+ * Payment controller.
  *
- * @Route("/location")
+ * @Route("/payment")
  */
-class LocationController extends Controller
+class PaymentController extends Controller
 {
 
     /**
-     * Lists all Location entities.
+     * Lists all Payment entities.
      *
-     * @Route("/", name="location")
+     * @Route("/", name="payment")
      * @Method("GET")
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AppBundle:Location')->findAll();
+        $entities = $em->getRepository('AppBundle:Payment')->findAll();
 
-        return $this->render('location/index.html.twig', array(
+        return $this->render('payment/index.html.twig', array(
             'entities' => $entities
         ));
     }
     /**
-     * Creates a new Location entity.
+     * Creates a new Payment entity.
      *
-     * @Route("/", name="location_create")
+     * @Route("/", name="payment_create")
      * @Method("POST")
-     * @Template("AppBundle:Location:new.html.twig")
+     * @Template("AppBundle:Payment:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Location();
+        $entity = new Payment();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -52,27 +52,26 @@ class LocationController extends Controller
             $em->persist($entity);
             $em->flush();
 
-//            return $this->redirect($this->generateUrl('location_show', array('id' => $entity->getId())));
-            return $this->redirect($this->generateUrl('location'));
+            return $this->redirect($this->generateUrl('payment_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('location/new.html.twig', array(
+        return array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        ));
+        );
     }
 
     /**
-     * Creates a form to create a Location entity.
+     * Creates a form to create a Payment entity.
      *
-     * @param Location $entity The entity
+     * @param Payment $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Location $entity)
+    private function createCreateForm(Payment $entity)
     {
-        $form = $this->createForm(new LocationType(), $entity, array(
-            'action' => $this->generateUrl('location_create'),
+        $form = $this->createForm(new PaymentType(), $entity, array(
+            'action' => $this->generateUrl('payment_create'),
             'method' => 'POST',
         ));
 
@@ -82,26 +81,27 @@ class LocationController extends Controller
     }
 
     /**
-     * Displays a form to create a new Location entity.
+     * Displays a form to create a new Payment entity.
      *
-     * @Route("/new", name="location_new")
+     * @Route("/new", name="payment_new")
      * @Method("GET")
      */
     public function newAction()
     {
-        $entity = new Location();
+        $entity = new Payment();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('location/new.html.twig', array(
-            'entities' => $entity,
+       
+        return $this->render('payment/new.html.twig', array(
+             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a Location entity.
+     * Finds and displays a Payment entity.
      *
-     * @Route("/{id}", name="location_show")
+     * @Route("/{id}", name="payment_show")
      * @Method("GET")
      * @Template()
      */
@@ -109,24 +109,24 @@ class LocationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Location')->find($id);
+        $entity = $em->getRepository('AppBundle:Payment')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Location entity.');
+            throw $this->createNotFoundException('Unable to find Payment entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
-         return $this->render('location/show.html.twig', array(
-            'entity' => $entity,
-            'delete_form'   => $deleteForm->createView(),
-        ));
+        return array(
+            'entity'      => $entity,
+            'delete_form' => $deleteForm->createView(),
+        );
     }
 
     /**
-     * Displays a form to edit an existing Location entity.
+     * Displays a form to edit an existing Payment entity.
      *
-     * @Route("/{id}/edit", name="location_edit")
+     * @Route("/{id}/edit", name="payment_edit")
      * @Method("GET")
      * @Template()
      */
@@ -134,33 +134,33 @@ class LocationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Location')->find($id);
+        $entity = $em->getRepository('AppBundle:Payment')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Location entity.');
+            throw $this->createNotFoundException('Unable to find Payment entity.');
         }
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('location/edit.html.twig',  array(
+        return array(
             'entity'      => $entity,
-            'form'   => $editForm->createView(),
+            'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        );
     }
 
     /**
-    * Creates a form to edit a Location entity.
+    * Creates a form to edit a Payment entity.
     *
-    * @param Location $entity The entity
+    * @param Payment $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Location $entity)
+    private function createEditForm(Payment $entity)
     {
-        $form = $this->createForm(new LocationType(), $entity, array(
-            'action' => $this->generateUrl('location_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new PaymentType(), $entity, array(
+            'action' => $this->generateUrl('payment_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -169,19 +169,20 @@ class LocationController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Location entity.
+     * Edits an existing Payment entity.
      *
-     * @Route("/{id}", name="location_update")
+     * @Route("/{id}", name="payment_update")
      * @Method("PUT")
+     * @Template("AppBundle:Payment:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Location')->find($id);
+        $entity = $em->getRepository('AppBundle:Payment')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Location entity.');
+            throw $this->createNotFoundException('Unable to find Payment entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -191,20 +192,19 @@ class LocationController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-//            return $this->redirect($this->generateUrl('location', array('id' => $id)));
-            return $this->redirect($this->generateUrl('location'));
+            return $this->redirect($this->generateUrl('payment_edit', array('id' => $id)));
         }
 
-         return $this->render('location/edit.html.twig',  array(
+        return array(
             'entity'      => $entity,
-            'form'   => $editForm->createView(),
+            'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        );
     }
     /**
-     * Deletes a Location entity.
+     * Deletes a Payment entity.
      *
-     * @Route("/{id}", name="location_delete")
+     * @Route("/{id}", name="payment_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -214,21 +214,21 @@ class LocationController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppBundle:Location')->find($id);
+            $entity = $em->getRepository('AppBundle:Payment')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Location entity.');
+                throw $this->createNotFoundException('Unable to find Payment entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('location'));
+        return $this->redirect($this->generateUrl('payment'));
     }
 
     /**
-     * Creates a form to delete a Location entity by id.
+     * Creates a form to delete a Payment entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -237,7 +237,7 @@ class LocationController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('location_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('payment_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

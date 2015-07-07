@@ -2,11 +2,12 @@
 
 namespace Acme\HelloBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\Section;
 
-class LoadSectionData implements FixtureInterface
+class LoadSectionData  extends AbstractFixture  implements OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
@@ -15,7 +16,7 @@ class LoadSectionData implements FixtureInterface
     {
         $sec = new Section();
         $sec->setName('Section 1');
-        $sec->setLocationId(1);
+        $sec->setLocation($this->getReference('ref-location'));
         $sec->setXCoord('012345678');
         $sec->setYCoord('-2012345678');
         $sec->setCreated(new \DateTime('now'));
@@ -23,6 +24,8 @@ class LoadSectionData implements FixtureInterface
         
         $manager->persist($sec);
         $manager->flush();
+        
+        $this->addReference('ref-section', $sec);
     }
     
     /**

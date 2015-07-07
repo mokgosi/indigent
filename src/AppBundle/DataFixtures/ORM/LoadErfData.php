@@ -2,11 +2,12 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\Erf;
 
-class LoadErfData implements FixtureInterface
+class LoadErfData extends AbstractFixture  implements OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
@@ -14,11 +15,11 @@ class LoadErfData implements FixtureInterface
     public function load(ObjectManager $manager)
     {
         $erf = new Erf();
-        $erf->setErfTypeId(1);
+        $erf->setErfType($this->getReference('ref-erfType'));
         $erf->setErfNo('A200');
         $erf->setStreetName('Street name 1');
-        $erf->setSectionId(1);
-        $erf->setLocationId(1);
+        $erf->setSection($this->getReference('ref-section'));
+        $erf->setLocation($this->getReference('ref-location'));
         $erf->setOwnerFirstName('Owner');
         $erf->setOwnerLastName('Owner');
         $erf->setOwnerMobile('0720112966');
@@ -31,6 +32,8 @@ class LoadErfData implements FixtureInterface
         
         $manager->persist($erf);
         $manager->flush();
+        
+        $this->addReference('ref-erf', $erf);
     }
     
     /**

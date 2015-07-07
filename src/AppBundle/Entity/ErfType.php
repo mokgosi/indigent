@@ -58,7 +58,7 @@ class ErfType
      * @ORM\OneToMany(targetEntity="Erf", mappedBy="erfType") 
      */
     protected $erfs;
-    
+
     /**
      * Get id
      *

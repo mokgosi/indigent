@@ -43,15 +43,14 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body form">
-                                    {#                                    <form action="{{ path('location_update', { 'id': entity.id }) }}" {{ form_enctype(form) }} method="POST">  #}
-                                    {{ form_start(form) }}
-
-                                    {{ form_widget(form._token) }}
+                                    {{ form_start( form, {'attr': {'novalidate': 'novalidate'}} ) }}    
+                                    {{ form_errors(form) }}
                                     <div class="row-fluid">
                                         <div class="span6 ">
                                             <div class="control-group">
                                                 <label class="control-label">Name</label>
                                                 <div class="controls">
+                                                    {{ form_errors(form.name) }}
                                                     {{ form_widget(form.name, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
                                                 </div>
                                             </div>
@@ -60,9 +59,9 @@
                                     <div class="row-fluid">
                                         <div class="span6 ">
                                             <div class="control-group">
-                                                <label class="control-label">Code</label>
+                                                <label class="control-label">Location</label>
                                                 <div class="controls">
-                                                    {{ form_widget(form.code, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
+                                                    {{ form_widget(form.location, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
                                                 </div>
                                             </div>
                                         </div>
@@ -88,10 +87,10 @@
                                         </div>
                                     </div>
                                     <div class="form-actions">
-                                        <button type="submit" class="btn blue"><i class="icon-ok"></i> Save</button>
+                                        {{ form_widget(form.submit, { 'attr': {'class': 'btn blue'} }) }}
                                         <a href="{{ path('section') }}" class="btn">Cancel</a>
                                     </div>
-                                    </form>
+                                    {{form_end(form)}}
                                 </div>
                             </div>
                         </div>
