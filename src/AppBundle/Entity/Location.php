@@ -27,27 +27,28 @@ class Location {
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     *  @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="code", type="integer")
+     * @ORM\Column(name="code", type="integer", nullable=true)
      */
     private $code;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="x_coord", type="string", length=15)
+     * @ORM\Column(name="x_coord", type="string", length=15, nullable=true)
      */
     private $xCoord;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="y_coord", type="string", length=15)
+     * @ORM\Column(name="y_coord", type="string", length=15, nullable=true)
      */
     private $yCoord;
 

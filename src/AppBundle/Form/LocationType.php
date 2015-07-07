@@ -16,11 +16,9 @@ class LocationType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('code')
+            ->add('code','text')
             ->add('xCoord')
             ->add('yCoord')
-//            ->add('createdAt','datetime', array('widget' => 'single_text'))
-//            ->add('updatedAt','datetime', array('widget' => 'single_text'))
         ;
     }
     

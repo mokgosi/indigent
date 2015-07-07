@@ -87,8 +87,8 @@
                                         <td>{{ entity.code }}</td>
                                         <td>{{ entity.xCoord }}</td>
                                         <td>{{ entity.yCoord }}</td>
-                                        <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                                        <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                        <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                        <td>{% if entity.updated %}{{ entity.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
                                         <td>
                                             <ul>
                                                 <li>

@@ -42,6 +42,7 @@ class ErfType
      * @var \DateTime
      *
      * @ORM\Column(name="created", type="datetime")
+     * @Assert\DateTime()
      */
     private $created;
 
@@ -49,6 +50,7 @@ class ErfType
      * @var \DateTime
      *
      * @ORM\Column(name="updated", type="datetime")
+     * @Assert\DateTime()
      */
     private $updated;
     

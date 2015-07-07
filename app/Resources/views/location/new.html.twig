@@ -43,8 +43,8 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body form">
-                                    <form action="{{ path('location') }}" {{ form_enctype(form) }} method="POST">  
-                                        {{ form_widget(form._token) }}
+                                        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}} ) }}
+                                        {{ form_errors(form) }}
                                         <div class="row-fluid">
                                             <div class="span6 ">
                                                 <div class="control-group">
@@ -86,10 +86,10 @@
                                             </div>
                                         </div>
                                         <div class="form-actions">
-                                            <button type="submit" class="btn blue"><i class="icon-ok"></i> Save</button>
+                                            {{ form_widget(form.submit, { 'attr': {'class': 'btn blue'} }) }}
                                             <a href="{{ path('location') }}" class="btn">Cancel</a>
                                         </div>
-                                    </form>
+                                    {{form_end(form)}}
                                 </div>
                             </div>
                         </div>
