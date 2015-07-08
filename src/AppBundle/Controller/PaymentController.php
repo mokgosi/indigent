@@ -84,13 +84,14 @@ class PaymentController extends Controller
      * Displays a form to create a new Payment entity.
      *
      * @Route("/new", name="payment_new")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
     public function newAction()
     {
         $entity = new Payment();
+        $entity->setStaffEmail($this->getUser()->getEmail());
+        $entity->setAmountDue($this->getParameter('minimum_fee'));
         $form   = $this->createCreateForm($entity);
-
        
         return $this->render('payment/new.html.twig', array(
              'entity' => $entity,

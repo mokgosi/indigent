@@ -291,6 +291,13 @@ var FormComponents = function () {
             placeholder: "Select an option",
             allowClear: true
         });
+        
+        
+        $('#appbundle_payment_erf').select2({
+            placeholder: "Select an option",
+            allowClear: true
+        });
+        
 
         $('#select2_sample2').select2({
             placeholder: "Select a State",
@@ -725,24 +732,25 @@ var FormComponents = function () {
     return {
         //main function to initiate the module
         init: function () {
-            handleWysihtml5();
-            handleToggleButtons();
-            handleTagsInput();
-            handleDatePickers();
-            handleTimePickers();
-            handleDatetimePicker();
-            handleDateRangePickers();
-            handleClockfaceTimePickers();
-            handleColorPicker();
+            
+//            handleWysihtml5();
+//            handleToggleButtons();
+//            handleTagsInput();
+//            handleDatePickers();
+//            handleTimePickers();
+//            handleDatetimePicker();
+//            handleDateRangePickers();
+//            handleClockfaceTimePickers();
+//            handleColorPicker();
             handleSelect2();
-            handleSelect2Modal();
-            handleInputMasks();
-            handleIPAddressInput();
-            handleMultiSelect();
-            handlePasswordStrengthChecker();
-            handleUsernameAvailabilityChecker1();
-            handleUsernameAvailabilityChecker2();
-            handleUsernameAvailabilityChecker3();
+//            handleSelect2Modal();
+//            handleInputMasks();
+//            handleIPAddressInput();
+//            handleMultiSelect();
+//            handlePasswordStrengthChecker();
+//            handleUsernameAvailabilityChecker1();
+//            handleUsernameAvailabilityChecker2();
+//            handleUsernameAvailabilityChecker3();
         }
 
     };

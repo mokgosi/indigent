@@ -88,9 +88,9 @@ class Payment {
     /**
      * @var integer
      *
-     * @ORM\Column(name="fos_user_id", type="integer")
+     * @ORM\Column(name="staff_email", type="string", length=255)
      */
-    private $fosUserId;
+    private $staffEmail;
 
     /**
      * @var \DateTime
@@ -111,6 +111,10 @@ class Payment {
      * @ORM\JoinColumn(name="erf_id", referencedColumnName="id")
      */
     protected $erf;
+    
+    public function __construct() {
+        $this->created = new \DateTime();
+    }
 
     /**
      * Get id
@@ -311,24 +315,24 @@ class Payment {
     }
 
     /**
-     * Set fosUserId
+     * Set staffEmail
      *
-     * @param integer $fosUserId
+     * @param integer $staffEmail
      * @return Payment
      */
-    public function setFosUserId($fosUserId) {
-        $this->fosUserId = $fosUserId;
+    public function setStaffEmail($staffEmail) {
+        $this->staffEmail = $staffEmail;
 
         return $this;
     }
 
     /**
-     * Get fosUserId
+     * Get staffEmail
      *
      * @return integer 
      */
-    public function getFosUserId() {
-        return $this->fosUserId;
+    public function getStaffEmail() {
+        return $this->staffEmail;
     }
 
     /**

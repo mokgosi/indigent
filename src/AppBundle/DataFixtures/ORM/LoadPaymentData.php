@@ -24,7 +24,7 @@ class LoadPaymentData extends AbstractFixture implements OrderedFixtureInterface
         $pay->setPayedBy('Payer 1');
         $pay->setPayedByAddress('123 Church Street');
         $pay->setPayedByPhone('012 346 1230');
-        $pay->setFosUserId(1);
+        $pay->setStaffEmail('admin@domain.com');
         $pay->setCreated(new \DateTime());
         $pay->setUpdated(new \DateTime());
         
@@ -38,7 +38,7 @@ class LoadPaymentData extends AbstractFixture implements OrderedFixtureInterface
         $pay2->setPayedBy('Payer 1');
         $pay2->setPayedByAddress('123 Church Street');
         $pay2->setPayedByPhone('012 346 1230');
-        $pay2->setFosUserId(1);
+        $pay2->setStaffEmail('admin@domain.com');
         $pay2->setCreated(new \DateTime());
         $pay2->setUpdated(new \DateTime());
         
