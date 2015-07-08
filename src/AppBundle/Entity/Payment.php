@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Payment
@@ -74,13 +75,6 @@ class Payment {
     /**
      * @var string
      *
-     * @ORM\Column(name="payed_by_address", type="string", length=255)
-     */
-    private $payedByAddress;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="payed_by_phone", type="string", length=255)
      */
     private $payedByPhone;
@@ -111,6 +105,19 @@ class Payment {
      * @ORM\JoinColumn(name="erf_id", referencedColumnName="id")
      */
     protected $erf;
+    
+     /**
+     * @var integer
+     *
+     * @ORM\Column(name="payment_method_id", type="integer")
+     */
+    private $paymentMethodId;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="PaymentMethod", inversedBy="payments")
+     * @ORM\JoinColumn(name="payment_method_id", referencedColumnName="id")
+     */
+    protected $paymentMethod;
     
     public function __construct() {
         $this->created = new \DateTime();
@@ -273,27 +280,6 @@ class Payment {
     }
 
     /**
-     * Set payedByAddress
-     *
-     * @param string $payedByAddress
-     * @return Payment
-     */
-    public function setPayedByAddress($payedByAddress) {
-        $this->payedByAddress = $payedByAddress;
-
-        return $this;
-    }
-
-    /**
-     * Get payedByAddress
-     *
-     * @return string 
-     */
-    public function getPayedByAddress() {
-        return $this->payedByAddress;
-    }
-
-    /**
      * Set payedByPhone
      *
      * @param string $payedByPhone
@@ -391,8 +377,45 @@ class Payment {
      *
      * @return AppBundle\Entity\Erf 
      */
-    public function setErf(Erf $erf) {
+    public function setErf(Erf $erf = null) {
         $this->erf = $erf;
+    }
+    
+    /**
+     * Get paymentMethodId
+     *
+     * @return integer
+     */
+    public function getPaymentMethodId() {
+        return $this->paymentMethodId;
+    }
+
+    /**
+     * Set paymentMethodId
+     *
+     * @param integer $paymentMethodId
+     * @return Payment
+     */
+    public function setPaymentMethodId($paymentMethodId) {
+        $this->paymentMethodId = $paymentMethodId;
+    }
+    
+    /**
+     * Get paymentMethod
+     *
+     * @param AppBundle\Entity\PaymentMethod $paymentMethod
+     */
+    public function getPaymentMethod() {
+        return $this->paymentMethod;
+    }
+
+    /**
+     * Set paymentMethod
+     *
+     * @return AppBundle\Entity\PaymentMethod 
+     */
+    public function setPaymentMethod(PaymentMethod $paymentMethod = null) {
+        $this->paymentMethod = $paymentMethod;
     }
 
     /**

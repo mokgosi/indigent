@@ -22,9 +22,9 @@ class LoadPaymentData extends AbstractFixture implements OrderedFixtureInterface
         $pay->setAmountOutstanding(50);
         $pay->setTotalOutstanding(300);
         $pay->setPayedBy('Payer 1');
-        $pay->setPayedByAddress('123 Church Street');
         $pay->setPayedByPhone('012 346 1230');
         $pay->setStaffEmail('admin@domain.com');
+        $pay->setPaymentMethod($this->getReference('ref-method'));
         $pay->setCreated(new \DateTime());
         $pay->setUpdated(new \DateTime());
         
@@ -36,9 +36,9 @@ class LoadPaymentData extends AbstractFixture implements OrderedFixtureInterface
         $pay2->setAmountOutstanding(50);
         $pay2->setTotalOutstanding(300);
         $pay2->setPayedBy('Payer 1');
-        $pay2->setPayedByAddress('123 Church Street');
         $pay2->setPayedByPhone('012 346 1230');
         $pay2->setStaffEmail('admin@domain.com');
+        $pay2->setPaymentMethod($this->getReference('ref-method'));
         $pay2->setCreated(new \DateTime());
         $pay2->setUpdated(new \DateTime());
         
@@ -53,6 +53,6 @@ class LoadPaymentData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 5; // the order in which fixtures will be loaded
+        return 6; // the order in which fixtures will be loaded
     }
 }

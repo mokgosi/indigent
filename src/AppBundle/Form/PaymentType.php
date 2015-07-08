@@ -24,12 +24,15 @@ class PaymentType extends AbstractType
             ->add('amountOutstanding')
             ->add('totalOutstanding')
             ->add('payedBy')
-            ->add('payedByAddress')
             ->add('payedByPhone')
             ->add('staffEmail')
+            ->add('paymentMethod', 'entity', array(
+                    'class' => 'AppBundle:PaymentMethod',
+                    'property' => 'name'))
             ->add('created', 'datetime', array(
                 'widget' => 'single_text',
             ))
+                
         ;
     }
     
