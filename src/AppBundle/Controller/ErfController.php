@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -15,8 +16,7 @@ use AppBundle\Form\ErfType;
  *
  * @Route("/erf")
  */
-class ErfController extends Controller
-{
+class ErfController extends Controller {
 
     /**
      * Lists all Erf entities.
@@ -24,24 +24,23 @@ class ErfController extends Controller
      * @Route("/", name="erf")
      * @Method("GET")
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('AppBundle:Erf')->findAll();
 
         return $this->render('erf/index.html.twig', array(
-            'entities' => $entities
+                    'entities' => $entities
         ));
     }
+
     /**
      * Creates a new Erf entity.
      *
      * @Route("/", name="erf_create")
      * @Method("POST")
      */
-    public function createAction(Request $request)
-    {
+    public function createAction(Request $request) {
         $entity = new Erf();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -56,8 +55,8 @@ class ErfController extends Controller
         }
 
         return $this->render('erf/new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+                    'entity' => $entity,
+                    'form' => $form->createView(),
         ));
     }
 
@@ -68,8 +67,7 @@ class ErfController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Erf $entity)
-    {
+    private function createCreateForm(Erf $entity) {
         $form = $this->createForm(new ErfType(), $entity, array(
             'action' => $this->generateUrl('erf_create'),
             'method' => 'POST',
@@ -86,14 +84,13 @@ class ErfController extends Controller
      * @Route("/new", name="erf_new")
      * @Method("GET")
      */
-    public function newAction()
-    {
+    public function newAction() {
         $entity = new Erf();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return $this->render('erf/new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+                    'entity' => $entity,
+                    'form' => $form->createView(),
         ));
     }
 
@@ -104,8 +101,7 @@ class ErfController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AppBundle:Erf')->find($id);
@@ -117,7 +113,7 @@ class ErfController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -128,8 +124,7 @@ class ErfController extends Controller
      * @Route("/{id}/edit", name="erf_edit")
      * @Method("GET")
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AppBundle:Erf')->find($id);
@@ -142,21 +137,20 @@ class ErfController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('erf/edit.html.twig', array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                    'entity' => $entity,
+                    'form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-    * Creates a form to edit a Erf entity.
-    *
-    * @param Erf $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Erf $entity)
-    {
+     * Creates a form to edit a Erf entity.
+     *
+     * @param Erf $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditForm(Erf $entity) {
         $form = $this->createForm(new ErfType(), $entity, array(
             'action' => $this->generateUrl('erf_update', array('id' => $entity->getId())),
             'method' => 'PUT',
@@ -166,14 +160,14 @@ class ErfController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Erf entity.
      *
      * @Route("/{id}", name="erf_update")
      * @Method("PUT")
      */
-    public function updateAction(Request $request, $id)
-    {
+    public function updateAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AppBundle:Erf')->find($id);
@@ -194,19 +188,19 @@ class ErfController extends Controller
         }
 
         return $this->render('erf/edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a Erf entity.
      *
      * @Route("/{id}", name="erf_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
-    {
+    public function deleteAction(Request $request, $id) {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -232,13 +226,33 @@ class ErfController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('erf_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+                        ->setAction($this->generateUrl('erf_delete', array('id' => $id)))
+                        ->setMethod('DELETE')
+                        ->add('submit', 'submit', array('label' => 'Delete'))
+                        ->getForm()
         ;
     }
+
+    /**
+     * Lists all Erf entities.
+     *
+     * @Route("/{id}/find", name="erf_get_by_id", options={"expose"=true})
+     */
+    public function getErfByIdAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AppBundle:Erf')->find($id);
+        
+        //json_encode() expects an associative array
+        
+        $result = array(
+            'street' => $entity->getStreetName(),
+            'section' => $entity->getSection()->getName(),
+            'section' => $entity->getLocation(),
+            'type' => $entity->getErfType()->getName()
+        );
+        return new JsonResponse($result, 200, array('Content-Type' => 'application/json'));
+    }
+
 }

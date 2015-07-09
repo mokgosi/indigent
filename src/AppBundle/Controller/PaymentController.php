@@ -91,6 +91,8 @@ class PaymentController extends Controller
         $entity = new Payment();
         $entity->setStaffEmail($this->getUser()->getEmail());
         $entity->setAmountDue($this->getParameter('minimum_fee'));
+        $entity->setAmountOutstanding($this->getParameter('minimum_fee'));
+        $entity->setTotalOutstanding (300);
         $form   = $this->createCreateForm($entity);
        
         return $this->render('payment/new.html.twig', array(

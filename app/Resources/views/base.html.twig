@@ -69,7 +69,12 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                             <li class="dropdown user">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                     <img alt="" src="{{ asset('/img/avatar1_small.jpg') }}" />
-                                    <span class="username">{{app.user.username}}</span>
+                                    <span class="username">
+                                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                            {{ app.user.username }} 
+                                        {% endif %}
+
+                                    </span>        
                                     <i class="icon-angle-down"></i>
                                 </a>
                                 <ul class="dropdown-menu">
@@ -234,11 +239,14 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/form-components.js') }}"></script>
+        
+        <script src="{{ asset('js/payment.js') }}"></script>
 
         <script>
             jQuery(document).ready(function () {
                 App.init();
                 FormComponents.init();
+                Payment.init();
             });
         </script>
 
