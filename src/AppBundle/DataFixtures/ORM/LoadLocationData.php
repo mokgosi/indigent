@@ -15,7 +15,7 @@ class LoadErfTypeData extends AbstractFixture  implements OrderedFixtureInterfac
     public function load(ObjectManager $manager)
     {
         $loc = new Location();
-        $loc->setName('Locaation 1');
+        $loc->setName('Reagile');
         $loc->setCode(0001);
         $loc->setXCoord('012345678');
         $loc->setYCoord('-2012345678');

@@ -17,7 +17,7 @@ class LoadErfData extends AbstractFixture  implements OrderedFixtureInterface
         $erf = new Erf();
         $erf->setErfType($this->getReference('ref-erfType'));
         $erf->setErfNo('A200');
-        $erf->setStreetName('Street name 1');
+        $erf->setStreetName('Tsepamo Street');
         $erf->setSection($this->getReference('ref-section'));
         $erf->setLocation($this->getReference('ref-location'));
         $erf->setOwnerFirstName('Owner');
@@ -33,7 +33,7 @@ class LoadErfData extends AbstractFixture  implements OrderedFixtureInterface
         $erf1 = new Erf();
         $erf1->setErfType($this->getReference('ref-erfType'));
         $erf1->setErfNo('A201');
-        $erf1->setStreetName('Street name 1');
+        $erf1->setStreetName('Ketelo Street');
         $erf1->setSection($this->getReference('ref-section'));
         $erf1->setLocation($this->getReference('ref-location'));
         $erf1->setOwnerFirstName('Owner');
@@ -49,7 +49,7 @@ class LoadErfData extends AbstractFixture  implements OrderedFixtureInterface
         $erf2 = new Erf();
         $erf2->setErfType($this->getReference('ref-erfType'));
         $erf2->setErfNo('A202');
-        $erf2->setStreetName('Street name 1');
+        $erf2->setStreetName('Kgomo Street');
         $erf2->setSection($this->getReference('ref-section'));
         $erf2->setLocation($this->getReference('ref-location'));
         $erf2->setOwnerFirstName('Owner');
@@ -65,7 +65,7 @@ class LoadErfData extends AbstractFixture  implements OrderedFixtureInterface
         $erf3 = new Erf();
         $erf3->setErfType($this->getReference('ref-erfType'));
         $erf3->setErfNo('A203');
-        $erf3->setStreetName('Street name 1');
+        $erf3->setStreetName('Smith Street');
         $erf3->setSection($this->getReference('ref-section'));
         $erf3->setLocation($this->getReference('ref-location'));
         $erf3->setOwnerFirstName('Owner');

@@ -12,4 +12,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class PaymentRepository extends EntityRepository
 {
+    public function getCurrentBalance()
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT p FROM AppBundle:Payment p ORDER BY p.created DESC'
+            )->setMaxResults(1)->getOneOrNullResult();
+    }
 }

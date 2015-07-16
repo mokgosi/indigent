@@ -51,8 +51,11 @@ var Payment = function () {
                 if (typeof data.message !== 'undefined') {
                     alert(data.message);
                 }
+                
+                $('div.display-address').html(data.street+', '+data.section+', '+data.location);
+                
             }).done(function () {
-                alert("second success");
+//                alert("second success");
             }).fail(function () {
                 alert("error");
             });

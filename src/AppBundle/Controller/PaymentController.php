@@ -7,16 +7,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\Payment;
 use AppBundle\Form\PaymentType;
+
 
 /**
  * Payment controller.
  *
  * @Route("/payment")
  */
-class PaymentController extends Controller
-{
+class PaymentController extends Controller {
 
     /**
      * Lists all Payment entities.
@@ -24,16 +25,16 @@ class PaymentController extends Controller
      * @Route("/", name="payment")
      * @Method("GET")
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('AppBundle:Payment')->findAll();
 
         return $this->render('payment/index.html.twig', array(
-            'entities' => $entities
+                    'entities' => $entities
         ));
     }
+
     /**
      * Creates a new Payment entity.
      *
@@ -41,8 +42,8 @@ class PaymentController extends Controller
      * @Method("POST")
      * @Template("AppBundle:Payment:new.html.twig")
      */
-    public function createAction(Request $request)
-    {
+    public function createAction(Request $request) {
+
         $entity = new Payment();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -57,7 +58,7 @@ class PaymentController extends Controller
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -68,8 +69,7 @@ class PaymentController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Payment $entity)
-    {
+    private function createCreateForm(Payment $entity) {
         $form = $this->createForm(new PaymentType(), $entity, array(
             'action' => $this->generateUrl('payment_create'),
             'method' => 'POST',
@@ -85,19 +85,29 @@ class PaymentController extends Controller
      *
      * @Route("/new", name="payment_new")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_ADMIN')")
      */
-    public function newAction()
-    {
+    public function newAction() {
+        
         $entity = new Payment();
+
         $entity->setStaffEmail($this->getUser()->getEmail());
+
+        //these should
         $entity->setAmountDue($this->getParameter('minimum_fee'));
         $entity->setAmountOutstanding($this->getParameter('minimum_fee'));
-        $entity->setTotalOutstanding (300);
-        $form   = $this->createCreateForm($entity);
-       
+
+        $em = $this->getDoctrine()->getManager();
+        $payment = $em->getRepository('AppBundle:Payment')
+                ->getCurrentBalance();
+
+        $entity->setTotalOutstanding($payment->getTotalOutstanding());
+
+        $form = $this->createCreateForm($entity);
+
         return $this->render('payment/new.html.twig', array(
-             'entity' => $entity,
-            'form'   => $form->createView(),
+                    'entity' => $entity,
+                    'form' => $form->createView(),
         ));
     }
 
@@ -106,10 +116,9 @@ class PaymentController extends Controller
      *
      * @Route("/{id}", name="payment_show")
      * @Method("GET")
-     * @Template()
+     * @Security("has_role('ROLE_ADMIN')")
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AppBundle:Payment')->find($id);
@@ -120,21 +129,19 @@ class PaymentController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        );
+        return $this->render('payment/show.html.twig', array(
+                    'entity' => $entity,
+                    'delete_form' => $deleteForm->createView(),
+        ));
     }
 
     /**
      * Displays a form to edit an existing Payment entity.
      *
      * @Route("/{id}/edit", name="payment_edit")
-     * @Method("GET")
-     * @Template()
+     * @Security("has_role('ROLE_ADMIN')")
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AppBundle:Payment')->find($id);
@@ -146,22 +153,21 @@ class PaymentController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+        return $this->render('payment/edit.html.twig', array(
+                    'entity' => $entity,
+                    'form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
+        ));
     }
 
     /**
-    * Creates a form to edit a Payment entity.
-    *
-    * @param Payment $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Payment $entity)
-    {
+     * Creates a form to edit a Payment entity.
+     *
+     * @param Payment $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditForm(Payment $entity) {
         $form = $this->createForm(new PaymentType(), $entity, array(
             'action' => $this->generateUrl('payment_update', array('id' => $entity->getId())),
             'method' => 'PUT',
@@ -171,6 +177,7 @@ class PaymentController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Payment entity.
      *
@@ -178,8 +185,7 @@ class PaymentController extends Controller
      * @Method("PUT")
      * @Template("AppBundle:Payment:edit.html.twig")
      */
-    public function updateAction(Request $request, $id)
-    {
+    public function updateAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AppBundle:Payment')->find($id);
@@ -199,19 +205,19 @@ class PaymentController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Payment entity.
      *
      * @Route("/{id}", name="payment_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
-    {
+    public function deleteAction(Request $request, $id) {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -237,13 +243,13 @@ class PaymentController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('payment_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+                        ->setAction($this->generateUrl('payment_delete', array('id' => $id)))
+                        ->setMethod('DELETE')
+                        ->add('submit', 'submit', array('label' => 'Delete'))
+                        ->getForm()
         ;
     }
+
 }

@@ -249,7 +249,7 @@ class ErfController extends Controller {
         $result = array(
             'street' => $entity->getStreetName(),
             'section' => $entity->getSection()->getName(),
-            'section' => $entity->getLocation(),
+            'location' => $entity->getLocation()->getName(),
             'type' => $entity->getErfType()->getName()
         );
         return new JsonResponse($result, 200, array('Content-Type' => 'application/json'));

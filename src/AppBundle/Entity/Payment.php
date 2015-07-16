@@ -26,9 +26,9 @@ class Payment {
     /**
      * @var string
      *
-     * @ORM\Column(name="receipt_no", type="string", length=255)
+     * @ORM\Column(name="ref_no", type="string", length=255, nullable=true)
      */
-    private $receiptNo;
+    private $refNo;
 
     /**
      * @var integer
@@ -36,6 +36,13 @@ class Payment {
      * @ORM\Column(name="erf_id", type="integer")
      */
     private $erfId;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="company_id", type="integer")
+     */
+    private $companyId;
 
     /**
      * @var string
@@ -68,14 +75,14 @@ class Payment {
     /**
      * @var string
      *
-     * @ORM\Column(name="payed_by", type="string", length=255)
+     * @ORM\Column(name="payed_by", type="string", length=255, nullable=true)
      */
     private $payedBy;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="payed_by_phone", type="string", length=255)
+     * @ORM\Column(name="payed_by_phone", type="string", length=255,nullable=true)
      */
     private $payedByPhone;
 
@@ -106,6 +113,12 @@ class Payment {
      */
     protected $erf;
     
+    /**
+     * @ORM\ManyToOne(targetEntity="Company", inversedBy="payments")
+     * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
+     */
+    protected $company;
+    
      /**
      * @var integer
      *
@@ -133,24 +146,24 @@ class Payment {
     }
 
     /**
-     * Set receiptNo
+     * Set refNo
      *
-     * @param string $receiptNo
+     * @param string $refNo
      * @return Payment
      */
-    public function setReceiptNo($receiptNo) {
-        $this->receiptNo = $receiptNo;
+    public function setrefNo($refNo) {
+        $this->refNo = $refNo;
 
         return $this;
     }
 
     /**
-     * Get receiptNo
+     * Get refNo
      *
      * @return string 
      */
-    public function getReceiptNo() {
-        return $this->receiptNo;
+    public function getrefNo() {
+        return $this->refNo;
     }
 
     /**
@@ -416,6 +429,43 @@ class Payment {
      */
     public function setPaymentMethod(PaymentMethod $paymentMethod = null) {
         $this->paymentMethod = $paymentMethod;
+    }
+    
+    /**
+     * Get companyId
+     *
+     * @return integer
+     */
+    public function getCompanyId() {
+        return $this->companyId;
+    }
+
+    /**
+     * Set companyId
+     *
+     * @param integer $companyId
+     * @return Payment
+     */
+    public function setCompanyId($companyId) {
+        $this->companyId = $companyId;
+    }
+    
+    /**
+     * Get company
+     *
+     * @param AppBundle\Entity\Company $company
+     */
+    public function getCompany() {
+        return $this->company;
+    }
+
+    /**
+     * Set company
+     *
+     * @return AppBundle\Entity\Company 
+     */
+    public function setCompany(Company $company = null) {
+        $this->company = $company;
     }
 
     /**

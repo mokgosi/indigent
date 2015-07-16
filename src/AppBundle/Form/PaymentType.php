@@ -15,10 +15,12 @@ class PaymentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('receiptNo','hidden')
             ->add('erf', 'entity', array(
                     'class' => 'AppBundle:Erf',
                     'property' => 'erfNo'))
+            ->add('company', 'entity', array(
+                    'class' => 'AppBundle:Company',
+                    'property' => 'name'))    
             ->add('amountDue')
             ->add('amountReceived')
             ->add('amountOutstanding')
