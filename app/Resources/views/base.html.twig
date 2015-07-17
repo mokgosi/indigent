@@ -64,7 +64,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                         <!-- END LOGO -->
                         <!-- BEGIN RESPONSIVE MENU TOGGLER -->
                         <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
-                            <img src="assets/img/menu-toggler.png" alt="" />
+                            <img src="{{ asset('img/menu-toggler.png') }}" alt="" />
                         </a>          
                         <!-- END RESPONSIVE MENU TOGGLER -->            
                         <!-- BEGIN TOP NAVIGATION MENU -->              
@@ -226,8 +226,9 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
         
         <!-- END CORE PLUGINS -->
         <script src="{{ asset('plugins/data-tables/jquery.dataTables.js') }}" ></script>
-        <script src="{{ asset('assets/plugins/data-tables/DT_bootstrap.js') }}" ></script>
+        <script src="{{ asset('plugins/data-tables/DT_bootstrap.js') }}" ></script>
         <script src="{{ asset('plugins/flot/jquery.flot.js') }}" ></script>
+        <script src="{{ asset('plugins/flot/jquery.flot.categories.js') }}" ></script>
         <script src="{{ asset('plugins/flot/jquery.flot.resize.js') }}"></script>
 
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>

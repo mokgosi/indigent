@@ -33,23 +33,6 @@
             <div class="row-fluid">
                 <div class="span6">
                     <!-- BEGIN PORTLET-->
-                    <div class="portlet solid bordered light-grey">
-                        <div class="portlet-title">
-                            <div class="caption"><i class="icon-bar-chart"></i>Payments Chart</div>
-                        </div>
-                        <div class="portlet-body">
-                            <div id="site_statistics_loading">
-                                <img src="{{ asset('img/loading.gif') }}" alt="loading" />
-                            </div>
-                            <div id="site_statistics_content" class="hide">
-                                <div id="site_statistics" class="chart"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END PORTLET-->
-                </div>
-                <div class="span6">
-                    <!-- BEGIN PORTLET-->
                     <div class="portlet solid light-grey bordered">
                         <div class="portlet-title">
                             <div class="caption"><i class="icon-bullhorn"></i>Pie Chart</div>
@@ -65,6 +48,25 @@
                     </div>
                     <!-- END PORTLET-->
                 </div>
+                <div class="span6">
+                    <!-- BEGIN PORTLET-->
+                    <div class="portlet solid bordered light-grey">
+                        <div class="portlet-title">
+                            <div class="caption"><i class="icon-bar-chart"></i>Payments Chart</div>
+                        </div>
+                        <div class="portlet-body">
+                            <div id="site_statistics_loading">
+                                <img src="{{ asset('img/loading.gif') }}" alt="loading" />
+                            </div>
+                            <div id="site_statistics_content" class="hide">
+{#                                <div id="site_statistics" class="chart"></div>#}
+                                <div id="placeholder" class="chart" style='width:300px'></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END PORTLET-->
+                </div>
+                
 
             </div>
             <div class="clearfix"></div>
@@ -72,12 +74,36 @@
                 <div class="span6">
                     <div class="portlet box blue">
                         <div class="portlet-title">
-                            <div class="caption"><i class="icon-bell"></i>Recent Activities - (Coming Soon)</div>
+                            <div class="caption"><i class="icon-bell"></i>Recent Activities</div>
                         </div>
                         <div class="portlet-body">
                             <div class="scroller" style="height:300px" data-always-visible="1" data-rail-visible="0">
                                 <ul class="feeds">
-
+                                    {% for recent in recents %}
+                                        <li>
+                                            <a href="#">
+                                                <div class="col1">
+                                                    <div class="cont">
+                                                        <div class="cont-col1">
+                                                            <div class="label label-success">                        
+                                                                <i class="icon-check"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="cont-col2">
+                                                            <div class="desc">
+                                                                Payment received - Stand no {{recent.erf.erfNo}}  
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col2">
+                                                    <div class="date">
+                                                        {{ recent.created|date('Y-m-d') }}
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    {% endfor %}   
                                 </ul>
                             </div>
                         </div>

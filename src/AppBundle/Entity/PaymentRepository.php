@@ -18,6 +18,13 @@ class PaymentRepository extends EntityRepository {
                                 'SELECT p FROM AppBundle:Payment p ORDER BY p.created DESC'
                         )->setMaxResults(1)->getOneOrNullResult();
     }
+    
+    public function getRecent() {
+        return $this->getEntityManager()
+                        ->createQuery('SELECT p FROM AppBundle:Payment p ORDER BY p.created DESC')
+                ->setMaxResults(10)
+                ->getResult();
+    }
 
     public function getBarGraphValues() {
         return $this->getEntityManager()
