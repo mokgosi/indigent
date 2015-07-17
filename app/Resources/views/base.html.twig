@@ -43,6 +43,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
             <!-- END GLOBAL MANDATORY STYLES -->
             
             <link rel="stylesheet" href="{{ asset('plugins/data-tables/DT_bootstrap.css') }}" />
+            <link rel="stylesheet" href="{{ asset('css/pages/tasks.css') }}"  type="text/css" media="screen"/>
+
 
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -237,6 +239,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 
         <script src="{{ asset('js/payment.js') }}"></script>
         <script src="{{ asset('js/index.js') }}"></script>
+        <script src="{{ asset('js/tasks.js') }}"></script>
         <script>
             jQuery(document).ready(function () {
                 App.init();
