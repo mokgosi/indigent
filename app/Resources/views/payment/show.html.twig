@@ -91,19 +91,19 @@
                                         <table border="1"  style='width: 100%'>
                                             <tr>
                                                 <td>Amount Due</td>
-                                                <td>{{ entity.amountDue }}</td>
+                                                <td>{{ entity.amountDue|number_format(2, '.', ',')  }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Amount Received</td>
-                                                <td>{{ entity.amountReceived }}</td>
+                                                <td>{{ entity.amountReceived|number_format(2, '.', ',')  }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Amount Still due</td>
-                                                <td>{{ entity.amountOutstanding }}</td>
+                                                <td>{{ entity.amountOutstanding|number_format(2, '.', ',')  }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Total Balance</td>
-                                                <td>{{ entity.totalOutstanding }}</td>
+                                                <td>{{ entity.totalOutstanding|number_format(2, '.', ',')  }}</td>
                                             </tr>
                                         </table>
                                     </td>

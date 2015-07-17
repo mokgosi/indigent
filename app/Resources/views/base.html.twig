@@ -41,6 +41,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
             <link rel="stylesheet" href="{{ asset('plugins/uniform/css/uniform.default.css') }}">
             <link rel="stylesheet" href="{{ asset('plugins/select2/select2_metro.css') }}">
             <!-- END GLOBAL MANDATORY STYLES -->
+            
+            <link rel="stylesheet" href="{{ asset('plugins/data-tables/DT_bootstrap.css') }}" />
 
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -219,22 +221,29 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
         <script src="{{ asset('plugins/jquery.cookie.min.js') }}"></script>
         <script src="{{ asset('plugins/uniform/jquery.uniform.min.js') }}"></script>
         <script src="{{ asset('plugins/select2/select2.min.js') }}"></script>
+        
+        <!-- END CORE PLUGINS -->
+        <script src="{{ asset('plugins/data-tables/jquery.dataTables.js') }}" ></script>
+        <script src="{{ asset('assets/plugins/data-tables/DT_bootstrap.js') }}" ></script>
+        <script src="{{ asset('plugins/flot/jquery.flot.js') }}" ></script>
+        <script src="{{ asset('plugins/flot/jquery.flot.resize.js') }}"></script>
 
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         <script src="{{ asset('js/fos_js_routes.js') }}"></script>
-        <!-- END CORE PLUGINS -->
 
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/form-components.js') }}"></script>
 
         <script src="{{ asset('js/payment.js') }}"></script>
-
+        <script src="{{ asset('js/index.js') }}"></script>
         <script>
             jQuery(document).ready(function () {
                 App.init();
                 FormComponents.init();
                 Payment.init();
+                Index.init();
+                Index.initCharts();
             });
         </script>
 
