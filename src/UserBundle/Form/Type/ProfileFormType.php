@@ -14,6 +14,8 @@ class ProfileFormType extends AbstractType
         $builder->add('last_name');
         $builder->add('telephone');
         $builder->add('mobile');
+        $builder->add('save', 'submit');
+        
     }
 
     public function getParent()

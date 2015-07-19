@@ -1,5 +1,16 @@
 {% extends '::base.html.twig' %}
-
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/form-components.js') }}"></script>
+    <script src="{{ asset('js/payment.js') }}"></script>
+    <script>
+        jQuery(document).ready(function () {
+            App.init();
+            FormComponents.init();
+            Payment.init();
+        });
+    </script>    
+{% endblock %}
 {% block main -%}
 
     <div class="container-fluid">

@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 
 /**
  * PaymentRepository
@@ -18,21 +19,44 @@ class PaymentRepository extends EntityRepository {
                                 'SELECT p FROM AppBundle:Payment p ORDER BY p.created DESC'
                         )->setMaxResults(1)->getOneOrNullResult();
     }
-    
+
     public function getRecent() {
         return $this->getEntityManager()
                         ->createQuery('SELECT p FROM AppBundle:Payment p ORDER BY p.created DESC')
-                ->setMaxResults(10)
-                ->getResult();
+                        ->setMaxResults(10)
+                        ->getResult();
     }
 
     public function getBarGraphValues() {
-        return $this->getEntityManager()
-                ->createQuery(
-                        'SELECT p FROM AppBundle:Payment p GROUP BY p.created ORDER BY p.created ASC '
-                    )->getResult();
+        $results = $this->getEntityManager()
+                        ->createQuery(
+                                'SELECT MONTHNAME(p.created), count(p) FROM AppBundle:Payment p GROUP BY p.created ORDER BY p.created ASC'
+                        )->getResult(Query::HYDRATE_ARRAY);
+        $array = array();
 
-        return $results;
+        foreach ($results as $result) {
+            $array[] = [$result[1], (int) $result[2]];
+        }
+
+        return $array;
+    }
+
+    public function getPieGraphValues() {
+        $results = $this->getEntityManager()
+                        ->createQuery(
+                                'SELECT count(p) '
+                                . 'FROM AppBundle:Payment p '
+                                . 'JOIN AppBundle:Payment p'
+                                . 'GROUP BY p.created '
+                                . 'ORDER BY p.created ASC'
+                        )->getResult(Query::HYDRATE_ARRAY);
+        $array = array();
+
+        foreach ($results as $result) {
+            $array[] = [$result[1], (int) $result[2]];
+        }
+
+        return $array;
     }
 
 }

@@ -1,5 +1,14 @@
 {% extends '::base.html.twig' %}
-
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/form-components.js') }}"></script>
+    <script>
+        jQuery(document).ready(function () {
+            App.init();
+            FormComponents.init();
+        });
+    </script>    
+{% endblock %}
 {% block body -%}
     <h1>Erf</h1>
 

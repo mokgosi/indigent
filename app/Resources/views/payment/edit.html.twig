@@ -1,5 +1,16 @@
 {% extends '::base.html.twig' %}
-
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/form-components.js') }}"></script>
+    <script src="{{ asset('js/payment.js') }}"></script>
+    <script>
+        jQuery(document).ready(function () {
+            App.init();
+            FormComponents.init();
+            Payment.init();
+        });
+    </script>    
+{% endblock %}
 {% block main -%}
 
     <div class="container-fluid">
@@ -96,7 +107,7 @@
                                             <div class="control-group">
                                                 <label class="control-label">Payment Outstanding</label>
                                                 <div class="controls">
-                                                     <div class="input-prepend input-append">
+                                                    <div class="input-prepend input-append">
                                                         <span class="add-on">ZAR</span>{{ form_widget(form.amountOutstanding, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix','readonly':'readonly'} }) }}<span class="add-on">.00</span>
                                                     </div>
                                                 </div>
@@ -128,7 +139,7 @@
                                         </div>        
                                     </div>
 
-{#                                    <h3 class="form-section">Payment Received From</h3>                                                #}
+                                    {#                                    <h3 class="form-section">Payment Received From</h3>                                                #}
 
                                     <div class="row-fluid">
                                         <div class="span6 ">
@@ -149,7 +160,7 @@
                                         </div>        
                                     </div>
 
-{#                                    <h3 class="form-section">Payment Received By</h3>  #}
+                                    {#                                    <h3 class="form-section">Payment Received By</h3>  #}
 
                                     <div class="row-fluid">
                                         <div class="span6 ">

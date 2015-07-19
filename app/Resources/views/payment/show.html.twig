@@ -1,22 +1,16 @@
 {% extends '::base.html.twig' %}
-
-{% block stylesheets %}
+{% block javascripts %}
     {{ parent() }}
-
-    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/select2/select2_metro.css') }}" />
-    <link rel="stylesheet" href="{{ asset('plugins/data-tables/DT_bootstrap.css') }}" />
-{% endblock%}    
-{% block javascript %}
-    {{ parent() }}
-
-    <!-- BEGIN PAGE LEVEL PLUGINS -->
-    <script type="text/javascript" src="{{ asset('plugins/select2/select2.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('plugins/data-tables/jquery.dataTables.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/plugins/data-tables/DT_bootstrap.js') }}"></script>
-    <!-- END PAGE LEVEL PLUGINS -->
-
+    <script src="{{ asset('js/form-components.js') }}"></script>
+    <script src="{{ asset('js/payment.js') }}"></script>
+    <script>
+        jQuery(document).ready(function () {
+            App.init();
+            FormComponents.init();
+            Payment.init();
+        });
+    </script>    
 {% endblock %}
-
 {% block main -%}
     <div class="container-fluid">
         <!-- BEGIN PAGE HEADER-->
@@ -62,8 +56,7 @@
                                 </button>
                                 <ul class="dropdown-menu pull-right">
                                     <li><a href="#">Print</a></li>
-                                    <li><a href="#">Save as PDF</a></li>
-                                    <li><a href="#">Export to Excel</a></li>
+                                    <li><a href="#">Send by Email</a></li>
                                 </ul>
                             </div>
                         </div>

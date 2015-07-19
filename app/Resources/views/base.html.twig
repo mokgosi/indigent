@@ -59,7 +59,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                     <div class="container-fluid">
                         <!-- BEGIN LOGO -->
                         <a class="brand" href="{{ path('dashboard') }}">
-                            &nbsp;&nbsp;&nbsp;&nbsp;IND<span style="color:red">i</span>GENT - <span style="font-size:10px">krlm</span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;IND<span style="color:red">i</span>GENT - <span style="font-size:14px;color:red">Beta 1</span>
                         </a>
                         <!-- END LOGO -->
                         <!-- BEGIN RESPONSIVE MENU TOGGLER -->
@@ -159,16 +159,16 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                             <li >
                                 <a href="javascript:;">
                                     <i class="icon-th"></i> 
-                                    <span class="title">Reports</span>
+                                    <span class="title">Reports - Coming soon!</span>
                                     <span class="arrow "></span>
                                 </a>
-                                <ul class="sub-menu">
+                                {#<ul class="sub-menu">
                                     <li >
                                         <a href="residential.html">Residential ERFs Reports</a>
                                         <a href="commercial.html">Commercial ERFs Reports</a>
                                         <a href="recreational.html">Recreational ERFs Reports</a>
                                     </li>
-                                </ul>
+                                </ul>#}
                             </li>
                         </ul>
                         <!-- END SIDEBAR MENU -->
@@ -227,29 +227,12 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
         <!-- END CORE PLUGINS -->
         <script src="{{ asset('plugins/data-tables/jquery.dataTables.js') }}" ></script>
         <script src="{{ asset('plugins/data-tables/DT_bootstrap.js') }}" ></script>
-        <script src="{{ asset('plugins/flot/jquery.flot.js') }}" ></script>
-        <script src="{{ asset('plugins/flot/jquery.flot.categories.js') }}" ></script>
-        <script src="{{ asset('plugins/flot/jquery.flot.resize.js') }}"></script>
 
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         <script src="{{ asset('js/fos_js_routes.js') }}"></script>
 
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
         <script src="{{ asset('js/app.js') }}"></script>
-        <script src="{{ asset('js/form-components.js') }}"></script>
-
-        <script src="{{ asset('js/payment.js') }}"></script>
-        <script src="{{ asset('js/index.js') }}"></script>
-        <script src="{{ asset('js/tasks.js') }}"></script>
-        <script>
-            jQuery(document).ready(function () {
-                App.init();
-                FormComponents.init();
-                Payment.init();
-                Index.init();
-                Index.initCharts();
-            });
-        </script>
 
     {% endblock %}
 

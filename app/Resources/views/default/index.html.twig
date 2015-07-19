@@ -1,5 +1,23 @@
 {% extends '::base.html.twig' %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('plugins/flot/jquery.flot.js') }}" ></script>
+    <script src="{{ asset('plugins/flot/jquery.flot.categories.js') }}" ></script>
+    <script src="{{ asset('plugins/flot/jquery.flot.pie.js') }}" ></script>
+    <script src="{{ asset('plugins/flot/jquery.flot.resize.js') }}"></script>
+    <script src="{{ asset('js/index.js') }}"></script>
+    <script>
+            var barGraphData = {{ entities|raw }};
+            
+            jQuery(document).ready(function () {
+                App.init();
+                Index.initCharts();
+                Index.init();
+            });
+    </script>    
+{% endblock %}
+
 {% block main -%}
     <div class="container-fluid">
         <!-- BEGIN PAGE HEADER-->
@@ -33,9 +51,26 @@
             <div class="row-fluid">
                 <div class="span6">
                     <!-- BEGIN PORTLET-->
+                    <div class="portlet solid bordered light-grey">
+                        <div class="portlet-title">
+                            <div class="caption"><i class="icon-bar-chart"></i>Payments Pie Chart</div>
+                        </div>
+                        <div class="portlet-body">
+                            <div id="site_statistics_loading">
+                                <img src="{{ asset('img/loading.gif') }}" alt="loading" />
+                            </div>
+                            <div id="site_statistics_content" class="hide">
+                                <div id="site_statistics" class="chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END PORTLET-->
+                </div>
+                <div class="span6">
+                    <!-- BEGIN PORTLET-->
                     <div class="portlet solid light-grey bordered">
                         <div class="portlet-title">
-                            <div class="caption"><i class="icon-bullhorn"></i>Pie Chart</div>
+                            <div class="caption"><i class="icon-bullhorn"></i>Payments Bar Chart</div>
                         </div>
                         <div class="portlet-body">
                             <div id="site_activities_loading">
@@ -48,25 +83,6 @@
                     </div>
                     <!-- END PORTLET-->
                 </div>
-                <div class="span6">
-                    <!-- BEGIN PORTLET-->
-                    <div class="portlet solid bordered light-grey">
-                        <div class="portlet-title">
-                            <div class="caption"><i class="icon-bar-chart"></i>Payments Chart</div>
-                        </div>
-                        <div class="portlet-body">
-                            <div id="site_statistics_loading">
-                                <img src="{{ asset('img/loading.gif') }}" alt="loading" />
-                            </div>
-                            <div id="site_statistics_content" class="hide">
-{#                                <div id="site_statistics" class="chart"></div>#}
-                                <div id="placeholder" class="chart" style='width:300px'></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END PORTLET-->
-                </div>
-                
 
             </div>
             <div class="clearfix"></div>
@@ -112,7 +128,7 @@
                 <div class="span6">
                     <div class="portlet box green tasks-widget">
                         <div class="portlet-title">
-                            <div class="caption"><i class="icon-check"></i>Tasks - (Coming Soon)</div>
+                            <div class="caption"><i class="icon-check"></i>Tasks - (Coming Soon!)</div>
                             <div class="tools">
                                 <a href="#portlet-config" data-toggle="modal" class="config"></a>
                                 <a href="" class="reload"></a>

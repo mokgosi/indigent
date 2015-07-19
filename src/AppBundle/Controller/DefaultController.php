@@ -24,10 +24,12 @@ class DefaultController extends Controller {
         $recents = $em->getRepository('AppBundle:Payment')
                 ->getRecent();
         
-        dump($recents);
-
+        
+//        var_dump($entities);
+//        die;
+        
         return $this->render('default/index.html.twig', array(
-                    'entities' => $entities,
+                    'entities' => json_encode($entities),
                     'recents' => $recents,
         ));
     }
