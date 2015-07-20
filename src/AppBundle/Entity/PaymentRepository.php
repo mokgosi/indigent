@@ -30,7 +30,10 @@ class PaymentRepository extends EntityRepository {
     public function getBarGraphValues() {
         $results = $this->getEntityManager()
                         ->createQuery(
-                                'SELECT MONTHNAME(p.created), count(p) FROM AppBundle:Payment p GROUP BY p.created ORDER BY p.created ASC'
+                                'SELECT MONTHNAME(p.created), count(p) '
+                                . 'FROM AppBundle:Payment p '
+                                . 'GROUP BY p.created '
+                                . 'ORDER BY p.created ASC'
                         )->getResult(Query::HYDRATE_ARRAY);
         $array = array();
 
@@ -44,16 +47,18 @@ class PaymentRepository extends EntityRepository {
     public function getPieGraphValues() {
         $results = $this->getEntityManager()
                         ->createQuery(
-                                'SELECT count(p) '
+                                'SELECT count(p) AS cont, s.id '
                                 . 'FROM AppBundle:Payment p '
-                                . 'JOIN AppBundle:Payment p'
-                                . 'GROUP BY p.created '
-                                . 'ORDER BY p.created ASC'
+                                . 'LEFT JOIN AppBundle:Erf e With e.id = p.erfId '
+                                . 'LEFT JOIN AppBundle:Section s With s.id = e.sectionId '
+                                . 'GROUP BY s.id'
                         )->getResult(Query::HYDRATE_ARRAY);
+        
         $array = array();
 
         foreach ($results as $result) {
-            $array[] = [$result[1], (int) $result[2]];
+            
+            $array[] = array('label'=>'hhhh', 'data'=>$result['cont']);
         }
 
         return $array;
