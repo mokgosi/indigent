@@ -8,14 +8,13 @@
     <script src="{{ asset('plugins/flot/jquery.flot.resize.js') }}"></script>
     <script src="{{ asset('js/index.js') }}"></script>
     <script>
-            var barGraphData = {{ entities|raw }};
-            var pieGraphData = {{ entities1|raw }};
-            
-            jQuery(document).ready(function () {
-                App.init();
-                Index.initCharts();
-                Index.init();
-            });
+        var barGraphData = {{ entities|raw }};
+                var pieGraphData = {{ entities1|raw }};
+                jQuery(document).ready(function () {
+            App.init();
+            Index.initCharts();
+            Index.init();
+        });
     </script>    
 {% endblock %}
 
@@ -114,15 +113,18 @@
                                                     </div>
                                                 </div>
                                                 <div class="col2">
-                                                    <div class="date">
-                                                        {{ recent.created|date('Y-m-d') }}
-                                                    </div>
+                                                    <div class="date" style='font-size: 10px'>{{ recent.created|time_ago_in_words }}</div>
                                                 </div>
                                             </a>
                                         </li>
                                     {% endfor %}   
                                 </ul>
                             </div>
+                        <div class="scroller-footer">
+                            <span class="pull-right">
+                                <a href="#">See All Tasks <i class="m-icon-swapright m-icon-gray"></i></a> &nbsp;
+                            </span>
+                        </div>
                         </div>
                     </div>
                 </div>

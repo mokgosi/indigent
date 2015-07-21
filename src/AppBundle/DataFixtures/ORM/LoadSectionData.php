@@ -14,16 +14,8 @@ class LoadSectionData  extends AbstractFixture  implements OrderedFixtureInterfa
      */
     public function load(ObjectManager $manager)
     {
-        $sec = new Section();
-        $sec->setName('Senthumole');
-        $sec->setLocation($this->getReference('ref-location'));
-        $sec->setXCoord('012345678');
-        $sec->setYCoord('-2012345678');
-        $sec->setCreated(new \DateTime('now'));
-        $sec->setUpdated(new \DateTime('now'));
-        
         $sec1 = new Section();
-        $sec1->setName('Mavista');
+        $sec1->setName('Senthumole');
         $sec1->setLocation($this->getReference('ref-location'));
         $sec1->setXCoord('012345678');
         $sec1->setYCoord('-2012345678');
@@ -31,7 +23,7 @@ class LoadSectionData  extends AbstractFixture  implements OrderedFixtureInterfa
         $sec1->setUpdated(new \DateTime('now'));
         
         $sec2 = new Section();
-        $sec2->setName('Extension 4');
+        $sec2->setName('Mavista');
         $sec2->setLocation($this->getReference('ref-location'));
         $sec2->setXCoord('012345678');
         $sec2->setYCoord('-2012345678');
@@ -39,7 +31,7 @@ class LoadSectionData  extends AbstractFixture  implements OrderedFixtureInterfa
         $sec2->setUpdated(new \DateTime('now'));
         
         $sec3 = new Section();
-        $sec3->setName('Hospital View');
+        $sec3->setName('Extension 4');
         $sec3->setLocation($this->getReference('ref-location'));
         $sec3->setXCoord('012345678');
         $sec3->setYCoord('-2012345678');
@@ -47,22 +39,34 @@ class LoadSectionData  extends AbstractFixture  implements OrderedFixtureInterfa
         $sec3->setUpdated(new \DateTime('now'));
         
         $sec4 = new Section();
-        $sec4->setName('Mountain View');
+        $sec4->setName('Hospital View');
         $sec4->setLocation($this->getReference('ref-location'));
         $sec4->setXCoord('012345678');
         $sec4->setYCoord('-2012345678');
         $sec4->setCreated(new \DateTime('now'));
         $sec4->setUpdated(new \DateTime('now'));
         
-        $manager->persist($sec);
+        $sec5 = new Section();
+        $sec5->setName('Mountain View');
+        $sec5->setLocation($this->getReference('ref-location'));
+        $sec5->setXCoord('012345678');
+        $sec5->setYCoord('-2012345678');
+        $sec5->setCreated(new \DateTime('now'));
+        $sec5->setUpdated(new \DateTime('now'));
+        
         $manager->persist($sec1);
         $manager->persist($sec2);
         $manager->persist($sec3);
         $manager->persist($sec4);
+        $manager->persist($sec5);
         
         $manager->flush();
         
-        $this->addReference('ref-section', $sec);
+        $this->addReference('ref-section1', $sec1);
+        $this->addReference('ref-section2', $sec2);
+        $this->addReference('ref-section3', $sec3);
+        $this->addReference('ref-section4', $sec4);
+        $this->addReference('ref-section5', $sec5);
     }
     
     /**

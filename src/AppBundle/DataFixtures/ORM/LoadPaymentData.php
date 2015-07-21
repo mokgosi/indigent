@@ -13,19 +13,19 @@ class LoadPaymentData extends AbstractFixture implements OrderedFixtureInterface
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager) {
-        $p=0;
-        foreach (range(1, 7) as $i) {
+        $p = 0;
+        foreach (range(1, 100) as $i) {
+            
+            $rand = rand(1, 7);
 
-            $rand = rand(1, 10);
             //add a few recs per month
             $erf = 0;
             foreach (range(1, $rand) as $y) {
                 $p++;
-                $erf++;
                 $pay = new Payment();
                 $pay->setRefNo('2015' . $p);
                 $pay->setCompany($this->getReference('ref-com'));
-                $pay->setErf($this->getReference('ref-erf'));
+                $pay->setErf($this->getReference('ref-erf'.$i));
                 $pay->setAmountDue(100);
                 $pay->setAmountReceived(100);
                 $pay->setAmountOutstanding(0);
@@ -35,7 +35,7 @@ class LoadPaymentData extends AbstractFixture implements OrderedFixtureInterface
                 $pay->setPayedByPhone('012 346 1230');
                 $pay->setStaffEmail('admin@domain.com');
                 $pay->setPaymentMethod($this->getReference('ref-method'));
-                $date = new \DateTime('2015-' . $i . '-15');
+                $date = new \DateTime('2015-' . $y . '-15');
                 $date->add(new \DateInterval('P1M'));
                 $date->sub(new \DateInterval('P1M'));
                 $pay->setCreated($date);

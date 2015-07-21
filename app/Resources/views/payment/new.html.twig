@@ -28,7 +28,7 @@
                         <span class="icon-angle-right"></span>
                     </li>
                     <li>
-                        <a href="#">Add New Payment</a>
+                        <a href="#">New Payment</a>
                     </li>
                 </ul>
             </div>
@@ -195,7 +195,7 @@
                                     <div class="form-actions">
                                         {#<button type="submit" class="btn blue"><i class="icon-ok"></i> Save</button>#}
                                         {{ form_widget(form.submit, { 'attr': {'class': 'btn blue', 'label': '<i class="icon-ok"></i> Save'} }) }}
-                                        <a href="{{ path('erftype') }}" class="btn">Cancel</a>
+                                        <a href="{{ path('payment') }}" class="btn">Cancel</a>
                                     </div>
                                     {{form_end(form)}}
                                 </div>

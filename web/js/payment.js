@@ -19,24 +19,36 @@ var Payment = function () {
             var balAmnt = parseFloat(balance.val());
 
             console.log(insAmnt);
+            
+            if(balance.val() == 0) {
+                received.prop('disabled', true);
+            }
 
             $(document).on('change', '#appbundle_payment_amountReceived', function () {
+                
+                
+                var rec = parseFloat(received.val()).toFixed(2);
+                
 
                 if (received.val() === '') {
                     outstanding.val(outAmnt);
                     balance.val(balAmnt);
                     return;
-                } else if ((parseFloat(received.val()) >= insAmnt && parseFloat(received.val()) < balAmnt) || parseFloat(received.val()) === balAmnt) {
+                } else if ((rec >= insAmnt && rec < balAmnt) || rec == balAmnt) {
                     outstanding.val('0.00');
-                } else if (parseFloat(received.val()) < insAmnt) {
-                    var new_out = (insAmnt - parseFloat(received.val()));
+                } else if (rec < insAmnt) {
+                    var new_out = (insAmnt - rec);
                     outstanding.val(new_out);
+                } else if(rec > balAmnt) {
+                    alert('Account being overpaid by: R'+ parseFloat(rec - balAmnt).toFixed(2));
+                    received.val('');
+                    return;
                 } else {
                     received.val('');
                     outstanding.val(outAmnt);
                     return;
                 }
-                var bal = (balAmnt - parseFloat(received.val()));
+                var bal = (balAmnt - rec);
                 balance.val(bal.toFixed(2));
             });
         }

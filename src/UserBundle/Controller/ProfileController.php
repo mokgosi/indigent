@@ -40,10 +40,15 @@ class ProfileController extends BaseController {
         $formFactory = $this->get('fos_user.profile.form.factory');
         $form = $formFactory->createForm();
         $form->setData($user);
+        
+        $formFactory = $this->get('fos_user.change_password.form.factory');
+
+        $passForm = $formFactory->createForm();
 
         return $this->render('FOSUserBundle:Profile:show.html.twig', array(
                     'user' => $user,
-                    'form' => $form->createView()
+                    'form' => $form->createView(),
+                    'passForm' => $passForm->createView()
         ));
     }
 

@@ -44,12 +44,13 @@
                             <a href="javascript:;" class="remove"></a>
                         </div>
                     </div>
-                    <div class="portlet-body">
+                    <div class="portlet-body form">
                         <div class="table-toolbar">
                             <div class="btn-group">
                                 <a href="{{path('payment_new')}}" id="sample_editable_1_new" class="btn green">
                                     New Payment <i class="icon-plus"></i>
                                 </a>
+
                             </div>
                             <div class="btn-group pull-right">
                                 <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
@@ -69,46 +70,53 @@
                             <p>Website:http://www.kgetlhengrivier.gov.za</p>  
                             <h4>Cash Receipt - Ref #: {{ entity.company.shortName }}{{ entity.refNo }}</h4> 
                         </div>  
-                        <table class="record_properties" border="0" style='width: 100%'>
-                            <tbody>
-                                <tr>
-                                    <td style='width: 50%'>Cash recieved from: {{ entity.payedBy }} ({{ entity.payedByPhone }}) </td>
-                                    <td align='right'>Date: {{ entity.created|date('Y-m-d') }}</td>
-                                </tr>
-                                <tr>
-                                    <td colspan='2'>For (Indegent No): {{ entity.erf.erfNo  }}</td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>
-                                        <table border="1"  style='width: 100%'>
-                                            <tr>
-                                                <td>Amount Due</td>
-                                                <td>{{ entity.amountDue|number_format(2, '.', ',')  }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Amount Received</td>
-                                                <td>{{ entity.amountReceived|number_format(2, '.', ',')  }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Amount Still due</td>
-                                                <td>{{ entity.amountOutstanding|number_format(2, '.', ',')  }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Total Balance</td>
-                                                <td>{{ entity.totalOutstanding|number_format(2, '.', ',')  }}</td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan='2'>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td colspan='2'>Cash recieved by: {{ entity.staffEmail }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class='row-fluid'>
+
+                            <table class="record_properties" border="0" style='width: 100%'>
+                                <tbody>
+                                    <tr>
+                                        <td style='width: 50%'>Cash recieved from: {{ entity.payedBy }} ({{ entity.payedByPhone }}) </td>
+                                        <td align='right'>Date: {{ entity.created|date('Y-m-d') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='2'>For (Indegent No): {{ entity.erf.erfNo  }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>
+                                            <table border="1"  style='width: 100%'>
+                                                <tr>
+                                                    <td>Amount Due</td>
+                                                    <td>{{ entity.amountDue|number_format(2, '.', ',')  }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Amount Received</td>
+                                                    <td>{{ entity.amountReceived|number_format(2, '.', ',')  }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Amount Still due</td>
+                                                    <td>{{ entity.amountOutstanding|number_format(2, '.', ',')  }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total Balance</td>
+                                                    <td>{{ entity.totalOutstanding|number_format(2, '.', ',')  }}</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='2'>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='2'>Cash recieved by: {{ entity.staffEmail }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div> 
+                        <div class="form-actions">
+                            <a href="{{ path('payment_edit', { 'id': entity.id }) }}"  class="btn blue"><i class="icon-pencil"></i> Edit</a>
+                            <a href="{{ path('payment') }}" class="btn">Back to list</a>
+                        </div>
                     </div>
                 </div>
             </div>

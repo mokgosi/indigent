@@ -11,3 +11,9 @@ services:
         class: AppBundle\EventListener\PaymentReference
         tags:
             - { name: doctrine.event_listener, event: postPersist }
+            
+    salavert.twig.time_ago:
+        class: Salavert\Twig\Extension\TimeAgoExtension
+        arguments: [@translator]
+        tags:
+        - { name: twig.extension }        

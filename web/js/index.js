@@ -187,10 +187,6 @@ var Index = function () {
                 $('#site_activities_loading').hide();
                 $('#site_activities_content').show();
 
-//                var activities = [["January", 10], ["February", 8], ["March", 4], ["April", 13], ["May", 17], ["June", 9]];
-
-//                var data = [["January", 10], ["February", 8], ["March", 4], ["April", 13], ["May", 17], ["June", 9]];
-                
                 $.plot("#site_activities", [barGraphData], {
                     series: {
                         color: "rgba(107,207,123, 0.9)",
@@ -217,31 +213,40 @@ var Index = function () {
                     }
                 });
             }
-            
-             if ($('#site_statistics').size() != 0) {
-                 
-                 //site activities
+
+            if ($('#site_statistics').size() != 0) {
+
+                //site activities
                 var previousPoint2 = null;
+
                 $('#site_statistics_loading').hide();
                 $('#site_statistics_content').show();
-                
-                var sdata = [
-			{ label: "Series1",  data: 10},
-			{ label: "Series2",  data: 30},
-			{ label: "Series3",  data: 90},
-			{ label: "Series4",  data: 70},
-			{ label: "Series5",  data: 80},
-			{ label: "Series6",  data: 110}
-		];
 
-                $.plot('#site_statistics', sdata, {
+                $.plot('#site_statistics', pieGraphData, {
                     series: {
                         pie: {
-                            show: true
+                            show: true,
+                            radius: 1,
+                            label: {
+                                show: true,
+                                radius: 3 / 4,
+                                formatter: labelFormatter,
+                                background: {
+//                                    opacity: 0.5
+                                }
+                            }
                         }
+                    },
+                    grid: {
+                        hoverable: true,
+                        clickable: true
                     }
                 });
-             }
+            }
+
+            function labelFormatter(label, series) {
+                return "<div style='font-size:8pt; text-align:center; padding:2px; color:white;'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";
+            }
         },
         initMiniCharts: function () {
 
