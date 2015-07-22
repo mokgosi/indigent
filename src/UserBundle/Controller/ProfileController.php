@@ -40,12 +40,12 @@ class ProfileController extends BaseController {
         $formFactory = $this->get('fos_user.profile.form.factory');
         $form = $formFactory->createForm();
         $form->setData($user);
-        
-        $formFactory = $this->get('fos_user.change_password.form.factory');
 
-        $passForm = $formFactory->createForm();
+        $formFactory1 = $this->get('fos_user.change_password.form.factory');
 
-        return $this->render('FOSUserBundle:Profile:show.html.twig', array(
+        $passForm = $formFactory1->createForm();
+
+        return $this->render('UserBundle:Profile:show.html.twig', array(
                     'user' => $user,
                     'form' => $form->createView(),
                     'passForm' => $passForm->createView()
@@ -101,12 +101,18 @@ class ProfileController extends BaseController {
             }
             return $response;
         }
+
+        $formFactory1 = $this->get('fos_user.change_password.form.factory');
+        $passForm = $formFactory1->createForm();
+
         if ($request->isXmlHttpRequest()) {
             return new JsonResponse(
                     array('message' => 'Error!'), 400);
         }
-        return $this->render('FOSUserBundle:Profile:edit.html.twig', array(
-                    'form' => $form->createView()
+        return $this->render('UserBundle:Profile:show.html.twig', array(
+                    'form' => $form->createView(),
+                    'user' => $user,
+                    'passForm' => $passForm->createView(),
         ));
     }
 
