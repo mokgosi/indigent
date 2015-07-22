@@ -16,7 +16,7 @@ class LoadCompanyData  extends AbstractFixture  implements OrderedFixtureInterfa
     {
         $com = new Company();
         $com->setShortName('KGE');
-        $com->setName('Kgetlheng Revier Local Municipality');
+        $com->setName('Kgetlengrivier Local Municipality');
         $com->setCreated(new \DateTime());
         $com->setUpdated(new \DateTime());
         $manager->persist($com);

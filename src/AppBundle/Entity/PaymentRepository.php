@@ -23,8 +23,9 @@ class PaymentRepository extends EntityRepository {
     public function getCurrentBalance($erfId) {
         return $this->getEntityManager()
                         ->createQuery(
-                                'SELECT p FROM AppBundle:Payment p WHERE p.erfId = :erf_id ORDER BY p.created DESC '
-                        )
+                                'SELECT p FROM AppBundle:Payment p '
+                                . 'WHERE p.erfId = :erf_id '
+                                . 'ORDER BY p.created DESC')
                         ->setParameter('erf_id', $erfId)
                         ->setMaxResults(1)->getOneOrNullResult();
     }
