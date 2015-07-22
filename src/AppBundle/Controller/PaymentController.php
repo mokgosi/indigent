@@ -97,11 +97,11 @@ class PaymentController extends Controller {
         $entity->setAmountDue($this->getParameter('minimum_fee'));
         $entity->setAmountOutstanding($this->getParameter('minimum_fee'));
 
-        $em = $this->getDoctrine()->getManager();
-        $payment = $em->getRepository('AppBundle:Payment')
-                ->getCurrentBalance();
-
-        $entity->setTotalOutstanding($payment->getTotalOutstanding());
+//        $em = $this->getDoctrine()->getManager();
+//        $payment = $em->getRepository('AppBundle:Payment')
+//                ->getCurrentBalance();
+//
+//        $entity->setTotalOutstanding($payment->getTotalOutstanding());
 
         $form = $this->createCreateForm($entity);
 

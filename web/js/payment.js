@@ -18,10 +18,8 @@ var Payment = function () {
             var outAmnt = parseFloat(outstanding.val());
             var balAmnt = parseFloat(balance.val());
 
-            console.log(insAmnt);
-            
             if(balance.val() == 0) {
-                received.prop('disabled', true);
+//                received.prop('disabled', true);
             }
 
             $(document).on('change', '#appbundle_payment_amountReceived', function () {
@@ -59,17 +57,18 @@ var Payment = function () {
         $(document).on('change', '#appbundle_payment_erf', function (e) {
 
             $.get(Routing.generate('erf_get_by_id', {id: $(this).val()}), function (data) {
-                console.log(data);
                 if (typeof data.message !== 'undefined') {
                     alert(data.message);
                 }
                 
                 $('div.display-address').html(data.street+', '+data.section+', '+data.location);
                 
+                $('#appbundle_payment_totalOutstanding').val(data.balance);
+                
             }).done(function () {
 //                alert("second success");
             }).fail(function () {
-                alert("error");
+                alert("error-this and that");
             });
 
         });
