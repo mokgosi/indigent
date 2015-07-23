@@ -1,8 +1,9 @@
 {% extends '::base.html.twig' %}
+
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/form-components.js') }}"></script>
-    <script src="{{ asset('js/table-editable.js') }}"></script>  
+    <script src="{{ asset('js/table-editable.js') }}"></script>    
     <script>
         jQuery(document).ready(function () {
             App.init();
@@ -17,8 +18,8 @@
         <div class="row-fluid">
             <div class="span12">
                 <h3 class="page-title">
-                    Manage ERFs
-                    <small>manage erfs</small>
+                    Manage Users
+                    <small>manage users</small>
                 </h3>
                 <ul class="breadcrumb">
                     <li>
@@ -26,7 +27,7 @@
                         <a href="index.html">Home</a> 
                         <i class="icon-angle-right"></i>
                     </li>
-                    <li><a href="#">Manage ERFs</a></li>
+                    <li><a href="#">Manage Users</a></li>
                 </ul>
                 <!-- END PAGE TITLE & BREADCRUMB-->
             </div>
@@ -36,7 +37,7 @@
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet box blue">
                     <div class="portlet-title">
-                        <div class="caption"><i class="icon-edit"></i>Manage ERFs</div>
+                        <div class="caption"><i class="icon-edit"></i>Manage Users</div>
                         <div class="tools">
                             <a href="javascript:;" class="collapse"></a>
                             <a href="#portlet-config" data-toggle="modal" class="config"></a>
@@ -47,8 +48,8 @@
                     <div class="portlet-body">
                         <div class="table-toolbar">
                             <div class="btn-group">
-                                <a href="{{path('erf_new')}}" id="sample_editable_1_new" class="btn green">
-                                    Add New <i class="icon-plus"></i>
+                                <a href="{{path('user_new')}}" class="btn green">
+                                    Add New<i class="icon-plus"></i>
                                 </a>
                             </div>
                             <div class="btn-group pull-right">
@@ -64,27 +65,25 @@
                         <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
                             <thead>
                                 <tr>
-                                    <th>Erf no</th>
-                                    <th>Street Name</th>
-                                    <th>Section</th>
-                                    <th>Location</th>
-                                    <th>Type</th>
-                                    <th>Owner Name</th>
-                                    <th>Owner Cellphone</th>
-                                    <th>Edit/Show</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Roles</th>
+				    <th>Show</th>
+                                    <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for entity in entities %}
+                                {% for user in users %}
                                     <tr>
-                                        <td><a href="{{ path('erf_edit', { 'id': entity.id }) }}">{{ entity.erfNo }}</a></td>
-                                        <td>{{ entity.streetName }}</td>
-                                        <td>{{ entity.section.name }}</td>
-                                        <td>{{ entity.location.name }}</td>
-                                        <td>{{ entity.erfType.name }}</td>
-                                        <td>{{ entity.ownerFirstName }} {{ entity.ownerLastName }}</td>
-                                        <td>{{ entity.ownerMobile }}</td>
-                                        <td><a href="{{ path('erf_edit', { 'id': entity.id }) }}">edit</a></td>
+                                        <td>{{ user.firstName }}</td>
+                                        <td>{{ user.lastName }}</td>
+                                        <td>{{ user.username }}</td>
+                                        <td>{{ user.email }}</td>
+                                        <td>{{ user.roles|join(', ') }}</td>
+                                        <td><a href="{{ path('user_show', { 'id': user.id }) }}">show</a></td>
+                                        <td><a href="{{ path('user_edit', { 'id': user.id }) }}">edit</a></td>
                                     </tr>
                                 {% endfor %}
                             </tbody>
@@ -93,5 +92,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>            
 {% endblock %}
+
