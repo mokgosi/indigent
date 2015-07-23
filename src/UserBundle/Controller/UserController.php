@@ -28,7 +28,6 @@ class UserController extends Controller {
         $em = $this->getDoctrine()->getManager();
 
         $users = $em->getRepository('UserBundle:User')->findAll();
-        dump($users);
 
         return array(
             'users' => $users
@@ -60,14 +59,11 @@ class UserController extends Controller {
     public function createAction(Request $request) {
         $entity = new User();
         $form = $this->createCreateForm($entity);
-//
-//        foreach ($form['roles'] as $key => $value) {
-//            $entity->addRole($value);
-//        }
         
         $form->handleRequest($request);
         
         if ($form->isValid()) {
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();

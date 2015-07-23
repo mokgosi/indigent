@@ -3,10 +3,12 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/form-components.js') }}"></script>
+    <script src="{{ asset('js/table-editable.js') }}"></script>  
     <script>
         jQuery(document).ready(function () {
             App.init();
             FormComponents.init();
+            TableEditable.init();
         });
     </script>    
 {% endblock %}
@@ -47,7 +49,7 @@
                     <div class="portlet-body">
                         <div class="table-toolbar">
                             <div class="btn-group">
-                                <a href="{{path('erftype_new')}}" id="sample_editable_1_new" class="btn green">
+                                <a href="{{path('erftype_new')}}" class="btn green">
                                     Add New <i class="icon-plus"></i>
                                 </a>
                             </div>
@@ -74,20 +76,12 @@
                             <tbody>
                                 {% for entity in entities %}
                                     <tr>
-{#                                        <td><a href="{{ path('erftype_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>#}
                                         <td>{{ entity.name }}</td>
                                         <td>{{ entity.description }}</td>
                                         <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                                         <td>{% if entity.updated %}{{ entity.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
                                         <td>
-                                            <ul>
-                                                {#<li>
-                                                    <a href="{{ path('erftype_show', { 'id': entity.id }) }}">show</a>
-                                                </li>#}
-                                                <li>
-                                                    <a href="{{ path('erftype_edit', { 'id': entity.id }) }}">edit</a>
-                                                </li>
-                                            </ul>
+                                            <a href="{{ path('erftype_edit', { 'id': entity.id }) }}">edit</a>
                                         </td>
                                     </tr>
                                 {% endfor %}

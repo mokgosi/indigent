@@ -70,7 +70,6 @@
                                     <th>Username</th>
                                     <th>Email</th>
                                     <th>Roles</th>
-				    <th>Show</th>
                                     <th>Edit</th>
                                 </tr>
                             </thead>
@@ -82,7 +81,6 @@
                                         <td>{{ user.username }}</td>
                                         <td>{{ user.email }}</td>
                                         <td>{{ user.roles|join(', ') }}</td>
-                                        <td><a href="{{ path('user_show', { 'id': user.id }) }}">show</a></td>
                                         <td><a href="{{ path('user_edit', { 'id': user.id }) }}">edit</a></td>
                                     </tr>
                                 {% endfor %}
