@@ -11,7 +11,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <!--[if !IE]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8" />
-        <title>Admin Dashboard</title>
+        <title>Admin {% block title %}{% endblock %}</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
         <meta content="" name="description" />
         <meta content="" name="author" />
@@ -138,7 +138,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                             <li class="{{ app.request.attributes.get('_route') in ['erf','erftype','location','section','erf_edit','erf_new','erf_update','erftype_edit','erftype_new','erftype_update','location_edit','location_new','location_update','section_edit','section_new','section_update'] ? 'active' : '' }}">
                                 <a href="javascript:;">
                                     <i class="icon-table"></i> 
-                                    <span class="title">ERFs</span>
+                                    <span class="title">ERF Management</span>
                                     <span class="arrow "></span>
                                 </a>
                                 <ul class="sub-menu">
@@ -240,7 +240,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
         <script src="{{ asset('plugins/select2/select2.min.js') }}"></script>
         
         <!-- END CORE PLUGINS -->
-        <script src="{{ asset('plugins/data-tables/jquery.dataTables.js') }}" ></script>
+        <script src="{{ asset('plugins/data-tables/jquery.dataTables.min.js') }}" ></script>
         <script src="{{ asset('plugins/data-tables/DT_bootstrap.js') }}" ></script>
 
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>

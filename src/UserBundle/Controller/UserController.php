@@ -59,11 +59,11 @@ class UserController extends Controller {
     public function createAction(Request $request) {
         $entity = new User();
         $form = $this->createCreateForm($entity);
-        
+
         $form->handleRequest($request);
-        
+
         if ($form->isValid()) {
-            
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
@@ -169,6 +169,7 @@ class UserController extends Controller {
      * @Method("PUT")
      */
     public function updateAction(Request $request, $id) {
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('UserBundle:User')->find($id);
@@ -178,15 +179,19 @@ class UserController extends Controller {
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        
-        foreach ($editForm['roles'] as $key => $value) {
-            $entity->addRole($value);
-        }
+
         $editForm = $this->createEditForm($entity);
-        
+
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+
+//            $userManager = $this->container->get('fos_user.user_manager');
+//            $user = $userManager->findUserByUsername($entity->getUsername());
+//            dump($request->request);
+//            $data = $editForm->getData();
+//            dump($data);
+//            die;
             $em->flush();
 
             return $this->redirect($this->generateUrl('user'));
