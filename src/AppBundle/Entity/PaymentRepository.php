@@ -85,7 +85,6 @@ class PaymentRepository extends EntityRepository {
         if(is_null($start)) {
             $start = date('m');
             $end = date('m');
-//            die($start);
         }
         
         $results = $this->getEntityManager()

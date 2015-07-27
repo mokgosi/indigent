@@ -39,7 +39,7 @@ class ReportController extends Controller {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('AppBundle:Payment')->getSectionReport($id);
-dump($entities);
+
         return $this->render('report/section.html.twig', array(
                     'entities' => $entities
         ));

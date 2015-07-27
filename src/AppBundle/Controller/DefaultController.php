@@ -24,8 +24,6 @@ class DefaultController extends Controller {
         $entities1 = $em->getRepository('AppBundle:Payment')
                 ->getPieGraphValues();
         
-        dump($entities1);
-        
         $recents = $em->getRepository('AppBundle:Payment')
                 ->getRecent();
         
