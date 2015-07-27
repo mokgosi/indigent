@@ -21,30 +21,36 @@ class PaymentRepository extends EntityRepository {
     }
 
     public function getCurrentBalance($erfId) {
-        return $this->getEntityManager()
-                        ->createQuery(
-                                'SELECT p FROM AppBundle:Payment p '
-                                . 'WHERE p.erfId = :erf_id '
-                                . 'ORDER BY p.created DESC')
-                        ->setParameter('erf_id', $erfId)
-                        ->setMaxResults(1)->getOneOrNullResult();
+        $results = $this->getEntityManager()
+                ->createQuery(
+                        'SELECT p FROM AppBundle:Payment p '
+                        . 'WHERE p.erfId = :erf_id '
+                        . 'ORDER BY p.created DESC')
+                ->setParameter('erf_id', $erfId)
+                ->setMaxResults(1)
+                ->getOneOrNullResult();
+
+        return $results;
     }
 
     public function getRecent() {
-        return $this->getEntityManager()
-                        ->createQuery('SELECT p FROM AppBundle:Payment p ORDER BY p.created DESC')
-                        ->setMaxResults(10)
-                        ->getResult();
+        $results = $this->getEntityManager()
+                ->createQuery('SELECT p FROM AppBundle:Payment p ORDER BY p.created DESC')
+                ->setMaxResults(10)
+                ->getResult();
+
+        return $results;
     }
 
     public function getBarGraphValues() {
         $results = $this->getEntityManager()
-                        ->createQuery(
-                                'SELECT MONTHNAME(p.created), count(p) '
-                                . 'FROM AppBundle:Payment p '
-                                . 'GROUP BY p.created '
-                                . 'ORDER BY p.created ASC'
-                        )->getResult(Query::HYDRATE_ARRAY);
+                ->createQuery(
+                        'SELECT MONTHNAME(p.created), count(p) '
+                        . 'FROM AppBundle:Payment p '
+                        . 'GROUP BY p.created '
+                        . 'ORDER BY p.created ASC')
+                ->getResult(Query::HYDRATE_ARRAY);
+
         $array = array();
 
         foreach ($results as $result) {
@@ -55,23 +61,48 @@ class PaymentRepository extends EntityRepository {
     }
 
     public function getPieGraphValues() {
+
         $results = $this->getEntityManager()
-                        ->createQuery(
-                                'SELECT count(p) AS cont, s.name '
-                                . 'FROM AppBundle:Payment p '
-                                . 'LEFT JOIN AppBundle:Erf e With e.id = p.erfId '
-                                . 'LEFT JOIN AppBundle:Section s With s.id = e.sectionId '
-                                . 'GROUP BY s.id'
-                        )->getResult(Query::HYDRATE_ARRAY);
+                ->createQuery(
+                        'SELECT count(p) AS cont, s.name, s.id '
+                        . 'FROM AppBundle:Payment p '
+                        . 'LEFT JOIN AppBundle:Erf e With e.id = p.erfId '
+                        . 'LEFT JOIN AppBundle:Section s With s.id = e.sectionId '
+                        . 'GROUP BY s.id')
+                ->getResult(Query::HYDRATE_ARRAY);
 
         $array = array();
 
         foreach ($results as $result) {
-
-            $array[] = array('label' => $result['name'], 'data' => $result['cont']);
+            $array[] = array('label' => $result['name'], 'data' => $result['cont'], 'id' => $result['id']);
         }
 
         return $array;
+    }
+
+    public function getSectionReport($id, $start=null, $end=null) {
+        
+        if(is_null($start)) {
+            $start = date('m');
+            $end = date('m');
+//            die($start);
+        }
+        
+        $results = $this->getEntityManager()
+                ->createQuery(
+                        'SELECT p.amountReceived, p.created, MONTHNAME(p.created) as month, e.erfNo, '
+                        . 'e.streetName as address, s.name as section '
+                        . 'FROM AppBundle:Payment p '
+                        . 'LEFT JOIN AppBundle:Erf e With e.id = p.erfId '
+                        . 'LEFT JOIN AppBundle:Section s With s.id = e.sectionId '
+                        . 'WHERE s.id = :id '
+                        . 'AND MONTH(p.created) BETWEEN :start AND :end ')
+                ->setParameter('id', $id)
+                ->setParameter('start', $start)
+                ->setParameter('end', $end)
+                ->getResult(Query::HYDRATE_ARRAY);
+
+        return $results;
     }
 
 }

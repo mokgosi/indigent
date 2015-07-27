@@ -171,19 +171,12 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                     </li>
                                 </ul>
                             </li>
-                            <li>
-                                <a href="javascript:;">
+                            <li class="{% if app.request.attributes.get('_route') == 'report' %}active{% endif %}">
+                                <a href="{{ path('report') }}">
                                     <i class="icon-th"></i> 
-                                    <span class="title">Reports - Coming soon!</span>
-                                    <span class="arrow "></span>
+                                    <span class="title">Reports</span>
+                                    <span class="selected"></span>
                                 </a>
-                                {#<ul class="sub-menu">
-                                    <li >
-                                        <a href="residential.html">Residential ERFs Reports</a>
-                                        <a href="commercial.html">Commercial ERFs Reports</a>
-                                        <a href="recreational.html">Recreational ERFs Reports</a>
-                                    </li>
-                                </ul>#}
                             </li>
                         </ul>
                         <!-- END SIDEBAR MENU -->

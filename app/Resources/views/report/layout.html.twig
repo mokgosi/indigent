@@ -12,14 +12,15 @@
         });
     </script>    
 {% endblock %}
+
 {% block main -%}
     <div class="container-fluid">
         <!-- BEGIN PAGE HEADER-->
         <div class="row-fluid">
             <div class="span12">
                 <h3 class="page-title">
-                    Manage Users
-                    <small>manage users</small>
+                    Report
+                    <small>report</small>
                 </h3>
                 <ul class="breadcrumb">
                     <li>
@@ -27,7 +28,7 @@
                         <a href="index.html">Home</a> 
                         <i class="icon-angle-right"></i>
                     </li>
-                    <li><a href="#">Manage Users</a></li>
+                    <li><a href="#">Report</a></li>
                 </ul>
                 <!-- END PAGE TITLE & BREADCRUMB-->
             </div>
@@ -37,7 +38,7 @@
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet box blue">
                     <div class="portlet-title">
-                        <div class="caption"><i class="icon-edit"></i>Manage Users</div>
+                        <div class="caption"><i class="icon-edit"></i> Report {% block report_title %}{% endblock %}</div>
                         <div class="tools">
                             <a href="javascript:;" class="collapse"></a>
                             <a href="#portlet-config" data-toggle="modal" class="config"></a>
@@ -47,10 +48,15 @@
                     </div>
                     <div class="portlet-body">
                         <div class="table-toolbar">
+                            <div id="section-filters">
+                                <fieldset>
+                                    <label>Report Filters</label>
+                                </fieldset>
+                            </div>
                             <div class="btn-group">
-                                <a href="{{path('user_new')}}" class="btn green">
+                                {#<a href="{{path('user_new')}}" class="btn green">
                                     Add New<i class="icon-plus"></i>
-                                </a>
+                                </a>#}
                             </div>
                             <div class="btn-group pull-right">
                                 <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
@@ -62,32 +68,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
-                            <thead>
-                                <tr>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Username</th>
-                                    <th>Email</th>
-                                    <th>Active</th>
-                                    <th>Roles</th>
-                                    <th>Edit</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for user in users %}
-                                    <tr>
-                                        <td>{{ user.firstName }}</td>
-                                        <td>{{ user.lastName }}</td>
-                                        <td>{{ user.username }}</td>
-                                        <td>{{ user.email }}</td>
-                                        <td>{{ user.enabled ? '<span class="label label-success">Yes</span>' : '<span class="label label-error">No</span>' }}</td>
-                                        <td>{{ user.roles|join(', ') }}</td>
-                                        <td><a href="{{ path('user_edit', { 'id': user.id }) }}">edit</a></td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                        {% block main_body %}{% endblock %}            
                     </div>
                 </div>
             </div>

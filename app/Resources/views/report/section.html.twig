@@ -1,0 +1,28 @@
+{% extends 'report/layout.html.twig' %}
+
+{% block report_title %} | Section {% endblock %}
+
+{% block main_body %}
+    <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+        <thead>
+            <tr>
+                <th>Erf #</th>
+                <th>Address</th>
+                <th>Section</th>
+                <th>Month</th>
+                <th>Date</th>
+                <th>Paid</th>
+            </tr>
+        </thead>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.erfNo }}</td>
+                <td>{{ entity.address}}</td>
+                <td>{{ entity.section}}</td>
+                <td>{{ entity.month}}</td>
+                <td>{{ entity.created|date('Y-m-d')}}</td>
+                <td>{{ entity.amountReceived}}</td>
+            </tr>
+        {% endfor %}    
+    </table>
+{% endblock %}

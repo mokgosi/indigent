@@ -24,15 +24,17 @@ class DefaultController extends Controller {
         $entities1 = $em->getRepository('AppBundle:Payment')
                 ->getPieGraphValues();
         
+        dump($entities1);
+        
         $recents = $em->getRepository('AppBundle:Payment')
                 ->getRecent();
-        
         
         
         return $this->render('default/index.html.twig', array(
                     'entities' => json_encode($entities),
                     'entities1' => json_encode($entities1),
                     'recents' => $recents,
+                    'tops' => $entities1,
         ));
     }
 
