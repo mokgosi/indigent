@@ -112,10 +112,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                             </li>
                             <li>
                                 <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-                                <form class="sidebar-search">
+                                <form action="{{ path('search') }}" method="post" class="sidebar-search">
                                     <div class="input-box">
                                         <a href="javascript:;" class="remove"></a>
-                                        <input type="text" placeholder="Search..." />
+                                        <input type="text" name='search' placeholder="Search Erf..." />
                                         <input type="button" class="submit" value=" " />
                                     </div>
                                 </form>
