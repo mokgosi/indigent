@@ -17,7 +17,8 @@ class PaymentType extends AbstractType
         $builder
             ->add('erf', 'entity', array(
                     'class' => 'AppBundle:Erf',
-                    'property' => 'erfNo'))
+                    'property' => 'erfNo',
+                    'placeholder' => 'Please Select...'))
             ->add('company', 'entity', array(
                     'class' => 'AppBundle:Company',
                     'property' => 'name'))    

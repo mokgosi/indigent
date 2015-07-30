@@ -49,7 +49,7 @@
                     <div class="portlet-body">
                         <div class="table-toolbar">
                             <div class="btn-group">
-                                <a href="{{path('payment_new')}}" class="btn green">
+                                <a href="{{path('payment_new_by_erf', {'id':id})}}" class="btn green">
                                     Pay 
                                 </a>
                             </div>
@@ -77,7 +77,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for entity in entities %}
                                     <tr>
                                         <td><a href="{{ path('erf_edit', { 'id': entity.id }) }}">{{ entity.erfNo }}</a></td>
                                         <td>{{ entity.streetName }}</td>
@@ -88,7 +87,6 @@
                                         <td>{{ entity.ownerMobile }}</td>
                                         <td><a href="{{ path('erf_edit', { 'id': entity.id }) }}">edit</a></td>
                                     </tr>
-                                {% endfor %}
                             </tbody>
                         </table>
                     </div>

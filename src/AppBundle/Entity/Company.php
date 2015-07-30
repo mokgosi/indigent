@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Company
@@ -10,7 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\CompanyRepository")
  */
-class Company {
+class Company
+{
 
     /**
      * @var integer
@@ -24,16 +26,62 @@ class Company {
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string")
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="short_name", type="string", length=3)
+     * @ORM\Column(name="short_name", type="string")
      */
     private $shortName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone", type="string")
+     * @Assert\NotBlank()
+     */
+    private $phone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fax", type="string")
+     */
+    private $fax;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string")
+     * @Assert\Email()
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="address", type="string")
+     * @Assert\NotBlank()
+     */
+    private $address;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="postal", type="string")
+     */
+    private $postal;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="website", type="string")
+     */
+    private $website;
 
     /**
      * @var \DateTime
@@ -54,7 +102,8 @@ class Company {
      */
     protected $payments;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->created = new \DateTime();
     }
 
@@ -63,7 +112,8 @@ class Company {
      *
      * @return integer 
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -73,7 +123,8 @@ class Company {
      * @param string $name
      * @return Company
      */
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
 
         return $this;
@@ -84,7 +135,8 @@ class Company {
      *
      * @return string 
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
@@ -94,7 +146,8 @@ class Company {
      * @param string $shortName
      * @return Company
      */
-    public function setShortName($shortName) {
+    public function setShortName($shortName)
+    {
         $this->shortName = $shortName;
 
         return $this;
@@ -105,7 +158,8 @@ class Company {
      *
      * @return string 
      */
-    public function getShortName() {
+    public function getShortName()
+    {
         return $this->shortName;
     }
 
@@ -115,7 +169,8 @@ class Company {
      * @param \DateTime $created
      * @return Payment
      */
-    public function setCreated($created) {
+    public function setCreated($created)
+    {
         $this->created = $created;
 
         return $this;
@@ -126,7 +181,8 @@ class Company {
      *
      * @return \DateTime 
      */
-    public function getCreated() {
+    public function getCreated()
+    {
         return $this->created;
     }
 
@@ -136,7 +192,8 @@ class Company {
      * @param \DateTime $updated
      * @return Payment
      */
-    public function setUpdated($updated) {
+    public function setUpdated($updated)
+    {
         $this->updated = $updated;
 
         return $this;
@@ -147,7 +204,8 @@ class Company {
      *
      * @return \DateTime 
      */
-    public function getUpdated() {
+    public function getUpdated()
+    {
         return $this->updated;
     }
 
@@ -155,7 +213,8 @@ class Company {
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
-    public function setUpdatedAtValue() {
+    public function setUpdatedAtValue()
+    {
 
         $this->setUpdated(new \DateTime('now'));
 
@@ -163,5 +222,133 @@ class Company {
             $this->setCreated(new \DateTime('now'));
         }
     }
+
+    /**
+     * Get phone
+     *
+     * @return string 
+     */
+    function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Get fax
+     *
+     * @return string 
+     */
+    function getFax()
+    {
+        return $this->fax;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string 
+     */
+    function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Get website
+     *
+     * @return string 
+     */
+    function getWebsite()
+    {
+        return $this->website;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     * @return Company
+     */
+    function setPhone($phone)
+    {
+        $this->phone = $phone;
+    }
+
+    /**
+     * Set fax
+     *
+     * @param string $fax
+     * @return Company
+     */
+    function setFax($fax)
+    {
+        $this->fax = $fax;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Company
+     */
+    function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     * @return Company
+     */
+    function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * Set website
+     *
+     * @param string $website
+     * @return Company
+     */
+    function setWebsite($website)
+    {
+        $this->website = $website;
+    }
+    
+    /**
+     * Get postal
+     *
+     * @return string 
+     */
+    function getPostal()
+    {
+        return $this->postal;
+    }
+
+    /**
+     * Set postal
+     *
+     * @param string $postal
+     * @return Company
+     */
+    function setPostal($postal)
+    {
+        $this->postal = $postal;
+    }
+
+
 
 }

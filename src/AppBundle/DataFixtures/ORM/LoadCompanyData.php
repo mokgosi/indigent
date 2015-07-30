@@ -17,7 +17,12 @@ class LoadCompanyData  extends AbstractFixture  implements OrderedFixtureInterfa
         $com = new Company();
         $com->setShortName('KGE');
         $com->setName('Kgetlengrivier Local Municipality');
-        $com->setCreated(new \DateTime());
+        $com->setAddress('Cnr Smuts & De Wet Streets, Koster');
+        $com->setPostal('PO Box 66, Koster, 0348');
+        $com->setPhone('014 543 2004/5');
+        $com->setFax('');
+        $com->setEmail('koster@koster.co.za');
+        $com->setWebsite('http://www.kgetlengrivier.gov.za');
         $com->setUpdated(new \DateTime());
         $manager->persist($com);
         

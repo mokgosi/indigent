@@ -4,15 +4,16 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('plugins/flot/jquery.flot.js') }}" ></script>
-    <script src="{{ asset('plugins/flot/jquery.flot.categories.js') }}" ></script>
-    <script src="{{ asset('plugins/flot/jquery.flot.pie.js') }}" ></script>
-    <script src="{{ asset('plugins/flot/jquery.flot.resize.js') }}"></script>
+    <script src="{{ asset('js/jquery.flot.min.js') }}" ></script>
+    <script src="{{ asset('js/jquery.flot.categories.min.js') }}" ></script>
+    <script src="{{ asset('js/jquery.flot.pie.min.js') }}" ></script>
+    <script src="{{ asset('js/jquery.flot.resize.min.js') }}"></script>
     <script src="{{ asset('js/index.js') }}"></script>
     <script>
         var barGraphData = {{ entities|raw }};
-                var pieGraphData = {{ entities1|raw }};
-                jQuery(document).ready(function () {
+        var pieGraphData = {{ entities1|raw }};
+        
+        jQuery(document).ready(function () {
             App.init();
             Index.initCharts();
             Index.init();
@@ -66,9 +67,8 @@
                                 </div>
                                 <div class="desc">{{ top.label }}</div>
                             </div>
-                                <a class="more" href="{{ path('report_section', { id: top.id }) }}">
-                                View more <i class="m-icon-swapright m-icon-white"></i>
-                            </a>                 
+                            <a class="more" href="{{ path('report_section', { id: top.id }) }}">
+                                View more <i class="m-icon-swapright m-icon-white"></i></a>                 
                         </div>
                     </div>
                 {% endfor %}

@@ -12,4 +12,16 @@ use Doctrine\ORM\EntityRepository;
  */
 class ErfRepository extends EntityRepository
 {
+    public function findByErfNo($erfNo)
+    {
+        $results = $this->getEntityManager()
+                ->createQuery(
+                        'SELECT e FROM AppBundle:Erf e '
+                        . 'WHERE e.erfNo = :erf_no')
+                ->setParameter('erf_no', $erfNo)
+                ->setMaxResults(1)
+                ->getOneOrNullResult();
+
+        return $results;
+    }
 }

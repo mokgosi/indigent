@@ -294,7 +294,7 @@ var FormComponents = function () {
         
         
         $('#appbundle_payment_erf').select2({
-            placeholder: "Select an option",
+            placeholder: {id: "", text: "Select a State"},
             allowClear: true
         });
         

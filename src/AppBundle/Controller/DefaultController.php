@@ -7,7 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-class DefaultController extends Controller {
+class DefaultController extends Controller
+{
 
     /**
      * @Route("/", name="dashboard")
@@ -15,8 +16,8 @@ class DefaultController extends Controller {
      * 
      * Roles ROLE_USER, ROLE_ADMIN
      */
-    public function indexAction() {
-
+    public function indexAction()
+    {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('AppBundle:Payment')
@@ -27,7 +28,6 @@ class DefaultController extends Controller {
 
         $recents = $em->getRepository('AppBundle:Payment')
                 ->getRecent();
-
 
         return $this->render('default/index.html.twig', array(
                     'entities' => json_encode($entities),
@@ -40,17 +40,18 @@ class DefaultController extends Controller {
     /**
      * @Route("/search", name="search")
      */
-    public function searchAction(Request $request) {
-        
+    public function searchAction(Request $request)
+    {
         $keyword = $request->request->get('search');
-
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('AppBundle:Erf')
+        $entity = $em->getRepository('AppBundle:Erf')
                 ->findByErfNo($keyword);
+        
+        dump($entity);
 
         return $this->render('erf/search.html.twig', array(
-                    'entities' => $entities
+                    'entity' => $entity,
+                    'id' => $entity->getId()
         ));
     }
 

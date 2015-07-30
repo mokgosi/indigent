@@ -18,15 +18,18 @@ var Payment = function () {
             var outAmnt = parseFloat(outstanding.val());
             var balAmnt = parseFloat(balance.val());
 
-            if(balance.val() == 0) {
+            if (balance.val() == 0) {
 //                received.prop('disabled', true);
             }
 
             $(document).on('change', '#appbundle_payment_amountReceived', function () {
                 
-                
+
+                if (isNaN(balAmnt)) {
+                    balAmnt = parseFloat(balance.val());
+                }
+
                 var rec = parseFloat(received.val()).toFixed(2);
-                
 
                 if (received.val() === '') {
                     outstanding.val(outAmnt);
@@ -37,15 +40,22 @@ var Payment = function () {
                 } else if (rec < insAmnt) {
                     var new_out = (insAmnt - rec);
                     outstanding.val(new_out);
-                } else if(rec > balAmnt) {
-                    alert('Account being overpaid by: R'+ parseFloat(rec - balAmnt).toFixed(2));
+                } else if (rec > balAmnt) {
+                    alert('Account being overpaid by: R' + parseFloat(rec - balAmnt).toFixed(2));
                     received.val('');
+                    outstanding.val(outAmnt);
+                    balance.val(balAmnt);
                     return;
+                } else if( rec < balAmnt) {
+                    var new_out = (insAmnt - rec);
+                    outstanding.val(new_out);
                 } else {
                     received.val('');
                     outstanding.val(outAmnt);
+                    balance.val(balAmnt);
                     return;
                 }
+
                 var bal = (balAmnt - rec);
                 balance.val(bal.toFixed(2));
             });
@@ -58,13 +68,13 @@ var Payment = function () {
 
             $.get(Routing.generate('erf_get_by_id', {id: $(this).val()}), function (data) {
                 if (typeof data.message !== 'undefined') {
-                    alert(data.message);
+                    console.log(data.message);
                 }
-                
-                $('div.display-address').html(data.street+', '+data.section+', '+data.location);
-                
+
+                $('div.display-address').html(data.street + ', ' + data.section + ', ' + data.location);
+
                 $('#appbundle_payment_totalOutstanding').val(data.balance);
-                
+
             }).done(function () {
 //                alert("second success");
             }).fail(function () {
