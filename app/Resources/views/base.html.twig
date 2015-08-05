@@ -31,20 +31,19 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
             #}
 
             <!-- BEGIN GLOBAL MANDATORY STYLES -->  
-            <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/bootstrap-responsive.min.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/style-metro.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/style-responsive.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/themes/default.css') }}" id="style_color">
-            <link rel="stylesheet" href="{{ asset('css/uniform.default.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/select2_metro.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+            <link rel="stylesheet" href="{{ asset('css/bootstrap-responsive.min.css') }}" rel="stylesheet" type="text/css">
+            <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}" rel="stylesheet" type="text/css">
+            <link rel="stylesheet" href="{{ asset('css/style-metro.css') }}" rel="stylesheet" type="text/css">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
+            <link rel="stylesheet" href="{{ asset('css/style-responsive.css') }}" rel="stylesheet" type="text/css">
+            <link rel="stylesheet" href="{{ asset('css/themes/default.css') }}" rel="stylesheet"  type="text/css" id="style_color">
+            <link rel="stylesheet" href="{{ asset('css/uniform.default.css') }}" rel="stylesheet" type="text/css">
+            <link rel="stylesheet" href="{{ asset('css/select2_metro.css') }}" rel="stylesheet" type="text/css">
             <!-- END GLOBAL MANDATORY STYLES -->
-            
-            <link rel="stylesheet" href="{{ asset('css/DT_bootstrap.css') }}" />
-            <link rel="stylesheet" href="{{ asset('css/pages/tasks.css') }}"  type="text/css" media="screen"/>
-            <link rel="stylesheet" href="{{ asset('css/pages/login.css') }}"  type="text/css" media="screen"/>
+
+            <link rel="stylesheet" href="{{ asset('css/DT_bootstrap.css') }}" rel="stylesheet" type="text/css" />
+            <link rel="stylesheet" href="{{ asset('css/pages/tasks.css') }}" rel="stylesheet" type="text/css"/>
 
 
         {% endblock %}
@@ -136,7 +135,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                     <span class="arrow "></span>
                                 </a>
                             </li>
-                            <li class="{{ app.request.attributes.get('_route') in ['erf','erftype','location','section','erf_edit','erf_new','erf_update','erftype_edit','erftype_new','erftype_update','location_edit','location_new','location_update','section_edit','section_new','section_update'] ? 'active' : '' }}">
+                            
+                             <li class="{{ app.request.attributes.get('_route') in ['erf','erftype','location','section','erf_edit','erf_new','erf_update','erftype_edit','erftype_new','erftype_update','location_edit','location_new','location_update','section_edit','section_new','section_update'] ? 'active' : '' }}">
                                 <a href="javascript:;">
                                     <i class="icon-table"></i> 
                                     <span class="title">ERF Management</span>
@@ -157,13 +157,27 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                     </li>
                                 </ul>
                             </li>
+                            
+                            <li class="{{ app.request.attributes.get('_route') in ['owner_edit','owner_new','owner_update'] ? 'active' : '' }}">
+                                <a href="javascript:;">
+                                    <i class="icon-table"></i> 
+                                    <span class="title">Owners</span>
+                                    <span class="arrow "></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="{{ app.request.attributes.get('_route') in ['owner_edit','owner_new','owner_update'] ? 'active' : '' }}" >
+                                        <a href="{{ path('owner_new') }}">Add Owner</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            
                             <li class="{{ app.request.attributes.get('_route') in ['user','user_new'] ? 'active' : '' }}">
                                 <a href="javascript:;">
                                     <i class="icon-user"></i> 
                                     <span class="title">User Management</span>
                                     <span class="arrow "></span>
                                 </a>
-                               <ul class="sub-menu">
+                                <ul class="sub-menu">
                                     <li class="{{ app.request.attributes.get('_route') in ['user'] ? 'active' : '' }}">
                                         <a href="{{ path('user') }}">Users List</a>
                                     </li>
@@ -176,8 +190,16 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                 <a href="{{ path('report') }}">
                                     <i class="icon-th"></i> 
                                     <span class="title">Reports</span>
-                                    <span class="selected"></span>
+                                    <span class="arrow "></span>
                                 </a>
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a href="{{ path('report_erf') }}">Account Statement</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('report_sections') }}">Reports by Section</a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                         <!-- END SIDEBAR MENU -->
@@ -218,30 +240,30 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
         #}
 
         <!-- BEGIN CORE PLUGINS --> 
-        <script src="{{ asset('js/jquery-1.10.1.min.js') }}"></script>
-        <script src="{{ asset('js/jquery-migrate-1.2.1.min.js') }}"></script>
-        <script src="{{ asset('js/jquery-ui-1.10.1.custom.min.js') }}"></script>
-        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('js/twitter-bootstrap-hover-dropdown.min.js') }}"></script>
+        <script src="{{ asset('js/jquery-1.10.1.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/jquery-migrate-1.2.1.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/jquery-ui-1.10.1.custom.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"type="text/javascript"></script>
+        <script src="{{ asset('js/twitter-bootstrap-hover-dropdown.min.js') }}" type="text/javascript"></script>
         <!--[if lt IE 9]>
         <script src="assets/plugins/excanvas.min.js"></script>
         <script src="assets/plugins/respond.min.js"></script>  
         <![endif]-->   
-        <script src="{{ asset('js/jquery.slimscroll.min.js') }}"></script>
-        <script src="{{ asset('js/jquery.blockui.min.js') }}"></script>
-        <script src="{{ asset('js/jquery.cookie.min.js') }}"></script>
-        <script src="{{ asset('js/jquery.uniform.min.js') }}"></script>
-        <script src="{{ asset('js/select2.min.js') }}"></script>
-        
-        <!-- END CORE PLUGINS -->
-        <script src="{{ asset('js/jquery.dataTables.min.js') }}" ></script>
-        <script src="{{ asset('js/DT_bootstrap.js') }}" ></script>
+        <script src="{{ asset('js/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/jquery.blockui.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/jquery.cookie.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/jquery.uniform.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/select2.min.js') }}" type="text/javascript"></script>
 
-        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-        <script src="{{ asset('js/fos_js_routes.js') }}"></script>
+        <!-- END CORE PLUGINS -->
+        <script src="{{ asset('js/jquery.dataTables.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/DT_bootstrap.js') }}" type="text/javascript" ></script>
+
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/fos_js_routes.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
 
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
-        <script src="{{ asset('js/app.js') }}"></script>
 
     {% endblock %}
 

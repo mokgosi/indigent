@@ -1,13 +1,13 @@
 <?php
 
-namespace Acme\HelloBundle\DataFixtures\ORM;
+namespace AppBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\Location;
 
-class LoadErfTypeData extends AbstractFixture  implements OrderedFixtureInterface
+class LoadLocationData extends AbstractFixture  implements OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}

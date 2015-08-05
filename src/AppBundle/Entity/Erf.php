@@ -22,6 +22,13 @@ class Erf {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="owner_id", type="integer", nullable=true)
+     */
+    private $ownerId;
 
     /**
      * @var integer
@@ -41,9 +48,9 @@ class Erf {
     /**
      * @var string
      *
-     * @ORM\Column(name="street_name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
-    private $streetName;
+    private $address;
 
     /**
      * @var integer
@@ -60,55 +67,14 @@ class Erf {
     private $locationId;
 
     /**
-     * @var string
+     * @var decimal
      *
-     * @ORM\Column(name="owner_first_name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="balance", type="decimal", precision=8, scale=2, options={"default":0})
      */
-    private $ownerFirstName;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="owner_last_name", type="string", length=255, nullable=true)
-     */
-    private $ownerLastName;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="owner_mobile", type="string", length=255, nullable=true)
-     */
-    private $ownerMobile;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="owner_telephone", type="string", length=255, nullable=true)
-     */
-    private $ownerTelephone;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="owner_email", type="string", length=255, nullable=true)
-     * @Assert\Email
-     */
-    private $ownerEmail;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="owner_address", type="string", length=255, nullable=true)
-     */
-    private $ownerAddress;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="owner_id_no", type="string", length=15, nullable=true)
-     */
-    private $ownerIdNo;
-
+    private $balance;
+    
+    
+    
     /**
      * @var \DateTime
      *
@@ -147,6 +113,8 @@ class Erf {
      * @ORM\OneToMany(targetEntity="Payment", mappedBy="erf") 
      */
     protected $payments;
+    
+    
 
     public function __construct() {
         $this->created = new \DateTime();
@@ -268,120 +236,6 @@ class Erf {
     }
 
     /**
-     * Get ownerFirstName
-     *
-     * @return string
-     */
-    function getOwnerFirstName() {
-        return $this->ownerFirstName;
-    }
-
-    /**
-     * Get ownerLastName
-     *
-     * @return string
-     */
-    function getOwnerLastName() {
-        return $this->ownerLastName;
-    }
-
-    /**
-     * Get ownerMobile
-     *
-     * @return string
-     */
-    function getOwnerMobile() {
-        return $this->ownerMobile;
-    }
-
-    /**
-     * Get ownerTelephone
-     *
-     * @return string
-     */
-    function getOwnerTelephone() {
-        return $this->ownerTelephone;
-    }
-
-    /**
-     * Get ownerEmail
-     *
-     * @return string
-     */
-    function getOwnerEmail() {
-        return $this->ownerEmail;
-    }
-
-    /**
-     * Get ownerAddress
-     *
-     * @return string
-     */
-    function getOwnerAddress() {
-        return $this->ownerAddress;
-    }
-
-    /**
-     * Set ownerFirstName
-     *
-     * @param string $ownerFirstName
-     * @return Erf
-     */
-    function setOwnerFirstName($ownerFirstName) {
-        $this->ownerFirstName = $ownerFirstName;
-    }
-
-    /**
-     * Set ownerLastName
-     *
-     * @param string $ownerLastName
-     * @return Erf
-     */
-    function setOwnerLastName($ownerLastName) {
-        $this->ownerLastName = $ownerLastName;
-    }
-
-    /**
-     * Set ownerMobile
-     *
-     * @param string $ownerMobile
-     * @return Erf
-     */
-    function setOwnerMobile($ownerMobile) {
-        $this->ownerMobile = $ownerMobile;
-    }
-
-    /**
-     * Set ownerTelephone
-     *
-     * @param string $ownerTelephone
-     * @return Erf
-     */
-    function setOwnerTelephone($ownerTelephone) {
-        $this->ownerTelephone = $ownerTelephone;
-    }
-
-    /**
-     * Set ownerEmail
-     *
-     * @param string $ownerEmail
-     * @return Erf
-     */
-    function setOwnerEmail($ownerEmail) {
-        $this->ownerEmail = $ownerEmail;
-    }
-
-    /**
-     * Set ownerAddress
-     *
-     * @param string $ownerAddress
-     * @return Erf
-     */
-    function setOwnerAddress($ownerAddress) {
-        $this->ownerAddress = $ownerAddress;
-    }
-
-    /**
      * Set created
      *
      * @param \DateTime $created
@@ -437,25 +291,6 @@ class Erf {
     }
 
     /**
-     * Get updated
-     *
-     * @return  string
-     */
-    function getOwnerIdNo() {
-        return $this->ownerIdNo;
-    }
-
-    /**
-     * Set ownerIdNo
-     *
-     * @param string $ownerIdNo
-     * @return Erf
-     */
-    function setOwnerIdNo($ownerIdNo) {
-        $this->ownerIdNo = $ownerIdNo;
-    }
-
-    /**
      * Set category
      *
      * @param AppBundle\Entity\ErfType $erfType
@@ -508,5 +343,25 @@ class Erf {
     public function getSection() {
         return $this->section;
     }
+    
+    /**
+     * Get balance
+     *
+     * @return Erf
+     */
+    function getBalance()
+    {
+        return $this->balance;
+    }
 
+    /**
+     * Set balance
+     *
+     * @param decimal $balance
+     * @return Erf
+     */
+    function setBalance($balance)
+    {
+        $this->balance = $balance;
+    }
 }

@@ -47,28 +47,28 @@ class Payment {
     /**
      * @var string
      *
-     * @ORM\Column(name="amount_due", type="decimal")
+     * @ORM\Column(name="amount_due", type="decimal", precision=8, scale=2, options={"default":0})
      */
     private $amountDue;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="amount_received", type="decimal")
+     * @ORM\Column(name="amount_received", type="decimal", precision=8, scale=2, options={"default":0})
      */
     private $amountReceived;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="amount_outstanding", type="decimal")
+     * @ORM\Column(name="amount_outstanding", type="decimal", precision=8, scale=2, options={"default":0})
      */
     private $amountOutstanding;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="total_outstanding", type="decimal")
+     * @ORM\Column(name="total_outstanding", type="decimal", precision=8, scale=2, options={"default":0})
      */
     private $totalOutstanding;
 

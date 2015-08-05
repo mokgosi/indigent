@@ -44,5 +44,27 @@ class ReportController extends Controller {
                     'entities' => $entities
         ));
     }
+    
+    
+    /**
+     * Lists all Payment entities.
+     *
+     * @Route("/section", name="report_sections")
+     * @Method("GET")
+     */
+    public function sectionReportAction() {
+        return new Response;
+    }
+    
+    /**
+     * Lists all Payment entities.
+     *
+     * @Route("/erf", name="report_erf")
+     * @Method("GET")
+     */
+    public function erfReportAction($id) {
+
+        return new Response;
+    }
 
 }

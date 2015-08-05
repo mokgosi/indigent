@@ -20,12 +20,7 @@ class OwnerType extends AbstractType
             ->add('lastName')
             ->add('telephone')
             ->add('mobile')
-            ->add('address')
-            ->add('city')
-            ->add('provinceId')
-            ->add('code')
-            ->add('created')
-            ->add('updated')
+            ->add('email')
         ;
     }
     

@@ -3,12 +3,14 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Owner
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\OwnerRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Owner
 {
@@ -25,62 +27,71 @@ class Owner
      * @var integer
      *
      * @ORM\Column(name="id_no", type="integer")
+     * 
      */
     private $idNo;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="first_name", type="string", length=50)
+     * @ORM\Column(name="first_name", type="string", length=255)
      */
     private $firstName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="last_name", type="string", length=50)
+     * @ORM\Column(name="last_name", type="string", length=255)
      */
     private $lastName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="telephone", type="string", length=15)
+     * @ORM\Column(name="telephone", type="string", length=15, nullable=true)
      */
     private $telephone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="mobile", type="string", length=15)
+     * @ORM\Column(name="mobile", type="string", length=15, nullable=true)
      */
     private $mobile;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=100, nullable=true)
+     * @Assert\Email
+     */
+    private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=255)
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     private $address;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="city", type="string", length=255)
+     * @ORM\Column(name="city", type="string", length=255, nullable=true)
      */
     private $city;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="province_id", type="integer")
+     * @ORM\Column(name="province_id", type="integer", nullable=true)
      */
     private $provinceId;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="code", type="integer")
+     * @ORM\Column(name="code", type="integer", nullable=true)
      */
     private $code;
 
@@ -361,4 +372,39 @@ class Owner
     {
         return $this->updated;
     }
+    
+    /**
+     * Get code
+     *
+     * @return string 
+     */
+    function getEmail()
+    {
+        return $this->email;
+    }
+
+     /**
+     * Set email
+     *
+     * @param string $email
+     * @return Owner
+     */
+    function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue() {
+
+        $this->setUpdated(new \DateTime('now'));
+
+        if ($this->getCreated() == null) {
+            $this->setCreated(new \DateTime('now'));
+        }
+    }
+
 }

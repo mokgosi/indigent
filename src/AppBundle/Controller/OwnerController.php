@@ -35,6 +35,7 @@ class OwnerController extends Controller
             'entities' => $entities,
         );
     }
+
     /**
      * Creates a new Owner entity.
      *
@@ -58,7 +59,7 @@ class OwnerController extends Controller
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -86,17 +87,16 @@ class OwnerController extends Controller
      *
      * @Route("/new", name="owner_new")
      * @Method("GET")
-     * @Template()
      */
     public function newAction()
     {
         $entity = new Owner();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
+        return $this->render('owner/new.html.twig', array(
+                    'entity' => $entity,
+                    'form' => $form->createView(),
+        ));
     }
 
     /**
@@ -119,7 +119,7 @@ class OwnerController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -129,7 +129,6 @@ class OwnerController extends Controller
      *
      * @Route("/{id}/edit", name="owner_edit")
      * @Method("GET")
-     * @Template()
      */
     public function editAction($id)
     {
@@ -144,20 +143,24 @@ class OwnerController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+//        return array(
+//            'entity' => $entity,
+//            'edit_form' => $editForm->createView(),
+//            'delete_form' => $deleteForm->createView(),
+//        );
+        return $this->render('owner/new.html.twig', array(
+                    'entity' => $entity,
+                    'form' => $editForm->createView(),
+        ));
     }
 
     /**
-    * Creates a form to edit a Owner entity.
-    *
-    * @param Owner $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Owner entity.
+     *
+     * @param Owner $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Owner $entity)
     {
         $form = $this->createForm(new OwnerType(), $entity, array(
@@ -169,6 +172,7 @@ class OwnerController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Owner entity.
      *
@@ -197,11 +201,12 @@ class OwnerController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Owner entity.
      *
@@ -238,10 +243,11 @@ class OwnerController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('owner_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+                        ->setAction($this->generateUrl('owner_delete', array('id' => $id)))
+                        ->setMethod('DELETE')
+                        ->add('submit', 'submit', array('label' => 'Delete'))
+                        ->getForm()
         ;
     }
+
 }

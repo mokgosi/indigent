@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\HelloBundle\DataFixtures\ORM;
+namespace AppBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -14,13 +14,13 @@ class LoadPaymentData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $manager) {
         $p = 0;
-        foreach (range(1, 50) as $i) {
+        foreach (range(1, 5) as $i) {
 
-            $rand = rand(2, 7);
+            $rand = rand(8, 8);
 
             //add a few recs per month
             $erf = 0;
-            foreach (range(1, $rand) as $y) {
+            foreach (range(1, 1) as $y) {
                 $p++;
                 $pay = new Payment();
                 $pay->setRefNo('2015' . $p);
@@ -38,7 +38,8 @@ class LoadPaymentData extends AbstractFixture implements OrderedFixtureInterface
                 $date = new \DateTime('2015-' . $y . '-15');
                 $date->add(new \DateInterval('P1M'));
                 $date->sub(new \DateInterval('P1M'));
-                $pay->setCreated($date);
+//                $pay->setCreated($date);
+                $pay->setCreated(new \DateTime());
                 $pay->setUpdated(new \DateTime());
                 $manager->persist($pay);
             }

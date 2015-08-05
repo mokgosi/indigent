@@ -16,7 +16,7 @@ class LoadErfData extends AbstractFixture implements OrderedFixtureInterface {
         
         $r=0;
         foreach (range(1, 5) as $s) {
-            foreach (range(1, 10) as $i) {
+            foreach (range(1, 1) as $i) {
                 $r++;
                 $erf = new Erf();
                 $erf->setErfType($this->getReference('ref-erfType'));
@@ -24,16 +24,9 @@ class LoadErfData extends AbstractFixture implements OrderedFixtureInterface {
                 $erf->setStreetName('Street Name');
                 $erf->setSection($this->getReference('ref-section'.$s));
                 $erf->setLocation($this->getReference('ref-location'));
-                $erf->setOwnerFirstName('Owner');
-                $erf->setOwnerLastName('Owner');
-                $erf->setOwnerMobile('0720112966');
-                $erf->setOwnerTelephone('0123464545');
-                $erf->setOwnerEmail('owner@mail.com');
-                $erf->setOwnerAddress('800 Church street');
-                $erf->setOwnerIdNo('1234567891234');
+                $erf->setBalance(800);
                 $erf->setCreated(new \DateTime('now'));
                 $erf->setUpdated(new \DateTime('now'));
-
                 $manager->persist($erf);
                 
                 $this->addReference('ref-erf'.$r, $erf);
