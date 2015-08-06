@@ -21,7 +21,8 @@ class LoadErfData extends AbstractFixture implements OrderedFixtureInterface {
                 $erf = new Erf();
                 $erf->setErfType($this->getReference('ref-erfType'));
                 $erf->setErfNo($s.'200'.($i-1));
-                $erf->setStreetName('Street Name');
+                $erf->setOwner($this->getReference('ref-owner'));
+                $erf->setAddress($s.' Street Name');
                 $erf->setSection($this->getReference('ref-section'.$s));
                 $erf->setLocation($this->getReference('ref-location'));
                 $erf->setBalance(800);

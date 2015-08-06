@@ -31,9 +31,9 @@ class OwnerController extends Controller
 
         $entities = $em->getRepository('AppBundle:Owner')->findAll();
 
-        return array(
-            'entities' => $entities,
-        );
+        return $this->render('owner/index.html.twig', array(
+                    'entities' => $entities
+        ));
     }
 
     /**
@@ -41,7 +41,6 @@ class OwnerController extends Controller
      *
      * @Route("/", name="owner_create")
      * @Method("POST")
-     * @Template("AppBundle:Owner:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -54,13 +53,14 @@ class OwnerController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('owner_show', array('id' => $entity->getId())));
+//            return $this->redirect($this->generateUrl('owner_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('owner'));
         }
 
-        return array(
-            'entity' => $entity,
-            'form' => $form->createView(),
-        );
+        return $this->render('owner/new.html.twig', array(
+                    'entity' => $entity,
+                    'form' => $form->createView(),
+        ));
     }
 
     /**
@@ -111,6 +111,7 @@ class OwnerController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AppBundle:Owner')->find($id);
+        $erfs = $em->getRepository('AppBundle:Erf')->findByOwnerId($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Owner entity.');
@@ -118,10 +119,11 @@ class OwnerController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
+        return $this->render('owner/show.html.twig', array(
             'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
-        );
+            'erfs' => $erfs
+        ));
     }
 
     /**

@@ -96,6 +96,12 @@ class Erf {
      * @ORM\JoinColumn(name="erf_type_id", referencedColumnName="id")
      */
     protected $erfType;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Owner", inversedBy="erfs")
+     * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
+     */
+    protected $owner;
 
     /**
      * @ORM\ManyToOne(targetEntity="Location", inversedBy="erfs")
@@ -173,24 +179,24 @@ class Erf {
     }
 
     /**
-     * Set streetName
+     * Set address
      *
-     * @param string $streetName
+     * @param string $address
      * @return Erf
      */
-    public function setStreetName($streetName) {
-        $this->streetName = $streetName;
+    public function setAddress($address) {
+        $this->address = $address;
 
         return $this;
     }
 
     /**
-     * Get streetName
+     * Get address
      *
      * @return string 
      */
-    public function getStreetName() {
-        return $this->streetName;
+    public function getAddress() {
+        return $this->address;
     }
 
     /**
@@ -342,6 +348,24 @@ class Erf {
      */
     public function getSection() {
         return $this->section;
+    }
+    
+    /**
+     * Set owner
+     *
+     * @param AppBundle\Entity\Owner $owner
+     */
+    public function setOwner(Owner $owner) {
+        $this->owner = $owner;
+    }
+
+    /**
+     * Get owner
+     *
+     * @return AppBundle\Entity\Owner 
+     */
+    public function getOwner() {
+        return $this->owner;
     }
     
     /**

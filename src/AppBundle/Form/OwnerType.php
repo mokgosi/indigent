@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class OwnerType extends AbstractType
 {
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -15,15 +16,20 @@ class OwnerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('idNo')
-            ->add('firstName')
-            ->add('lastName')
-            ->add('telephone')
-            ->add('mobile')
-            ->add('email')
+                ->add('socialSecurityNo')
+                ->add('firstName')
+                ->add('lastName')
+                ->add('gender', 'choice', array(
+                    'placeholder' => 'Choose gender',
+                    'choices' => array('Male' => 'Male', 'Female' => 'Female'),
+                    'required' => false,
+                ))
+                ->add('telephone')
+                ->add('mobile')
+                ->add('email')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
@@ -41,4 +47,5 @@ class OwnerType extends AbstractType
     {
         return 'appbundle_owner';
     }
+
 }

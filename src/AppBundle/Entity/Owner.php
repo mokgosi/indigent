@@ -4,16 +4,19 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Owner
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\OwnerRepository")
+ * @UniqueEntity("socialSecurityNo")
  * @ORM\HasLifecycleCallbacks()
  */
 class Owner
 {
+
     /**
      * @var integer
      *
@@ -26,15 +29,17 @@ class Owner
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_no", type="integer")
+     * @ORM\Column(name="social_security_no", type="string", unique=true)
+     * @Assert\NotBlank()
      * 
      */
-    private $idNo;
+    private $socialSecurityNo;
 
     /**
      * @var string
      *
      * @ORM\Column(name="first_name", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $firstName;
 
@@ -42,8 +47,16 @@ class Owner
      * @var string
      *
      * @ORM\Column(name="last_name", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $lastName;
+
+    /**
+     * @var gender
+     *
+     * @ORM\Column(name="gender", type="string", length=10, nullable=true)
+     */
+    private $gender;
 
     /**
      * @var string
@@ -58,7 +71,7 @@ class Owner
      * @ORM\Column(name="mobile", type="string", length=15, nullable=true)
      */
     private $mobile;
-    
+
     /**
      * @var string
      *
@@ -109,6 +122,10 @@ class Owner
      */
     private $updated;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Erf", mappedBy="owner") 
+     */
+    protected $erfs;
 
     /**
      * Get id
@@ -121,26 +138,26 @@ class Owner
     }
 
     /**
-     * Set idNo
+     * Set socialSecurityNo
      *
-     * @param integer $idNo
+     * @param integer $socialSecurityNo
      * @return Owner
      */
-    public function setIdNo($idNo)
+    public function setSocialSecurityNo($socialSecurityNo)
     {
-        $this->idNo = $idNo;
+        $this->socialSecurityNo = $socialSecurityNo;
 
         return $this;
     }
 
     /**
-     * Get idNo
+     * Get socialSecurityNo
      *
-     * @return integer 
+     * @return string 
      */
-    public function getIdNo()
+    public function getSocialSecurityNo()
     {
-        return $this->idNo;
+        return $this->socialSecurityNo;
     }
 
     /**
@@ -187,6 +204,29 @@ class Owner
     public function getLastName()
     {
         return $this->lastName;
+    }
+
+    /**
+     * Set gender
+     *
+     * @param string $gender
+     * @return Owner
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    /**
+     * Get gender
+     *
+     * @return string 
+     */
+    public function getGender()
+    {
+        return $this->gender;
     }
 
     /**
@@ -372,7 +412,7 @@ class Owner
     {
         return $this->updated;
     }
-    
+
     /**
      * Get code
      *
@@ -383,7 +423,7 @@ class Owner
         return $this->email;
     }
 
-     /**
+    /**
      * Set email
      *
      * @param string $email
@@ -398,7 +438,8 @@ class Owner
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
-    public function setUpdatedAtValue() {
+    public function setUpdatedAtValue()
+    {
 
         $this->setUpdated(new \DateTime('now'));
 

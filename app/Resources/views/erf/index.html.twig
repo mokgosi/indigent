@@ -68,7 +68,7 @@
                             <thead>
                                 <tr>
                                     <th>Erf no</th>
-                                    <th>Street Name</th>
+                                    <th>Street Address</th>
                                     <th>Section</th>
                                     <th>Location</th>
                                     <th>Type</th>
@@ -80,7 +80,7 @@
                                 {% for entity in entities %}
                                     <tr>
                                         <td><a href="{{ path('erf_edit', { 'id': entity.id }) }}">{{ entity.erfNo }}</a></td>
-                                        <td>{{ entity.streetName }}</td>
+                                        <td>{{ entity.address }}</td>
                                         <td>{{ entity.section.name }}</td>
                                         <td>{{ entity.location.name }}</td>
                                         <td>{{ entity.erfType.name }}</td>

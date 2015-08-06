@@ -1,1 +1,51 @@
-{# empty Twig template #}
+{% extends 'owner/layout.html.twig' %}
+
+{% block main_body %}
+    <div class="table-toolbar">
+        <div class="btn-group">
+            <a href="{{path('owner_new')}}" class="btn green">
+                Add New<i class="icon-plus"></i>
+            </a>
+        </div>
+        <div class="btn-group pull-right">
+            <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right">
+                <li><a href="#">Print</a></li>
+                <li><a href="#">Save as PDF</a></li>
+                <li><a href="#">Export to Excel</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+        <thead>
+            <tr>
+                <th>Id #</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Telephone</th>
+                <th>Show</th>
+                <th>Edit</th>
+{#                <th>Reg. Erf</th>#}
+            </tr>
+        </thead>
+        <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td>{{ entity.socialSecurityNo }}</td>
+                    <td>{{ entity.lastName }}</td>
+                    <td>{{ entity.firstName }}</td>
+                    <td>{{ entity.email }}</td>
+                    <td>{{ entity.mobile }}</td>
+                    <td>{{ entity.telephone }}</td>
+                    <td><a href="{{ path('owner_show', { 'id': entity.id }) }}">show</a></td>
+                    <td><a href="{{ path('owner_edit', { 'id': entity.id }) }}">edit</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

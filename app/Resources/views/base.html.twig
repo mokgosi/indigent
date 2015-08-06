@@ -39,7 +39,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
             <link rel="stylesheet" href="{{ asset('css/style-responsive.css') }}" rel="stylesheet" type="text/css">
             <link rel="stylesheet" href="{{ asset('css/themes/default.css') }}" rel="stylesheet"  type="text/css" id="style_color">
             <link rel="stylesheet" href="{{ asset('css/uniform.default.css') }}" rel="stylesheet" type="text/css">
-            <link rel="stylesheet" href="{{ asset('css/select2_metro.css') }}" rel="stylesheet" type="text/css">
+{#            <link rel="stylesheet" href="{{ asset('css/select2_metro.css') }}" rel="stylesheet" type="text/css">#}
+            <link rel="stylesheet" href="{{ asset('css/select2.css') }}" rel="stylesheet" type="text/css">
             <!-- END GLOBAL MANDATORY STYLES -->
 
             <link rel="stylesheet" href="{{ asset('css/DT_bootstrap.css') }}" rel="stylesheet" type="text/css" />
@@ -142,6 +143,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                     <span class="title">ERF Management</span>
                                     <span class="arrow "></span>
                                 </a>
+                                
                                 <ul class="sub-menu">
                                     <li class="{{ app.request.attributes.get('_route') in ['erf','erf_edit','erf_new','erf_update'] ? 'active' : '' }}">
                                         <a href="{{ path('erf') }}">Manage ERFs</a>
@@ -158,14 +160,17 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                 </ul>
                             </li>
                             
-                            <li class="{{ app.request.attributes.get('_route') in ['owner_edit','owner_new','owner_update'] ? 'active' : '' }}">
+                            <li class="{{ app.request.attributes.get('_route') in ['owner','owner_edit','owner_new','owner_show','owner_update'] ? 'active' : '' }}">
                                 <a href="javascript:;">
                                     <i class="icon-table"></i> 
                                     <span class="title">Owners</span>
                                     <span class="arrow "></span>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li class="{{ app.request.attributes.get('_route') in ['owner_edit','owner_new','owner_update'] ? 'active' : '' }}" >
+                                    <li class="{{ app.request.attributes.get('_route') in ['owner'] ? 'active' : '' }}" >
+                                        <a href="{{ path('owner') }}">Owners List</a>
+                                    </li>
+                                    <li class="{{ app.request.attributes.get('_route') in ['owner_new'] ? 'active' : '' }}" >
                                         <a href="{{ path('owner_new') }}">Add Owner</a>
                                     </li>
                                 </ul>
@@ -253,7 +258,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
         <script src="{{ asset('js/jquery.blockui.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/jquery.cookie.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/jquery.uniform.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/select2.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/select2.js') }}" type="text/javascript"></script>
 
         <!-- END CORE PLUGINS -->
         <script src="{{ asset('js/jquery.dataTables.min.js') }}" type="text/javascript"></script>
