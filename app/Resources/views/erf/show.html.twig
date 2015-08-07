@@ -1,72 +1,111 @@
-{% extends '::base.html.twig' %}
-
-{% block title %} | Erf Management{% endblock %}
+{% extends 'owner/layout.html.twig' %}
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/form-components.js') }}"></script>
     <script>
         jQuery(document).ready(function () {
             App.init();
-            FormComponents.init();
         });
     </script>    
 {% endblock %}
-{% block body -%}
-    <h1>Erf</h1>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Erftypeid</th>
-                <td>{{ entity.erfTypeId }}</td>
-            </tr>
-            <tr>
-                <th>Erfno</th>
-                <td>{{ entity.erfNo }}</td>
-            </tr>
-            <tr>
-                <th>Erfstreetname</th>
-                <td>{{ entity.erfStreetName }}</td>
-            </tr>
-            <tr>
-                <th>Erfsectionid</th>
-                <td>{{ entity.erfSectionId }}</td>
-            </tr>
-            <tr>
-                <th>Erflocationid</th>
-                <td>{{ entity.erfLocationId }}</td>
-            </tr>
-            <tr>
-                <th>Erfownerid</th>
-                <td>{{ entity.erfOwnerId }}</td>
-            </tr>
-            <tr>
-                <th>Created</th>
-                <td>{{ entity.created|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Updated</th>
-                <td>{{ entity.updated|date('Y-m-d H:i:s') }}</td>
-            </tr>
-        </tbody>
-    </table>
+{% block main_body %}
+    <div class="table-toolbar">
+        <div class="btn-group">
+            <a href="{{path('erf_new')}}" class="btn green">
+                Add Erf <i class="icon-plus"></i>
+            </a>
+        </div>
+        <div class="btn-group pull-right">
+            <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right">
+                <li><a href="#">Print</a></li>
+                <li><a href="#">Save as PDF</a></li>
+                <li><a href="#">Export to Excel</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        <!-- BEGIN FORM-->
+        <div class="form-horizontal form-view">
+            <h3 class="form-section">Erf Info</h3>
+            <div class="row-fluid">
+                <div class="span6 ">
+                    <div class="control-group">
+                        <label class="control-label" for="erfNo">Erf No:</label>
+                        <div class="controls">
+                            <input type="text" value="{{ entity.erfNo }}" readonly="readonly" class="m-wrap span12"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="span6 ">
+                    <div class="control-group">
+                        <label class="control-label" >Balance:</label>
+                        <div class="controls">                                                
+                            <input type="text" value="{{ entity.balance }}" readonly="readonly" class="m-wrap span12"/>                                                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span6 ">
+                    <div class="control-group">
+                        <label class="control-label" for="address">Street Address:</label>
+                        <div class="controls">
+                            <input type="text" value="{{ entity.address }}" readonly="readonly" class="m-wrap span12"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span6 ">
+                    <div class="control-group">
+                        <label class="control-label" >Section:</label>
+                        <div class="controls">
+                            <input type="text" value="{{ entity.section.name }}" readonly="readonly" class="m-wrap span12"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">  
+                <div class="span6 ">
+                    <div class="control-group">
+                        <label class="control-label" >Location:</label>
+                        <div class="controls">
+                            <input type="text" value="{{ entity.location.name }}" readonly="readonly" class="m-wrap span12"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span6 ">
+                    <div class="control-group">
+                        <label class="control-label" >Erf Type:</label>
+                        <div class="controls">
+                            <input type="text" value="{{ entity.erfType.name }}" readonly="readonly" class="m-wrap span12"/>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span6 ">
+                    <div class="control-group">
+                        <label class="control-label" >Owner:</label>
+                        <div class="controls">                                                
+                            <input type="text" value="{{ entity.owner.firstName }} {{ entity.owner.lastName }} - {{ entity.owner.socialSecurityNo }}" readonly="readonly" class="m-wrap span12"/>                                                        
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('erf') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('erf_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+            <div class="form-actions">
+                <a href="{{ path('erf_edit', { 'id': entity.id }) }}"  class="btn blue"><i class="icon-pencil"></i> Edit</a>
+                <a href="{{ path('erf') }}" class="btn">Back to list</a>
+            </div>
+        </div>
+        <!-- END FORM-->  
+    </div>
+
+</div>
 {% endblock %}

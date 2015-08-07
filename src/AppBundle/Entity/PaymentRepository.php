@@ -104,7 +104,7 @@ class PaymentRepository extends EntityRepository
         $results = $this->getEntityManager()
                 ->createQuery(
                         'SELECT p.amountReceived, p.created, MONTHNAME(p.created) as month, e.erfNo, '
-                        . 'e.streetName as address, s.name as section '
+                        . 'e.address as address, s.name as section '
                         . 'FROM AppBundle:Payment p '
                         . 'LEFT JOIN AppBundle:Erf e With e.id = p.erfId '
                         . 'LEFT JOIN AppBundle:Section s With s.id = e.sectionId '

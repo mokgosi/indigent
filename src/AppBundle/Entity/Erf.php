@@ -4,12 +4,14 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Erf
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\ErfRepository")
+ * @UniqueEntity("socialSecurityNo")
  * @ORM\HasLifecycleCallbacks()
  */
 class Erf {
@@ -40,7 +42,7 @@ class Erf {
     /**
      * @var string
      *
-     * @ORM\Column(name="erf_no", type="string", length=10)
+     * @ORM\Column(name="erf_no", type="string", length=10, unique=true)
      * @Assert\NotBlank()
      */
     private $erfNo;
@@ -65,6 +67,13 @@ class Erf {
      * @ORM\Column(name="location_id", type="integer")
      */
     private $locationId;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="code", type="integer", nullable=true)
+     */
+    private $code;
 
     /**
      * @var decimal
@@ -72,7 +81,6 @@ class Erf {
      * @ORM\Column(name="balance", type="decimal", precision=8, scale=2, options={"default":0})
      */
     private $balance;
-    
     
     
     /**
@@ -135,7 +143,18 @@ class Erf {
     public function getId() {
         return $this->id;
     }
+    
+    function getOwnerId()
+    {
+        return $this->ownerId;
+    }
 
+    function setOwnerId($ownerId)
+    {
+        $this->ownerId = $ownerId;
+    }
+
+    
     /**
      * Set erfTypeId
      *
@@ -239,6 +258,29 @@ class Erf {
      */
     public function getLocationId() {
         return $this->locationId;
+    }
+    
+    /**
+     * Set code
+     *
+     * @param integer $code
+     * @return Owner
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return integer 
+     */
+    public function getCode()
+    {
+        return $this->code;
     }
 
     /**

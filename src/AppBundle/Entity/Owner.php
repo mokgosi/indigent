@@ -87,19 +87,19 @@ class Owner
      */
     private $address;
 
-    /**
-     * @var string
+     /**
+     * @var integer
      *
-     * @ORM\Column(name="city", type="string", length=255, nullable=true)
+     * @ORM\Column(name="section_id", type="integer")
      */
-    private $city;
+    private $sectionId;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="province_id", type="integer", nullable=true)
+     * @ORM\Column(name="location_id", type="integer")
      */
-    private $provinceId;
+    private $locationId;
 
     /**
      * @var integer
@@ -126,6 +126,18 @@ class Owner
      * @ORM\OneToMany(targetEntity="Erf", mappedBy="owner") 
      */
     protected $erfs;
+    
+     /**
+     * @ORM\ManyToOne(targetEntity="Location", inversedBy="erfs")
+     * @ORM\JoinColumn(name="location_id", referencedColumnName="id")
+     */
+    protected $location;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Section", inversedBy="erfs")
+     * @ORM\JoinColumn(name="section_id", referencedColumnName="id")
+     */
+    protected $section;
 
     /**
      * Get id
@@ -298,50 +310,46 @@ class Owner
         return $this->address;
     }
 
-    /**
-     * Set city
+   /**
+     * Set sectionId
      *
-     * @param string $city
-     * @return Owner
+     * @param integer $sectionId
+     * @return Erf
      */
-    public function setCity($city)
-    {
-        $this->city = $city;
+    public function setSectionId($sectionId) {
+        $this->sectionId = $sectionId;
 
         return $this;
     }
 
     /**
-     * Get city
-     *
-     * @return string 
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
-
-    /**
-     * Set provinceId
-     *
-     * @param integer $provinceId
-     * @return Owner
-     */
-    public function setProvinceId($provinceId)
-    {
-        $this->provinceId = $provinceId;
-
-        return $this;
-    }
-
-    /**
-     * Get provinceId
+     * Get sectionId
      *
      * @return integer 
      */
-    public function getProvinceId()
-    {
-        return $this->provinceId;
+    public function getSectionId() {
+        return $this->sectionId;
+    }
+
+    /**
+     * Set locationId
+     *
+     * @param integer $locationId
+     * @return Erf
+     */
+    public function setLocationId($locationId) {
+        $this->locationId = $locationId;
+
+        return $this;
+    }
+
+    /**
+     * Get locationId
+     *
+     * @return integer 
+     */
+    public function getLocationId() {
+        return $this->locationId;
     }
 
     /**
@@ -432,6 +440,42 @@ class Owner
     function setEmail($email)
     {
         $this->email = $email;
+    }
+    
+    /**
+     * Set location
+     *
+     * @param AppBundle\Entity\Location $location
+     */
+    public function setLocation(Location $location) {
+        $this->location = $location;
+    }
+
+    /**
+     * Get location
+     *
+     * @return AppBundle\Entity\Location 
+     */
+    public function getLocation() {
+        return $this->location;
+    }
+
+    /**
+     * Set section
+     *
+     * @param AppBundle\Entity\Section $section
+     */
+    public function setSection(Section $section) {
+        $this->section = $section;
+    }
+
+    /**
+     * Get section
+     *
+     * @return AppBundle\Entity\Section 
+     */
+    public function getSection() {
+        return $this->section;
     }
 
     /**

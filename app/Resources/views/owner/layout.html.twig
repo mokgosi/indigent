@@ -3,12 +3,14 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/form-components.js') }}"></script>
-    <script src="{{ asset('js/table-editable.js') }}"></script>    
+    <script src="{{ asset('js/table-editable.js') }}"></script>
+    <script src="{{ asset('js/owner.js') }}"></script>    
     <script>
         jQuery(document).ready(function () {
             App.init();
             FormComponents.init();
             TableEditable.init();
+            Owner.init();
         });
     </script>    
 {% endblock %}

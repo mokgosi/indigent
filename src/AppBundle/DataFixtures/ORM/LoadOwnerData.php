@@ -15,7 +15,7 @@ class LoadOwnerData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-
+        $s = 1;
         $owner = new Owner();
         $owner->setSocialSecurityNo(1234567890123);
         $owner->setLastName('Foo');
@@ -24,6 +24,9 @@ class LoadOwnerData extends AbstractFixture implements OrderedFixtureInterface
         $owner->setEmail('mail@email.com');
         $owner->setMobile('0720112966');
         $owner->setTelephone('0210112966');
+        $owner->setAddress('230 Street');
+        $owner->setSection($this->getReference('ref-section'.$s));
+        $owner->setLocation($this->getReference('ref-location'));
         $owner->setCreated(new \DateTime('now'));
         $owner->setUpdated(new \DateTime('now'));
         $manager->persist($owner);

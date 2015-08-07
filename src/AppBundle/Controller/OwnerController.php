@@ -120,9 +120,9 @@ class OwnerController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('owner/show.html.twig', array(
-            'entity' => $entity,
-            'delete_form' => $deleteForm->createView(),
-            'erfs' => $erfs
+                    'entity' => $entity,
+                    'delete_form' => $deleteForm->createView(),
+                    'erfs' => $erfs
         ));
     }
 
@@ -250,6 +250,11 @@ class OwnerController extends Controller
                         ->add('submit', 'submit', array('label' => 'Delete'))
                         ->getForm()
         ;
+    }
+
+    public function searchOwner()
+    {
+        
     }
 
 }

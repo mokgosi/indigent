@@ -1,0 +1,149 @@
+<div class="portlet-body form">
+    {{ form_start( form, {'attr': {'novalidate': 'novalidate'}} ) }}    
+
+    <h3 class="form-section">Erf Info</h3>
+
+    {{ form_errors(form) }}
+
+    <div class="row-fluid">
+        <div class="span6 ">
+            <div class="control-group">
+                <label class="control-label">Type</label>
+                <div class="controls">
+                    {{ form_errors(form.erfType) }}
+                    {{ form_widget(form.erfType,{ 'attr': {'class': 'm-wrap span12'} }) }}
+                </div>
+            </div>
+        </div>
+        <div class="span6 ">
+            <div class="control-group">
+                <label class="control-label">Account Balance</label>
+                <div class="controls">
+                    {{ form_errors(form.balance) }}
+                    {{ form_widget(form.balance, { 'attr': {'class': 'm-wrap span12'} }) }}
+                </div>
+            </div>
+        </div>        
+    </div>
+    <div class="row-fluid">
+        <div class="span6 ">
+            <div class="control-group">
+                <label class="control-label">Erf No</label>
+                <div class="controls">
+                    {{ form_errors(form.erfNo) }}
+                    {{ form_widget(form.erfNo, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span6 ">
+            <div class="control-group">
+                <label class="control-label">Street Address</label>
+                <div class="controls">
+                    {{ form_errors(form.address) }}
+                    {{ form_widget(form.address, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span6 ">
+            <div class="control-group">
+                <label class="control-label">Location</label>
+                <div class="controls">
+                    {{ form_errors(form.location) }}
+                    {{ form_widget(form.location, { 'attr': {'class': 'm-wrap span12'} }) }}
+                </div>
+            </div>
+        </div>
+    </div>                                                    
+    <div class="row-fluid">
+        <div class="span6 ">
+            <div class="control-group">
+                <label class="control-label" >Section</label>
+                <div class="controls">
+                    {{ form_errors(form.section) }}
+                    {{ form_widget(form.section, { 'attr': {'class': 'm-wrap span12'} }) }}
+                </div>
+            </div>
+        </div>
+    </div>
+      
+
+    <h3 class="form-section">Owner Info</h3>            
+
+    <div class="row-fluid">
+        <div class="span6 ">
+            <div class="control-group">
+                <label class="control-label" >ID #</label>
+                <div class="controls">
+                    {{ form_widget(form.owner, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
+                </div>
+            </div>
+        </div>
+    </div>
+                
+    <div class="row-fluid">
+        <div class="span6 ">
+            <div class="control-group">
+                <label class="control-label" >First Name</label>
+                <div class="controls">
+                    <input type='text' id='ownerFirstName' value="" class='m-wrap span12 placeholder-no-fix' readonly='readonly'>
+                </div>
+            </div>
+        </div>
+    </div>
+                
+    {#<div class="row-fluid">
+        <div class="span6 ">
+            <div class="control-group">
+                <label class="control-label" >Email</label>
+                <div class="controls">
+                    {{ form_widget(form.ownerEmail, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
+                </div>
+            </div>
+        </div>
+    </div>
+                
+    <div class="row-fluid">
+        <div class="span6 ">
+            <div class="control-group">
+                <label class="control-label" >Mobile</label>
+                <div class="controls">
+                    {{ form_widget(form.ownerMobile, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
+                </div>
+            </div>
+        </div>
+    </div>
+                
+    <div class="row-fluid">
+        <div class="span6 ">
+            <div class="control-group">
+                <label class="control-label" >Telephone</label>
+                <div class="controls">
+                    {{ form_widget(form.ownerTelephone, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
+                </div>
+            </div>
+        </div>
+    </div>
+                
+    <div class="row-fluid">
+        <div class="span6 ">
+            <div class="control-group">
+                <label class="control-label" >ID Number</label>
+                <div class="controls">
+                    {{ form_widget(form.ownerIdNo, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
+                </div>
+            </div>
+        </div>
+    </div>#}
+
+    <div class="form-actions">
+        {{ form_widget(form.submit, { 'attr': {'class': 'btn blue', 'label': '<i class="icon-ok"></i> Save'} }) }}
+        {#                                            <button type="submit" class="btn blue"><i class="icon-ok"></i> Save</button>#}
+        <a href="{{ path('erf') }}" class="btn">Cancel</a>
+    </div>
+
+    {{form_end(form)}}
+</div>

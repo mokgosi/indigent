@@ -99,7 +99,6 @@ class ErfController extends Controller {
      *
      * @Route("/{id}", name="erf_show")
      * @Method("GET")
-     * @Template()
      */
     public function showAction($id) {
         $em = $this->getDoctrine()->getManager();
@@ -111,11 +110,11 @@ class ErfController extends Controller {
         }
 
         $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity' => $entity,
-            'delete_form' => $deleteForm->createView(),
-        );
+        
+        return $this->render('erf/show.html.twig', array(
+                    'entity' => $entity,
+                    'form' => $deleteForm->createView(),
+        ));
     }
 
     /**
@@ -250,7 +249,7 @@ class ErfController extends Controller {
                 ->getCurrentBalance($id);
 
         $result = array(
-            'street' => $entity->getStreetName(),
+            'street' => $entity->getAddress(),
             'section' => $entity->getSection()->getName(),
             'location' => $entity->getLocation()->getName(),
             'type' => $entity->getErfType()->getName(),

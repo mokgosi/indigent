@@ -20,13 +20,17 @@ class ErfType extends AbstractType
                     'class' => 'AppBundle:ErfType',
                     'property' => 'name'))
                 ->add('erfNo')
-                ->add('streetName')
+                ->add('address')
                 ->add('location', 'entity', array(
                     'class' => 'AppBundle:Location',
                     'property' => 'name'))
                 ->add('section', 'entity', array(
                     'class' => 'AppBundle:Section',
                     'property' => 'name'))
+                ->add('owner', 'entity', array(
+                    'class' => 'AppBundle:Owner',
+                    'placeholder' => 'Search Owner ID #',
+                    'property' => 'socialSecurityNo'))
                 ->add('balance')
         ;
     }

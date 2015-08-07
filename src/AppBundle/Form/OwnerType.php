@@ -27,6 +27,13 @@ class OwnerType extends AbstractType
                 ->add('telephone')
                 ->add('mobile')
                 ->add('email')
+                ->add('address')
+                ->add('location', 'entity', array(
+                    'class' => 'AppBundle:Location',
+                    'property' => 'name'))
+                ->add('section', 'entity', array(
+                    'class' => 'AppBundle:Section',
+                    'property' => 'name'))
         ;
     }
 
