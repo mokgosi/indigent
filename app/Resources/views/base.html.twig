@@ -137,7 +137,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                 </a>
                             </li>
                             
-                             <li class="{{ app.request.attributes.get('_route') in ['erf','erftype','location','section','erf_show','erf_edit','erf_new','erf_update','erftype_edit','erftype_new','erftype_update','location_edit','location_new','location_update','section_edit','section_new','section_update'] ? 'active' : '' }}">
+                             <li class="{{ app.request.attributes.get('_route') in ['erf','erf_show','erf_edit','erf_new','erf_update','erftype','erftype_show','erftype_edit','erftype_new','erftype_update','location','location_show','location_edit','location_new','location_update','section','section_show','section_edit','section_new','section_update'] ? 'active' : '' }}">
                                 <a href="javascript:;">
                                     <i class="icon-table"></i> 
                                     <span class="title">ERF Management</span>
@@ -151,7 +151,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                     <li class="{{ app.request.attributes.get('_route') in ['erftype','erftype_edit','erftype_new','erftype_update'] ? 'active' : '' }}" >
                                         <a href="{{ path('erftype') }}">Manage Types</a>
                                     </li>
-                                    <li class="{{ app.request.attributes.get('_route') in ['location','location_edit','location_new','location_update'] ? 'active' : '' }}" >
+                                    <li class="{{ app.request.attributes.get('_route') in ['location','location_show','location_edit','location_new','location_update'] ? 'active' : '' }}" >
                                         <a href="{{ path('location') }}">Manage Locations</a>
                                     </li>
                                     <li class="{{ app.request.attributes.get('_route') in ['section','section_edit','section_new','section_update'] ? 'active' : '' }}" >
