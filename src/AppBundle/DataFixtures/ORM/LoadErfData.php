@@ -16,7 +16,7 @@ class LoadErfData extends AbstractFixture implements OrderedFixtureInterface {
         
         $r=0;
         foreach (range(1, 5) as $s) {
-            foreach (range(1, 1) as $i) {
+            foreach (range(1, 100) as $i) {
                 $r++;
                 $erf = new Erf();
                 $erf->setErfType($this->getReference('ref-erfType'));

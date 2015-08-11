@@ -27,7 +27,7 @@
         </div>
     </div>
     <div class="portlet-body form">
-        <!-- BEGIN FORM-->
+        {{ form_start(delete_form) }}
         <div class="form-horizontal form-view">
             <h3 class="form-section">Erf Info</h3>
             <div class="row-fluid">
@@ -88,6 +88,7 @@
                     </div>
                 </div>
             </div>
+            <h3 class="form-section">Owner Info</h3>    
             <div class="row-fluid">
                 <div class="span6 ">
                     <div class="control-group">
@@ -98,13 +99,13 @@
                     </div>
                 </div>
             </div>
-
             <div class="form-actions">
-                <a href="{{ path('erf_edit', { 'id': entity.id }) }}"  class="btn blue"><i class="icon-pencil"></i> Edit</a>
                 <a href="{{ path('erf') }}" class="btn">Back to list</a>
+                <a href="{{ path('erf_edit', { 'id': entity.id }) }}"  class="btn blue"><i class="icon-pencil"></i> Edit</a>
+                {{ form_widget(delete_form.submit, { 'attr': {'class': 'btn red', 'label': 'Delete'} }) }}
             </div>
         </div>
-        <!-- END FORM-->  
+        {{ form_end(delete_form) }} 
     </div>
 
 </div>

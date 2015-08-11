@@ -113,7 +113,7 @@ class ErfController extends Controller {
         
         return $this->render('erf/show.html.twig', array(
                     'entity' => $entity,
-                    'form' => $deleteForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -257,5 +257,6 @@ class ErfController extends Controller {
         );
         return new JsonResponse($result, 200, array('Content-Type' => 'application/json'));
     }
+  
 
 }

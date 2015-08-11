@@ -20,7 +20,7 @@ class OwnerType extends AbstractType
                 ->add('firstName')
                 ->add('lastName')
                 ->add('gender', 'choice', array(
-                    'placeholder' => 'Choose gender',
+                    'placeholder' => 'Choose Gender',
                     'choices' => array('Male' => 'Male', 'Female' => 'Female'),
                     'required' => false,
                 ))

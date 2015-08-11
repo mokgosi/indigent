@@ -7,23 +7,26 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Entity\Payment;
 
-class LoadPaymentData extends AbstractFixture implements OrderedFixtureInterface {
+class LoadPaymentData extends AbstractFixture implements OrderedFixtureInterface
+{
 
     /**
      * {@inheritDoc}
      */
-    public function load(ObjectManager $manager) {
-        $p = 0;
-        foreach (range(1, 5) as $i) {
-
-            $rand = rand(8, 8);
-
-            //add a few recs per month
-            $erf = 0;
-            foreach (range(1, 1) as $y) {
-                $p++;
+    public function load(ObjectManager $manager)
+    {
+        $refNo = 0;
+        foreach (range(1, 500) as $i) {
+            $today = new \DateTime('now');
+            $currMonth = $today->format('m');
+            
+            //how many months paid
+            $months = rand(1, $currMonth);
+            
+            foreach (range(1, $months) as $y) {
+                $refNo++;
                 $pay = new Payment();
-                $pay->setRefNo('2015' . $p);
+                $pay->setRefNo('2015' . $refNo);
                 $pay->setCompany($this->getReference('ref-com'));
                 $pay->setErf($this->getReference('ref-erf' . $i));
                 $pay->setAmountDue(100);
@@ -36,10 +39,7 @@ class LoadPaymentData extends AbstractFixture implements OrderedFixtureInterface
                 $pay->setStaffEmail('admin@domain.com');
                 $pay->setPaymentMethod($this->getReference('ref-method'));
                 $date = new \DateTime('2015-' . $y . '-15');
-                $date->add(new \DateInterval('P1M'));
-                $date->sub(new \DateInterval('P1M'));
-//                $pay->setCreated($date);
-                $pay->setCreated(new \DateTime());
+                $pay->setCreated($date);
                 $pay->setUpdated(new \DateTime());
                 $manager->persist($pay);
             }
@@ -50,7 +50,8 @@ class LoadPaymentData extends AbstractFixture implements OrderedFixtureInterface
     /**
      * {@inheritDoc}
      */
-    public function getOrder() {
+    public function getOrder()
+    {
         return 7; // the order in which fixtures will be loaded
     }
 

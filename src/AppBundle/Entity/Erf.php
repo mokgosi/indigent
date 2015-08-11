@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\ErfRepository")
- * @UniqueEntity("socialSecurityNo")
+ * @UniqueEntity("erfNo")
  * @ORM\HasLifecycleCallbacks()
  */
 class Erf {

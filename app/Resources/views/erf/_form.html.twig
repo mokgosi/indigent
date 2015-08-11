@@ -95,12 +95,23 @@
         </div>
     </div>
                 
-    {#<div class="row-fluid">
+    <div class="row-fluid">
         <div class="span6 ">
             <div class="control-group">
-                <label class="control-label" >Email</label>
+                <label class="control-label" >Last Name</label>
                 <div class="controls">
-                    {{ form_widget(form.ownerEmail, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
+                    <input type='text' id='ownerLastName' value="" class='m-wrap span12 placeholder-no-fix' readonly='readonly'>
+                </div>
+            </div>
+        </div>
+    </div>
+                
+    <div class="row-fluid">
+        <div class="span6 ">
+            <div class="control-group">
+                <label class="control-label" >Address</label>
+                <div class="controls">
+                    <input type='text' id='ownerAddress' value="" class='m-wrap span12 placeholder-no-fix' readonly='readonly'>
                 </div>
             </div>
         </div>
@@ -111,24 +122,13 @@
             <div class="control-group">
                 <label class="control-label" >Mobile</label>
                 <div class="controls">
-                    {{ form_widget(form.ownerMobile, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
+                    <input type='text' id='ownerMobile' value="" class='m-wrap span12 placeholder-no-fix' readonly='readonly'>
                 </div>
             </div>
         </div>
     </div>
                 
-    <div class="row-fluid">
-        <div class="span6 ">
-            <div class="control-group">
-                <label class="control-label" >Telephone</label>
-                <div class="controls">
-                    {{ form_widget(form.ownerTelephone, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
-                </div>
-            </div>
-        </div>
-    </div>
-                
-    <div class="row-fluid">
+    {#<div class="row-fluid">
         <div class="span6 ">
             <div class="control-group">
                 <label class="control-label" >ID Number</label>

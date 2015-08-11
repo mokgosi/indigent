@@ -72,7 +72,8 @@
                                     <th>Description</th>
                                     <th>Created</th>
                                     <th>Updated</th>
-                                    <th>Actions</th>
+                                    <th>Show</th>
+                                    <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -82,6 +83,9 @@
                                         <td>{{ entity.description }}</td>
                                         <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                                         <td>{% if entity.updated %}{{ entity.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                        <td>
+                                            <a href="{{ path('erftype_show', { 'id': entity.id }) }}">show</a>
+                                        </td>
                                         <td>
                                             <a href="{{ path('erftype_edit', { 'id': entity.id }) }}">edit</a>
                                         </td>

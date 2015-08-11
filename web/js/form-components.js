@@ -283,7 +283,7 @@ var FormComponents = function () {
             format: 'hex'
         });
         $('.colorpicker-rgba').colorpicker();
-    }
+    };
 
     var handleSelect2 = function () {
 
@@ -294,7 +294,7 @@ var FormComponents = function () {
         
         
         $('#appbundle_payment_erf').select2({
-            placeholder: {id: "", text: "Select a State"},
+            placeholder: {id: "", text: "Select Erf #"},
             allowClear: true
         });
         

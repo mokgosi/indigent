@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -252,9 +253,25 @@ class OwnerController extends Controller
         ;
     }
 
-    public function searchOwner()
+    /**
+     * Lists all Erf entities.
+     *
+     * @Route("/{id}/find", name="get_erf_owner", options={"expose"=true})
+     */
+    public function getErfOwnerAction($id)
     {
-        
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AppBundle:Owner')->find($id);
+
+        //json_encode() expects an associative array
+
+        $result = array(
+            'firstName' => $entity->getFirstName(),
+            'lastName' => $entity->getLastName(),
+            'address' => $entity->getAddress(),
+            'mobile' => $entity->getMobile(),
+        );
+        return new JsonResponse($result, 200, array('Content-Type' => 'application/json'));
     }
 
 }

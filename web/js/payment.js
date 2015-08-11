@@ -83,9 +83,17 @@ var Payment = function () {
 
         });
     };
+    
+    var handleSelect2 = function() {
+      $('#appbundle_payment_erf').select2({
+            placeholder: {id: "", text: "Select Erf #"},
+            allowClear: true
+        });  
+    };
 
     return {
         init: function () {
+            handleSelect2();
             handlePayment();
             handleSearch();
         }

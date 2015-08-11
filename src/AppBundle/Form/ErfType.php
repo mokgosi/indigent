@@ -25,6 +25,7 @@ class ErfType extends AbstractType
                     'class' => 'AppBundle:Location',
                     'property' => 'name'))
                 ->add('section', 'entity', array(
+                    'placeholder' => 'Choose Section',
                     'class' => 'AppBundle:Section',
                     'property' => 'name'))
                 ->add('owner', 'entity', array(

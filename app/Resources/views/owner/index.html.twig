@@ -35,9 +35,10 @@
         <tbody>
             {% for entity in entities %}
                 <tr>
-                    <td>{{ entity.socialSecurityNo }}</td>
-                    <td>{{ entity.lastName }}</td>
-                    <td>{{ entity.firstName }}</td>
+                    
+                    <td><a href="{{ path('owner_show', { 'id': entity.id }) }}">{{ entity.socialSecurityNo }}</a></td>
+                    <td><a href="{{ path('owner_show', { 'id': entity.id }) }}">{{ entity.lastName }}</a></td>
+                    <td><a href="{{ path('owner_show', { 'id': entity.id }) }}">{{ entity.firstName }}</a></td>
                     <td>{{ entity.email }}</td>
                     <td>{{ entity.mobile }}</td>
                     <td>{{ entity.telephone }}</td>

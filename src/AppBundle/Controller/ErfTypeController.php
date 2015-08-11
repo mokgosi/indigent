@@ -103,7 +103,6 @@ class ErfTypeController extends Controller
      *
      * @Route("/{id}", name="erftype_show")
      * @Method("GET")
-     * @Template()
      */
     public function showAction($id)
     {
@@ -116,11 +115,11 @@ class ErfTypeController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        );
+       
+        return $this->render('erftype/show.html.twig', array(
+            'entity' => $entity,
+            'delete_form'   => $deleteForm->createView(),
+        ));
     }
 
     /**

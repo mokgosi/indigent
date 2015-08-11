@@ -1,0 +1,66 @@
+{% extends '::base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/table-editable.js') }}"></script>    
+    <script src="{{ asset('js/payment.js') }}"></script>    
+    <script>
+        jQuery(document).ready(function () {
+            App.init();
+            TableEditable.init();
+            Payment.init();
+        });
+    </script>    
+{% endblock %}
+
+{% block main -%}
+
+    <div class="container-fluid">
+        <!-- BEGIN PAGE HEADER-->   
+        <div class="row-fluid">
+            <div class="span12">
+                <h3 class="page-title">
+                    {% block page_title %}{% endblock %}
+                    <small>{% block page_title_small %}{% endblock %}</small>
+                </h3>
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="icon-home"></i>
+                        <a href="index.html">Home</a> 
+                        <span class="icon-angle-right"></span>
+                    </li>
+                    <li>
+                        <a href="#">{% block breadcrumb %}{% endblock %}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- END PAGE HEADER-->
+        <!-- BEGIN PAGE CONTENT-->
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="tabbable tabbable-custom boxless">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a  href="#tab_1" data-toggle="tab">{% block page_tab_info_title %}{% endblock %}</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_1">
+                            <div class="portlet box blue">
+                                <div class="portlet-title">
+                                    <div class="caption"><i class="icon-reorder"></i>{% block page_tab_details_title %}{% endblock %}</div>
+                                    <div class="tools">
+                                        <a href="javascript:;" class="collapse"></a>
+                                        <a href="#portlet-config" data-toggle="modal" class="config"></a>
+                                        <a href="javascript:;" class="reload"></a>
+                                        <a href="javascript:;" class="remove"></a>
+                                    </div>
+                                </div>
+                                {% block main_body %}{% endblock %} 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}

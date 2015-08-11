@@ -1,5 +1,13 @@
 {% extends 'owner/layout.html.twig' %}
 
+{% block title ' | Owner' %}
+
+{% block page_title %}Add Owner{% endblock %}
+{% block page_title_small %}add owner{% endblock %}
+{% block breadcrumb %}Add Owner{% endblock %}
+{% block page_tab_info_title %}Owner Info{% endblock %}
+{% block page_tab_details_title %}Owner Details{% endblock %}
+
 {% block main_body %}
 
     {{ include('owner/_form.html.twig', {

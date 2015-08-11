@@ -11,7 +11,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
  *
  * @Route("/report")
  */
-class ReportController extends Controller {
+class ReportController extends Controller
+{
 
     /**
      * Lists all Payment entities.
@@ -19,7 +20,8 @@ class ReportController extends Controller {
      * @Route("/", name="report")
      * @Method("GET")
      */
-    public function indexAction() {
+    public function indexAction()
+    {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('AppBundle:Payment')->findAll();
@@ -35,7 +37,8 @@ class ReportController extends Controller {
      * @Route("/section/{id}", name="report_section")
      * @Method("GET")
      */
-    public function getSectionReportAction($id) {
+    public function getSectionReportAction($id)
+    {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('AppBundle:Payment')->getSectionReport($id);
@@ -44,25 +47,34 @@ class ReportController extends Controller {
                     'entities' => $entities
         ));
     }
-    
-    
+
+    /***
+     * @Route("/")
+     */
+    public function getErfTransactionHistory()
+    {
+        
+    }
+
     /**
      * Lists all Payment entities.
      *
      * @Route("/section", name="report_sections")
      * @Method("GET")
      */
-    public function sectionReportAction() {
+    public function sectionReportAction()
+    {
         return new Response;
     }
-    
+
     /**
      * Lists all Payment entities.
      *
      * @Route("/erf", name="report_erf")
      * @Method("GET")
      */
-    public function erfReportAction($id) {
+    public function erfReportAction($id)
+    {
 
         return new Response;
     }

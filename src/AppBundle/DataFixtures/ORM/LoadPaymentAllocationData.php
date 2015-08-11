@@ -15,15 +15,19 @@ class LoadPaymentAllocationData extends AbstractFixture implements OrderedFixtur
      */
     public function load(ObjectManager $manager)
     {
-        foreach (range(1, 5) as $i) {
-            $allocation = new PaymentAllocation();
-            $allocation->setErfId($i);
-            $allocation->setAmount(100);
-            $date = new \DateTime();
-            $allocation->setMonth($date->format('F'));
-            $allocation->setCreated($date);
-            $allocation->setUpdated(new \DateTime());
-            $manager->persist($allocation);
+        foreach (range(1, 500) as $i) {
+            $today = new \DateTime('now');
+            $currMonth = $today->format('m');
+            foreach (range(1, $currMonth) as $y) {
+                $allocation = new PaymentAllocation();
+                $allocation->setErfId($i);
+                $allocation->setAmount(100);
+                $date = new \DateTime('2015-' . $y . '-01');
+                $allocation->setMonth($date->format('F'));
+                $allocation->setCreated($date);
+                $allocation->setUpdated(new \DateTime());
+                $manager->persist($allocation);
+            }
         }
         $manager->flush();
     }

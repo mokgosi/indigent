@@ -73,18 +73,20 @@
                                     <th>Ycoord</th>
                                     <th>Created</th>
                                     <th>Updated</th>
-                                    <th>Actions</th>
+                                    <th>Show</th>
+                                    <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for entity in entities %}
                                     <tr>
-                                        <td>{{ entity.name }}</td>
+                                        <td><a ref="{{ path('location_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
                                         <td>{{ entity.code }}</td>
                                         <td>{{ entity.xCoord }}</td>
                                         <td>{{ entity.yCoord }}</td>
                                         <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                                         <td>{% if entity.updated %}{{ entity.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                        <td><a href="{{ path('location_show', { 'id': entity.id }) }}">show</a></td>
                                         <td><a href="{{ path('location_edit', { 'id': entity.id }) }}">edit</a></td>
                                     </tr>
                                 {% endfor %}
