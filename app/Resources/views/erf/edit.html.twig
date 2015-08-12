@@ -1,5 +1,13 @@
 {% extends 'erf/layout.html.twig' %}
 
+{% block title ' | Erf' %}
+
+{% block page_title %}Edit Erf{% endblock %}
+{% block page_title_small %}edit erf{% endblock %}
+{% block breadcrumb %}Edit Erf{% endblock %}
+{% block page_tab_info_title %}Erf Info{% endblock %}
+{% block page_tab_details_title %}Erf Details{% endblock %}
+
 {% block main_body %}
 
     {{ include('erf/_form.html.twig', {

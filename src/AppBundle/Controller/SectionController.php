@@ -15,7 +15,8 @@ use AppBundle\Form\SectionType;
  *
  * @Route("/section")
  */
-class SectionController extends Controller {
+class SectionController extends Controller
+{
 
     /**
      * Lists all Section entities.
@@ -23,7 +24,8 @@ class SectionController extends Controller {
      * @Route("/", name="section")
      * @Method("GET")
      */
-    public function indexAction() {
+    public function indexAction()
+    {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('AppBundle:Section')->findAll();
@@ -39,7 +41,8 @@ class SectionController extends Controller {
      * @Route("/", name="section_create")
      * @Method("POST")
      */
-    public function createAction(Request $request) {
+    public function createAction(Request $request)
+    {
         $entity = new Section();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -66,7 +69,8 @@ class SectionController extends Controller {
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Section $entity) {
+    private function createCreateForm(Section $entity)
+    {
         $form = $this->createForm(new SectionType(), $entity, array(
             'action' => $this->generateUrl('section_create'),
             'method' => 'POST',
@@ -83,7 +87,8 @@ class SectionController extends Controller {
      * @Route("/new", name="section_new")
      * @Method("GET")
      */
-    public function newAction() {
+    public function newAction()
+    {
         $entity = new Section();
         $form = $this->createCreateForm($entity);
 
@@ -98,9 +103,9 @@ class SectionController extends Controller {
      *
      * @Route("/{id}", name="section_show")
      * @Method("GET")
-     * @Template()
      */
-    public function showAction($id) {
+    public function showAction($id)
+    {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AppBundle:Section')->find($id);
@@ -111,10 +116,10 @@ class SectionController extends Controller {
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
-            'entity' => $entity,
-            'delete_form' => $deleteForm->createView(),
-        );
+        return $this->render('section/show.html.twig', array(
+                    'entity' => $entity,
+                    'delete_form' => $deleteForm->createView(),
+        ));
     }
 
     /**
@@ -123,7 +128,8 @@ class SectionController extends Controller {
      * @Route("/{id}/edit", name="section_edit")
      * @Method("GET")
      */
-    public function editAction($id) {
+    public function editAction($id)
+    {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AppBundle:Section')->find($id);
@@ -149,7 +155,8 @@ class SectionController extends Controller {
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createEditForm(Section $entity) {
+    private function createEditForm(Section $entity)
+    {
         $form = $this->createForm(new SectionType(), $entity, array(
             'action' => $this->generateUrl('section_update', array('id' => $entity->getId())),
             'method' => 'PUT',
@@ -166,7 +173,8 @@ class SectionController extends Controller {
      * @Route("/{id}", name="section_update")
      * @Method("PUT")
      */
-    public function updateAction(Request $request, $id) {
+    public function updateAction(Request $request, $id)
+    {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AppBundle:Section')->find($id);
@@ -199,7 +207,8 @@ class SectionController extends Controller {
      * @Route("/{id}", name="section_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id) {
+    public function deleteAction(Request $request, $id)
+    {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -225,7 +234,8 @@ class SectionController extends Controller {
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id) {
+    private function createDeleteForm($id)
+    {
         return $this->createFormBuilder()
                         ->setAction($this->generateUrl('section_delete', array('id' => $id)))
                         ->setMethod('DELETE')

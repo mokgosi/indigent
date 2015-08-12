@@ -1,113 +1,14 @@
-{% extends '::base.html.twig' %}
+{% extends 'section/layout.html.twig' %}
 
-{% block title %} | Section Management{% endblock %}
+{% block title ' | Section' %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('js/form-components.js') }}"></script>
-    <script>
-        jQuery(document).ready(function () {
-            App.init();
-            FormComponents.init();
-        });
-    </script>    
+{% block page_title %}Edit Section{% endblock %}
+{% block page_title_small %}edit section{% endblock %}
+{% block breadcrumb %}Edit Section{% endblock %}
+{% block page_tab_info_title %}Section Info{% endblock %}
+{% block page_tab_details_title %}Section Details{% endblock %}
+{% block main_body %}
+    {{ include('section/_form.html.twig', {
+        form: form,
+    }, with_context = false) }}
 {% endblock %}
-{% block main -%}
-
-    <div class="container-fluid">
-        <!-- BEGIN PAGE HEADER-->   
-        <div class="row-fluid">
-            <div class="span12">
-                <h3 class="page-title">
-                    Edit Section
-                    <small>edit section</small>
-                </h3>
-                <ul class="breadcrumb">
-                    <li>
-                        <i class="icon-home"></i>
-                        <a href="index.html">Home</a> 
-                        <span class="icon-angle-right"></span>
-                    </li>
-                    <li>
-                        <a href="#">Edit Section</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- END PAGE HEADER-->
-        <!-- BEGIN PAGE CONTENT-->
-        <div class="row-fluid">
-            <div class="span12">
-                <div class="tabbable tabbable-custom boxless">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a  href="#tab_1" data-toggle="tab">Section info</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tab_1">
-                            <div class="portlet box blue">
-                                <div class="portlet-title">
-                                    <div class="caption"><i class="icon-reorder"></i>Section Details</div>
-                                    <div class="tools">
-                                        <a href="javascript:;" class="collapse"></a>
-                                        <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                                        <a href="javascript:;" class="reload"></a>
-                                        <a href="javascript:;" class="remove"></a>
-                                    </div>
-                                </div>
-                                <div class="portlet-body form">
-                                    {{ form_start( form, {'attr': {'novalidate': 'novalidate'}} ) }}    
-                                    {{ form_errors(form) }}
-                                    <div class="row-fluid">
-                                        <div class="span6 ">
-                                            <div class="control-group">
-                                                <label class="control-label">Name</label>
-                                                <div class="controls">
-                                                    {{ form_errors(form.name) }}
-                                                    {{ form_widget(form.name, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row-fluid">
-                                        <div class="span6 ">
-                                            <div class="control-group">
-                                                <label class="control-label">Location</label>
-                                                <div class="controls">
-                                                    {{ form_widget(form.location, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row-fluid">
-                                        <div class="span6 ">
-                                            <div class="control-group">
-                                                <label class="control-label">X-Coord</label>
-                                                <div class="controls">
-                                                    {{ form_widget(form.xCoord, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row-fluid">
-                                        <div class="span6 ">
-                                            <div class="control-group">
-                                                <label class="control-label">Y-Coord</label>
-                                                <div class="controls">
-                                                    {{ form_widget(form.yCoord, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-actions">
-                                        {{ form_widget(form.submit, { 'attr': {'class': 'btn blue'} }) }}
-                                        <a href="{{ path('section') }}" class="btn">Cancel</a>
-                                    </div>
-                                    {{form_end(form)}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endblock %}

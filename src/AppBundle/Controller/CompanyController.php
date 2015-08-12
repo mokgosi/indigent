@@ -31,9 +31,9 @@ class CompanyController extends Controller
 
         $entities = $em->getRepository('AppBundle:Company')->findAll();
 
-        return array(
-            'entities' => $entities,
-        );
+        return $this->render('company/index.html.twig', array(
+                    'entities' => $entities
+        ));
     }
 
     /**
@@ -105,7 +105,6 @@ class CompanyController extends Controller
      *
      * @Route("/{id}", name="company_show")
      * @Method("GET")
-     * @Template()
      */
     public function showAction($id)
     {
@@ -119,10 +118,10 @@ class CompanyController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
+        return $this->render('company/show.html.twig', array(
             'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
 
     /**
@@ -130,7 +129,6 @@ class CompanyController extends Controller
      *
      * @Route("/{id}/edit", name="company_edit")
      * @Method("GET")
-     * @Template()
      */
     public function editAction($id)
     {
@@ -145,11 +143,11 @@ class CompanyController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
+        return $this->render('company/edit.html.twig', array(
             'entity' => $entity,
-            'edit_form' => $editForm->createView(),
+            'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
 
     /**
@@ -176,7 +174,6 @@ class CompanyController extends Controller
      *
      * @Route("/{id}", name="company_update")
      * @Method("PUT")
-     * @Template("AppBundle:Company:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -195,14 +192,15 @@ class CompanyController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('company_edit', array('id' => $id)));
+//            return $this->redirect($this->generateUrl('company_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('company'));
         }
 
-        return array(
+        return $this->render('company/edit.html.twig', array(
             'entity' => $entity,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
 
     /**

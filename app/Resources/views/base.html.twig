@@ -148,7 +148,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                     <li class="{{ app.request.attributes.get('_route') in ['erf','erf_edit','erf_new','erf_update'] ? 'active' : '' }}">
                                         <a href="{{ path('erf') }}">Manage ERFs</a>
                                     </li>
-                                    <li class="{{ app.request.attributes.get('_route') in ['erftype','erftype_edit','erftype_new','erftype_update'] ? 'active' : '' }}" >
+                                    <li class="{{ app.request.attributes.get('_route') in ['erftype','erftype_show','erftype_edit','erftype_new','erftype_update'] ? 'active' : '' }}" >
                                         <a href="{{ path('erftype') }}">Manage Types</a>
                                     </li>
                                     <li class="{{ app.request.attributes.get('_route') in ['location','location_show','location_edit','location_new','location_update'] ? 'active' : '' }}" >
@@ -167,11 +167,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                     <span class="arrow "></span>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li class="{{ app.request.attributes.get('_route') in ['owner'] ? 'active' : '' }}" >
-                                        <a href="{{ path('owner') }}">Owners List</a>
-                                    </li>
                                     <li class="{{ app.request.attributes.get('_route') in ['owner_new'] ? 'active' : '' }}" >
                                         <a href="{{ path('owner_new') }}">Add Owner</a>
+                                    </li>
+                                    <li class="{{ app.request.attributes.get('_route') in ['owner', 'owner_show'] ? 'active' : '' }}" >
+                                        <a href="{{ path('owner') }}">List</a>
                                     </li>
                                 </ul>
                             </li>
@@ -192,19 +192,27 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                 </ul>
                             </li>
                             <li class="{% if app.request.attributes.get('_route') == 'report' %}active{% endif %}">
-                                <a href="{{ path('report') }}">
+                                <a href="#">
                                     <i class="icon-th"></i> 
-                                    <span class="title">Reports</span>
+                                    <span class="title">Reports (Coming Soon!)</span>
                                     <span class="arrow "></span>
                                 </a>
-                                <ul class="sub-menu">
+                                {#<ul class="sub-menu">
                                     <li>
                                         <a href="{{ path('report_erf') }}">Account Statement</a>
                                     </li>
                                     <li>
                                         <a href="{{ path('report_sections') }}">Reports by Section</a>
                                     </li>
-                                </ul>
+                                </ul>#}
+                            </li>
+                            <li class="{{ app.request.attributes.get('_route') in ['company','company_show','company_edit'] ? 'active' : '' }}">
+                                <a href="{{ path('company') }}">
+                                    <i class="icon-cog"></i> 
+                                    <span class="title">Settings</span>
+                                    <span class="arrow "></span>
+                                </a>
+                              
                             </li>
                         </ul>
                         <!-- END SIDEBAR MENU -->

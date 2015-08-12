@@ -1,0 +1,60 @@
+{% extends 'company/layout.html.twig' %}
+
+{% block title ' | Local Municipality' %}
+
+{% block page_title %}Local Municipality{% endblock %}
+{% block page_title_small %}local municipality{% endblock %}
+{% block breadcrumb %}Local Municipality{% endblock %}
+{% block page_tab_info_title %}Municipality Info{% endblock %}
+{% block page_tab_details_title %}Municipality Details{% endblock %}
+
+{% block main_body %}
+
+    <div class="portlet-body">
+
+        <div class="table-toolbar">
+            {#<div class="btn-group">
+                <a href="{{path('erf_new')}}" class="btn green">
+                    Add New <i class="icon-plus"></i>
+                </a>
+            </div>#}
+            <div class="btn-group pull-right">
+                <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu pull-right">
+                    <li><a href="#">Print</a></li>
+                    <li><a href="#">Save as PDF</a></li>
+                    <li><a href="#">Export to Excel</a></li>
+                </ul>
+            </div>
+        </div>
+        <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+            <thead>
+                <tr>
+                    <th>Municipality</th>
+                    <th>Physical Address</th>
+                    <th>Postal Address</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Website</th>
+                    <th>Show</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entity in entities %}
+                    <tr>
+                        <td><a href="{{ path('company_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+                        <td>{{ entity.address }}</td>
+                        <td>{{ entity.postal }}</td>
+                        <td>{{ entity.email }}</td>
+                        <td>{{ entity.phone }}</td>
+                        <td>{{ entity.website }}</td>
+                        <td><a href="{{ path('company_show', { 'id': entity.id }) }}">show</a></td>
+                        <td><a href="{{ path('company_edit', { 'id': entity.id }) }}">edit</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

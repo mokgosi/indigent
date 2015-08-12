@@ -2,15 +2,11 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/form-components.js') }}"></script>
     <script src="{{ asset('js/table-editable.js') }}"></script>
-    <script src="{{ asset('js/owner.js') }}"></script>    
     <script>
         jQuery(document).ready(function () {
             App.init();
-            FormComponents.init();
             TableEditable.init();
-            Owner.init();
         });
     </script>    
 {% endblock %}
@@ -39,7 +35,7 @@
             <div class="span12">
                 <div class="portlet box blue">
                     <div class="portlet-title">
-                        <div class="caption"><i class="icon-edit"></i> Owner Details</div>
+                        <div class="caption"><i class="icon-edit"></i> Location</div>
                         <div class="tools">
                             <a href="javascript:;" class="collapse"></a>
                             <a href="#portlet-config" data-toggle="modal" class="config"></a>

@@ -1,5 +1,13 @@
 {% extends 'erf/layout.html.twig' %}
 
+{% block title ' | Erf' %}
+
+{% block page_title %}Erf Management{% endblock %}
+{% block page_title_small %}erf management{% endblock %}
+{% block breadcrumb %}Erf Management{% endblock %}
+{% block page_tab_info_title %}Erf Info{% endblock %}
+{% block page_tab_details_title %}Erf Details{% endblock %}
+
 {% block main_body %}
 
     <div class="portlet-body">
@@ -29,7 +37,8 @@
                     <th>Location</th>
                     <th>Type</th>
                     <th>Owner</th>
-                    <th>Edit/Show</th>
+                    <th>Show</th>
+                    <th>Edit</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,7 +49,8 @@
                         <td>{{ entity.section.name }}</td>
                         <td>{{ entity.location.name }}</td>
                         <td>{{ entity.erfType.name }}</td>
-                        <td>{{ entity.owner ? entity.owner.firstName }} </td>
+                        <td>{{ entity.owner ? entity.owner.firstName }} {{ entity.owner ? entity.owner.lastName }}</td>
+                        <td><a href="{{ path('erf_show', { 'id': entity.id }) }}">show</a></td>
                         <td><a href="{{ path('erf_edit', { 'id': entity.id }) }}">edit</a></td>
                     </tr>
                 {% endfor %}

@@ -1,0 +1,17 @@
+{% extends 'company/layout.html.twig' %}
+
+{% block title ' | Erf' %}
+
+{% block page_title %}Edit Municipality{% endblock %}
+{% block page_title_small %}edit municipality{% endblock %}
+{% block breadcrumb %}Edit Municipality{% endblock %}
+{% block page_tab_info_title %}Municipality Info{% endblock %}
+{% block page_tab_details_title %}Municipality Details{% endblock %}
+
+{% block main_body %}
+
+    {{ include('company/_form.html.twig', {
+        form: form,
+    }, with_context = false) }}
+    
+{% endblock %}
