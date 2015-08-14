@@ -17,8 +17,8 @@ class PaymentRepository extends EntityRepository
     public function findAll()
     {
         return $this->getEntityManager()
-                        ->createQuery('SELECT p FROM AppBundle:Payment p ORDER BY p.created DESC')
-                        ->setMaxResults(10)
+                        ->createQuery('SELECT p FROM AppBundle:Payment p ORDER BY p.updated DESC')
+                        ->setMaxResults(100)
                         ->getResult();
     }
 
@@ -34,6 +34,19 @@ class PaymentRepository extends EntityRepository
                 ->getOneOrNullResult();
 
         return $results;
+    }
+    
+    public function updateCurrentBalance($id,$balance)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder('AppBundle:Erf');
+        
+        $qb->update('AppBundle:Erf e')
+            ->set('e.balance', ':balance')
+            ->where('e.id = :id')
+            ->setParameter('id', $id)
+            ->setParameter('balance', $balance)
+            ->getQuery()
+            ->execute();
     }
 
     public function getRecent()

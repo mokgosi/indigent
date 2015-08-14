@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -14,7 +15,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @UniqueEntity("erfNo")
  * @ORM\HasLifecycleCallbacks()
  */
-class Erf {
+class Erf
+{
 
     /**
      * @var integer
@@ -24,7 +26,7 @@ class Erf {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
+
     /**
      * @var integer
      *
@@ -67,7 +69,7 @@ class Erf {
      * @ORM\Column(name="location_id", type="integer")
      */
     private $locationId;
-    
+
     /**
      * @var integer
      *
@@ -81,8 +83,7 @@ class Erf {
      * @ORM\Column(name="balance", type="decimal", precision=8, scale=2, options={"default":0})
      */
     private $balance;
-    
-    
+
     /**
      * @var \DateTime
      *
@@ -104,7 +105,7 @@ class Erf {
      * @ORM\JoinColumn(name="erf_type_id", referencedColumnName="id")
      */
     protected $erfType;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Owner", inversedBy="erfs")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
@@ -122,17 +123,23 @@ class Erf {
      * @ORM\JoinColumn(name="section_id", referencedColumnName="id")
      */
     protected $section;
-    
-     /**
-     * @ORM\OneToMany(targetEntity="Payment", mappedBy="erf") 
+
+    /**
+     * @ORM\OneToMany(targetEntity="Payment", mappedBy="erf")
+     * @ORM\OrderBy({"updated" = "DESC"}) 
      */
     protected $payments;
-    
-    
 
-    public function __construct() {
+    /**
+     * @ORM\OneToMany(targetEntity="PaymentAllocation", mappedBy="erf") 
+     */
+    protected $allocations;
+
+    public function __construct()
+    {
         $this->created = new \DateTime();
         $this->updated = new \DateTime();
+        $this->payments = new ArrayCollection();
     }
 
     /**
@@ -140,10 +147,11 @@ class Erf {
      *
      * @return integer 
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
-    
+
     function getOwnerId()
     {
         return $this->ownerId;
@@ -154,14 +162,14 @@ class Erf {
         $this->ownerId = $ownerId;
     }
 
-    
     /**
      * Set erfTypeId
      *
      * @param integer $erfTypeId
      * @return Erf
      */
-    public function setErfTypeId($erfTypeId) {
+    public function setErfTypeId($erfTypeId)
+    {
         $this->erfTypeId = $erfTypeId;
 
         return $this;
@@ -172,7 +180,8 @@ class Erf {
      *
      * @return integer 
      */
-    public function getErfTypeId() {
+    public function getErfTypeId()
+    {
         return $this->erfTypeId;
     }
 
@@ -182,7 +191,8 @@ class Erf {
      * @param string $erfNo
      * @return Erf
      */
-    public function setErfNo($erfNo) {
+    public function setErfNo($erfNo)
+    {
         $this->erfNo = $erfNo;
 
         return $this;
@@ -193,7 +203,8 @@ class Erf {
      *
      * @return string 
      */
-    public function getErfNo() {
+    public function getErfNo()
+    {
         return $this->erfNo;
     }
 
@@ -203,7 +214,8 @@ class Erf {
      * @param string $address
      * @return Erf
      */
-    public function setAddress($address) {
+    public function setAddress($address)
+    {
         $this->address = $address;
 
         return $this;
@@ -214,7 +226,8 @@ class Erf {
      *
      * @return string 
      */
-    public function getAddress() {
+    public function getAddress()
+    {
         return $this->address;
     }
 
@@ -224,7 +237,8 @@ class Erf {
      * @param integer $sectionId
      * @return Erf
      */
-    public function setSectionId($sectionId) {
+    public function setSectionId($sectionId)
+    {
         $this->sectionId = $sectionId;
 
         return $this;
@@ -235,7 +249,8 @@ class Erf {
      *
      * @return integer 
      */
-    public function getSectionId() {
+    public function getSectionId()
+    {
         return $this->sectionId;
     }
 
@@ -245,7 +260,8 @@ class Erf {
      * @param integer $locationId
      * @return Erf
      */
-    public function setLocationId($locationId) {
+    public function setLocationId($locationId)
+    {
         $this->locationId = $locationId;
 
         return $this;
@@ -256,10 +272,11 @@ class Erf {
      *
      * @return integer 
      */
-    public function getLocationId() {
+    public function getLocationId()
+    {
         return $this->locationId;
     }
-    
+
     /**
      * Set code
      *
@@ -289,7 +306,8 @@ class Erf {
      * @param \DateTime $created
      * @return Erf
      */
-    public function setCreated($created) {
+    public function setCreated($created)
+    {
         $this->created = $created;
 
         return $this;
@@ -300,7 +318,8 @@ class Erf {
      *
      * @return \DateTime 
      */
-    public function getCreated() {
+    public function getCreated()
+    {
         return $this->created;
     }
 
@@ -310,7 +329,8 @@ class Erf {
      * @param \DateTime $updated
      * @return Erf
      */
-    public function setUpdated($updated) {
+    public function setUpdated($updated)
+    {
         $this->updated = $updated;
 
         return $this;
@@ -321,7 +341,8 @@ class Erf {
      *
      * @return \DateTime 
      */
-    public function getUpdated() {
+    public function getUpdated()
+    {
         return $this->updated;
     }
 
@@ -329,7 +350,8 @@ class Erf {
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
-    public function setUpdatedAtValue() {
+    public function setUpdatedAtValue()
+    {
 
         $this->setUpdated(new \DateTime('now'));
 
@@ -343,7 +365,8 @@ class Erf {
      *
      * @param AppBundle\Entity\ErfType $erfType
      */
-    public function setErfType(ErfType $erfType) {
+    public function setErfType(ErfType $erfType)
+    {
         $this->erfType = $erfType;
     }
 
@@ -352,7 +375,8 @@ class Erf {
      *
      * @return AppBundle\Entity\ErfType 
      */
-    public function getErfType() {
+    public function getErfType()
+    {
         return $this->erfType;
     }
 
@@ -361,7 +385,8 @@ class Erf {
      *
      * @param AppBundle\Entity\Location $location
      */
-    public function setLocation(Location $location) {
+    public function setLocation(Location $location)
+    {
         $this->location = $location;
     }
 
@@ -370,7 +395,8 @@ class Erf {
      *
      * @return AppBundle\Entity\Location 
      */
-    public function getLocation() {
+    public function getLocation()
+    {
         return $this->location;
     }
 
@@ -379,7 +405,8 @@ class Erf {
      *
      * @param AppBundle\Entity\Section $section
      */
-    public function setSection(Section $section) {
+    public function setSection(Section $section)
+    {
         $this->section = $section;
     }
 
@@ -388,16 +415,18 @@ class Erf {
      *
      * @return AppBundle\Entity\Section 
      */
-    public function getSection() {
+    public function getSection()
+    {
         return $this->section;
     }
-    
+
     /**
      * Set owner
      *
      * @param AppBundle\Entity\Owner $owner
      */
-    public function setOwner(Owner $owner) {
+    public function setOwner(Owner $owner)
+    {
         $this->owner = $owner;
     }
 
@@ -406,10 +435,11 @@ class Erf {
      *
      * @return AppBundle\Entity\Owner 
      */
-    public function getOwner() {
+    public function getOwner()
+    {
         return $this->owner;
     }
-    
+
     /**
      * Get balance
      *
@@ -430,4 +460,10 @@ class Erf {
     {
         $this->balance = $balance;
     }
+    
+    public function getPayments()
+    {
+        return $this->payments;
+    }
+
 }

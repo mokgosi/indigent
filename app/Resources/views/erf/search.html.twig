@@ -73,7 +73,9 @@
                                     <th>Type</th>
                                     <th>Owner Name</th>
                                     <th>Owner Cellphone</th>
-                                    <th>Edit/Show</th>
+                                    <th>Show</th>
+                                    <th>Edit</th>
+                                    <th>Pay</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -85,7 +87,9 @@
                                         <td>{{ entity.erfType.name }}</td>
                                         <td>{{ entity.owner.firstName }} {{ entity.owner.lastName }}</td>
                                         <td>{{ entity.owner.mobile }}</td>
+                                        <td><a href="{{ path('erf_show', { 'id': entity.id }) }}">show</a></td>
                                         <td><a href="{{ path('erf_edit', { 'id': entity.id }) }}">edit</a></td>
+                                        <td><a href="{{ path('payment_new_by_erf', { 'id': entity.id }) }}">pay</a></td>
                                     </tr>
                             </tbody>
                         </table>

@@ -100,6 +100,35 @@
                         </div>
                     </div>
                 </div>
+                <h3 class="form-section">Transaction History</h3>
+                <div class="portlet-body">
+                    <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+                            <thead>
+                                <tr>
+                                    <th>Ref #</th>
+                                    <th>Installment</th>
+                                    <th>Received</th>
+                                    <th>Still Due</th>
+                                    <th>Total Balance</th>
+                                    <th>Payed by</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for payment in entity.payments %}
+                                    <tr>
+                                        <td>{{ payment.refNo }}</td>
+                                        <td>{{ payment.amountDue }}</td>
+                                        <td>{{ payment.amountReceived }}</td>
+                                        <td>{{ payment.amountOutstanding }}</td>
+                                        <td>{{ payment.totalOutstanding }}</td>
+                                        <td>{{ payment.payedBy }}</td>
+                                        <td>{% if payment.created %}{{ payment.created|date('Y-m-d') }}{% endif %}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                </div>
                 <div class="form-actions">
                     <a href="{{ path('erf') }}" class="btn">Back to list</a>
                     <a href="{{ path('erf_edit', { 'id': entity.id }) }}"  class="btn blue"><i class="icon-pencil"></i> Edit</a>

@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\CompanyRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Company
 {
@@ -349,6 +350,7 @@ class Company
         $this->postal = $postal;
     }
 
+    
 
 
 }

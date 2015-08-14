@@ -16,7 +16,7 @@ class LoadPaymentData extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $refNo = 0;
-        foreach (range(1, 500) as $i) {
+        foreach (range(1, 50) as $i) {
             $today = new \DateTime('now');
             $currMonth = $today->format('m');
             

@@ -11,3 +11,7 @@ fos_js_routing:
 user:
     resource: "@UserBundle/Controller/"
     type:     annotation
+    
+BCCCronManagerBundle:
+    resource: "@BCCCronManagerBundle/Resources/config/routing.xml"
+    prefix:   /cron-manager    

@@ -17,11 +17,11 @@
         {% for entity in entities %}
             <tr>
                 <td>{{ entity.erfNo }}</td>
-                <td>{{ entity.address}}</td>
-                <td>{{ entity.section}}</td>
-                <td>{{ entity.month}}</td>
-                <td>{{ entity.created|date('Y-m-d')}}</td>
-                <td>{{ entity.amountReceived}}</td>
+                <td>{{ entity.address }}</td>
+                <td>{{ entity.section }}</td>
+                <td>{{ entity.month }}</td>
+                <td>{{ entity.created|date('Y-m-d') }}</td>
+                <td>{{ entity.amountReceived }}</td>
             </tr>
         {% endfor %}    
     </table>

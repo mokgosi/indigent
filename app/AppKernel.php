@@ -21,6 +21,8 @@ class AppKernel extends Kernel
             new UserBundle\UserBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new JasonRoman\Bundle\FlotBundle\JasonRomanFlotBundle(),
+            new BCC\CronManagerBundle\BCCCronManagerBundle(),
+            
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

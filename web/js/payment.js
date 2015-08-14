@@ -71,7 +71,9 @@ var Payment = function () {
                     console.log(data.message);
                 }
 
-                $('div.display-address').html(data.street + ', ' + data.section + ', ' + data.location);
+                $('div#erfAddress').html(data.street);
+                $('div#erfSection').html(data.section);
+                $('div#erfLocation').html(data.location);
 
                 $('#appbundle_payment_totalOutstanding').val(data.balance);
 

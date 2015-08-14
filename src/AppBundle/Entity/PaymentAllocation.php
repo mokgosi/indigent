@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\PaymentAllocationRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class PaymentAllocation
 {
@@ -24,7 +25,7 @@ class PaymentAllocation
     /**
      * @var integer
      *
-     * @ORM\Column(name="erfId", type="integer")
+     * @ORM\Column(name="erf_id", type="integer")
      */
     private $erfId;
 
@@ -55,6 +56,12 @@ class PaymentAllocation
      * @ORM\Column(name="updated", type="datetime")
      */
     private $updated;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Erf", inversedBy="allocations")
+     * @ORM\JoinColumn(name="erf_id", referencedColumnName="id")
+     */
+    protected $erf;
 
     /**
      * Get id
@@ -179,5 +186,36 @@ class PaymentAllocation
     public function getUpdated()
     {
         return $this->updated;
+    }
+    
+    /**
+     * Set erf
+     *
+     * @param AppBundle\Entity\Erf $erf
+     */
+    public function getErf() {
+        return $this->erf;
+    }
+
+    /**
+     * Get erf
+     *
+     * @return AppBundle\Entity\Erf 
+     */
+    public function setErf(Erf $erf = null) {
+        $this->erf = $erf;
+    }
+    
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue() {
+
+        $this->setUpdated(new \DateTime('now'));
+
+        if ($this->getCreated() == null) {
+            $this->setCreated(new \DateTime('now'));
+        }
     }
 }
