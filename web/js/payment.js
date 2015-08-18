@@ -71,9 +71,10 @@ var Payment = function () {
                     console.log(data.message);
                 }
 
-                $('#erfAddress').val(data.street);
-                $('#erfSection').val(data.section);
-                $('#erfLocation').val(data.location);
+                var address = data.street+', '+data.section+', '+data.location;
+                var owner = data.first_name+' '+data.last_name;
+                $('#erfAddress').val(address);
+                $('#erfOwner').val(owner);
 
                 $('#appbundle_payment_totalOutstanding').val(data.balance);
 

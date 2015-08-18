@@ -1,0 +1,20 @@
+<div class="portlet-body form">
+    {{ form_start( form, {'attr': {'novalidate': 'novalidate'}} ) }}    
+    {{ form_errors(form) }}
+    <div class="row-fluid">
+        <div class="span6 ">
+            <div class="control-group">
+                <label class="control-label">Rate Amount</label>
+                <div class="controls">
+                    {{ form_errors(form.name) }}
+                    {{ form_widget(form.name, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-actions">
+        {{ form_widget(form.submit, { 'attr': {'class': 'btn blue'} }) }}
+        <a href="{{ path('section') }}" class="btn">Cancel</a>
+    </div>
+    {{form_end(form)}}
+</div>

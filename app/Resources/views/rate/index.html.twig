@@ -1,10 +1,10 @@
-{% extends 'section/layout.html.twig' %}
+{% extends 'rate/layout.html.twig' %}
 
 {% block main_body %}
     <div class="portlet-body">
         <div class="table-toolbar">
             <div class="btn-group">
-                <a href="{{path('section_new')}}" class="btn green">
+                <a href="{{path('rate_new')}}" class="btn green">
                     Add New <i class="icon-plus"></i>
                 </a>
             </div>
@@ -21,11 +21,7 @@
         <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Location</th>
-                    <th>Xcoord</th>
-                    <th>Ycoord</th>
-                    <th>Created</th>
+                    <th>Amount</th>
                     <th>Updated</th>
                     <th>Show</th>
                     <th>Edit</th>
@@ -34,14 +30,10 @@
             <tbody>
                 {% for entity in entities %}
                     <tr>
-                        <td>{{ entity.name }}</td>
-                        <td>{{ entity.location.name }}</td>
-                        <td>{{ entity.xCoord }}</td>
-                        <td>{{ entity.yCoord }}</td>
-                        <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{{ entity.amount }}</td>
                         <td>{% if entity.updated %}{{ entity.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
-                        <td><a href="{{ path('section_show', { 'id': entity.id }) }}">show</a></td>
-                        <td><a href="{{ path('section_edit', { 'id': entity.id }) }}">edit</a></td>
+                        <td><a href="{{ path('rate_show', { 'id': entity.id }) }}">show</a></td>
+                        <td><a href="{{ path('rate_edit', { 'id': entity.id }) }}">edit</a></td>
                     </tr>
                 {% endfor %}
             </tbody>

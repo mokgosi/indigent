@@ -29,6 +29,9 @@ class PaymentType extends AbstractType
             ->add('payedBy')
             ->add('payedByPhone')
             ->add('staffEmail')
+            ->add('paymentStatus', 'entity', array(
+                    'class' => 'AppBundle:PaymentStatus',
+                    'property' => 'name'))
             ->add('paymentMethod', 'entity', array(
                     'class' => 'AppBundle:PaymentMethod',
                     'property' => 'name'))

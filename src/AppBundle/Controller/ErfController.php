@@ -109,7 +109,6 @@ class ErfController extends Controller {
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        dump($entity);
         
         return $this->render('erf/show.html.twig', array(
                     'entity' => $entity,
@@ -181,8 +180,6 @@ class ErfController extends Controller {
 
         if ($editForm->isValid()) {
             $em->flush();
-
-//            return $this->redirect($this->generateUrl('erf_edit', array('id' => $id)));
             return $this->redirect($this->generateUrl('erf'));
         }
 
@@ -242,7 +239,7 @@ class ErfController extends Controller {
     public function getErfByIdAction($id) {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('AppBundle:Erf')->find($id);
-        
+        dump($entity);
         //json_encode() expects an associative array
 
         $result = array(
@@ -250,7 +247,9 @@ class ErfController extends Controller {
             'section' => $entity->getSection()->getName(),
             'location' => $entity->getLocation()->getName(),
             'type' => $entity->getErfType()->getName(),
-            'balance' => $entity->getBalance()
+            'balance' => $entity->getBalance(),
+            'first_name' => $entity->getOwner()->getFirstName(),
+            'last_name' => $entity->getOwner()->getLastName(),
         );
         return new JsonResponse($result, 200, array('Content-Type' => 'application/json'));
     }

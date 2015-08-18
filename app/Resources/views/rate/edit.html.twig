@@ -1,0 +1,14 @@
+{% extends 'rate/layout.html.twig' %}
+
+{% block title ' | Section' %}
+
+{% block page_title %}Edit Rate{% endblock %}
+{% block page_title_small %}edit rate{% endblock %}
+{% block breadcrumb %}Edit Rate{% endblock %}
+{% block page_tab_info_title %}Rate Info{% endblock %}
+{% block page_tab_details_title %}Rate Details{% endblock %}
+{% block main_body %}
+    {{ include('rate/_form.html.twig', {
+        form: form,
+    }, with_context = false) }}
+{% endblock %}
