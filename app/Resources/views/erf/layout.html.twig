@@ -3,10 +3,12 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('js/table-editable.js') }}"></script>
+    <script src="{{ asset('js/erf.js') }}"></script>
     <script>
         jQuery(document).ready(function () {
             App.init();
             TableEditable.init();
+            Erf.init();
         });
     </script>    
 {% endblock %}
