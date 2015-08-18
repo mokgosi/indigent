@@ -12,7 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="AppBundle\Entity\PaymentRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Payment {
+class Payment
+{
 
     /**
      * @var integer
@@ -36,7 +37,14 @@ class Payment {
      * @ORM\Column(name="erf_id", type="integer")
      */
     private $erfId;
-    
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="payment_status_id", type="integer")
+     */
+    private $paymentStatusId;
+
     /**
      * @var integer
      *
@@ -112,27 +120,34 @@ class Payment {
      * @ORM\JoinColumn(name="erf_id", referencedColumnName="id")
      */
     protected $erf;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Company", inversedBy="payments")
      * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
      */
     protected $company;
-    
-     /**
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="payment_method_id", type="integer")
      */
     private $paymentMethodId;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="PaymentMethod", inversedBy="payments")
      * @ORM\JoinColumn(name="payment_method_id", referencedColumnName="id")
      */
     protected $paymentMethod;
-    
-    public function __construct() {
+
+    /**
+     * @ORM\ManyToOne(targetEntity="PaymentStatus", inversedBy="payments")
+     * @ORM\JoinColumn(name="payment_status_id", referencedColumnName="id")
+     */
+    protected $paymentStatus;
+
+    public function __construct()
+    {
         $this->created = new \DateTime();
     }
 
@@ -141,7 +156,8 @@ class Payment {
      *
      * @return integer 
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -151,7 +167,8 @@ class Payment {
      * @param string $refNo
      * @return Payment
      */
-    public function setrefNo($refNo) {
+    public function setrefNo($refNo)
+    {
         $this->refNo = $refNo;
 
         return $this;
@@ -162,7 +179,8 @@ class Payment {
      *
      * @return string 
      */
-    public function getrefNo() {
+    public function getrefNo()
+    {
         return $this->refNo;
     }
 
@@ -172,7 +190,8 @@ class Payment {
      * @param integer $erfId
      * @return Payment
      */
-    public function setErfId($erfId) {
+    public function setErfId($erfId)
+    {
         $this->erfId = $erfId;
 
         return $this;
@@ -183,7 +202,8 @@ class Payment {
      *
      * @return integer 
      */
-    public function getErfId() {
+    public function getErfId()
+    {
         return $this->erfId;
     }
 
@@ -193,7 +213,8 @@ class Payment {
      * @param string $amountDue
      * @return Payment
      */
-    public function setAmountDue($amountDue) {
+    public function setAmountDue($amountDue)
+    {
         $this->amountDue = $amountDue;
 
         return $this;
@@ -204,7 +225,8 @@ class Payment {
      *
      * @return string 
      */
-    public function getAmountDue() {
+    public function getAmountDue()
+    {
         return $this->amountDue;
     }
 
@@ -214,7 +236,8 @@ class Payment {
      * @param string $amountReceived
      * @return Payment
      */
-    public function setAmountReceived($amountReceived) {
+    public function setAmountReceived($amountReceived)
+    {
         $this->amountReceived = $amountReceived;
 
         return $this;
@@ -225,7 +248,8 @@ class Payment {
      *
      * @return string 
      */
-    public function getAmountReceived() {
+    public function getAmountReceived()
+    {
         return $this->amountReceived;
     }
 
@@ -235,7 +259,8 @@ class Payment {
      * @param string $amountOutstanding
      * @return Payment
      */
-    public function setAmountOutstanding($amountOutstanding) {
+    public function setAmountOutstanding($amountOutstanding)
+    {
         $this->amountOutstanding = $amountOutstanding;
 
         return $this;
@@ -246,7 +271,8 @@ class Payment {
      *
      * @return string 
      */
-    public function getAmountOutstanding() {
+    public function getAmountOutstanding()
+    {
         return $this->amountOutstanding;
     }
 
@@ -256,7 +282,8 @@ class Payment {
      * @param string $totalOutstanding
      * @return Payment
      */
-    public function setTotalOutstanding($totalOutstanding) {
+    public function setTotalOutstanding($totalOutstanding)
+    {
         $this->totalOutstanding = $totalOutstanding;
 
         return $this;
@@ -267,7 +294,8 @@ class Payment {
      *
      * @return string 
      */
-    public function getTotalOutstanding() {
+    public function getTotalOutstanding()
+    {
         return $this->totalOutstanding;
     }
 
@@ -277,7 +305,8 @@ class Payment {
      * @param string $payedBy
      * @return Payment
      */
-    public function setPayedBy($payedBy) {
+    public function setPayedBy($payedBy)
+    {
         $this->payedBy = $payedBy;
 
         return $this;
@@ -288,7 +317,8 @@ class Payment {
      *
      * @return string 
      */
-    public function getPayedBy() {
+    public function getPayedBy()
+    {
         return $this->payedBy;
     }
 
@@ -298,7 +328,8 @@ class Payment {
      * @param string $payedByPhone
      * @return Payment
      */
-    public function setPayedByPhone($payedByPhone) {
+    public function setPayedByPhone($payedByPhone)
+    {
         $this->payedByPhone = $payedByPhone;
 
         return $this;
@@ -309,7 +340,8 @@ class Payment {
      *
      * @return string 
      */
-    public function getPayedByPhone() {
+    public function getPayedByPhone()
+    {
         return $this->payedByPhone;
     }
 
@@ -319,7 +351,8 @@ class Payment {
      * @param integer $staffEmail
      * @return Payment
      */
-    public function setStaffEmail($staffEmail) {
+    public function setStaffEmail($staffEmail)
+    {
         $this->staffEmail = $staffEmail;
 
         return $this;
@@ -330,7 +363,8 @@ class Payment {
      *
      * @return integer 
      */
-    public function getStaffEmail() {
+    public function getStaffEmail()
+    {
         return $this->staffEmail;
     }
 
@@ -340,7 +374,8 @@ class Payment {
      * @param \DateTime $created
      * @return Payment
      */
-    public function setCreated($created) {
+    public function setCreated($created)
+    {
         $this->created = $created;
 
         return $this;
@@ -351,7 +386,8 @@ class Payment {
      *
      * @return \DateTime 
      */
-    public function getCreated() {
+    public function getCreated()
+    {
         return $this->created;
     }
 
@@ -361,7 +397,8 @@ class Payment {
      * @param \DateTime $updated
      * @return Payment
      */
-    public function setUpdated($updated) {
+    public function setUpdated($updated)
+    {
         $this->updated = $updated;
 
         return $this;
@@ -372,7 +409,8 @@ class Payment {
      *
      * @return \DateTime 
      */
-    public function getUpdated() {
+    public function getUpdated()
+    {
         return $this->updated;
     }
 
@@ -381,7 +419,8 @@ class Payment {
      *
      * @param AppBundle\Entity\Erf $erf
      */
-    public function getErf() {
+    public function getErf()
+    {
         return $this->erf;
     }
 
@@ -390,16 +429,18 @@ class Payment {
      *
      * @return AppBundle\Entity\Erf 
      */
-    public function setErf(Erf $erf = null) {
+    public function setErf(Erf $erf = null)
+    {
         $this->erf = $erf;
     }
-    
+
     /**
      * Get paymentMethodId
      *
      * @return integer
      */
-    public function getPaymentMethodId() {
+    public function getPaymentMethodId()
+    {
         return $this->paymentMethodId;
     }
 
@@ -409,16 +450,18 @@ class Payment {
      * @param integer $paymentMethodId
      * @return Payment
      */
-    public function setPaymentMethodId($paymentMethodId) {
+    public function setPaymentMethodId($paymentMethodId)
+    {
         $this->paymentMethodId = $paymentMethodId;
     }
-    
+
     /**
      * Get paymentMethod
      *
      * @param AppBundle\Entity\PaymentMethod $paymentMethod
      */
-    public function getPaymentMethod() {
+    public function getPaymentMethod()
+    {
         return $this->paymentMethod;
     }
 
@@ -427,16 +470,18 @@ class Payment {
      *
      * @return AppBundle\Entity\PaymentMethod 
      */
-    public function setPaymentMethod(PaymentMethod $paymentMethod = null) {
+    public function setPaymentMethod(PaymentMethod $paymentMethod = null)
+    {
         $this->paymentMethod = $paymentMethod;
     }
-    
+
     /**
      * Get companyId
      *
      * @return integer
      */
-    public function getCompanyId() {
+    public function getCompanyId()
+    {
         return $this->companyId;
     }
 
@@ -446,16 +491,18 @@ class Payment {
      * @param integer $companyId
      * @return Payment
      */
-    public function setCompanyId($companyId) {
+    public function setCompanyId($companyId)
+    {
         $this->companyId = $companyId;
     }
-    
+
     /**
      * Get company
      *
      * @param AppBundle\Entity\Company $company
      */
-    public function getCompany() {
+    public function getCompany()
+    {
         return $this->company;
     }
 
@@ -464,7 +511,8 @@ class Payment {
      *
      * @return AppBundle\Entity\Company 
      */
-    public function setCompany(Company $company = null) {
+    public function setCompany(Company $company = null)
+    {
         $this->company = $company;
     }
 
@@ -472,13 +520,44 @@ class Payment {
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
-    public function setUpdatedAtValue() {
+    public function setUpdatedAtValue()
+    {
 
         $this->setUpdated(new \DateTime('now'));
 
         if ($this->getCreated() == null) {
             $this->setCreated(new \DateTime('now'));
         }
+    }
+
+    function getPaymentStatusId()
+    {
+        return $this->paymentStatusId;
+    }
+
+    /**
+     * Get paymentStatus
+     *
+     * @param AppBundle\Entity\PaymentStatus $paymentStatus
+     */
+    function getPaymentStatus()
+    {
+        return $this->paymentStatus;
+    }
+
+    function setPaymentStatusId($paymentStatusId)
+    {
+        $this->paymentStatusId = $paymentStatusId;
+    }
+
+    /**
+     * Set $paymentStatus
+     *
+     * @return AppBundle\Entity\PaymentStatus 
+     */
+    function setPaymentStatus(PaymentStatus $paymentStatus = null)
+    {
+        $this->paymentStatus = $paymentStatus;
     }
 
 }

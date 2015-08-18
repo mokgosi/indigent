@@ -44,7 +44,7 @@
                         <div class="control-group">
                             <label class="control-label" >Balance:</label>
                             <div class="controls">                                                
-                                <input type="text" value="{{ entity.balance }}" readonly="readonly" class="m-wrap span12"/>                                                        
+                                <input type="text" value="ZAR {{ entity.balance }}" readonly="readonly" class="m-wrap span12"/>                                                        
                             </div>
                         </div>
                     </div>
@@ -108,22 +108,27 @@
                                     <th>Ref #</th>
                                     <th>Installment</th>
                                     <th>Received</th>
-                                    <th>Still Due</th>
-                                    <th>Total Balance</th>
-                                    <th>Payed by</th>
+                                    <th>Due</th>
+                                    <th>Balance</th>
                                     <th>Date</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for payment in entity.payments %}
                                     <tr>
                                         <td>{{ payment.refNo }}</td>
-                                        <td>{{ payment.amountDue }}</td>
-                                        <td>{{ payment.amountReceived }}</td>
-                                        <td>{{ payment.amountOutstanding }}</td>
-                                        <td>{{ payment.totalOutstanding }}</td>
-                                        <td>{{ payment.payedBy }}</td>
+                                        <td>ZAR {{ payment.amountDue }}</td>
+                                        <td>ZAR {{ payment.amountReceived }}</td>
+                                        <td>ZAR {{ payment.amountOutstanding }}</td>
+                                        <td>ZAR {{ payment.totalOutstanding }}</td>
                                         <td>{% if payment.created %}{{ payment.created|date('Y-m-d') }}{% endif %}</td>
+                                        <td>{% if payment.paymentStatus.name == 'Completed' %}
+                                                <span class="label label-success label-mini">{{ payment.paymentStatus.name }}</span>
+                                            {% else %}
+                                                <span class="label label-important label-mini">{{ payment.paymentStatus.name }}</span>
+                                            {% endif %}    
+                                        </td>
                                     </tr>
                                 {% endfor %}
                             </tbody>

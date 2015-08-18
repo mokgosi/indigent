@@ -41,6 +41,11 @@ class PaymentStatus
      * @ORM\Column(name="updated", type="datetime")
      */
     private $updated;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Payment", mappedBy="paymentStatus")
+     */
+    protected $payments;
 
 
     /**

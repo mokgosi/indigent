@@ -56,10 +56,10 @@ class PaymentController extends Controller
             $em->flush();
 
             $data = $request->request->get('appbundle_payment');
-       
+
             $balance = $em->getRepository('AppBundle:Payment')
-                ->updateCurrentBalance($data['erf'], $data['totalOutstanding']);
-            
+                    ->updateCurrentBalance($data['erf'], $data['totalOutstanding']);
+
             return $this->redirect($this->generateUrl('payment_show', array('id' => $entity->getId())));
         }
 
@@ -108,6 +108,7 @@ class PaymentController extends Controller
 
         return $this->render('payment/new.html.twig', array(
                     'entity' => $entity,
+                    'erf' => array(),
                     'form' => $form->createView(),
         ));
     }
@@ -122,9 +123,9 @@ class PaymentController extends Controller
     public function newByErfAction($id)
     {
         $entity = new Payment();
-        
+
         $em = $this->getDoctrine()->getManager();
-        
+
         $erf = $em->getRepository('AppBundle:Erf')->find($id);
         $balance = $em->getRepository('AppBundle:Payment')
                 ->getCurrentBalance($id);
@@ -135,7 +136,7 @@ class PaymentController extends Controller
         $entity->setAmountDue($this->getParameter('minimum_fee'));
         $entity->setAmountOutstanding($this->getParameter('minimum_fee'));
         $entity->setTotalOutstanding($balance->getTotalOutstanding());
-        
+
         $form = $this->createCreateForm($entity);
 
         return $this->render('payment/new.html.twig', array(

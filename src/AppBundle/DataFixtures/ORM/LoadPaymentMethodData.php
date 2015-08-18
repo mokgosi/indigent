@@ -34,6 +34,6 @@ class LoadPaymentMethodData  extends AbstractFixture  implements OrderedFixtureI
      */
     public function getOrder()
     {
-        return 5; // the order in which fixtures will be loaded
+        return 6; // the order in which fixtures will be loaded
     }
 }

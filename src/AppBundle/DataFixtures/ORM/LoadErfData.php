@@ -42,7 +42,7 @@ class LoadErfData extends AbstractFixture implements OrderedFixtureInterface {
      * {@inheritDoc}
      */
     public function getOrder() {
-        return 4; // the order in which fixtures will be loaded
+        return 5; // the order in which fixtures will be loaded
     }
 
 }

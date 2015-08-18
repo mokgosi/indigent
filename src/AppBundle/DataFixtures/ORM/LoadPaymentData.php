@@ -29,6 +29,7 @@ class LoadPaymentData extends AbstractFixture implements OrderedFixtureInterface
                 $pay->setRefNo('2015' . $refNo);
                 $pay->setCompany($this->getReference('ref-com'));
                 $pay->setErf($this->getReference('ref-erf' . $i));
+                $pay->setPaymentStatus($this->getReference('ref-status'));
                 $pay->setAmountDue(100);
                 $pay->setAmountReceived(100);
                 $pay->setAmountOutstanding(0);
@@ -52,7 +53,7 @@ class LoadPaymentData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 7; // the order in which fixtures will be loaded
+        return 10; // the order in which fixtures will be loaded
     }
 
 }

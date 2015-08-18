@@ -28,7 +28,7 @@
             <div class="control-group">
                 <label class="control-label">Address</label>
                 <div class="display-address"></div>
-                <input type="text" id="erfAddress" value="{% if erf.address %}{{ erf.address }}{% endif %}" class='m-wrap span12 placeholder-no-fix' readonly='readonly'>
+                <input type="text" id="erfAddress" value="{% if erf is not empty  %}{{ erf.address }} {% endif %}" class='m-wrap span12 placeholder-no-fix' readonly='readonly'>
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@
             <div class="control-group">
                 <label class="control-label">Section</label>
                 <div class="display-address"></div>
-                <input type="text" id="erfSection" value="{% if erf.section %}{{ erf.section.name }}{% endif %}" class='m-wrap span12 placeholder-no-fix' readonly='readonly'>
+                <input type="text" id="erfSection" value="{% if erf is not empty %}{{ erf.section.name }}{% endif %}" class='m-wrap span12 placeholder-no-fix' readonly='readonly'>
             </div>
         </div>
     </div>
@@ -46,7 +46,7 @@
             <div class="control-group">
                 <label class="control-label">Location</label>
                 <div class="display-address"></div>
-                <input type="text" id="erfLocation" value="{% if erf.location %}{{ erf.location.name }}{% endif %}" class='m-wrap span12 placeholder-no-fix' readonly='readonly'>
+                <input type="text" id="erfLocation" value="{% if erf is not empty %}{{ erf.location.name }}{% endif %}" class='m-wrap span12 placeholder-no-fix' readonly='readonly'>
             </div>
         </div>
     </div>
