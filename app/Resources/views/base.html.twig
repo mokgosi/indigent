@@ -206,13 +206,20 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                     </li>
                                 </ul>#}
                             </li>
-                            <li class="{{ app.request.attributes.get('_route') in ['company','company_show','company_edit'] ? 'active' : '' }}">
-                                <a href="{{ path('company') }}">
+                            <li class="{{ app.request.attributes.get('_route') in ['rate', 'rate_show','rate_edit','rate_update', 'company','company_show','company_edit','company_update'] ? 'active' : '' }}">
+                                <a href="javascript:;">
                                     <i class="icon-cog"></i> 
                                     <span class="title">Settings</span>
                                     <span class="arrow "></span>
                                 </a>
-                              
+                              <ul class="sub-menu">
+                                    <li class="{{ app.request.attributes.get('_route') in ['rate','rate_show','rate_edit','rate_update'] ? 'active' : '' }}">
+                                        <a href="{{ path('rate') }}">Rate</a>
+                                    </li>
+                                    <li class="{{ app.request.attributes.get('_route') in ['company','company_show','company_edit','company_update'] ? 'active' : '' }}">
+                                        <a href="{{ path('company') }}">Municipality</a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                         <!-- END SIDEBAR MENU -->

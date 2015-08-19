@@ -30,7 +30,7 @@
             <tbody>
                 {% for entity in entities %}
                     <tr>
-                        <td>{{ entity.amount }}</td>
+                        <td>ZAR {{ entity.amount }}</td>
                         <td>{% if entity.updated %}{{ entity.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
                         <td><a href="{{ path('rate_show', { 'id': entity.id }) }}">show</a></td>
                         <td><a href="{{ path('rate_edit', { 'id': entity.id }) }}">edit</a></td>

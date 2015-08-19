@@ -28,35 +28,18 @@
             <div class="control-group">
                 <label class="control-label">Address</label>
                 <div class="display-address"></div>
-                <input type="text" id="erfAddress" value="{% if erf.address is defined  %} {{ erf.address }} {% endif %} {% if erf.section is defined %} {{ erf.section.name }} {% endif %} {% if erf.location is defined %} {{ erf.location.name }} {% endif %}" class='m-wrap span12 placeholder-no-fix' readonly='readonly'>
+                <input type="text" id="erfAddress" value="{% if erf.address is defined  %} {{ erf.address }}, {% endif %} {% if erf.section is defined %} {{ erf.section.name }}, {% endif %} {% if erf.location is defined %} {{ erf.location.name }} {% endif %}" class='m-wrap span12 placeholder-no-fix' readonly='readonly'>
             </div>
         </div>
         <div class="span6 ">
             <div class="control-group">
                 <label class="control-label">Owner</label>
                 <div class="display-address"></div>
-                <input type="text" id="erfOwner" value="" class='m-wrap span12 placeholder-no-fix' readonly='readonly'>
+                <input type="text" id="erfOwner" value="{% if erf.owner is defined  %} {{ erf.owner.firstName }} {{erf.owner.lastName}} {% endif %}" class='m-wrap span12 placeholder-no-fix' readonly='readonly'>
             </div>
         </div>
     </div>
-    {#<div class="row-fluid">
-        <div class="span6 ">
-            <div class="control-group">
-                <label class="control-label">Section</label>
-                <div class="display-address"></div>
-                <input type="text" id="erfSection" value="{% if erf.section is defined %} {{ erf.section.name }} {% endif %}" class='m-wrap span12 placeholder-no-fix' readonly='readonly'>
-            </div>
-        </div>
-    </div>
-    <div class="row-fluid">
-        <div class="span6 ">
-            <div class="control-group">
-                <label class="control-label">Location</label>
-                <div class="display-address"></div>
-                <input type="text" id="erfLocation" value="{% if erf.location is defined %} {{ erf.location.name }} {% endif %}" class='m-wrap span12 placeholder-no-fix' readonly='readonly'>
-            </div>
-        </div>
-    </div>#}
+    
     <h3 class="form-section">Payment Info</h3>            
     <div class="row-fluid">
         <div class="span6 ">

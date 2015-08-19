@@ -88,7 +88,7 @@ class RateController extends Controller
      */
     public function newAction()
     {
-        $entity = new Section();
+        $entity = new Rate();
         $form = $this->createCreateForm($entity);
 
         return $this->render('rate/new.html.twig', array(
@@ -222,7 +222,7 @@ class RateController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('section'));
+        return $this->redirect($this->generateUrl('rate'));
     }
 
     /**

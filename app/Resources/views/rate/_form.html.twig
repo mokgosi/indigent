@@ -6,15 +6,15 @@
             <div class="control-group">
                 <label class="control-label">Rate Amount</label>
                 <div class="controls">
-                    {{ form_errors(form.name) }}
-                    {{ form_widget(form.name, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
+                    {{ form_errors(form.amount) }}
+                    {{ form_widget(form.amount, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
                 </div>
             </div>
         </div>
     </div>
     <div class="form-actions">
         {{ form_widget(form.submit, { 'attr': {'class': 'btn blue'} }) }}
-        <a href="{{ path('section') }}" class="btn">Cancel</a>
+        <a href="{{ path('rate') }}" class="btn">Cancel</a>
     </div>
     {{form_end(form)}}
 </div>
