@@ -16,7 +16,7 @@ class ErfTypeType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description')
+            ->add('description','textarea')
         ;
     }
     

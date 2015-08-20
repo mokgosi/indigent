@@ -29,6 +29,13 @@ class Rate
      * @ORM\Column(name="amount", type="decimal", precision=8, scale=2, options={"default":0})
      */
     private $amount;
+    
+    /**
+     * @var decimal
+     *
+     * @ORM\Column(name="vat", type="decimal", precision=8, scale=2, options={"default":0})
+     */
+    private $vat;
 
     /**
      * @var \DateTime
@@ -77,6 +84,29 @@ class Rate
     public function getAmount()
     {
         return $this->amount;
+    }
+    
+    /**
+     * Set vat
+     *
+     * @param string $vat
+     * @return Section
+     */
+    public function setVat($vat)
+    {
+        $this->vat = $vat;
+
+        return $this;
+    }
+
+    /**
+     * Get vat
+     *
+     * @return string 
+     */
+    public function getVat()
+    {
+        return $this->vat;
     }
 
     /**

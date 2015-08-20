@@ -22,7 +22,7 @@
             <thead>
                 <tr>
                     <th>Amount</th>
-                    <th>Updated</th>
+                    <th>VAT %</th>
                     <th>Show</th>
                     <th>Edit</th>
                 </tr>
@@ -31,7 +31,7 @@
                 {% for entity in entities %}
                     <tr>
                         <td>ZAR {{ entity.amount }}</td>
-                        <td>{% if entity.updated %}{{ entity.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{{ entity.vat }}</td>
                         <td><a href="{{ path('rate_show', { 'id': entity.id }) }}">show</a></td>
                         <td><a href="{{ path('rate_edit', { 'id': entity.id }) }}">edit</a></td>
                     </tr>

@@ -12,6 +12,17 @@
             </div>
         </div>
     </div>
+    <div class="row-fluid">
+        <div class="span6 ">
+            <div class="control-group">
+                <label class="control-label">VAT %</label>
+                <div class="controls">
+                    {{ form_errors(form.vat) }}
+                    {{ form_widget(form.vat, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="form-actions">
         {{ form_widget(form.submit, { 'attr': {'class': 'btn blue'} }) }}
         <a href="{{ path('rate') }}" class="btn">Cancel</a>
