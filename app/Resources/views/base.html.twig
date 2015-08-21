@@ -100,7 +100,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
         {% endblock %}
 
         {% block body %}
-            <div class="page-container">
+            <div class="page-container row-fluid">
 
                 <div class="page-sidebar nav-collapse collapse">
                     {% block sidebar %}
@@ -133,7 +133,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                 <a href="{{ path('payment') }}">
                                     <i class="icon-money"></i> 
                                     <span class="title">Payments</span>
-                                    <span class="arrow "></span>
+                                    <span class="{{ app.request.attributes.get('_route') in ['payment','payment_show','payment_edit','payment_new','payment_update'] ? 'selected' : '' }}"></span>
                                 </a>
                             </li>
                             
@@ -141,11 +141,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                 <a href="javascript:;">
                                     <i class="icon-table"></i> 
                                     <span class="title">ERF Management</span>
-                                    <span class="arrow "></span>
+                                    <span class="{{ app.request.attributes.get('_route') in ['erf','erf_show','erf_edit','erf_new','erf_update','erftype','erftype_show','erftype_edit','erftype_new','erftype_update','location','location_show','location_edit','location_new','location_update','section','section_show','section_edit','section_new','section_update'] ? 'selected' : '' }}"></span>
+                                    <span class="arrow {{ app.request.attributes.get('_route') in ['erf','erf_show','erf_edit','erf_new','erf_update','erftype','erftype_show','erftype_edit','erftype_new','erftype_update','location','location_show','location_edit','location_new','location_update','section','section_show','section_edit','section_new','section_update'] ? 'open' : '' }}"></span>
                                 </a>
-                                
                                 <ul class="sub-menu">
-                                    <li class="{{ app.request.attributes.get('_route') in ['erf','erf_edit','erf_new','erf_update'] ? 'active' : '' }}">
+                                    <li class="{{ app.request.attributes.get('_route') in ['erf','erf_show','erf_edit','erf_new','erf_update'] ? 'active' : '' }}">
                                         <a href="{{ path('erf') }}">Manage ERFs</a>
                                     </li>
                                     <li class="{{ app.request.attributes.get('_route') in ['erftype','erftype_show','erftype_edit','erftype_new','erftype_update'] ? 'active' : '' }}" >
@@ -154,7 +154,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                     <li class="{{ app.request.attributes.get('_route') in ['location','location_show','location_edit','location_new','location_update'] ? 'active' : '' }}" >
                                         <a href="{{ path('location') }}">Manage Locations</a>
                                     </li>
-                                    <li class="{{ app.request.attributes.get('_route') in ['section','section_edit','section_new','section_update'] ? 'active' : '' }}" >
+                                    <li class="{{ app.request.attributes.get('_route') in ['section','section_show', 'section_edit','section_new','section_update'] ? 'active' : '' }}" >
                                         <a href="{{ path('section') }}">Manage Sections</a>
                                     </li>
                                 </ul>
@@ -164,7 +164,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                 <a href="javascript:;">
                                     <i class="icon-table"></i> 
                                     <span class="title">Owners</span>
-                                    <span class="arrow "></span>
+                                    <span class="{{ app.request.attributes.get('_route') in ['owner','owner_edit','owner_new','owner_show','owner_update'] ? 'selected' : '' }}"></span>
+                                    <span class="arrow {{ app.request.attributes.get('_route') in ['owner','owner_edit','owner_new','owner_show','owner_update'] ? 'open' : '' }}"></span>
                                 </a>
                                 <ul class="sub-menu">
                                     <li class="{{ app.request.attributes.get('_route') in ['owner_new'] ? 'active' : '' }}" >
@@ -180,7 +181,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                 <a href="javascript:;">
                                     <i class="icon-user"></i> 
                                     <span class="title">User Management</span>
-                                    <span class="arrow "></span>
+                                    <span class="{{ app.request.attributes.get('_route') in ['user','user_new', 'user_edit', 'user_update', 'user_show'] ? 'selected' : '' }}"></span>
+                                    <span class="arrow {{ app.request.attributes.get('_route') in ['user','user_new', 'user_edit', 'user_update', 'user_show'] ? 'open' : '' }}"></span>
                                 </a>
                                 <ul class="sub-menu">
                                     <li class="{{ app.request.attributes.get('_route') in ['user'] ? 'active' : '' }}">
@@ -210,7 +212,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                 <a href="javascript:;">
                                     <i class="icon-cog"></i> 
                                     <span class="title">Settings</span>
-                                    <span class="arrow "></span>
+                                    <span class="{{ app.request.attributes.get('_route') in ['rate', 'rate_show','rate_edit','rate_update', 'company','company_show','company_edit','company_update'] ? 'selected' : '' }}"></span>
+                                    <span class="arrow {{ app.request.attributes.get('_route') in ['rate', 'rate_show','rate_edit','rate_update', 'company','company_show','company_edit','company_update'] ? 'open' : '' }}"></span>
                                 </a>
                               <ul class="sub-menu">
                                     <li class="{{ app.request.attributes.get('_route') in ['rate','rate_show','rate_edit','rate_update'] ? 'active' : '' }}">
