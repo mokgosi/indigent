@@ -87,6 +87,13 @@ var Payment = function () {
         });
     };
     
+    var hanglePrinting = function() {
+        $('#printdetails').on('click', function() {
+            //Print ele2 with default options
+            $.print("#print-div");
+        });
+    };
+    
     var handleSelect2 = function() {
       $('#appbundle_payment_erf').select2({
             placeholder: {id: "", text: "Select Erf #"},
@@ -99,6 +106,7 @@ var Payment = function () {
             handleSelect2();
             handlePayment();
             handleSearch();
+            hanglePrinting();
         }
 
     };
