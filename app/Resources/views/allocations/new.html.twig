@@ -1,0 +1,14 @@
+{% extends 'allocations/layout.html.twig' %}
+
+{% block title ' | Allocation' %}
+
+{% block page_title %}Add Allocation{% endblock %}
+{% block page_title_small %}add allocation{% endblock %}
+{% block breadcrumb %}Add Allocation{% endblock %}
+{% block page_tab_info_title %}Allocation Info{% endblock %}
+{% block page_tab_details_title %}Allocation Details{% endblock %}
+{% block main_body %}
+    {{ include('allocations/_form.html.twig', {
+        form: form,
+    }, with_context = false) }}
+{% endblock %}

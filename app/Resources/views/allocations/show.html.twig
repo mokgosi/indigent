@@ -1,0 +1,74 @@
+{% extends 'allocations/layout.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        jQuery(document).ready(function () {
+            App.init();
+        });
+    </script>    
+{% endblock %}
+
+{% block main_body %}
+    <div class="portlet-body"> 
+        <div class="table-toolbar">
+            <div class="btn-group">
+                <a href="{{path('paymentallocation_new')}}" class="btn green">
+                    Add Section <i class="icon-plus"></i>
+                </a>
+            </div>
+            <div class="btn-group pull-right">
+                <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu pull-right">
+                    <li><a href="#">Print</a></li>
+                    <li><a href="#">Save as PDF</a></li>
+                    <li><a href="#">Export to Excel</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="portlet-body form">
+            {{ form_start(delete_form) }}
+            <div class="form-horizontal form-view">
+                <h3 class="form-section">Section Info</h3>
+                <div class="row-fluid">
+                    <div class="span6 ">
+                        <div class="control-group">
+                            <label class="control-label" for="erfNo">Erf #</label>
+                            <div class="controls">
+                                <input type="text" value="{{ entity.erf.erfNo }}" readonly="readonly" class="m-wrap span12"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span6 ">
+                        <div class="control-group">
+                            <label class="control-label" for="erfNo">Amount</label>
+                            <div class="controls">
+                                <input type="text" value="{{ entity.amount }}" readonly="readonly" class="m-wrap span12"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span6 ">
+                        <div class="control-group">
+                            <label class="control-label" for="address">Month</label>
+                            <div class="controls">
+                                <input type="text" value="{{ entity.month }}" readonly="readonly" class="m-wrap span12"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <a href="{{ path('paymentallocation') }}" class="btn">Back to list</a>
+                    <a href="{{ path('paymentallocation_edit', { 'id': entity.id }) }}"  class="btn blue"><i class="icon-pencil"></i> Edit</a>
+                    {{ form_widget(delete_form.submit, { 'attr': {'class': 'btn red', 'label': 'Delete'} }) }}
+                </div>
+            </div>
+            {{ form_end(delete_form) }}  
+        </div>
+
+    </div>
+{% endblock %}

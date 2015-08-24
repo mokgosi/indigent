@@ -1,0 +1,48 @@
+{% extends 'allocations/layout.html.twig' %}
+
+{% block main_body %}
+    <div class="portlet-body">
+        <div class="table-toolbar">
+            <div class="btn-group">
+                <a href="{{path('paymentallocation_new')}}" class="btn green">
+                    Add New <i class="icon-plus"></i>
+                </a>
+            </div>
+            <div class="btn-group pull-right">
+                <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu pull-right">
+                    <li><a href="#">Print</a></li>
+                    <li><a href="#">Save as PDF</a></li>
+                    <li><a href="#">Export to Excel</a></li>
+                </ul>
+            </div>
+        </div>
+        <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+            <thead>
+                <tr>
+                    <th>Erf #</th>
+                    <th>Amount</th>
+                    <th>Month</th>
+                    <th>Year</th>
+                    <th>Status</th>
+                    <th>Show</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entity in entities %}
+                    <tr>
+                        <td>{{ entity.erf.erfNo }}</td>
+                        <td>{{ entity.amount }}</td>
+                        <td>{{ entity.month }}</td>
+                        <td>{{ entity.created|date('Y') }}</td>
+                        <td>not paid</td>
+                        <td><a href="{{ path('paymentallocation_show', { 'id': entity.id }) }}">show</a></td>
+                        <td><a href="{{ path('paymentallocation_edit', { 'id': entity.id }) }}">edit</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
