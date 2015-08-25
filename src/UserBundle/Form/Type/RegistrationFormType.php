@@ -24,7 +24,6 @@ class RegistrationFormType extends AbstractType
             'expanded' => true,
             'required' => false,
         ));
-//        $builder->add('enabled', 'checkbox');
         $builder->add('enabled', 'checkbox', array(
             'value' => 1,
             'required' => false
