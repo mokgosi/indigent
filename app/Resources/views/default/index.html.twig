@@ -51,7 +51,7 @@
         <!-- END PAGE HEADER-->
         <div id="dashboard">
             <div class="row-fluid">
-                {% set color = ['blue', 'yellow', 'green', 'red', 'purple'] %}
+               {# {% set color = ['blue', 'yellow', 'green', 'red', 'purple'] %}
                 {% set total = 0 %}
                 {% for top in tops %}
                     {% set i = loop.index - 1%}
@@ -71,17 +71,65 @@
                                 View more <i class="m-icon-swapright m-icon-white"></i></a>                 
                         </div>
                     </div>
-                {% endfor %}
-                <div class="span2 responsive" data-tablet="span6" data-desktop="span3">
+                {% endfor %}#}
+                <div class="span4 responsive" data-tablet="span6" data-desktop="span3">
+                    <div class="dashboard-stat yellow">
+                        <div class="visual">
+                            <i class="icon-bar-chart"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number">
+                                {{ allPayments|default('0') }}
+                            </div>
+                            <div class="desc">Payments</div>
+                        </div>
+                        <a class="more" href="#">
+                            View more <i class="m-icon-swapright m-icon-white"></i>
+                        </a>                 
+                    </div>
+                </div>
+                <div class="span4 responsive" data-tablet="span6" data-desktop="span3">
+                    <div class="dashboard-stat green">
+                        <div class="visual">
+                            <i class="icon-bar-chart"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number">
+                                {{ completed|default('0') }}
+                            </div>
+                            <div class="desc">Completed</div>
+                        </div>
+                        <a class="more" href="#">
+                            View more <i class="m-icon-swapright m-icon-white"></i>
+                        </a>                 
+                    </div>
+                </div>
+                <div class="span4 responsive" data-tablet="span6" data-desktop="span3">
+                    <div class="dashboard-stat red">
+                        <div class="visual">
+                            <i class="icon-bar-chart"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number">
+                                {{ cancelled|default('0') }}
+                            </div>
+                            <div class="desc">Cancelled</div>
+                        </div>
+                        <a class="more" href="#">
+                            View more <i class="m-icon-swapright m-icon-white"></i>
+                        </a>                 
+                    </div>
+                </div>
+                <div class="span4 responsive" data-tablet="span6" data-desktop="span3">
                     <div class="dashboard-stat blue">
                         <div class="visual">
                             <i class="icon-bar-chart"></i>
                         </div>
                         <div class="details">
                             <div class="number">
-                                {{ total }}
+                                {{ revenue|default('0.00') }}
                             </div>
-                            <div class="desc">Total</div>
+                            <div class="desc">Revenue</div>
                         </div>
                         <a class="more" href="#">
                             View more <i class="m-icon-swapright m-icon-white"></i>

@@ -35,18 +35,18 @@ class PaymentRepository extends EntityRepository
 
         return $results;
     }
-    
-    public function updateCurrentBalance($id,$balance)
+
+    public function updateCurrentBalance($id, $balance)
     {
         $qb = $this->getEntityManager()->createQueryBuilder('AppBundle:Erf');
-        
+
         $qb->update('AppBundle:Erf e')
-            ->set('e.balance', ':balance')
-            ->where('e.id = :id')
-            ->setParameter('id', $id)
-            ->setParameter('balance', $balance)
-            ->getQuery()
-            ->execute();
+                ->set('e.balance', ':balance')
+                ->where('e.id = :id')
+                ->setParameter('id', $id)
+                ->setParameter('balance', $balance)
+                ->getQuery()
+                ->execute();
     }
 
     public function getRecent()
@@ -78,7 +78,7 @@ class PaymentRepository extends EntityRepository
         return $array;
     }
 
-    public function getPieGraphValues($start=null, $end=null)
+    public function getPieGraphValues($start = null, $end = null)
     {
         if (is_null($start)) {
             $start = date('m');
@@ -128,6 +128,92 @@ class PaymentRepository extends EntityRepository
                 ->setParameter('end', $end)
                 ->getResult(Query::HYDRATE_ARRAY);
 
+        return $results;
+    }
+
+    public function getAllPayments($start = null, $end = null)
+    {
+         if (is_null($start)) {
+            $start = date('m');
+            $end = date('m');
+        }
+
+        $results = $this->getEntityManager()
+                ->createQueryBuilder()
+                ->select('COUNT(p)')
+                ->from('AppBundle:Payment', 'p')
+                ->where('MONTH(p.created) BETWEEN :start AND :end')
+                ->setParameter('start', $start)
+                ->setParameter('end', $end)
+                ->getQuery()
+                ->getSingleScalarResult();
+    
+        return $results;
+    }
+    
+    public function getCompleted($start = null, $end = null)
+    {
+         if (is_null($start)) {
+            $start = date('m');
+            $end = date('m');
+        }
+
+        $results = $this->getEntityManager()
+                ->createQueryBuilder()
+                ->select('COUNT(p)')
+                ->from('AppBundle:Payment', 'p')
+                ->where('MONTH(p.created) BETWEEN :start AND :end')
+                ->andWhere('p.paymentStatusId = :status')
+                ->setParameter('status', 1)
+                ->setParameter('start', $start)
+                ->setParameter('end', $end)
+                ->getQuery()
+                ->getSingleScalarResult();
+    
+        return $results;
+    }
+    
+    public function getCancelled($start = null, $end = null)
+    {
+         if (is_null($start)) {
+            $start = date('m');
+            $end = date('m');
+        }
+
+        $results = $this->getEntityManager()
+                ->createQueryBuilder()
+                ->select('COUNT(p)')
+                ->from('AppBundle:Payment', 'p')
+                ->where('MONTH(p.created) BETWEEN :start AND :end')
+                ->andWhere('p.paymentStatusId = :status')
+                ->setParameter('status', 2)
+                ->setParameter('start', $start)
+                ->setParameter('end', $end)
+                ->getQuery()
+                ->getSingleScalarResult();
+    
+        return $results;
+    }
+    
+    public function getRevenue($start = null, $end = null)
+    {
+         if (is_null($start)) {
+            $start = date('m');
+            $end = date('m');
+        }
+
+        $results = $this->getEntityManager()
+                ->createQueryBuilder()
+                ->select('Sum(p.amountReceived)')
+                ->from('AppBundle:Payment', 'p')
+                ->where('MONTH(p.created) BETWEEN :start AND :end')
+                ->andWhere('p.paymentStatusId = :status')
+                ->setParameter('status', 1)
+                ->setParameter('start', $start)
+                ->setParameter('end', $end)
+                ->getQuery()
+                ->getSingleScalarResult();
+    
         return $results;
     }
 

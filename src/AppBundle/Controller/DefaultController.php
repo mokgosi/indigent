@@ -28,12 +28,27 @@ class DefaultController extends Controller
 
         $recents = $em->getRepository('AppBundle:Payment')
                 ->getRecent();
+        
+        $allPayments = $em->getRepository('AppBundle:Payment')
+                ->getAllPayments();
+        
+        $completed = $em->getRepository('AppBundle:Payment')
+                ->getCompleted();
+        
+        $cancelled = $em->getRepository('AppBundle:Payment')
+                ->getCancelled();
+        
+        $revenue = $em->getRepository('AppBundle:Payment')
+                ->getRevenue();
 
         return $this->render('default/index.html.twig', array(
                     'entities' => json_encode($entities),
                     'entities1' => json_encode($entities1),
                     'recents' => $recents,
-                    'tops' => $entities1,
+                    'allPayments' => $allPayments,
+                    'completed' => $completed,
+                    'cancelled' => $cancelled,
+                    'revenue' => $revenue
         ));
     }
 
