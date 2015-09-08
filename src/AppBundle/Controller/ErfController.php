@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\Erf;
 use AppBundle\Form\ErfType;
 
@@ -15,6 +16,7 @@ use AppBundle\Form\ErfType;
  * Erf controller.
  *
  * @Route("/erf")
+ * @Security("has_role('ROLE_USER')") 
  */
 class ErfController extends Controller {
 

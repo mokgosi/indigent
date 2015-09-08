@@ -4,10 +4,12 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\CronTask;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Route("/crontasks")
+ * @Security("has_role('ROLE_ADMIN')") 
  */
 class CronTaskController extends Controller
 {

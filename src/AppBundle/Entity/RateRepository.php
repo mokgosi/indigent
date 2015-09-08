@@ -12,4 +12,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class RateRepository extends EntityRepository
 {
+
+    public function getRate()
+    {
+        $results = $this->getEntityManager()
+                ->createQueryBuilder()
+                ->select('r')
+                ->from('AppBundle:Rate', 'r')
+                ->getQuery()
+                ->getSingleScalarResult();
+
+        return $results;
+    }
+
 }

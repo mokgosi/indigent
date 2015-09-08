@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\PaymentAllocation;
 use AppBundle\Form\PaymentAllocationType;
 
@@ -14,6 +15,7 @@ use AppBundle\Form\PaymentAllocationType;
  * PaymentAllocation controller.
  *
  * @Route("/paymentallocation")
+ * @Security("has_role('ROLE_ADMIN')") 
  */
 class PaymentAllocationController extends Controller
 {
@@ -30,10 +32,14 @@ class PaymentAllocationController extends Controller
 
         $entities = $em->getRepository('AppBundle:PaymentAllocation')->findAll();
 
+        $checks = $em->getRepository('AppBundle:Section')->findAll();
+
         return $this->render('allocations/index.html.twig', array(
-            'entities' => $entities
+                    'entities' => $entities,
+                    'sections' => $checks
         ));
     }
+
     /**
      * Creates a new PaymentAllocation entity.
      *
@@ -89,7 +95,7 @@ class PaymentAllocationController extends Controller
     public function newAction()
     {
         $entity = new PaymentAllocation();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return $this->render('allocations/new.html.twig', array(
                     'entity' => $entity,
@@ -141,19 +147,19 @@ class PaymentAllocationController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('allocations/edit.html.twig', array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                    'entity' => $entity,
+                    'form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-    * Creates a form to edit a PaymentAllocation entity.
-    *
-    * @param PaymentAllocation $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a PaymentAllocation entity.
+     *
+     * @param PaymentAllocation $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(PaymentAllocation $entity)
     {
         $form = $this->createForm(new PaymentAllocationType(), $entity, array(
@@ -165,6 +171,7 @@ class PaymentAllocationController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing PaymentAllocation entity.
      *
@@ -193,11 +200,12 @@ class PaymentAllocationController extends Controller
         }
 
         return $this->render('allocations/edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a PaymentAllocation entity.
      *
@@ -234,10 +242,30 @@ class PaymentAllocationController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('paymentallocation_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+                        ->setAction($this->generateUrl('paymentallocation_delete', array('id' => $id)))
+                        ->setMethod('DELETE')
+                        ->add('submit', 'submit', array('label' => 'Delete'))
+                        ->getForm()
         ;
     }
+
+     /**
+     * Reallocats PaymentAllocations.
+     *
+     * @Route("/{id}/reallocation", name="paymentallocation_reallocation", options={"expose"=true})
+     * @Method("GET")
+     */
+    public function allocateSectionAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        
+        $em->getRepository('AppBundle:PaymentAllocation')->deleteByMonth('September');
+
+        $em->getRepository('AppBundle:PaymentAllocation')->allocateBySection($id);
+        
+        return $this->redirect($this->generateUrl('paymentallocation'));
+        
+    }
+
+
 }

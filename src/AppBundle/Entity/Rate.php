@@ -90,7 +90,7 @@ class Rate
      * Set vat
      *
      * @param string $vat
-     * @return Section
+     * @return Rate
      */
     public function setVat($vat)
     {
@@ -113,7 +113,7 @@ class Rate
      * Set created
      *
      * @param \DateTime $created
-     * @return Section
+     * @return Rate
      */
     public function setCreated($created)
     {

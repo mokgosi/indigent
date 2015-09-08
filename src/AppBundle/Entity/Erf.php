@@ -80,6 +80,13 @@ class Erf
     /**
      * @var decimal
      *
+     * @ORM\Column(name="previous_balance", type="decimal", precision=8, scale=2, options={"default":0})
+     */
+    private $previousBalance;
+    
+    /**
+     * @var decimal
+     *
      * @ORM\Column(name="balance", type="decimal", precision=8, scale=2, options={"default":0})
      */
     private $balance;
@@ -443,13 +450,13 @@ class Erf
     /**
      * Get balance
      *
-     * @return Erf
+     * @return decimal $balance
      */
     function getBalance()
     {
         return $this->balance;
     }
-
+    
     /**
      * Set balance
      *
@@ -459,6 +466,27 @@ class Erf
     function setBalance($balance)
     {
         $this->balance = $balance;
+    }
+
+    /**
+     * Set previousBalance
+     *
+     * @param decimal $previousBalance
+     * @return Erf
+     */
+    function setPreviousBalance($previousBalance)
+    {
+        $this->previousBalance = $previousBalance;
+    }
+    
+     /**
+     * Get previousBalance
+     *
+     * @return decimal $balance
+     */
+    function getPreviosBalance()
+    {
+        return $this->previousBalance;
     }
     
     public function getPayments()

@@ -17,6 +17,7 @@ class LoadRateData extends AbstractFixture  implements OrderedFixtureInterface
         $loc = new Rate();
         $loc->setAmount(100);
         $loc->setVat(14);
+        $loc->setStatus('Active');
         $loc->setCreated(new \DateTime('now'));
         $loc->setUpdated(new \DateTime('now'));
         

@@ -44,6 +44,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
             <!-- END GLOBAL MANDATORY STYLES -->
 
             <link rel="stylesheet" href="{{ asset('css/DT_bootstrap.css') }}" rel="stylesheet" type="text/css" />
+            <link rel="stylesheet" href="{{ asset('css/bootstrap-modal.css') }}" rel="stylesheet" type="text/css"/>
             <link rel="stylesheet" href="{{ asset('css/pages/tasks.css') }}" rel="stylesheet" type="text/css"/>
 
 
@@ -122,6 +123,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                 </form>
                                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
                             </li>
+                           
                             <li class="start {% if app.request.attributes.get('_route') == 'dashboard' %}active{% endif %}">
                                 <a href="{{ path('dashboard') }}">
                                     <i class="icon-home"></i> 
@@ -136,7 +138,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                     <span class="{{ app.request.attributes.get('_route') in ['payment','payment_show','payment_edit','payment_new','payment_update'] ? 'selected' : '' }}"></span>
                                 </a>
                             </li>
-
+                            
+                            {% if app.user and is_granted('ROLE_ADMIN') %}
                             <li class="{{ app.request.attributes.get('_route') in ['erf','erf_show','erf_edit','erf_new','erf_update','erftype','erftype_show','erftype_edit','erftype_new','erftype_update','location','location_show','location_edit','location_new','location_update','section','section_show','section_edit','section_new','section_update'] ? 'active' : '' }}">
                                 <a href="javascript:;">
                                     <i class="icon-table"></i> 
@@ -223,10 +226,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                         <a href="{{ path('company') }}">Municipality</a>
                                     </li>
                                     <li class="{{ app.request.attributes.get('_route') in ['paymentallocation','paymentallocation_show','paymentallocation_edit','paymentallocation_update'] ? 'active' : '' }}">
-                                        <a href="{{ path('paymentallocation') }}">Allcations</a>
+                                        <a href="{{ path('paymentallocation') }}">Allocations</a>
                                     </li>
                                 </ul>
                             </li>
+                            {% endif %}
                         </ul>
                         <!-- END SIDEBAR MENU -->
                     {% endblock %}

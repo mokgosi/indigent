@@ -12,7 +12,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/", name="dashboard")
-     * @Security("has_role('ROLE_ADMIN')") 
+     * @Security("has_role('ROLE_USER')") 
      * 
      * Roles ROLE_USER, ROLE_ADMIN
      */

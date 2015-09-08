@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\PaymentMethod;
 use AppBundle\Form\PaymentMethodType;
 
@@ -14,6 +15,7 @@ use AppBundle\Form\PaymentMethodType;
  * PaymentMethod controller.
  *
  * @Route("/paymentmethod")
+ * @Security("has_role('ROLE_ADMIN')") 
  */
 class PaymentMethodController extends Controller
 {

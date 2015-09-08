@@ -135,9 +135,11 @@
                         </table>
                 </div>
                 <div class="form-actions">
+                    {% if app.user and is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('erf') }}" class="btn">Back to list</a>
                     <a href="{{ path('erf_edit', { 'id': entity.id }) }}"  class="btn blue"><i class="icon-pencil"></i> Edit</a>
                     {{ form_widget(delete_form.submit, { 'attr': {'class': 'btn red', 'label': 'Delete'} }) }}
+                    {% endif %}    
                 </div>
             </div>
             {{ form_end(delete_form) }} 

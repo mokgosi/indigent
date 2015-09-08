@@ -15,6 +15,7 @@ use AppBundle\Form\PaymentType;
  * Payment controller.
  *
  * @Route("/payment")
+ * @Security("has_role('ROLE_USER')") 
  */
 class PaymentController extends Controller
 {
@@ -93,7 +94,6 @@ class PaymentController extends Controller
      *
      * @Route("/new", name="payment_new")
      * @Method({"GET", "POST"})
-     * @Security("has_role('ROLE_ADMIN')")
      */
     public function newAction()
     {
@@ -118,7 +118,6 @@ class PaymentController extends Controller
      *
      * @Route("/new/{id}", name="payment_new_by_erf")
      * @Method({"GET", "POST"})
-     * @Security("has_role('ROLE_ADMIN')")
      */
     public function newByErfAction($id)
     {
@@ -151,7 +150,7 @@ class PaymentController extends Controller
      *
      * @Route("/{id}", name="payment_show")
      * @Method("GET")
-     * @Security("has_role('ROLE_ADMIN')")
+     * 
      */
     public function showAction($id)
     {
@@ -175,7 +174,6 @@ class PaymentController extends Controller
      * Displays a form to edit an existing Payment entity.
      *
      * @Route("/{id}/edit", name="payment_edit")
-     * @Security("has_role('ROLE_ADMIN')")
      */
     public function editAction($id)
     {

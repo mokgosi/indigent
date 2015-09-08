@@ -74,7 +74,9 @@
                                     <th>Owner Name</th>
                                     <th>Owner Cellphone</th>
                                     <th>Show</th>
+                                    {% if app.user and is_granted('ROLE_ADMIN') %}
                                     <th>Edit</th>
+                                    {% endif %}
                                     <th>Pay</th>
                                 </tr>
                             </thead>
@@ -88,7 +90,9 @@
                                         <td>{{ entity.owner.firstName }} {{ entity.owner.lastName }}</td>
                                         <td>{{ entity.owner.mobile }}</td>
                                         <td><a href="{{ path('erf_show', { 'id': entity.id }) }}">show</a></td>
+                                        {% if app.user and is_granted('ROLE_ADMIN') %}
                                         <td><a href="{{ path('erf_edit', { 'id': entity.id }) }}">edit</a></td>
+                                        {% endif %}
                                         <td><a href="{{ path('payment_new_by_erf', { 'id': entity.id }) }}">pay</a></td>
                                     </tr>
                             </tbody>

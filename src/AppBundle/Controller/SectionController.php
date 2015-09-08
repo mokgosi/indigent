@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\Section;
 use AppBundle\Form\SectionType;
 
@@ -14,6 +15,7 @@ use AppBundle\Form\SectionType;
  * Section controller.
  *
  * @Route("/section")
+ * @Security("has_role('ROLE_ADMIN')") 
  */
 class SectionController extends Controller
 {

@@ -5,11 +5,13 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Payment controller.
  *
  * @Route("/report")
+ * @Security("has_role('ROLE_ADMIN')") 
  */
 class ReportController extends Controller
 {
@@ -19,6 +21,7 @@ class ReportController extends Controller
      *
      * @Route("/", name="report")
      * @Method("GET")
+
      */
     public function indexAction()
     {
