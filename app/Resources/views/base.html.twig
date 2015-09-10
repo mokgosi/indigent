@@ -46,6 +46,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
             <link rel="stylesheet" href="{{ asset('css/DT_bootstrap.css') }}" rel="stylesheet" type="text/css" />
             <link rel="stylesheet" href="{{ asset('css/bootstrap-modal.css') }}" rel="stylesheet" type="text/css"/>
             <link rel="stylesheet" href="{{ asset('css/pages/tasks.css') }}" rel="stylesheet" type="text/css"/>
+            <link rel="stylesheet" href="{{ asset('css/pages/search.css') }}" rel="stylesheet" type="text/css"/>
 
 
         {% endblock %}
@@ -202,14 +203,17 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                     <span class="title">Reports (Coming Soon!)</span>
                                     <span class="arrow "></span>
                                 </a>
-                                {#<ul class="sub-menu">
+                                <ul class="sub-menu">
                                     <li>
-                                        <a href="{{ path('report_erf') }}">Account Statement</a>
+                                        <a href="{{ path('report_erf') }}">Erf Report</a>
                                     </li>
                                     <li>
-                                        <a href="{{ path('report_sections') }}">Reports by Section</a>
+                                        <a href="{{ path('report_section') }}">Section Report</a>
                                     </li>
-                                </ul>#}
+                                    <li>
+                                        <a href="{{ path('report_location') }}">Location Report</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="{{ app.request.attributes.get('_route') in ['rate', 'rate_show','rate_edit','rate_update', 'company','company_show','company_edit','company_update','paymentallocation','paymentallocation_show','paymentallocation_edit','paymentallocation_update'] ? 'active' : '' }}">
                                 <a href="javascript:;">

@@ -19,67 +19,40 @@ class ReportController extends Controller
     /**
      * Lists all Payment entities.
      *
-     * @Route("/", name="report")
+     * @Route("/erf", name="report_erf")
      * @Method("GET")
-
      */
-    public function indexAction()
+    public function erfReportAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('AppBundle:Payment')->findAll();
-
-        return $this->render('report/index.html.twig', array(
-                    'entities' => $entities
+        return $this->render('report/erf.html.twig', array(
+                    'entities' => ''
         ));
     }
 
     /**
      * Lists all Payment entities.
      *
-     * @Route("/section/{id}", name="report_section")
-     * @Method("GET")
-     */
-    public function getSectionReportAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('AppBundle:Payment')->getSectionReport($id);
-
-        return $this->render('report/section.html.twig', array(
-                    'entities' => $entities
-        ));
-    }
-
-    /***
-     * @Route("/")
-     */
-    public function getErfTransactionHistory()
-    {
-        
-    }
-
-    /**
-     * Lists all Payment entities.
-     *
-     * @Route("/section", name="report_sections")
+     * @Route("/section", name="report_section")
      * @Method("GET")
      */
     public function sectionReportAction()
     {
-        return new Response;
+        return $this->render('report/section.html.twig', array(
+                    'entities' => ''
+        ));
     }
 
     /**
      * Lists all Payment entities.
      *
-     * @Route("/erf", name="report_erf")
+     * @Route("/location", name="report_location")
      * @Method("GET")
      */
-    public function erfReportAction($id)
+    public function locationReportAction()
     {
-
-        return new Response;
+        return $this->render('report/location.html.twig', array(
+                    'entities' => ''
+        ));
     }
 
 }

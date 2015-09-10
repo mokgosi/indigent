@@ -216,5 +216,54 @@ class PaymentRepository extends EntityRepository
     
         return $results;
     }
+    
+    
+    
+    
+    
+    
+    
+    public function getErfReport($id, $start = null, $end = null)
+    {
+
+        if (is_null($start)) {
+            $start = date('m');
+            $end = date('m');
+        }
+
+        $results = $this->getEntityManager()
+                ->createQuery(
+                        'SELECT p.amountReceived, p.created, MONTHNAME(p.created) as month, e.erfNo, '
+                        . 'e.address as address, s.name as section '
+                        . 'FROM AppBundle:Payment p '
+                        . 'LEFT JOIN AppBundle:Erf e With e.id = p.erfId '
+                        . 'LEFT JOIN AppBundle:Section s With s.id = e.sectionId '
+                        . 'WHERE s.id = :id '
+                        . 'AND MONTH(p.created) BETWEEN :start AND :end ')
+                ->setParameter('id', $id)
+                ->setParameter('start', $start)
+                ->setParameter('end', $end)
+                ->getResult(Query::HYDRATE_ARRAY);
+
+        return $results;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 }
