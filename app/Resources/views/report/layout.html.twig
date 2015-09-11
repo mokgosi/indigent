@@ -4,11 +4,13 @@
     {{ parent() }}
     <script src="{{ asset('js/form-components.js') }}"></script>
     <script src="{{ asset('js/table-editable.js') }}"></script>    
+    <script src="{{ asset('js/search.js') }}"></script>    
     <script>
         jQuery(document).ready(function () {
             App.init();
             FormComponents.init();
             TableEditable.init();
+            Search.init();
         });
     </script>    
 {% endblock %}
