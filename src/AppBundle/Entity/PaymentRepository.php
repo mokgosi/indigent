@@ -106,30 +106,7 @@ class PaymentRepository extends EntityRepository
         return $array;
     }
 
-    public function getSectionReport($id, $start = null, $end = null)
-    {
-
-        if (is_null($start)) {
-            $start = date('m');
-            $end = date('m');
-        }
-
-        $results = $this->getEntityManager()
-                ->createQuery(
-                        'SELECT p.amountReceived, p.created, MONTHNAME(p.created) as month, e.erfNo, '
-                        . 'e.address as address, s.name as section '
-                        . 'FROM AppBundle:Payment p '
-                        . 'LEFT JOIN AppBundle:Erf e With e.id = p.erfId '
-                        . 'LEFT JOIN AppBundle:Section s With s.id = e.sectionId '
-                        . 'WHERE s.id = :id '
-                        . 'AND MONTH(p.created) BETWEEN :start AND :end ')
-                ->setParameter('id', $id)
-                ->setParameter('start', $start)
-                ->setParameter('end', $end)
-                ->getResult(Query::HYDRATE_ARRAY);
-
-        return $results;
-    }
+    
 
     public function getAllPayments($start = null, $end = null)
     {
@@ -217,19 +194,29 @@ class PaymentRepository extends EntityRepository
         return $results;
     }
     
-    
-    
-    
-    
-    
-    
     public function getErfReport($id, $start = null, $end = null)
     {
+        $results = $this->getEntityManager()
+                ->createQuery(
+                        'SELECT p.amountDue, p.amountReceived, p.amountOutstanding, s.name, '
+                        . 'p.totalOutstanding, p.created, MONTHNAME(p.created) as month, '
+                        . 'e.erfNo, e.address as address '
+                        . 'FROM AppBundle:Payment p '
+                        . 'LEFT JOIN AppBundle:Erf e With e.id = p.erfId '
+                        . 'LEFT JOIN AppBundle:PaymentStatus s With s.id = p.paymentStatusId '
+                        . 'WHERE e.erfNo = :id '
+                        . 'AND p.created BETWEEN :start AND :end ')
+                
+                ->setParameter('id', $id)
+                ->setParameter('start', $start)
+                ->setParameter('end', $end)
+                ->getResult();
 
-        if (is_null($start)) {
-            $start = date('m');
-            $end = date('m');
-        }
+        return $results;
+    }
+    
+    public function getSectionReport($id, $start = null, $end = null)
+    {
 
         $results = $this->getEntityManager()
                 ->createQuery(
@@ -239,11 +226,12 @@ class PaymentRepository extends EntityRepository
                         . 'LEFT JOIN AppBundle:Erf e With e.id = p.erfId '
                         . 'LEFT JOIN AppBundle:Section s With s.id = e.sectionId '
                         . 'WHERE s.id = :id '
-                        . 'AND MONTH(p.created) BETWEEN :start AND :end ')
+                        . 'AND p.created BETWEEN :start AND :end ')
+                
                 ->setParameter('id', $id)
                 ->setParameter('start', $start)
                 ->setParameter('end', $end)
-                ->getResult(Query::HYDRATE_ARRAY);
+                ->getResult();
 
         return $results;
     }
