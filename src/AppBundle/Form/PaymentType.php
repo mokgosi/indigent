@@ -16,6 +16,7 @@ class PaymentType extends AbstractType
     {
         $builder
             ->add('erf', 'entity', array(
+                'error_bubbling' => true,
                     'class' => 'AppBundle:Erf',
                     'property' => 'erfNo',
                     'placeholder' => 'Please Select...'))

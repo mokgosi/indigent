@@ -135,10 +135,53 @@ class ReportController extends Controller
      * @Route("/location", name="report_location")
      * @Method("GET")
      */
-    public function locationReportAction()
+    public function locationReportAction(Request $request)
     {
+        $location = null;
+        $entities = null;
+
+        $form = $this->get('form.factory')->createNamedBuilder('', 'form', array(), array(
+            'action' => $this->generateUrl('report_location'),
+            'method' => 'GET',
+            'csrf_protection' => false,
+            'attr' => array('name' => 'search'),))
+            ->add('location', 'entity', array(
+                'class' => 'AppBundle:Location',
+                'property' => 'name'))
+            ->add('datefrom', 'text', array('required' => false,))
+            ->add('dateto', 'text', array('required' => false,))
+            ->add('submit', 'submit')
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+            $data = $form->getData();
+
+            if (!$data['datefrom']) {
+                $d = new \DateTime('first day of this month');
+                $data['datefrom'] = $d->format('Y-m-d');
+            }
+            if (!$data['dateto']) {
+                $dt = new \DateTime();
+                $data['dateto'] = $dt->format('Y-m-d');
+            }
+
+            $em = $this->getDoctrine()->getManager();
+
+            $location = $em->getRepository('AppBundle:Location')->findOneBy(array('id' => $data['location']));
+
+            $entities = $em->getRepository('AppBundle:Payment')->getLocationReport($data['location'], $data['datefrom'], $data['dateto']);
+
+            dump($entities);
+
+        }
+
         return $this->render('report/location.html.twig', array(
-                    'entities' => ''
+            'entities' => $entities,
+            'location' => $location,
+            'form' => $form->createView(),
         ));
     }
 

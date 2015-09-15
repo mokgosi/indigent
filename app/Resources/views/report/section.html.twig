@@ -125,7 +125,7 @@
                     <td>{{ entity.month }}</td>
                     <td>{{ entity.created|date('Y-m-d H:i:s') }}</td>
                     <td>{{ entity.amountReceived }}</td>
-                    <td>{{ entity.amountReceived }}</td>
+                    <td><span class="label {{ (entity.name == 'Completed') ? 'label-success' : 'label-important' }} label-mini">{{ entity.name }}</span></td>
                 </tr>
             {% endfor %}    
         </table>

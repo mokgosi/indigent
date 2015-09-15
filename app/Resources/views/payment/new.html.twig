@@ -10,6 +10,7 @@
 {% block main_body %}
     {{ include('payment/_form.html.twig', {
         form: form,
-        erf: erf
+        erf: erf,
+        errors: errors
     }, with_context = false) }}
 {% endblock %}

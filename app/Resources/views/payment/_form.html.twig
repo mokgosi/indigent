@@ -1,14 +1,22 @@
 <div class="portlet-body form">
     {{ form_start( form, {'attr': {'novalidate': 'novalidate'}} ) }}        
 
-    {{ form_errors(form) }}
+    {% if errors|length %}
+        <div class="alert alert-error">
+            <button class="close" data-dismiss="alert"></button>
+            <strong>Error!</strong> Fix all form errors and submit again.
+            {#{{ form_errors(form) }}#}
+            {{ errors }}
+        </div>
+    {% endif %}
 
     <h3 class="form-section">Erf Info</h3>              
 
     <div class="row-fluid">
         <div class="span6 ">
             <div class="control-group">
-                <label class="control-label">Search Erf</label>
+                <label class="control-label">{{ form_label(form.erf) }}</label>
+                    {{ form_errors(form.erf) }}
                 <div class="controls">
                     {{ form_widget(form.erf, { 'attr': {'class': 'm-wrap span12 select2'} }) }}
                 </div>
@@ -18,6 +26,7 @@
             <div class="control-group">
                 <label class="control-label">Municipality</label>
                 <div class="controls">
+                    {{ form_errors(form.company) }}
                     {{ form_widget(form.company, { 'attr': {'class': 'm-wrap span12 select2'} }) }}
                 </div>
             </div>
@@ -39,7 +48,7 @@
             </div>
         </div>
     </div>
-    
+
     <h3 class="form-section">Payment Info</h3>            
     <div class="row-fluid">
         <div class="span6 ">
@@ -47,6 +56,7 @@
                 <label class="control-label">Installment</label>
                 <div class="controls">
                     <div class="input-prepend input-append">
+                        {{ form_errors(form.amountDue) }}
                         <span class="add-on">ZAR</span>{{ form_widget(form.amountDue, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix','readonly':'readonly'} }) }}<span class="add-on">.00</span>
                     </div>
 
@@ -55,8 +65,9 @@
         </div>
         <div class="span6 ">
             <div class="control-group">
-                <label class="control-label">Payment Received</label>
+                <label class="control-label">{{ form_label(form.amountReceived) }}</label>
                 <div class="controls">
+                        {{ form_errors(form.amountReceived) }}
                     <div class="input-prepend input-append">
                         <span class="add-on">ZAR</span>{{ form_widget(form.amountReceived, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}<span class="add-on">.00</span>
                     </div>
@@ -70,6 +81,7 @@
             <div class="control-group">
                 <label class="control-label">Payment Outstanding</label>
                 <div class="controls">
+                        {{ form_errors(form.amountOutstanding) }}
                     <div class="input-prepend input-append">
                         <span class="add-on">ZAR</span>{{ form_widget(form.amountOutstanding, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix','readonly':'readonly'} }) }}<span class="add-on">.00</span>
                     </div>
@@ -81,6 +93,7 @@
                 <label class="control-label">Balance Due</label>
                 <div class="controls">
                     <div class="input-prepend input-append">
+                        {{ form_errors(form.totalOutstanding) }}
                         <span class="add-on">ZAR</span>{{ form_widget(form.totalOutstanding, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix','readonly':'readonly'} }) }}<span class="add-on">.00</span>
                     </div>
                 </div>
@@ -92,6 +105,7 @@
             <div class="control-group">
                 <label class="control-label">Payment Status</label>
                 <div class="controls">
+                    {{ form_errors(form.paymentStatus) }}
                     {{ form_widget(form.paymentStatus, { 'attr': {'class': 'm-wrap placeholder-no-fix'} }) }}
                 </div>
             </div>
@@ -100,6 +114,7 @@
             <div class="control-group">
                 <label class="control-label">Payment Method</label>
                 <div class="controls">
+                    {{ form_errors(form.paymentMethod) }}
                     {{ form_widget(form.paymentMethod, { 'attr': {'class': 'm-wrap placeholder-no-fix'} }) }}
                 </div>
             </div>
@@ -111,6 +126,7 @@
             <div class="control-group">
                 <label class="control-label">Paid By</label>
                 <div class="controls">
+                    {{ form_errors(form.payedBy) }}
                     {{ form_widget(form.payedBy, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix', 'placeholder':'Type Name'} }) }}
                 </div>
             </div>
@@ -119,6 +135,7 @@
             <div class="control-group">
                 <label class="control-label">Contact</label>
                 <div class="controls">
+                    {{ form_errors(form.payedByPhone) }}
                     {{ form_widget(form.payedByPhone, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix', 'placeholder':'Type Contact Number'} }) }}
                 </div>
             </div>
@@ -129,6 +146,7 @@
             <div class="control-group">
                 <label class="control-label">Received By</label>
                 <div class="controls">
+                    {{ form_errors(form.staffEmail) }}
                     {{ form_widget(form.staffEmail, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix', 'readonly':'readonly'} }) }}
                 </div>
             </div>
@@ -137,6 +155,7 @@
             <div class="control-group">
                 <label class="control-label">Date</label>
                 <div class="controls">
+                    {{ form_errors(form.created) }}
                     {{ form_widget(form.created, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix', 'readonly':'readonly'} }) }}
                 </div>
             </div>

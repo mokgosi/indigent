@@ -221,10 +221,11 @@ class PaymentRepository extends EntityRepository
         $results = $this->getEntityManager()
                 ->createQuery(
                         'SELECT p.amountReceived, p.created, MONTHNAME(p.created) as month, e.erfNo, '
-                        . 'e.address as address, s.name as section '
+                        . 'e.address as address, s.name as section, st.name '
                         . 'FROM AppBundle:Payment p '
                         . 'LEFT JOIN AppBundle:Erf e With e.id = p.erfId '
                         . 'LEFT JOIN AppBundle:Section s With s.id = e.sectionId '
+                        . 'LEFT JOIN AppBundle:PaymentStatus st With st.id = p.paymentStatusId '
                         . 'WHERE s.id = :id '
                         . 'AND p.created BETWEEN :start AND :end ')
                 
@@ -235,23 +236,31 @@ class PaymentRepository extends EntityRepository
 
         return $results;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
+    public function getLocationReport($id, $start = null, $end = null)
+    {
+        $str ='SELECT name, '
+                    . 'COALESCE(sum(completed),0.00) as revenue, '
+                    . 'COALESCE(count(completed),0) as completed, '
+                    . 'COALESCE(count(cancelled),0) as cancelled, '
+                    . 'COALESCE(count(pending),0) as pending '
+                    . 'FROM (SELECT s.name, '
+                    . "case when ps.name = 'Completed' then p.amount_received end AS completed, "
+                    . "case when ps.name = 'Cancelled' then p.amount_received end as cancelled, "
+                    . "case when ps.name = 'Pending' then p.amount_received end as pending "
+                    . 'FROM payment p '
+                    . 'LEFT JOIN payment_status ps ON ps.id = p.payment_status_id '
+                    . 'LEFT JOIN erf e ON e.id = p.erf_id '
+                    . 'LEFT JOIN section s ON s.id = e.section_id '
+                    . 'LEFT JOIN location l ON l.id = s.location_id '
+                    . "WHERE l.id = '".$id->getId(). "'"
+                    . "AND p.created BETWEEN '".$start."' AND '".$end."') As T Group by name ";
+
+        $conn = $this->getEntityManager()->getConnection();
+        $stmt = $conn->executeQuery($str);
+        $data = $stmt->fetchAll();
+
+        return $data;
+    }
 }
+    

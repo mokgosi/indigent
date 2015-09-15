@@ -34,21 +34,22 @@ class Payment
     /**
      * @var integer
      *
-     * @ORM\Column(name="erf_id", type="integer")
+     * @ORM\Column(name="erf_id", type="integer", nullable=false)
+     * @Assert\NotNull(message = "Please select valid Erf No.")
      */
     private $erfId;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="payment_status_id", type="integer")
+     * @ORM\Column(name="payment_status_id", type="integer", nullable=false)
      */
     private $paymentStatusId;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="company_id", type="integer")
+     * @ORM\Column(name="company_id", type="integer", nullable=false)
      */
     private $companyId;
 
@@ -63,6 +64,7 @@ class Payment
      * @var string
      *
      * @ORM\Column(name="amount_received", type="decimal", precision=8, scale=2, options={"default":0})
+     * @Assert\NotBlank(message = "Please provide Amount Received.")
      */
     private $amountReceived;
 
