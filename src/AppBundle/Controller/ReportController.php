@@ -174,8 +174,6 @@ class ReportController extends Controller
 
             $entities = $em->getRepository('AppBundle:Payment')->getLocationReport($data['location'], $data['datefrom'], $data['dateto']);
 
-            dump($entities);
-
         }
 
         return $this->render('report/location.html.twig', array(

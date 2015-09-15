@@ -106,15 +106,17 @@
                     <th>Revenue</th>
                 </tr>
                 </thead>
-                {% for entity in entities %}
-                    <tr>
-                        <td>{{entity.name}}</td>
-                        <td>{{entity.completed}}</td>
-                        <td>{{entity.cancelled}}</td>
-                        <td>{{entity.pending}}</td>
-                        <td>{{entity.revenue}}</td>
-                    </tr>
-                {% endfor %}
+                {% if entities  %}
+                    {% for entity in entities.data %}
+                        <tr>
+                            <td>{{entity.name}}</td>
+                            <td>{{entity.completed}}</td>
+                            <td>{{entity.cancelled}}</td>
+                            <td>{{entity.pending}}</td>
+                            <td>{{entity.revenue}}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
             </table>
         </div>
     </div>

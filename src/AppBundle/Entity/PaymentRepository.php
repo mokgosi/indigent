@@ -258,9 +258,25 @@ class PaymentRepository extends EntityRepository
 
         $conn = $this->getEntityManager()->getConnection();
         $stmt = $conn->executeQuery($str);
-        $data = $stmt->fetchAll();
-
+        $results = $stmt->fetchAll();
+        
+        $data = [];
+        
+        $data['data'] = $results;
+        $data['total']['revenue'] = 0;
+        $data['total']['completed'] = 0;
+        $data['total']['cancelled'] = 0;
+        $data['total']['pending'] = 0;
+        
+        foreach ($results as $array) {
+            $data['total']['revenue'] += $array['revenue'];
+            $data['total']['completed'] += $array['completed'];
+            $data['total']['cancelled'] += $array['cancelled'];
+            $data['total']['pending'] += $array['pending'];
+        }
+        
         return $data;
     }
+    
 }
     
