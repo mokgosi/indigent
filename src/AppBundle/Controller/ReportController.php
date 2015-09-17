@@ -81,6 +81,7 @@ class ReportController extends Controller
     {
         $section = null;
         $entities = null;
+        $graph = null;
 
         $form = $this->get('form.factory')->createNamedBuilder('', 'form', array(), array(
                     'action' => $this->generateUrl('report_section'),
@@ -118,13 +119,13 @@ class ReportController extends Controller
             $section = $em ->getRepository('AppBundle:Section')->findOneBy(array('id'=>$data['section']));
 
             $entities = $em->getRepository('AppBundle:Payment')->getSectionReport($data['section'], $data['datefrom'], $data['dateto']);
-            
 
         }        
 
         return $this->render('report/section.html.twig', array(
                     'entities' => $entities,
                     'section' => $section,
+                    'graph' => json_encode($graph),
                     'form' => $form->createView()
         ));
     }
@@ -139,6 +140,7 @@ class ReportController extends Controller
     {
         $location = null;
         $entities = null;
+        $graph = null;
 
         $form = $this->get('form.factory')->createNamedBuilder('', 'form', array(), array(
             'action' => $this->generateUrl('report_location'),
@@ -171,14 +173,17 @@ class ReportController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             $location = $em->getRepository('AppBundle:Location')->findOneBy(array('id' => $data['location']));
-
             $entities = $em->getRepository('AppBundle:Payment')->getLocationReport($data['location'], $data['datefrom'], $data['dateto']);
+            $graph = $em->getRepository('AppBundle:Payment')->getLocationGraphReport($data['location'], $data['datefrom'], $data['dateto']);
+
+            dump($entities);
 
         }
 
         return $this->render('report/location.html.twig', array(
-            'entities' => $entities,
             'location' => $location,
+            'entities' => $entities,
+            'graph' => json_encode($graph),
             'form' => $form->createView(),
         ));
     }

@@ -274,8 +274,36 @@ class PaymentRepository extends EntityRepository
             $data['total']['cancelled'] += $array['cancelled'];
             $data['total']['pending'] += $array['pending'];
         }
-        
+
         return $data;
+    }
+
+    public function getLocationGraphReport($id, $start = null, $end = null)
+    {
+        $str = 'SELECT name, month, '
+            . 'COALESCE(count(completed),0) as completed '
+            . 'FROM (SELECT s.name, MONTHNAME(p.created) as month, '
+            . "case when ps.name = 'Completed' then p.amount_received end AS completed "
+            . 'FROM payment p '
+            . 'LEFT JOIN payment_status ps ON ps.id = p.payment_status_id '
+            . 'LEFT JOIN erf e ON e.id = p.erf_id '
+            . 'LEFT JOIN section s ON s.id = e.section_id '
+            . 'LEFT JOIN location l ON l.id = s.location_id '
+            . "WHERE l.id = '" . $id->getId() . "'"
+            . "AND p.created BETWEEN '" . $start . "' AND '" . $end . "') As T Group by name, month ";
+
+        $conn = $this->getEntityManager()->getConnection();
+        $stmt = $conn->executeQuery($str);
+        $results = $stmt->fetchAll();
+
+        $array = [];
+
+        foreach ($results as $result) {
+            $timestamp = strtotime('01-'.$result['month'].'-'.date('Y')) * 1000;
+            $key=str_replace(' ', '',$result['name']);
+            $array[$key][] = [$timestamp, (int) $result['completed']];
+        }
+        return $array;
     }
     
 }

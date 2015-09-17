@@ -2,20 +2,32 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('js/jquery.flot.min.js') }}" ></script>
+    <script src="{{ asset('js/jquery.flot.time.js') }}" ></script>
+    <script src="{{ asset('js/jquery.flot.axislabels.js') }}" ></script>
+    <script src="{{ asset('js/jquery.flot.orderBars.js') }}" ></script>
     <script src="{{ asset('js/form-components.js') }}"></script>
-    <script src="{{ asset('js/table-editable.js') }}"></script>    
-    <script src="{{ asset('js/search.js') }}"></script>    
+    <script src="{{ asset('js/table-editable.js') }}"></script>
+    <script src="{{ asset('js/search.js') }}"></script>
+    <script src="{{ asset('js/location.js') }}"></script>
+
     <script>
+        var barData = {{ graph|raw }};
+
         jQuery(document).ready(function () {
             App.init();
             FormComponents.init();
             TableEditable.init();
             Search.init();
+            Location.initCharts();
         });
     </script>    
 {% endblock %}
 
 {% block main -%}
+
+    {#{{ dump(graph) }}#}
+
     <div class="container-fluid">
         <!-- BEGIN PAGE HEADER-->
         <div class="row-fluid">

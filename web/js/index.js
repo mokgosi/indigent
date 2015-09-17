@@ -174,6 +174,7 @@ var Index = function () {
                 ]
             });
         },
+
         initCharts: function () {
 
 
