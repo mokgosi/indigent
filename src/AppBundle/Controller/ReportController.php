@@ -40,6 +40,7 @@ class ReportController extends Controller
         
         $erf = null;
         $entities = null;
+        $graph = null;
 
         if ($form->isValid()) {
 
@@ -67,6 +68,7 @@ class ReportController extends Controller
         return $this->render('report/erf.html.twig', array(
                 'form' => $form->createView(),
                 'entities' => $entities,
+                'graph' => json_encode($graph),
                 'erf' => $erf,
         ));
     }
@@ -119,6 +121,7 @@ class ReportController extends Controller
             $section = $em ->getRepository('AppBundle:Section')->findOneBy(array('id'=>$data['section']));
 
             $entities = $em->getRepository('AppBundle:Payment')->getSectionReport($data['section'], $data['datefrom'], $data['dateto']);
+            $entities = $em->getRepository('AppBundle:Payment')->getBarGraphValues();
 
         }        
 
@@ -175,9 +178,6 @@ class ReportController extends Controller
             $location = $em->getRepository('AppBundle:Location')->findOneBy(array('id' => $data['location']));
             $entities = $em->getRepository('AppBundle:Payment')->getLocationReport($data['location'], $data['datefrom'], $data['dateto']);
             $graph = $em->getRepository('AppBundle:Payment')->getLocationGraphReport($data['location'], $data['datefrom'], $data['dateto']);
-
-            dump($entities);
-
         }
 
         return $this->render('report/location.html.twig', array(

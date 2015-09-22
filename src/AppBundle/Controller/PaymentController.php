@@ -65,8 +65,6 @@ class PaymentController extends Controller
         }
 
         $errors = (string)$form->getErrors(true, true);
-        var_dump($form->getErrors(true));
-        die;
 
         return $this->render('payment/new.html.twig', array(
             'entity' => $entity,

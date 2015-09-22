@@ -258,8 +258,10 @@ class PaymentAllocationController extends Controller
     public function allocateSectionAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        
-        $em->getRepository('AppBundle:PaymentAllocation')->deleteByMonth('September');
+
+        $date = new \DateTime();
+        $month = $date->format('F');
+        $em->getRepository('AppBundle:PaymentAllocation')->deleteByMonth($id, $month);
 
         $em->getRepository('AppBundle:PaymentAllocation')->allocateBySection($id);
         

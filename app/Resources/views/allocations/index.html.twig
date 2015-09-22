@@ -38,7 +38,7 @@
                 {% for entity in entities %}
                     <tr>
                         <td>{{ entity.erf.erfNo }}</td>
-                        <td>{{ entity.amount }}</td>
+                        <td>R {{ entity.amount }}</td>
                         <td>{{ entity.month }}</td>
                         <td>{{ entity.created|date('Y') }}</td>
                         <td><a href="{{ path('paymentallocation_show', { 'id': entity.id }) }}">show</a></td>
@@ -71,7 +71,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn">Close</button>
-                <button type="button" class="btn blue" id='submitSectionsModal'>Save changes</button>
+                <button type="button" class="btn blue" id='submitSectionsModal' data-loading-text="<i class='icon-spinner icon-spin icon-large'></i> processing...">Save changes</button>
+{#                data-loading-text="<i class='icon-spinner icon-spin icon-large'></i>#}
             </div>
         </div>
     </div>

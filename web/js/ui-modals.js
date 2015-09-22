@@ -1,52 +1,60 @@
 var UIModals = function () {
 
-    
+
     var initModals = function () {
-       
-       	$.fn.modalmanager.defaults.resize = true;
-		$.fn.modalmanager.defaults.spinner = '<div class="loading-spinner fade" style="width: 200px; margin-left: -100px;"><img src="assets/img/ajax-modal-loading.gif" align="middle">&nbsp;<span style="font-weight:300; color: #eee; font-size: 18px; font-family:Open Sans;">&nbsp;Loading...</span></div>';
+
+        $.fn.modalmanager.defaults.resize = true;
+        $.fn.modalmanager.defaults.spinner = '<div class="loading-spinner fade" style="width: 200px; margin-left: -100px;"><img src="assets/img/ajax-modal-loading.gif" align="middle">&nbsp;<span style="font-weight:300; color: #eee; font-size: 18px; font-family:Open Sans;">&nbsp;Loading...</span></div>';
 
 
-       	var $modal = $('#ajax-modal');
- 
-		$('#modal_ajax_demo_btn').on('click', function(){
-		  // create the backdrop and wait for next modal to be triggered
-		  $('body').modalmanager('loading');
-		 
-		  setTimeout(function(){
-		     $modal.load('ui_modals_ajax_sample.html', '', function(){
-		      $modal.modal().on("hidden", function() {
-              	$modal.empty();
-              });
-		    });
-		  }, 1000);
-		});
-		 
-		$modal.on('click', '.update', function(){
-		  $modal.modal('loading');
-		  setTimeout(function(){
-		    $modal
-		      .modal('loading')
-		      .find('.modal-body')
-		        .prepend('<div class="alert alert-info fade in">' +
-		          'Updated!<button type="button" class="close" data-dismiss="alert"></button>' +
-		        '</div>');
-		  }, 1000);
-		}); 
+        var $modal = $('#ajax-modal');
 
-		$("#submitSectionsModal").on("click", function( e ) {
-	        e.preventDefault();
-	        var url = Routing.generate('paymentallocation_reallocation', {id: $("#sectionsModalSelect").val()});
-		    $.ajax({
-		        type        : 'GET',
-		        url         : url,
-		        data        : null,
-		        success     : function(result) { 
-		        	$("#responsive").modal('hide'); 
-		        }
-		    });
-	        
-	    });
+        $('#modal_ajax_demo_btn').on('click', function () {
+            // create the backdrop and wait for next modal to be triggered
+            $('body').modalmanager('loading');
+
+            setTimeout(function () {
+                $modal.load('ui_modals_ajax_sample.html', '', function () {
+                    $modal.modal().on("hidden", function () {
+                        $modal.empty();
+                    });
+                });
+            }, 1000);
+        });
+
+        $modal.on('click', '.update', function () {
+            $modal.modal('loading');
+            setTimeout(function () {
+                $modal
+                        .modal('loading')
+                        .find('.modal-body')
+                        .prepend('<div class="alert alert-info fade in">' +
+                                'Updated!<button type="button" class="close" data-dismiss="alert"></button>' +
+                                '</div>');
+            }, 1000);
+        });
+        
+        var $responsive = $('#responsive');
+
+        $("#submitSectionsModal").on("click", function (e) {
+            e.preventDefault();
+            var btn = $(this);
+            btn.button('loading');
+//            setTimeout(function(){
+//                        btn.button('reset');
+//                    }, 5000);
+            var url = Routing.generate('paymentallocation_reallocation', {id: $("#sectionsModalSelect").val()});
+            $.ajax({
+                type: 'GET',
+                url: url,
+                data: null,
+                success: function (result) {
+                     btn.button('reset');
+                    $("#responsive").modal('hide');
+                }
+            });
+
+        });
     }
 
     return {

@@ -199,20 +199,21 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                     </li>
                                 </ul>
                             </li>
-                            <li class="{% if app.request.attributes.get('_route') == 'report' %}active{% endif %}">
+                            <li class="{{ app.request.attributes.get('_route') in ['report_erf', 'report_section', 'report_location'] ? 'active' : '' }}">
                                 <a href="#">
                                     <i class="icon-th"></i> 
-                                    <span class="title">Reports (Coming Soon!)</span>
-                                    <span class="arrow "></span>
+                                    <span class="title">Reports</span>
+                                    <span class="{{ app.request.attributes.get('_route') in ['report_erf', 'report_section', 'report_location'] ? 'selected' : '' }}"></span>
+                                    <span class="arrow {{ app.request.attributes.get('_route') in ['report_erf', 'report_section', 'report_location'] ? 'open' : '' }}"></span>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li>
+                                    <li class="{{ app.request.attributes.get('_route') in ['report_erf'] ? 'active' : '' }}">
                                         <a href="{{ path('report_erf') }}">Erf Report</a>
                                     </li>
-                                    <li>
+                                    <li class="{{ app.request.attributes.get('_route') in ['report_section'] ? 'active' : '' }}">
                                         <a href="{{ path('report_section') }}">Section Report</a>
                                     </li>
-                                    <li>
+                                    <li class="{{ app.request.attributes.get('_route') in ['report_location'] ? 'active' : '' }}">
                                         <a href="{{ path('report_location') }}">Location Report</a>
                                     </li>
                                 </ul>

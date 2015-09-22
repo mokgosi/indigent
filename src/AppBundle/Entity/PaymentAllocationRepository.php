@@ -18,14 +18,28 @@ class PaymentAllocationRepository extends EntityRepository
         return $this->findBy(array(), array('created' => 'DESC'));
     }
 
-    public function deleteByMonth($month)
+    public function deleteByMonth($id, $month)
     {
-        $entities = $this->findBy(array('month' => $month));
-        $em = $this->getEntityManager();
-        foreach ($entities as $entity) {
-            $em->remove($entity);
+        $results = $this->getEntityManager()
+            ->createQuery(
+                'SELECT pa.id '
+                . 'FROM AppBundle:Erf e '
+                . 'INNER JOIN AppBundle:PaymentAllocation pa With e.id = pa.erfId '
+                . 'WHERE pa.month = :month '
+                . 'AND e.sectionId = :id')
+            ->setParameter('id', $id)
+            ->setParameter('month', $month)
+            ->getResult();
+                
+        $array = [];
+        foreach($results as $value) {
+            $array[] = $value['id'];
         }
-        $em->flush();
+        
+        $query = $this->getEntityManager()
+                ->createQuery('DELETE FROM AppBundle:PaymentAllocation pa WHERE pa.id IN (:ids)');
+        $query->setParameter('ids', $array);
+        $query->execute(); 
     }
 
     public function allocateBySection($id)
@@ -35,9 +49,9 @@ class PaymentAllocationRepository extends EntityRepository
         $entities = $em->getRepository('AppBundle:Erf')->findBy(array('sectionId' => $id));
 
         $rate = $em->getRepository('AppBundle:Rate')->findOneBy(array('id' => 1));
-        
+
         foreach ($entities as $result) {
-            
+
             $allocation = new PaymentAllocation();
             $allocation->setErf($result);
             $allocation->setAmount($rate->getAmount());
@@ -45,8 +59,13 @@ class PaymentAllocationRepository extends EntityRepository
             $allocation->setMonth($date->format('F'));
             $allocation->setCreated($date);
             $allocation->setUpdated($date);
-            
+
+            $currentBalance = $rate->getAmount() + $result->getBalance();
+            $result->setPreviousBalance($result->getBalance());
+            $result->setBalance($currentBalance);
+
             $em->persist($allocation);
+            $em->persist($result);
         }
 
         $em->flush();
