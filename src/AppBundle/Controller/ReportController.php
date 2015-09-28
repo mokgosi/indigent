@@ -205,5 +205,7 @@ class ReportController extends Controller
             'entities' => $entities,
         ));
     }
+    
+    
  
 }

@@ -51,27 +51,6 @@
         <!-- END PAGE HEADER-->
         <div id="dashboard">
             <div class="row-fluid">
-               {# {% set color = ['blue', 'yellow', 'green', 'red', 'purple'] %}
-                {% set total = 0 %}
-                {% for top in tops %}
-                    {% set i = loop.index - 1%}
-                    {% set total = total + top.data  %}
-                    <div class="span2 responsive" data-tablet="span6" data-desktop="span3">
-                        <div class="dashboard-stat {{ color[i] }}">
-                            <div class="visual">
-                                <i class="icon-bar-chart"></i>
-                            </div>
-                            <div class="details">
-                                <div class="number">
-                                    {{ top.data }}
-                                </div>
-                                <div class="desc">{{ top.label }}</div>
-                            </div>
-                            <a class="more" href="{{ path('report_section', { id: top.id }) }}">
-                                View more <i class="m-icon-swapright m-icon-white"></i></a>                 
-                        </div>
-                    </div>
-                {% endfor %}#}
                 <div class="span4 responsive" data-tablet="span6" data-desktop="span3">
                     <div class="dashboard-stat yellow">
                         <div class="visual">

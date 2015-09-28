@@ -106,11 +106,9 @@ class PaymentRepository extends EntityRepository
         return $array;
     }
 
-    
-
     public function getAllPayments($start = null, $end = null)
     {
-         if (is_null($start)) {
+        if (is_null($start)) {
             $start = date('m');
             $end = date('m');
         }
@@ -124,38 +122,56 @@ class PaymentRepository extends EntityRepository
                 ->setParameter('end', $end)
                 ->getQuery()
                 ->getSingleScalarResult();
-    
+
         return $results;
     }
-    
+
     public function getCompleted($start = null, $end = null)
     {
-         if (is_null($start)) {
+        if (is_null($start)) {
             $start = date('m');
             $end = date('m');
         }
+
+        $status = $this->getEntityManager()
+                ->createQueryBuilder()
+                ->select('s.id')
+                ->from('AppBundle:PaymentStatus', 's')
+                ->where('s.name like :active')
+                ->setParameter('active', '%Completed%')
+                ->getQuery()
+                ->getSingleScalarResult();
 
         $results = $this->getEntityManager()
                 ->createQueryBuilder()
                 ->select('COUNT(p)')
                 ->from('AppBundle:Payment', 'p')
                 ->where('MONTH(p.created) BETWEEN :start AND :end')
-                ->andWhere('p.paymentStatusId = :status')
-                ->setParameter('status', 1)
+                ->andWhere('IDENTITY(p.paymentStatus) = :status')
+                ->setParameter('status', $status)
                 ->setParameter('start', $start)
                 ->setParameter('end', $end)
                 ->getQuery()
                 ->getSingleScalarResult();
-    
+
         return $results;
     }
-    
+
     public function getCancelled($start = null, $end = null)
     {
-         if (is_null($start)) {
+        if (is_null($start)) {
             $start = date('m');
             $end = date('m');
         }
+
+        $status = $this->getEntityManager()
+                ->createQueryBuilder()
+                ->select('s.id')
+                ->from('AppBundle:PaymentStatus', 's')
+                ->where('s.name like :active')
+                ->setParameter('active', '%Cancelled%')
+                ->getQuery()
+                ->getSingleScalarResult();
 
         $results = $this->getEntityManager()
                 ->createQueryBuilder()
@@ -163,21 +179,30 @@ class PaymentRepository extends EntityRepository
                 ->from('AppBundle:Payment', 'p')
                 ->where('MONTH(p.created) BETWEEN :start AND :end')
                 ->andWhere('p.paymentStatusId = :status')
-                ->setParameter('status', 2)
+                ->setParameter('status', $status)
                 ->setParameter('start', $start)
                 ->setParameter('end', $end)
                 ->getQuery()
                 ->getSingleScalarResult();
-    
+
         return $results;
     }
-    
+
     public function getRevenue($start = null, $end = null)
     {
-         if (is_null($start)) {
+        if (is_null($start)) {
             $start = date('m');
             $end = date('m');
         }
+
+        $status = $this->getEntityManager()
+                ->createQueryBuilder()
+                ->select('s.id')
+                ->from('AppBundle:PaymentStatus', 's')
+                ->where('s.name like :active')
+                ->setParameter('active', '%Completed%')
+                ->getQuery()
+                ->getSingleScalarResult();
 
         $results = $this->getEntityManager()
                 ->createQueryBuilder()
@@ -185,15 +210,15 @@ class PaymentRepository extends EntityRepository
                 ->from('AppBundle:Payment', 'p')
                 ->where('MONTH(p.created) BETWEEN :start AND :end')
                 ->andWhere('p.paymentStatusId = :status')
-                ->setParameter('status', 1)
+                ->setParameter('status', $status)
                 ->setParameter('start', $start)
                 ->setParameter('end', $end)
                 ->getQuery()
                 ->getSingleScalarResult();
-    
+
         return $results;
     }
-    
+
     public function getErfReport($id, $start = null, $end = null)
     {
         $results = $this->getEntityManager()
@@ -206,7 +231,6 @@ class PaymentRepository extends EntityRepository
                         . 'LEFT JOIN AppBundle:PaymentStatus s With s.id = p.paymentStatusId '
                         . 'WHERE e.erfNo = :id '
                         . 'AND p.created BETWEEN :start AND :end ')
-                
                 ->setParameter('id', $id)
                 ->setParameter('start', $start)
                 ->setParameter('end', $end)
@@ -214,7 +238,7 @@ class PaymentRepository extends EntityRepository
 
         return $results;
     }
-    
+
     public function getSectionReport($id, $start = null, $end = null)
     {
 
@@ -228,7 +252,6 @@ class PaymentRepository extends EntityRepository
                         . 'LEFT JOIN AppBundle:PaymentStatus st With st.id = p.paymentStatusId '
                         . 'WHERE s.id = :id '
                         . 'AND p.created BETWEEN :start AND :end ')
-                
                 ->setParameter('id', $id)
                 ->setParameter('start', $start)
                 ->setParameter('end', $end)
@@ -247,7 +270,7 @@ class PaymentRepository extends EntityRepository
                         . 'WHERE e.sectionId = :id '
                         . 'GROUP BY p.created '
                         . 'ORDER BY p.created ASC')
-                ->setParameter('id', $id)                
+                ->setParameter('id', $id)
                 ->getResult(Query::HYDRATE_ARRAY);
 
         $array = array();
@@ -261,29 +284,29 @@ class PaymentRepository extends EntityRepository
 
     public function getLocationReport($id, $start = null, $end = null)
     {
-        $str ='SELECT name, '
-                    . 'COALESCE(sum(completed),0.00) as revenue, '
-                    . 'COALESCE(count(completed),0) as completed, '
-                    . 'COALESCE(count(cancelled),0) as cancelled, '
-                    . 'COALESCE(count(pending),0) as pending '
-                    . 'FROM (SELECT s.name, '
-                    . "case when ps.name = 'Completed' then p.amount_received end AS completed, "
-                    . "case when ps.name = 'Cancelled' then p.amount_received end as cancelled, "
-                    . "case when ps.name = 'Pending' then p.amount_received end as pending "
-                    . 'FROM payment p '
-                    . 'LEFT JOIN payment_status ps ON ps.id = p.payment_status_id '
-                    . 'LEFT JOIN erf e ON e.id = p.erf_id '
-                    . 'LEFT JOIN section s ON s.id = e.section_id '
-                    . 'LEFT JOIN location l ON l.id = s.location_id '
-                    . "WHERE l.id = '".$id->getId(). "'"
-                    . "AND p.created BETWEEN '".$start."' AND '".$end."') As T Group by name ";
+        $str = 'SELECT name, '
+                . 'COALESCE(sum(completed),0.00) as revenue, '
+                . 'COALESCE(count(completed),0) as completed, '
+                . 'COALESCE(count(cancelled),0) as cancelled, '
+                . 'COALESCE(count(pending),0) as pending '
+                . 'FROM (SELECT s.name, '
+                . "case when ps.name = 'Completed' then p.amount_received end AS completed, "
+                . "case when ps.name = 'Cancelled' then p.amount_received end as cancelled, "
+                . "case when ps.name = 'Pending' then p.amount_received end as pending "
+                . 'FROM payment p '
+                . 'LEFT JOIN payment_status ps ON ps.id = p.payment_status_id '
+                . 'LEFT JOIN erf e ON e.id = p.erf_id '
+                . 'LEFT JOIN section s ON s.id = e.section_id '
+                . 'LEFT JOIN location l ON l.id = s.location_id '
+                . "WHERE l.id = '" . $id->getId() . "'"
+                . "AND p.created BETWEEN '" . $start . "' AND '" . $end . "') As T Group by name ";
 
         $conn = $this->getEntityManager()->getConnection();
         $stmt = $conn->executeQuery($str);
         $results = $stmt->fetchAll();
-        
+
         $data = [];
-        
+
         $data['data'] = $results;
 
         return $data;
@@ -292,16 +315,16 @@ class PaymentRepository extends EntityRepository
     public function getLocationGraphReport($id, $start = null, $end = null)
     {
         $str = 'SELECT name, month, '
-            . 'COALESCE(count(completed),0) as completed '
-            . 'FROM (SELECT s.name, MONTHNAME(p.created) as month, '
-            . "case when ps.name = 'Completed' then p.amount_received end AS completed "
-            . 'FROM payment p '
-            . 'LEFT JOIN payment_status ps ON ps.id = p.payment_status_id '
-            . 'LEFT JOIN erf e ON e.id = p.erf_id '
-            . 'LEFT JOIN section s ON s.id = e.section_id '
-            . 'LEFT JOIN location l ON l.id = s.location_id '
-            . "WHERE l.id = '" . $id->getId() . "'"
-            . "AND p.created BETWEEN '" . $start . "' AND '" . $end . "') As T Group by name, month ";
+                . 'COALESCE(count(completed),0) as completed '
+                . 'FROM (SELECT s.name, MONTHNAME(p.created) as month, '
+                . "case when ps.name = 'Completed' then p.amount_received end AS completed "
+                . 'FROM payment p '
+                . 'LEFT JOIN payment_status ps ON ps.id = p.payment_status_id '
+                . 'LEFT JOIN erf e ON e.id = p.erf_id '
+                . 'LEFT JOIN section s ON s.id = e.section_id '
+                . 'LEFT JOIN location l ON l.id = s.location_id '
+                . "WHERE l.id = '" . $id->getId() . "'"
+                . "AND p.created BETWEEN '" . $start . "' AND '" . $end . "') As T Group by name, month ";
 
         $conn = $this->getEntityManager()->getConnection();
         $stmt = $conn->executeQuery($str);
@@ -310,30 +333,28 @@ class PaymentRepository extends EntityRepository
         $array = [];
 
         foreach ($results as $result) {
-            $timestamp = strtotime('01-'.$result['month'].'-'.date('Y')) * 1000;
-            $key=str_replace(' ', '',$result['name']);
+            $timestamp = strtotime('01-' . $result['month'] . '-' . date('Y')) * 1000;
+            $key = str_replace(' ', '', $result['name']);
             $array[$key][] = [$timestamp, (int) $result['completed']];
         }
         return $array;
     }
 
-    public function checkout($email) 
+    public function checkout($email)
     {
         $date = date('Y-m-d');
 
         $results = $this->getEntityManager()
-            ->createQuery('SELECT p.refNo, p.amountReceived, p.created, e.erfNo '
-                .'FROM AppBundle:Payment p '
-                .'LEFT JOIN AppBundle:Erf e With e.id = p.erfId '
-                .'WHERE p.staffEmail = :email ' 
-                .'AND p.created LIKE :date')
-                
-        ->setParameter('email', $email)
-        ->setParameter('date', '%'.$date.'%')
-        ->getResult();
-        
-        return $results;      
+                ->createQuery('SELECT p.refNo, p.amountReceived, p.created, e.erfNo '
+                        . 'FROM AppBundle:Payment p '
+                        . 'LEFT JOIN AppBundle:Erf e With e.id = p.erfId '
+                        . 'WHERE p.staffEmail = :email '
+                        . 'AND p.created LIKE :date')
+                ->setParameter('email', $email)
+                ->setParameter('date', '%' . $date . '%')
+                ->getResult();
+
+        return $results;
     }
-    
+
 }
-    
