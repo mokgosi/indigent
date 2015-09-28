@@ -83,6 +83,13 @@ class Erf
      * @ORM\Column(name="previous_balance", type="decimal", precision=8, scale=2, options={"default":0})
      */
     private $previousBalance;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="month", type="integer", nullable=true)
+     */
+    private $month;
     
     /**
      * @var decimal
@@ -452,7 +459,7 @@ class Erf
      *
      * @return decimal $balance
      */
-    function getBalance()
+    public function getBalance()
     {
         return $this->balance;
     }
@@ -463,7 +470,7 @@ class Erf
      * @param decimal $balance
      * @return Erf
      */
-    function setBalance($balance)
+    public function setBalance($balance)
     {
         $this->balance = $balance;
     }
@@ -474,7 +481,7 @@ class Erf
      * @param decimal $previousBalance
      * @return Erf
      */
-    function setPreviousBalance($previousBalance)
+    public function setPreviousBalance($previousBalance)
     {
         $this->previousBalance = $previousBalance;
     }
@@ -484,7 +491,7 @@ class Erf
      *
      * @return decimal $balance
      */
-    function getPreviosBalance()
+    public function getPreviosBalance()
     {
         return $this->previousBalance;
     }
@@ -494,4 +501,24 @@ class Erf
         return $this->payments;
     }
 
+    /**
+     * Set recent allocation month
+     *
+     * @param integer $month
+     * @return Erf
+     */
+    public function setMonth($month)
+    {
+        $this->month = $month;
+    }
+    
+     /**
+     * Get recent allocation month
+     *
+     * @return integer $month
+     */
+    public function getMonth()
+    {
+        return $this->month;
+    }
 }

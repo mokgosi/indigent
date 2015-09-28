@@ -98,5 +98,12 @@ fos_user:
             type: app_user_profile
             
 fos_js_routing:
-    routes_to_expose: [ fos_user_profile_edit ]       
+    routes_to_expose: [ fos_user_profile_edit ]
+
+knp_snappy:
+    temporary_folder: %kernel.cache_dir%/snappy
+    pdf:
+        enabled:    true
+        binary:     /usr/local/bin/wkhtmltopdf #"\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\"" for Windows users
+        options:    []
     

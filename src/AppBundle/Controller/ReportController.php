@@ -121,9 +121,10 @@ class ReportController extends Controller
             $section = $em ->getRepository('AppBundle:Section')->findOneBy(array('id'=>$data['section']));
 
             $entities = $em->getRepository('AppBundle:Payment')->getSectionReport($data['section'], $data['datefrom'], $data['dateto']);
-            $entities = $em->getRepository('AppBundle:Payment')->getBarGraphValues();
+            $graph = $em->getRepository('AppBundle:Payment')->getSectionBarGraph($data['section']);
 
         }        
+
 
         return $this->render('report/section.html.twig', array(
                     'entities' => $entities,
@@ -188,4 +189,21 @@ class ReportController extends Controller
         ));
     }
 
+    /**
+     * Lists all Payment entities.
+     *
+     * @Route("/checkout", name="report_checkout")
+     * @Method("GET")
+     */
+    public function checkoutAction() 
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('AppBundle:Payment')->checkout($this->getUser()->getEmail());
+
+        return $this->render('report/checkout.html.twig', array(
+            'entities' => $entities,
+        ));
+    }
+ 
 }

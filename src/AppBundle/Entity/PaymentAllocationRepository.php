@@ -59,13 +59,15 @@ class PaymentAllocationRepository extends EntityRepository
             $allocation->setMonth($date->format('F'));
             $allocation->setCreated($date);
             $allocation->setUpdated($date);
-
-            $currentBalance = $rate->getAmount() + $result->getBalance();
-            $result->setPreviousBalance($result->getBalance());
-            $result->setBalance($currentBalance);
-
+            //set month number when updated
+            if($result->getMonth() != $date->format('m')) {
+                $currentBalance = $rate->getAmount() + $result->getBalance();
+                $result->setPreviousBalance($result->getBalance());
+                $result->setBalance($currentBalance);
+                $result->setMonth($date->format('m'));
+                $em->persist($result);
+            }
             $em->persist($allocation);
-            $em->persist($result);
         }
 
         $em->flush();

@@ -56,7 +56,6 @@ class PaymentController extends Controller
             $data = $request->request->get('appbundle_payment');
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
-            $
             $em->flush();
             $balance = $em->getRepository('AppBundle:Payment')
                 ->updateCurrentBalance($data['erf'], $data['totalOutstanding']);

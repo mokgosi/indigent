@@ -5,8 +5,7 @@
         <div class="alert alert-error">
             <button class="close" data-dismiss="alert"></button>
             <strong>Error!</strong> Fix all form errors and submit again.
-            {#{{ form_errors(form) }}#}
-            {{ errors }}
+            {{ form_errors(form) }}
         </div>
     {% endif %}
 

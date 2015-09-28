@@ -27,7 +27,9 @@
         "jasonroman/flot-bundle": "^1.0",
         "salavert/time-ago-in-words": "^1.6",
         "friendsofsymfony/elastica-bundle": "^3.1",
-        "bcc/cron-manager-bundle": "^2.6"
+        "bcc/cron-manager-bundle": "^2.6",
+        "knplabs/knp-snappy-bundle": "dev-master",
+        "phpunit/phpunit": "^4.8"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

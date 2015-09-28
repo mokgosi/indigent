@@ -237,6 +237,28 @@ class PaymentRepository extends EntityRepository
         return $results;
     }
 
+    public function getSectionBarGraph($id)
+    {
+        $results = $this->getEntityManager()
+                ->createQuery(
+                        'SELECT MONTHNAME(p.created), count(p) '
+                        . 'FROM AppBundle:Payment p '
+                        . 'LEFT JOIN AppBundle:Erf e With e.id = p.erfId '
+                        . 'WHERE e.sectionId = :id '
+                        . 'GROUP BY p.created '
+                        . 'ORDER BY p.created ASC')
+                ->setParameter('id', $id)                
+                ->getResult(Query::HYDRATE_ARRAY);
+
+        $array = array();
+
+        foreach ($results as $result) {
+            $array[] = [$result[1], (int) $result[2]];
+        }
+
+        return $array;
+    }
+
     public function getLocationReport($id, $start = null, $end = null)
     {
         $str ='SELECT name, '
@@ -263,17 +285,6 @@ class PaymentRepository extends EntityRepository
         $data = [];
         
         $data['data'] = $results;
-        $data['total']['revenue'] = 0;
-        $data['total']['completed'] = 0;
-        $data['total']['cancelled'] = 0;
-        $data['total']['pending'] = 0;
-        
-        foreach ($results as $array) {
-            $data['total']['revenue'] += $array['revenue'];
-            $data['total']['completed'] += $array['completed'];
-            $data['total']['cancelled'] += $array['cancelled'];
-            $data['total']['pending'] += $array['pending'];
-        }
 
         return $data;
     }
@@ -304,6 +315,24 @@ class PaymentRepository extends EntityRepository
             $array[$key][] = [$timestamp, (int) $result['completed']];
         }
         return $array;
+    }
+
+    public function checkout($email) 
+    {
+        $date = date('Y-m-d');
+
+        $results = $this->getEntityManager()
+            ->createQuery('SELECT p.refNo, p.amountReceived, p.created, e.erfNo '
+                .'FROM AppBundle:Payment p '
+                .'LEFT JOIN AppBundle:Erf e With e.id = p.erfId '
+                .'WHERE p.staffEmail = :email ' 
+                .'AND p.created LIKE :date')
+                
+        ->setParameter('email', $email)
+        ->setParameter('date', '%'.$date.'%')
+        ->getResult();
+        
+        return $results;      
     }
     
 }

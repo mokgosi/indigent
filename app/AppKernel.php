@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new JasonRoman\Bundle\FlotBundle\JasonRomanFlotBundle(),
             new BCC\CronManagerBundle\BCCCronManagerBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             
         );
 

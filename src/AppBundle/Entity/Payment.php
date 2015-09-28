@@ -35,7 +35,7 @@ class Payment
      * @var integer
      *
      * @ORM\Column(name="erf_id", type="integer", nullable=false)
-     * @Assert\NotNull(message = "Please select valid Erf No.")
+     * 
      */
     private $erfId;
 
