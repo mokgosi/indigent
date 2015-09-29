@@ -29,7 +29,8 @@
         "friendsofsymfony/elastica-bundle": "^3.1",
         "bcc/cron-manager-bundle": "^2.6",
         "knplabs/knp-snappy-bundle": "dev-master",
-        "phpunit/phpunit": "^4.8"
+        "phpunit/phpunit": "^4.8",
+        "liuggio/ExcelBundle": "^2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
