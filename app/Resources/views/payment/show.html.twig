@@ -65,60 +65,60 @@
                                 </ul>
                             </div>
                         </div>
-                                    <div id="print-div">
-                        <div style='text-align: center;'>
-                            <h3>{{ entity.company.name }}</h3>  
-                            <p>{{ entity.company.address }}</p>  
-                            <p>{{ entity.company.postal }}</p>  
-                            <p>Phone: {{ entity.company.phone }}</p>  
-                            <p>Fax:{{ entity.company.fax }} </p>  
-                            <p>Email: {{ entity.company.email }}</p>  
-                            <p>Website: {{ entity.company.website }}</p>  
-                            <h4>Cash Receipt - Ref #: {{ entity.company.shortName }}{{ entity.refNo }}</h4> 
-                        </div>  
-                        <div class='row-fluid'>
-
-                            <table class="record_properties" border="0" style='width: 100%'>
-                                <tbody>
-                                    <tr>
-                                        <td style='width: 50%'>Cash recieved from: {{ entity.payedBy }} ({{ entity.payedByPhone }}) </td>
-                                        <td align='right'>Date: {{ entity.created|date('Y-m-d') }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan='2'>For (Erf No): {{ entity.erf.erfNo  }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                        <td>
-                                            <table border="1"  style='width: 100%'>
-                                                <tr>
-                                                    <td>Amount Due</td>
-                                                    <td>{{ entity.amountDue|number_format(2, '.', ',')  }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Amount Received</td>
-                                                    <td>{{ entity.amountReceived|number_format(2, '.', ',')  }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Amount Still due</td>
-                                                    <td>{{ entity.amountOutstanding|number_format(2, '.', ',')  }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Total Balance</td>
-                                                    <td>{{ entity.totalOutstanding|number_format(2, '.', ',')  }}</td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan='2'>&nbsp;</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan='2'>Cash recieved by: {{ entity.staffEmail }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div> </div>
+                        <div id="print-div">
+                            <div style='text-align: center;'>
+                                <h3>{{ entity.company.name }}</h3>  
+                                <p>{{ entity.company.address }}</p>  
+                                <p>{{ entity.company.postal }}</p>  
+                                <p>Phone: {{ entity.company.phone }}</p>  
+                                <p>Fax:{{ entity.company.fax }} </p>  
+                                <p>Email: {{ entity.company.email }}</p>  
+                                <p>Website: {{ entity.company.website }}</p>  
+                                <h4>Cash Receipt - Ref #: {{ entity.company.shortName }}{{ entity.refNo }}</h4> 
+                            </div>  
+                            <div class='row-fluid'>
+                                <table class="record_properties" border="0" style='width: 100%'>
+                                    <tbody>
+                                        <tr>
+                                            <td style='width: 50%'>Cash recieved from: {{ entity.payedBy }} ({{ entity.payedByPhone }}) </td>
+                                            <td align='right'>Date: {{ entity.created|date('Y-m-d') }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan='2'>For (Erf No): {{ entity.erf.erfNo  }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <table border="1"  style='width: 100%'>
+                                                    <tr>
+                                                        <td>Amount Due</td>
+                                                        <td>{{ entity.amountDue|number_format(2, '.', ',')  }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Amount Received</td>
+                                                        <td>{{ entity.amountReceived|number_format(2, '.', ',')  }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Amount Still due</td>
+                                                        <td>{{ entity.amountOutstanding|number_format(2, '.', ',')  }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Total Balance</td>
+                                                        <td>{{ entity.totalOutstanding|number_format(2, '.', ',')  }}</td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan='2'>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan='2'>Cash recieved by: {{ entity.staffEmail }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div> 
+                        </div>
                         <div class="form-actions">
                             <a href="{{ path('payment') }}" class="btn">Back to list</a>
                             <a href="{{ path('payment_edit', { 'id': entity.id }) }}"  class="btn blue"><i class="icon-pencil"></i> Edit</a>
@@ -130,17 +130,4 @@
             </div>
         </div>
     </div>      
-    {#    <ul class="record_actions">
-            <li>
-                <a href="{{ path('payment') }}">
-                    Back to the list
-                </a>
-            </li>
-            <li>
-                <a href="{{ path('payment_edit', { 'id': entity.id }) }}">
-                    Edit
-                </a>
-            </li>
-            <li>{{ form(delete_form) }}</li>
-        </ul>#}
 {% endblock %}
