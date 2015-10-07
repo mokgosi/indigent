@@ -63,7 +63,7 @@ class PaymentRepository extends EntityRepository
     {
         $results = $this->getEntityManager()
                 ->createQuery(
-                        'SELECT MONTHNAME(p.created), count(p) '
+                        "SELECT DATE_FORMAT(p.created,'%b'), count(p) "
                         . 'FROM AppBundle:Payment p '
                         . 'GROUP BY p.created '
                         . 'ORDER BY p.created ASC')
@@ -244,7 +244,7 @@ class PaymentRepository extends EntityRepository
 
         $results = $this->getEntityManager()
                 ->createQuery(
-                        'SELECT p.amountReceived, p.created, MONTHNAME(p.created) as month, e.erfNo, '
+                        "SELECT p.amountReceived, p.created, DATE_FORMAT(p.created,'%b') as month, e.erfNo, "
                         . 'e.address as address, s.name as section, st.name '
                         . 'FROM AppBundle:Payment p '
                         . 'LEFT JOIN AppBundle:Erf e With e.id = p.erfId '
@@ -264,7 +264,7 @@ class PaymentRepository extends EntityRepository
     {
         $results = $this->getEntityManager()
                 ->createQuery(
-                        'SELECT MONTHNAME(p.created), count(p) '
+                        "SELECT DATE_FORMAT(p.created,'%b'), count(p) "
                         . 'FROM AppBundle:Payment p '
                         . 'LEFT JOIN AppBundle:Erf e With e.id = p.erfId '
                         . 'WHERE e.sectionId = :id '

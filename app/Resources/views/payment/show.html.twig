@@ -71,8 +71,7 @@
                                 <p>{{ entity.company.address }}</p>  
                                 <p>{{ entity.company.postal }}</p>  
                                 <p>Phone: {{ entity.company.phone }}</p>  
-                                <p>Fax:{{ entity.company.fax }} </p>  
-                                <p>Email: {{ entity.company.email }}</p>  
+                                <p>Email: {{ entity.company.email }}</p>
                                 <p>Website: {{ entity.company.website }}</p>  
                                 <h4>Cash Receipt - Ref #: {{ entity.company.shortName }}{{ entity.refNo }}</h4> 
                             </div>  
@@ -97,6 +96,10 @@
                                                     <tr>
                                                         <td>Amount Received</td>
                                                         <td>{{ entity.amountReceived|number_format(2, '.', ',')  }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tax Included</td>
+                                                        <td>14%</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Amount Still due</td>

@@ -9,7 +9,6 @@
     <script src="{{ asset('js/table-editable.js') }}"></script>
     <script src="{{ asset('js/search.js') }}"></script>
     <script src="{{ asset('js/location.js') }}"></script>
-    <script src="{{ asset('js/print.js') }}"></script>
 
     <script>
         var barData = {{ graph|raw }};
@@ -19,11 +18,12 @@
             TableEditable.init();
             Search.init();
             Location.initCharts();
-            Print.init();
+{#            Print.init();#}
         });
     </script>    
 {% endblock %}
 
+{% block title '| Section Report' %}
 
 {% block main_body %}
 
@@ -155,7 +155,7 @@
                         <h3 class="form-section">Erf List</h3>
                     </div>
                 {% endif %}
-            </div>            
+            </div>  
 
             <table class="table table-striped table-hover table-bordered" id="section_report_datatable">
                 <thead>

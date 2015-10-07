@@ -77,6 +77,7 @@ doctrine:
               MONTH: DoctrineExtensions\Query\Mysql\Month
               MONTHNAME: DoctrineExtensions\Query\Mysql\MonthName
               YEAR: DoctrineExtensions\Query\Mysql\Year
+              DATE_FORMAT: DoctrineExtensions\Query\Mysql\DateFormat
 
 # Swiftmailer Configuration
 swiftmailer:

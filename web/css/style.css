@@ -5569,3 +5569,7 @@ label.required:before {
 .meta-value.blue {
     color: #27a9e3 !important;
 }
+
+div.dt-buttons {
+    float: none !important;
+}

@@ -99,7 +99,7 @@ var TableEditable = function () {
                 ],
                 // set the initial value
                 "iDisplayLength": 5,
-                "dom": "B<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+                "dom": "B<'clear'><'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
                 "sPaginationType": "bootstrap",
                 "oLanguage": {
                     "sLengthMenu": "_MENU_ records per page",
@@ -114,7 +114,10 @@ var TableEditable = function () {
                 }
                 ],
                 buttons: [
-                    'print'
+                    'print',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
                 ]
             });
 
@@ -163,7 +166,10 @@ var TableEditable = function () {
                     }
                 ],
                 buttons: [
-                    'print'
+                    'print',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
                 ]
             });
 
@@ -212,7 +218,10 @@ var TableEditable = function () {
                     }
                 ],
                 buttons: [
-                    'print'
+                    'print',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
                 ]
             });
 
@@ -288,7 +297,10 @@ var TableEditable = function () {
                     }
                 ],
                 buttons: [
-                    'print'
+                    'print',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
                 ]
             });
 
