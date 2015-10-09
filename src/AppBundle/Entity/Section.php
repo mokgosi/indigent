@@ -234,6 +234,7 @@ class Section
      */
     function setLocationId($locationId) {
         $this->locationId = $locationId;
+        return $this;
     }
     
     /**
@@ -243,6 +244,7 @@ class Section
      */
     public function setLocation(Location $location) {
         $this->location = $location;
+        return $this;
     }
 
     /**

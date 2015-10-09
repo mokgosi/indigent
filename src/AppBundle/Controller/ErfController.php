@@ -69,7 +69,7 @@ class ErfController extends Controller {
      * @return \Symfony\Component\Form\Form The form
      */
     private function createCreateForm(Erf $entity) {
-        $form = $this->createForm(new ErfType(), $entity, array(
+        $form = $this->createForm(new ErfType($this->getDoctrine()->getManager()), $entity, array(
             'action' => $this->generateUrl('erf_create'),
             'method' => 'POST',
         ));

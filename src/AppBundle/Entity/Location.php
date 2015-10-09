@@ -82,6 +82,11 @@ class Location {
      * @ORM\OneToMany(targetEntity="Section", mappedBy="location") 
      */
     protected $sections;
+    
+    public function __construct()
+    {
+        $this->sections = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -229,6 +234,36 @@ class Location {
         if ($this->getCreated() == null) {
             $this->setCreated(new \DateTime('now'));
         }
+    }
+    
+    /**
+     * Add sections
+     *
+     * @param \AppBundle\Entity\Section $sections
+     * @return Province
+     */
+    public function addSection(Section $sections)
+    {
+        $this->sections[] = $sections;
+        return $this;
+    }
+    /**
+     * Remove sections
+     *
+     * @param \AppBundle\Entity\Section $sections
+     */
+    public function removeSection(\AppBundle\Entity\Section $sections)
+    {
+        $this->sections->removeElement($sections);
+    }
+    /**
+     * Get sections
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSections()
+    {
+        return $this->sections;
     }
     
     function __toString() {

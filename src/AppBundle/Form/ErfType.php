@@ -11,9 +11,16 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 
 use AppBundle\Entity\Location;
+use Doctrine\ORM\EntityManager;
 
 class ErfType extends AbstractType
 {
+    protected $em;
+    
+    function __construct(EntityManager $em = null)
+    {
+        $this->em = $em;
+    }
 
     /**
      * @param FormBuilderInterface $builder
@@ -57,13 +64,14 @@ class ErfType extends AbstractType
             'mapped' => false)
         );
         
+        
         // Sections are empty, unless we actually supplied a location
         $sections = array();
 
         if ($location) {
             // Fetch the sections from specified location
-            $repo = $this->em->getRepository('AppBundle:Sections');
-            $sections = $repo->findBy(array('location_id' => $location));
+            $repo = $this->em->getRepository('AppBundle:Section');
+            $sections = $repo->findBy(array('locationId' => $location));
         }
 
         // Add the sections element
@@ -83,6 +91,7 @@ class ErfType extends AbstractType
    
         // Note that the data is not yet hydrated into the entity.
         $location = $this->em->getRepository('AppBundle:Location')->find($data['location']);
+        dump($location);
         $this->addElements($form, $location);
     }
 
@@ -90,9 +99,9 @@ class ErfType extends AbstractType
     {
         $erf = $event->getData();
         $form = $event->getForm();     
-        dump($erf);
         // We might have an empty account (when we insert a new account, for instance)
         $location = $erf->getSection() ? $erf->getSection()->getLocation() : null;
+        dump($location);
         $this->addElements($form, $location);
     }
 
