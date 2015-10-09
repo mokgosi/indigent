@@ -18,6 +18,7 @@
             <div class="control-group">
                 <label class="control-label">Code</label>
                 <div class="controls">
+                    {{ form_errors(form.code) }}
                     {{ form_widget(form.code, { 'attr': {'class': 'm-wrap span12 placeholder-no-fix'} }) }}
                 </div>
             </div>

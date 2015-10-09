@@ -11,6 +11,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\Section;
 use AppBundle\Form\SectionType;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 /**
  * Section controller.
  *
@@ -35,6 +38,32 @@ class SectionController extends Controller
         return $this->render('section/index.html.twig', array(
                     'entities' => $entities
         ));
+    }
+
+    /**
+     * Lists all Section entities.
+     *
+     * @Route("/ajax", name="get_sections_by_location_id", options={"expose"=true})
+     * @Method("GET")
+     */
+    public function getSectionsByLocationAction(Request $request)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new NotFoundHttpException();
+        }
+        
+        // Get the location id
+        $id = $request->query->get('id');
+        $em = $this->getDoctrine()->getManager();
+
+        $sections = $em->getRepository('AppBundle:Section')->findBy(array('locationId' => $id));
+
+        $result = [];
+        foreach ($sections as $section) {
+            $result[$section->getName()] = $section->getId();
+        }
+
+        return new JsonResponse($result);
     }
 
     /**

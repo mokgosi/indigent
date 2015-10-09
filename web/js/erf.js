@@ -18,9 +18,31 @@ var Erf = function () {
         });
     };
 
+    var handleLocation = function () {
+        $("#appbundle_erf_location").select2({
+            placeholder: "Select location",
+            allowClear: true
+        }).on('change', function (e) {
+            var url = Routing.generate('get_sections_by_location_id', {id: $(this).val()});
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function (data) {
+                   $('#appbundle_erf_section').html('');
+                    $.each(data, function(k, v) {
+                        $('#appbundle_erf_section').append('<option value="' + v + '">' + k + '</option>');
+                    });
+ 
+                }
+            });
+            return false;
+        });
+    };
+
     return {
         init: function () {
             handleErf();
+            handleLocation();
         }
     };
 }();

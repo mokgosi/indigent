@@ -27,14 +27,19 @@ class Location {
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
-     *  @Assert\NotBlank()
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="code", type="integer", nullable=true)
+     * @ORM\Column(name="code", type="string", nullable=true)
+     * 
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     message="Please enter correct code"
+     * )
      */
     private $code;
 
@@ -224,6 +229,10 @@ class Location {
         if ($this->getCreated() == null) {
             $this->setCreated(new \DateTime('now'));
         }
+    }
+    
+    function __toString() {
+        return $this->getName();
     }
 
 }

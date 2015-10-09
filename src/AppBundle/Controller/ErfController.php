@@ -255,6 +255,8 @@ class ErfController extends Controller {
         );
         return new JsonResponse($result, 200, array('Content-Type' => 'application/json'));
     }
+    
+//    public function getSectionsByLocation 
   
 
 }

@@ -5,9 +5,12 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints\Regex;
+
 
 class LocationType extends AbstractType
 {
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -15,13 +18,13 @@ class LocationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('code','text')
-            ->add('xCoord')
-            ->add('yCoord')
+                ->add('name')
+                ->add('code', 'text', array('error_bubbling'=>true))
+                ->add('xCoord')
+                ->add('yCoord')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
@@ -39,4 +42,5 @@ class LocationType extends AbstractType
     {
         return 'appbundle_location';
     }
+
 }

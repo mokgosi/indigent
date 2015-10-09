@@ -253,5 +253,9 @@ class Section
     public function getLocation() {
         return $this->location;
     }
+    
+    function __toString() {
+        return $this->getName();
+    }
 
 }

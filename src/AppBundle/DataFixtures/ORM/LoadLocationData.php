@@ -15,14 +15,32 @@ class LoadLocationData extends AbstractFixture  implements OrderedFixtureInterfa
     public function load(ObjectManager $manager)
     {
         $loc = new Location();
-        $loc->setName('Reagile');
-        $loc->setCode(0001);
-        $loc->setXCoord('012345678');
-        $loc->setYCoord('-2012345678');
+        $loc->setName('Koster');
+        $loc->setCode('0348');
+        $loc->setXCoord('-25.868586');
+        $loc->setYCoord('26.878511');
         $loc->setCreated(new \DateTime('now'));
         $loc->setUpdated(new \DateTime('now'));
         
+        $loc1 = new Location();
+        $loc1->setName('Derby');
+        $loc1->setCode('0347');
+        $loc1->setXCoord('-25.9395045');
+        $loc1->setYCoord('27.018035');
+        $loc1->setCreated(new \DateTime('now'));
+        $loc1->setUpdated(new \DateTime('now'));
+        
+        $loc2 = new Location();
+        $loc2->setName('Swartruggens');
+        $loc2->setCode('2835');
+        $loc2->setXCoord('-25.6419504');
+        $loc2->setYCoord('26.6875125');
+        $loc2->setCreated(new \DateTime('now'));
+        $loc2->setUpdated(new \DateTime('now'));
+        
         $manager->persist($loc);
+        $manager->persist($loc1);
+        $manager->persist($loc2);
         $manager->flush();
         
         $this->addReference('ref-location', $loc);
