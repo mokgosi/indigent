@@ -53,21 +53,16 @@ class ErfType extends AbstractType
 
     protected function addElements(FormInterface $form, Location $location = null)
     {
-        // Remove the submit button, we will place this at the end of the form later
-//        $submit = $form->get('save');
-//        $form->remove('save');
         // Add the province element
         $form->add('location', 'entity', array(
             'data' => $location,
             'empty_value' => '-- Choose --',
-            'class' => 'AppBundle:Location',
-            'mapped' => false)
+            'class' => 'AppBundle:Location')
         );
-        
         
         // Sections are empty, unless we actually supplied a location
         $sections = array();
-
+        
         if ($location) {
             // Fetch the sections from specified location
             $repo = $this->em->getRepository('AppBundle:Section');
@@ -81,17 +76,14 @@ class ErfType extends AbstractType
             'choices' => $sections,
         ));
         // Add submit button again, this time, it's back at the end of the form
-//        $form->add($submit);
     }
 
     function onPreSubmit(FormEvent $event)
     {
         $form = $event->getForm();
         $data = $event->getData();
-   
         // Note that the data is not yet hydrated into the entity.
-        $location = $this->em->getRepository('AppBundle:Location')->find($data['location']);
-        dump($location);
+        $location = $this->em->getRepository('AppBundle:Location')->findOneBy(array('id'=>$data['location']));
         $this->addElements($form, $location);
     }
 
@@ -101,7 +93,6 @@ class ErfType extends AbstractType
         $form = $event->getForm();     
         // We might have an empty account (when we insert a new account, for instance)
         $location = $erf->getSection() ? $erf->getSection()->getLocation() : null;
-        dump($location);
         $this->addElements($form, $location);
     }
 

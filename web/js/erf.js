@@ -28,6 +28,7 @@ var Erf = function () {
                 type: "GET",
                 url: url,
                 success: function (data) {
+                   console.log(data); 
                    $('#appbundle_erf_section').html('');
                     $.each(data, function(k, v) {
                         $('#appbundle_erf_section').append('<option value="' + v + '">' + k + '</option>');
