@@ -198,15 +198,17 @@ class ErfTypeController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('erftype_edit', array('id' => $id)));
+            
         }
         $errors = $editForm->getErrors();
-
-        return array(
+        
+        return $this->render('erftype/edit.html.twig', array(
             'entity'      => $entity,
             'errors'      => $errors,
-            'edit_form'   => $editForm->createView(),
+            'form'        => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
+
     }
     /**
      * Deletes a ErfType entity.
