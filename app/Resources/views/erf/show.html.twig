@@ -1,13 +1,11 @@
 {% extends 'erf/layout.html.twig' %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script>
-        jQuery(document).ready(function () {
-            App.init();
-        });
-    </script>    
-{% endblock %}
+{% block title ' | Erf' %}
+
+{% block page_title %}Erf Management{% endblock %}
+{% block page_title_small %}erf management{% endblock %}
+{% block breadcrumb %}Show Erf {{ entity.erfNo }}{% endblock %}
+{% block data_table_header %}Show Erf {{ entity.erfNo }}{% endblock %}
 
 {% block main_body %}
     <div class="portlet-body"> 
@@ -44,7 +42,7 @@
                         <div class="control-group">
                             <label class="control-label" >Balance:</label>
                             <div class="controls">                                                
-                                <input type="text" value="ZAR {{ entity.balance }}" readonly="readonly" class="m-wrap span12"/>                                                        
+                                <input type="text" value="R {{ entity.balance }}" readonly="readonly" class="m-wrap span12"/>                                                        
                             </div>
                         </div>
                     </div>
@@ -89,13 +87,13 @@
                         </div>
                     </div>
                 </div>
-                <h3 class="form-section">Owner Info</h3>    
+                <h3 class="form-section">Owner Info</h3>   
                 <div class="row-fluid">
                     <div class="span6 ">
                         <div class="control-group">
                             <label class="control-label" >Owner:</label>
                             <div class="controls">                                                
-                                <input type="text" value="{{ entity.owner.firstName }} {{ entity.owner.lastName }} - {{ entity.owner.socialSecurityNo }}" readonly="readonly" class="m-wrap span12"/>                                                        
+                                <input type="text" value="{% if entity.owner.firstName is defined %} {{ entity.owner.firstName }} {{ entity.owner.lastName }} - {{ entity.owner.socialSecurityNo }} {% endif %}" readonly="readonly" class="m-wrap span12"/>                                                        
                             </div>
                         </div>
                     </div>

@@ -128,11 +128,9 @@ class PaymentController extends Controller
         $entity = new Payment();
 
         $em = $this->getDoctrine()->getManager();
-
         $erf = $em->getRepository('AppBundle:Erf')->find($id);
         $balance = $em->getRepository('AppBundle:Payment')
             ->getCurrentBalance($id);
-
         //these should
         $entity->setErf($erf);
         $entity->setStaffEmail($this->getUser()->getEmail());

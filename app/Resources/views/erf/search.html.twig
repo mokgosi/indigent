@@ -87,8 +87,8 @@
                                         <td>{{ entity.section.name }}</td>
                                         <td>{{ entity.location.name }}</td>
                                         <td>{{ entity.erfType.name }}</td>
-                                        <td>{{ entity.owner.firstName }} {{ entity.owner.lastName }}</td>
-                                        <td>{{ entity.owner.mobile }}</td>
+                                        <td>{% if entity.owner.firstName is defined %} {{ entity.owner.firstName }} {{ entity.owner.lastName }}{% endif %}</td>
+                                        <td>{% if entity.owner.mobile is defined %}{{ entity.owner.mobile }}{% endif %}</td>
                                         <td><a href="{{ path('erf_show', { 'id': entity.id }) }}">show</a></td>
                                         {% if app.user and is_granted('ROLE_ADMIN') %}
                                         <td><a href="{{ path('erf_edit', { 'id': entity.id }) }}">edit</a></td>
