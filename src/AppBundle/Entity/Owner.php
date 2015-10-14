@@ -30,7 +30,7 @@ class Owner
      * @var integer
      *
      * @ORM\Column(name="social_security_no", type="string", unique=true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Please provide a valid ID Number")
      * 
      */
     private $socialSecurityNo;
@@ -39,7 +39,7 @@ class Owner
      * @var string
      *
      * @ORM\Column(name="first_name", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Please provide First Name")
      */
     private $firstName;
 
@@ -47,7 +47,7 @@ class Owner
      * @var string
      *
      * @ORM\Column(name="last_name", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Please provide Last Name")
      */
     private $lastName;
 

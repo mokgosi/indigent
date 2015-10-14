@@ -59,9 +59,11 @@ class OwnerController extends Controller
 //            return $this->redirect($this->generateUrl('owner_show', array('id' => $entity->getId())));
             return $this->redirect($this->generateUrl('owner'));
         }
+        $errors = $form->getErrors();
 
         return $this->render('owner/new.html.twig', array(
                     'entity' => $entity,
+                    'errors' => $errors,
                     'form' => $form->createView(),
         ));
     }
@@ -95,9 +97,11 @@ class OwnerController extends Controller
     {
         $entity = new Owner();
         $form = $this->createCreateForm($entity);
+        $errors = $form->getErrors();
 
         return $this->render('owner/new.html.twig', array(
                     'entity' => $entity,
+                    'errors' => $errors,
                     'form' => $form->createView(),
         ));
     }
@@ -147,14 +151,11 @@ class OwnerController extends Controller
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
+        $errors = $editForm->getErrors();
 
-//        return array(
-//            'entity' => $entity,
-//            'edit_form' => $editForm->createView(),
-//            'delete_form' => $deleteForm->createView(),
-//        );
         return $this->render('owner/new.html.twig', array(
                     'entity' => $entity,
+                    'errors' => $errors,
                     'form' => $editForm->createView(),
         ));
     }
@@ -183,7 +184,6 @@ class OwnerController extends Controller
      *
      * @Route("/{id}", name="owner_update")
      * @Method("PUT")
-     * @Template("AppBundle:Owner:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -198,6 +198,7 @@ class OwnerController extends Controller
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
+        $errors = $editForm->getErrors();
 
         if ($editForm->isValid()) {
             $em->flush();
@@ -205,11 +206,12 @@ class OwnerController extends Controller
             return $this->redirect($this->generateUrl('owner_edit', array('id' => $id)));
         }
 
-        return array(
-            'entity' => $entity,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+        return $this->render('owner/edit.html.twig', array(
+                    'entity' => $entity,
+                    'errors' => $errors,
+                    'form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
+        ));
     }
 
     /**

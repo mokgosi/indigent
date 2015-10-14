@@ -16,9 +16,9 @@ class OwnerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('socialSecurityNo')
-                ->add('firstName')
-                ->add('lastName')
+                ->add('socialSecurityNo','text',array('error_bubbling'=>true))
+                ->add('firstName','text',array('error_bubbling'=>true))
+                ->add('lastName','text',array('error_bubbling'=>true))
                 ->add('gender', 'choice', array(
                     'placeholder' => 'Choose Gender',
                     'choices' => array('Male' => 'Male', 'Female' => 'Female'),
@@ -43,7 +43,8 @@ class OwnerType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Owner'
+            'data_class' => 'AppBundle\Entity\Owner',
+            'error_bubbling' => true
         ));
     }
 

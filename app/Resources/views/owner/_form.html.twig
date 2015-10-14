@@ -1,7 +1,13 @@
 <div class="portlet-body form">
     {{ form_start( form, {'attr': {'novalidate': 'novalidate'}} ) }}    
 
-    {{ form_errors(form) }}
+    {% if errors|length %}
+        <div class="alert alert-error">
+            <button class="close" data-dismiss="alert"></button>
+            <strong>Error!</strong> Please fix all form errors and submit again.
+            {{ form_errors(form) }}
+        </div>
+    {% endif %}
 
     <div class="row-fluid">
         <div class="span6 ">
