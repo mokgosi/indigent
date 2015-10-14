@@ -144,12 +144,29 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                             </li>
                             
                             {% if app.user and is_granted('ROLE_ADMIN') %}
-                            <li class="{{ app.request.attributes.get('_route') in ['erf','erf_show','erf_edit','erf_new','erf_update','erftype','erftype_show','erftype_edit','erftype_new','erftype_update','location','location_show','location_edit','location_new','location_update','section','section_show','section_edit','section_new','section_update'] ? 'active' : '' }}">
+                            <li class="{{ app.request.attributes.get('_route') in ['location','location_show','location_edit','location_new','location_update','section','section_show','section_edit','section_new','section_update'] ? 'active' : '' }}">
+                                <a href="javascript:;">
+                                    <i class="icon-table"></i> 
+                                    <span class="title">Location Management</span>
+                                    <span class="{{ app.request.attributes.get('_route') in ['location','location_show','location_edit','location_new','location_update','section','section_show','section_edit','section_new','section_update'] ? 'selected' : '' }}"></span>
+                                    <span class="arrow {{ app.request.attributes.get('_route') in ['location','location_show','location_edit','location_new','location_update','section','section_show','section_edit','section_new','section_update'] ? 'open' : '' }}"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="{{ app.request.attributes.get('_route') in ['location','location_show','location_edit','location_new','location_update'] ? 'active' : '' }}" >
+                                        <a href="{{ path('location') }}">Manage Locations</a>
+                                    </li>
+                                    <li class="{{ app.request.attributes.get('_route') in ['section','section_show', 'section_edit','section_new','section_update'] ? 'active' : '' }}" >
+                                        <a href="{{ path('section') }}">Manage Sections</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            <li class="{{ app.request.attributes.get('_route') in ['erf','erf_show','erf_edit','erf_new','erf_update','erftype','erftype_show','erftype_edit','erftype_new','erftype_update'] ? 'active' : '' }}">
                                 <a href="javascript:;">
                                     <i class="icon-table"></i> 
                                     <span class="title">ERF Management</span>
-                                    <span class="{{ app.request.attributes.get('_route') in ['erf','erf_show','erf_edit','erf_new','erf_update','erftype','erftype_show','erftype_edit','erftype_new','erftype_update','location','location_show','location_edit','location_new','location_update','section','section_show','section_edit','section_new','section_update'] ? 'selected' : '' }}"></span>
-                                    <span class="arrow {{ app.request.attributes.get('_route') in ['erf','erf_show','erf_edit','erf_new','erf_update','erftype','erftype_show','erftype_edit','erftype_new','erftype_update','location','location_show','location_edit','location_new','location_update','section','section_show','section_edit','section_new','section_update'] ? 'open' : '' }}"></span>
+                                    <span class="{{ app.request.attributes.get('_route') in ['erf','erf_show','erf_edit','erf_new','erf_update','erftype','erftype_show','erftype_edit','erftype_new','erftype_update'] ? 'selected' : '' }}"></span>
+                                    <span class="arrow {{ app.request.attributes.get('_route') in ['erf','erf_show','erf_edit','erf_new','erf_update','erftype','erftype_show','erftype_edit','erftype_new','erftype_update'] ? 'open' : '' }}"></span>
                                 </a>
                                 <ul class="sub-menu">
                                     <li class="{{ app.request.attributes.get('_route') in ['erf','erf_show','erf_edit','erf_new','erf_update'] ? 'active' : '' }}">
@@ -157,12 +174,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                     </li>
                                     <li class="{{ app.request.attributes.get('_route') in ['erftype','erftype_show','erftype_edit','erftype_new','erftype_update'] ? 'active' : '' }}" >
                                         <a href="{{ path('erftype') }}">Manage Types</a>
-                                    </li>
-                                    <li class="{{ app.request.attributes.get('_route') in ['location','location_show','location_edit','location_new','location_update'] ? 'active' : '' }}" >
-                                        <a href="{{ path('location') }}">Manage Locations</a>
-                                    </li>
-                                    <li class="{{ app.request.attributes.get('_route') in ['section','section_show', 'section_edit','section_new','section_update'] ? 'active' : '' }}" >
-                                        <a href="{{ path('section') }}">Manage Sections</a>
                                     </li>
                                 </ul>
                             </li>

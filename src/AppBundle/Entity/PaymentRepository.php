@@ -53,7 +53,7 @@ class PaymentRepository extends EntityRepository
     {
         $results = $this->getEntityManager()
                 ->createQuery('SELECT p FROM AppBundle:Payment p ORDER BY p.created DESC')
-                ->setMaxResults(10)
+                ->setMaxResults(50)
                 ->getResult();
 
         return $results;

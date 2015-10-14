@@ -23,7 +23,7 @@ var Payment = function () {
             }
 
             $(document).on('change', '#appbundle_payment_amountReceived', function () {
-                
+
 
                 if (isNaN(balAmnt)) {
                     balAmnt = parseFloat(balance.val());
@@ -46,7 +46,7 @@ var Payment = function () {
                     outstanding.val(outAmnt);
                     balance.val(balAmnt);
                     return;
-                } else if( rec < balAmnt) {
+                } else if (rec < balAmnt) {
                     var new_out = (insAmnt - rec);
                     outstanding.val(new_out);
                 } else {
@@ -71,8 +71,8 @@ var Payment = function () {
                     console.log(data.message);
                 }
 
-                var address = data.street+', '+data.section+', '+data.location;
-                var owner = data.first_name+' '+data.last_name;
+                var address = data.street + ', ' + data.section + ', ' + data.location;
+                var owner = data.first_name + ' ' + data.last_name;
                 $('#erfAddress').val(address);
                 $('#erfOwner').val(owner);
 
@@ -86,19 +86,43 @@ var Payment = function () {
 
         });
     };
-    
-    var hanglePrinting = function() {
-        $('#printdetails').on('click', function() {
-            //Print ele2 with default options
-            $.print("#print-div");
-        });
-    };
-    
-    var handleSelect2 = function() {
-      $('#appbundle_payment_erf').select2({
+
+    var handleSelect2 = function () {
+        $('#appbundle_payment_erf').select2({
             placeholder: {id: "", text: "Select Erf #"},
             allowClear: true
-        });  
+        });
+    };
+
+    var handleDataTable = function () {
+        var oTable = $('#recent_payments_data_table').dataTable({
+            "bSort": false,
+            "aLengthMenu": [
+                [5, 15, 20, -1],
+                [5, 15, 20, "All"] // change per page values here
+            ],
+            // set the initial value
+            "iDisplayLength": 5,
+            "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+            "sPaginationType": "bootstrap",
+            "oLanguage": {
+                "sLengthMenu": "_MENU_ records per page",
+                "oPaginate": {
+                    "sPrevious": "Prev",
+                    "sNext": "Next"
+                }
+            },
+            "aoColumnDefs": [{
+                    'bSortable': false,
+                    'aTargets': [0]
+                }
+            ]
+        });
+        jQuery('#recent_payments_data_table_wrapper .dataTables_filter input').addClass("m-wrap medium"); // modify table search input
+        jQuery('#recent_payments_data_table_wrapper .dataTables_length select').addClass("m-wrap small"); // modify table per page dropdown
+        jQuery('#recent_payments_data_table_wrapper .dataTables_length select').select2({
+            showSearchInput: false //hide search box with special css class
+        }); // initialize select2 dropdown
     };
 
     return {
@@ -106,7 +130,7 @@ var Payment = function () {
             handleSelect2();
             handlePayment();
             handleSearch();
-            hanglePrinting();
+            handleDataTable();
         }
 
     };
