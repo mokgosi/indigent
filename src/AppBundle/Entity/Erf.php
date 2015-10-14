@@ -82,7 +82,7 @@ class Erf
      *
      * @ORM\Column(name="previous_balance", type="decimal", precision=8, scale=2, options={"default":0}, nullable=true)
      */
-    private $previousBalance;
+    private $previousBalance = 0.00;
 
     /**
      * @var integer
@@ -96,7 +96,7 @@ class Erf
      *
      * @ORM\Column(name="balance", type="decimal", precision=8, scale=2, options={"default":0}, nullable=true)
      */
-    private $balance;
+    private $balance = 100.00;
 
     /**
      * @var \DateTime
@@ -491,7 +491,7 @@ class Erf
      *
      * @return decimal $balance
      */
-    public function getPreviosBalance()
+    public function getPreviousBalance()
     {
         return $this->previousBalance;
     }

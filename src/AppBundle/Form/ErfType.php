@@ -46,6 +46,7 @@ class ErfType extends AbstractType
                     'placeholder' => 'Search Owner ID #',
                     'property' => 'socialSecurityNo'))
                 ->add('balance')
+                ->add('previousBalance','hidden')
         ;
         $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, 'onPreSetData'));
         $builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));

@@ -131,12 +131,15 @@ class PaymentController extends Controller
         $erf = $em->getRepository('AppBundle:Erf')->find($id);
         $balance = $em->getRepository('AppBundle:Payment')
             ->getCurrentBalance($id);
+        
+        $bal = ($balance) ? $balance->getTotalOutstanding() : $erf->getBalance();
+        
         //these should
         $entity->setErf($erf);
         $entity->setStaffEmail($this->getUser()->getEmail());
         $entity->setAmountDue($this->getParameter('minimum_fee'));
         $entity->setAmountOutstanding($this->getParameter('minimum_fee'));
-        $entity->setTotalOutstanding($balance->getTotalOutstanding());
+        $entity->setTotalOutstanding($bal);
 
         $form = $this->createCreateForm($entity);
 
