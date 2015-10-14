@@ -4,14 +4,10 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/form-components.js') }}"></script>
-    <script src="{{ asset('js/table-editable.js') }}"></script>    
     <script src="{{ asset('js/payment.js') }}"></script>
     <script>
         jQuery(document).ready(function () {
             App.init();
-            FormComponents.init();
-            TableEditable.init();
             Payment.init();
         });
     </script>    
@@ -28,7 +24,7 @@
                 <ul class="breadcrumb">
                     <li>
                         <i class="icon-home"></i>
-                        <a href="index.html">Home</a> 
+                        <a href="{{ path('payment') }}">Home</a> 
                         <i class="icon-angle-right"></i>
                     </li>
                     <li><a href="#">Manage Payments</a></li>

@@ -2,17 +2,6 @@
 
 {% block title %} | Erf Management{% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('js/form-components.js') }}"></script>
-    <script src="{{ asset('js/table-editable.js') }}"></script>  
-    <script>
-        jQuery(document).ready(function () {
-            App.init();
-            FormComponents.init();
-        });
-    </script>    
-{% endblock %}
 {% block main -%}
     <div class="container-fluid">
         <!-- BEGIN PAGE HEADER-->
@@ -25,7 +14,7 @@
                 <ul class="breadcrumb">
                     <li>
                         <i class="icon-home"></i>
-                        <a href="index.html">Home</a> 
+                        <a href="{{ path('erf') }}">Home</a>
                         <i class="icon-angle-right"></i>
                     </li>
                     <li><a href="#">Search Results</a></li>
@@ -74,27 +63,27 @@
                                     <th>Owner Name</th>
                                     <th>Owner Cellphone</th>
                                     <th>Show</th>
-                                    {% if app.user and is_granted('ROLE_ADMIN') %}
-                                    <th>Edit</th>
-                                    {% endif %}
+                                        {% if app.user and is_granted('ROLE_ADMIN') %}
+                                        <th>Edit</th>
+                                        {% endif %}
                                     <th>Pay</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                    <tr>
-                                        <td><a href="{{ path('erf_edit', { 'id': entity.id }) }}">{{ entity.erfNo }}</a></td>
-                                        <td>{{ entity.address }}</td>
-                                        <td>{{ entity.section.name }}</td>
-                                        <td>{{ entity.location.name }}</td>
-                                        <td>{{ entity.erfType.name }}</td>
-                                        <td>{% if entity.owner.firstName is defined %} {{ entity.owner.firstName }} {{ entity.owner.lastName }}{% endif %}</td>
-                                        <td>{% if entity.owner.mobile is defined %}{{ entity.owner.mobile }}{% endif %}</td>
-                                        <td><a href="{{ path('erf_show', { 'id': entity.id }) }}">show</a></td>
-                                        {% if app.user and is_granted('ROLE_ADMIN') %}
+                                <tr>
+                                    <td><a href="{{ path('erf_edit', { 'id': entity.id }) }}">{{ entity.erfNo }}</a></td>
+                                    <td>{{ entity.address }}</td>
+                                    <td>{{ entity.section.name }}</td>
+                                    <td>{{ entity.location.name }}</td>
+                                    <td>{{ entity.erfType.name }}</td>
+                                    <td>{% if entity.owner.firstName is defined %} {{ entity.owner.firstName }} {{ entity.owner.lastName }}{% endif %}</td>
+                                    <td>{% if entity.owner.mobile is defined %}{{ entity.owner.mobile }}{% endif %}</td>
+                                    <td><a href="{{ path('erf_show', { 'id': entity.id }) }}">show</a></td>
+                                    {% if app.user and is_granted('ROLE_ADMIN') %}
                                         <td><a href="{{ path('erf_edit', { 'id': entity.id }) }}">edit</a></td>
-                                        {% endif %}
-                                        <td><a href="{{ path('payment_new_by_erf', { 'id': entity.id }) }}">pay</a></td>
-                                    </tr>
+                                    {% endif %}
+                                    <td><a href="{{ path('payment_new_by_erf', { 'id': entity.id }) }}">pay</a></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

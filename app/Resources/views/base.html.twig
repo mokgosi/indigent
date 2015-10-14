@@ -127,7 +127,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                 </form>
                                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
                             </li>
-                           
+
                             <li class="start {% if app.request.attributes.get('_route') == 'dashboard' %}active{% endif %}">
                                 <a href="{{ path('dashboard') }}">
                                     <i class="icon-home"></i> 
@@ -142,193 +142,180 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                     <span class="{{ app.request.attributes.get('_route') in ['payment','payment_show','payment_edit','payment_new','payment_update'] ? 'selected' : '' }}"></span>
                                 </a>
                             </li>
-                            
+
                             {% if app.user and is_granted('ROLE_ADMIN') %}
-                            <li class="{{ app.request.attributes.get('_route') in ['location','location_show','location_edit','location_new','location_update','section','section_show','section_edit','section_new','section_update'] ? 'active' : '' }}">
-                                <a href="javascript:;">
-                                    <i class="icon-table"></i> 
-                                    <span class="title">Location Management</span>
-                                    <span class="{{ app.request.attributes.get('_route') in ['location','location_show','location_edit','location_new','location_update','section','section_show','section_edit','section_new','section_update'] ? 'selected' : '' }}"></span>
-                                    <span class="arrow {{ app.request.attributes.get('_route') in ['location','location_show','location_edit','location_new','location_update','section','section_show','section_edit','section_new','section_update'] ? 'open' : '' }}"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li class="{{ app.request.attributes.get('_route') in ['location','location_show','location_edit','location_new','location_update'] ? 'active' : '' }}" >
-                                        <a href="{{ path('location') }}">Manage Locations</a>
-                                    </li>
-                                    <li class="{{ app.request.attributes.get('_route') in ['section','section_show', 'section_edit','section_new','section_update'] ? 'active' : '' }}" >
-                                        <a href="{{ path('section') }}">Manage Sections</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            
-                            <li class="{{ app.request.attributes.get('_route') in ['erf','erf_show','erf_edit','erf_new','erf_update','erftype','erftype_show','erftype_edit','erftype_new','erftype_update'] ? 'active' : '' }}">
-                                <a href="javascript:;">
-                                    <i class="icon-table"></i> 
-                                    <span class="title">ERF Management</span>
-                                    <span class="{{ app.request.attributes.get('_route') in ['erf','erf_show','erf_edit','erf_new','erf_update','erftype','erftype_show','erftype_edit','erftype_new','erftype_update'] ? 'selected' : '' }}"></span>
-                                    <span class="arrow {{ app.request.attributes.get('_route') in ['erf','erf_show','erf_edit','erf_new','erf_update','erftype','erftype_show','erftype_edit','erftype_new','erftype_update'] ? 'open' : '' }}"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li class="{{ app.request.attributes.get('_route') in ['erf','erf_show','erf_edit','erf_new','erf_update'] ? 'active' : '' }}">
-                                        <a href="{{ path('erf') }}">Manage ERFs</a>
-                                    </li>
-                                    <li class="{{ app.request.attributes.get('_route') in ['erftype','erftype_show','erftype_edit','erftype_new','erftype_update'] ? 'active' : '' }}" >
-                                        <a href="{{ path('erftype') }}">Manage Types</a>
-                                    </li>
-                                </ul>
-                            </li>
+                                <li class="{{ app.request.attributes.get('_route') in ['location','location_show','location_edit','location_new','location_update','section','section_show','section_edit','section_new','section_update'] ? 'active' : '' }}">
+                                    <a href="javascript:;">
+                                        <i class="icon-table"></i> 
+                                        <span class="title">Location Management</span>
+                                        <span class="{{ app.request.attributes.get('_route') in ['location','location_show','location_edit','location_new','location_update','section','section_show','section_edit','section_new','section_update'] ? 'selected' : '' }}"></span>
+                                        <span class="arrow {{ app.request.attributes.get('_route') in ['location','location_show','location_edit','location_new','location_update','section','section_show','section_edit','section_new','section_update'] ? 'open' : '' }}"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="{{ app.request.attributes.get('_route') in ['location','location_show','location_edit','location_new','location_update'] ? 'active' : '' }}" >
+                                            <a href="{{ path('location') }}">Manage Locations</a>
+                                        </li>
+                                        <li class="{{ app.request.attributes.get('_route') in ['section','section_show', 'section_edit','section_new','section_update'] ? 'active' : '' }}" >
+                                            <a href="{{ path('section') }}">Manage Sections</a>
+                                        </li>
+                                    </ul>
+                                </li>
 
-                            <li class="{{ app.request.attributes.get('_route') in ['owner','owner_edit','owner_new','owner_show','owner_update'] ? 'active' : '' }}">
-                                <a href="javascript:;">
-                                    <i class="icon-table"></i> 
-                                    <span class="title">Owners</span>
-                                    <span class="{{ app.request.attributes.get('_route') in ['owner','owner_edit','owner_new','owner_show','owner_update'] ? 'selected' : '' }}"></span>
-                                    <span class="arrow {{ app.request.attributes.get('_route') in ['owner','owner_edit','owner_new','owner_show','owner_update'] ? 'open' : '' }}"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li class="{{ app.request.attributes.get('_route') in ['owner_new'] ? 'active' : '' }}" >
-                                        <a href="{{ path('owner_new') }}">Add Owner</a>
-                                    </li>
-                                    <li class="{{ app.request.attributes.get('_route') in ['owner', 'owner_show'] ? 'active' : '' }}" >
-                                        <a href="{{ path('owner') }}">List</a>
-                                    </li>
-                                </ul>
-                            </li>
+                                <li class="{{ app.request.attributes.get('_route') in ['erf','erf_show','erf_edit','erf_new','erf_update','erftype','erftype_show','erftype_edit','erftype_new','erftype_update'] ? 'active' : '' }}">
+                                    <a href="javascript:;">
+                                        <i class="icon-table"></i> 
+                                        <span class="title">ERF Management</span>
+                                        <span class="{{ app.request.attributes.get('_route') in ['erf','erf_show','erf_edit','erf_new','erf_update','erftype','erftype_show','erftype_edit','erftype_new','erftype_update'] ? 'selected' : '' }}"></span>
+                                        <span class="arrow {{ app.request.attributes.get('_route') in ['erf','erf_show','erf_edit','erf_new','erf_update','erftype','erftype_show','erftype_edit','erftype_new','erftype_update'] ? 'open' : '' }}"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="{{ app.request.attributes.get('_route') in ['erf','erf_show','erf_edit','erf_new','erf_update'] ? 'active' : '' }}">
+                                            <a href="{{ path('erf') }}">Manage ERFs</a>
+                                        </li>
+                                        <li class="{{ app.request.attributes.get('_route') in ['erftype','erftype_show','erftype_edit','erftype_new','erftype_update'] ? 'active' : '' }}" >
+                                            <a href="{{ path('erftype') }}">Manage Types</a>
+                                        </li>
+                                    </ul>
+                                </li>
 
-                            <li class="{{ app.request.attributes.get('_route') in ['user','user_new', 'user_edit', 'user_update', 'user_show'] ? 'active' : '' }}">
-                                <a href="javascript:;">
-                                    <i class="icon-user"></i> 
-                                    <span class="title">User Management</span>
-                                    <span class="{{ app.request.attributes.get('_route') in ['user','user_new', 'user_edit', 'user_update', 'user_show'] ? 'selected' : '' }}"></span>
-                                    <span class="arrow {{ app.request.attributes.get('_route') in ['user','user_new', 'user_edit', 'user_update', 'user_show'] ? 'open' : '' }}"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li class="{{ app.request.attributes.get('_route') in ['user'] ? 'active' : '' }}">
-                                        <a href="{{ path('user') }}">Users List</a>
-                                    </li>
-                                    <li class="{{ app.request.attributes.get('_route') in ['user_new'] ? 'active' : '' }}" >
-                                        <a href="{{ path('user_new') }}">Add User</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="{{ app.request.attributes.get('_route') in ['report_erf', 'report_section', 'report_location'] ? 'active' : '' }}">
-                                <a href="#">
-                                    <i class="icon-th"></i> 
-                                    <span class="title">Reports</span>
-                                    <span class="{{ app.request.attributes.get('_route') in ['report_erf', 'report_section', 'report_location'] ? 'selected' : '' }}"></span>
-                                    <span class="arrow {{ app.request.attributes.get('_route') in ['report_erf', 'report_section', 'report_location'] ? 'open' : '' }}"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li class="{{ app.request.attributes.get('_route') in ['report_erf'] ? 'active' : '' }}">
-                                        <a href="{{ path('report_erf') }}">Erf Report</a>
-                                    </li>
-                                    <li class="{{ app.request.attributes.get('_route') in ['report_section'] ? 'active' : '' }}">
-                                        <a href="{{ path('report_section') }}">Section Report</a>
-                                    </li>
-                                    <li class="{{ app.request.attributes.get('_route') in ['report_location'] ? 'active' : '' }}">
-                                        <a href="{{ path('report_location') }}">Location Report</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="{{ app.request.attributes.get('_route') in ['rate', 'rate_show','rate_edit','rate_update', 'company','company_show','company_edit','company_update','paymentallocation','paymentallocation_show','paymentallocation_edit','paymentallocation_update'] ? 'active' : '' }}">
-                                <a href="javascript:;">
-                                    <i class="icon-cog"></i> 
-                                    <span class="title">Settings</span>
-                                    <span class="{{ app.request.attributes.get('_route') in ['rate', 'rate_show','rate_edit','rate_update', 'company','company_show','company_edit','company_update','paymentallocation','paymentallocation_show','paymentallocation_edit','paymentallocation_update'] ? 'selected' : '' }}"></span>
-                                    <span class="arrow {{ app.request.attributes.get('_route') in ['rate', 'rate_show','rate_edit','rate_update', 'company','company_show','company_edit','company_update','paymentallocation','paymentallocation_show','paymentallocation_edit','paymentallocation_update'] ? 'open' : '' }}"></span>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li class="{{ app.request.attributes.get('_route') in ['rate','rate_show','rate_edit','rate_update'] ? 'active' : '' }}">
-                                        <a href="{{ path('rate') }}">Rate</a>
-                                    </li>
-                                    <li class="{{ app.request.attributes.get('_route') in ['company','company_show','company_edit','company_update'] ? 'active' : '' }}">
-                                        <a href="{{ path('company') }}">Municipality</a>
-                                    </li>
-                                    <li class="{{ app.request.attributes.get('_route') in ['paymentallocation','paymentallocation_show','paymentallocation_edit','paymentallocation_update'] ? 'active' : '' }}">
-                                        <a href="{{ path('paymentallocation') }}">Allocations</a>
-                                    </li>
-                                </ul>
-                            </li>
+                                <li class="{{ app.request.attributes.get('_route') in ['owner','owner_edit','owner_new','owner_show','owner_update'] ? 'active' : '' }}">
+                                    <a href="javascript:;">
+                                        <i class="icon-table"></i> 
+                                        <span class="title">Owners</span>
+                                        <span class="{{ app.request.attributes.get('_route') in ['owner','owner_edit','owner_new','owner_show','owner_update'] ? 'selected' : '' }}"></span>
+                                        <span class="arrow {{ app.request.attributes.get('_route') in ['owner','owner_edit','owner_new','owner_show','owner_update'] ? 'open' : '' }}"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="{{ app.request.attributes.get('_route') in ['owner_new'] ? 'active' : '' }}" >
+                                            <a href="{{ path('owner_new') }}">Add Owner</a>
+                                        </li>
+                                        <li class="{{ app.request.attributes.get('_route') in ['owner', 'owner_show'] ? 'active' : '' }}" >
+                                            <a href="{{ path('owner') }}">List</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="{{ app.request.attributes.get('_route') in ['user','user_new', 'user_edit', 'user_update', 'user_show'] ? 'active' : '' }}">
+                                    <a href="javascript:;">
+                                        <i class="icon-user"></i> 
+                                        <span class="title">User Management</span>
+                                        <span class="{{ app.request.attributes.get('_route') in ['user','user_new', 'user_edit', 'user_update', 'user_show'] ? 'selected' : '' }}"></span>
+                                        <span class="arrow {{ app.request.attributes.get('_route') in ['user','user_new', 'user_edit', 'user_update', 'user_show'] ? 'open' : '' }}"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="{{ app.request.attributes.get('_route') in ['user'] ? 'active' : '' }}">
+                                            <a href="{{ path('user') }}">Users List</a>
+                                        </li>
+                                        <li class="{{ app.request.attributes.get('_route') in ['user_new'] ? 'active' : '' }}" >
+                                            <a href="{{ path('user_new') }}">Add User</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="{{ app.request.attributes.get('_route') in ['report_erf', 'report_section', 'report_location'] ? 'active' : '' }}">
+                                    <a href="#">
+                                        <i class="icon-th"></i> 
+                                        <span class="title">Reports</span>
+                                        <span class="{{ app.request.attributes.get('_route') in ['report_erf', 'report_section', 'report_location'] ? 'selected' : '' }}"></span>
+                                        <span class="arrow {{ app.request.attributes.get('_route') in ['report_erf', 'report_section', 'report_location'] ? 'open' : '' }}"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="{{ app.request.attributes.get('_route') in ['report_erf'] ? 'active' : '' }}">
+                                            <a href="{{ path('report_erf') }}">Erf Report</a>
+                                        </li>
+                                        <li class="{{ app.request.attributes.get('_route') in ['report_section'] ? 'active' : '' }}">
+                                            <a href="{{ path('report_section') }}">Section Report</a>
+                                        </li>
+                                        <li class="{{ app.request.attributes.get('_route') in ['report_location'] ? 'active' : '' }}">
+                                            <a href="{{ path('report_location') }}">Location Report</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="{{ app.request.attributes.get('_route') in ['rate', 'rate_show','rate_edit','rate_update', 'company','company_show','company_edit','company_update','paymentallocation','paymentallocation_show','paymentallocation_edit','paymentallocation_update'] ? 'active' : '' }}">
+                                    <a href="javascript:;">
+                                        <i class="icon-cog"></i> 
+                                        <span class="title">Settings</span>
+                                        <span class="{{ app.request.attributes.get('_route') in ['rate', 'rate_show','rate_edit','rate_update', 'company','company_show','company_edit','company_update','paymentallocation','paymentallocation_show','paymentallocation_edit','paymentallocation_update'] ? 'selected' : '' }}"></span>
+                                        <span class="arrow {{ app.request.attributes.get('_route') in ['rate', 'rate_show','rate_edit','rate_update', 'company','company_show','company_edit','company_update','paymentallocation','paymentallocation_show','paymentallocation_edit','paymentallocation_update'] ? 'open' : '' }}"></span>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="{{ app.request.attributes.get('_route') in ['rate','rate_show','rate_edit','rate_update'] ? 'active' : '' }}">
+                                            <a href="{{ path('rate') }}">Rate</a>
+                                        </li>
+                                        <li class="{{ app.request.attributes.get('_route') in ['company','company_show','company_edit','company_update'] ? 'active' : '' }}">
+                                            <a href="{{ path('company') }}">Municipality</a>
+                                        </li>
+                                        <li class="{{ app.request.attributes.get('_route') in ['paymentallocation','paymentallocation_show','paymentallocation_edit','paymentallocation_update'] ? 'active' : '' }}">
+                                            <a href="{{ path('paymentallocation') }}">Allocations</a>
+                                        </li>
+                                    </ul>
+                                </li>
                             {% endif %}
                         </ul>
                         <!-- END SIDEBAR MENU -->
                     {% endblock %}
                 </div>
                 <!-- BEGIN PAGE -->
-                <div class="page-content">
-                {% block main %}{% endblock %}
+                <div class="page-content">{% block main %}{% endblock %}</div>
+                <!-- END PAGE -->
             </div>
-            <!-- END PAGE -->
-        </div>
-    {% endblock %}
+        {% endblock %}
 
-    {% block footer %}
-        <!-- BEGIN FOOTER -->
-        <div class="footer">
-            <div class="footer-inner">
-                <!-- 2013 &copy; Metronic by keenthemes. -->
+        {% block footer %}
+            <!-- BEGIN FOOTER -->
+            <div class="footer">
+                <div class="footer-inner">
+                    <!-- 2013 &copy; Metronic by keenthemes. -->
+                </div>
+                <div class="footer-tools">
+                    <span class="go-top">
+                        <i class="icon-angle-up"></i>
+                    </span>
+                </div>
             </div>
-            <div class="footer-tools">
-                <span class="go-top">
-                    <i class="icon-angle-up"></i>
-                </span>
-            </div>
-        </div>
-    {% endblock %}
-    <!-- END FOOTER -->
+        {% endblock %}
+        <!-- END FOOTER -->
 
+        {% block javascripts %}
+            {# uncomment the following lines to combine and minimize JavaScript assets with Assetic
+                {% javascripts filter="?jsqueeze" output="js/app.js"
+                    "%kernel.root_dir%/Resources/assets/js/jquery-2.1.4.js"
+                    "%kernel.root_dir%/Resources/assets/js/bootstrap-3.3.4.js"
+                    "%kernel.root_dir%/Resources/assets/js/highlight.pack.js" %}
+                    <script src="{{ asset_url }}"></script>
+                {% endjavascripts %}
+            #}
 
-    {% block javascripts %}
-        {# uncomment the following lines to combine and minimize JavaScript assets with Assetic
-            {% javascripts filter="?jsqueeze" output="js/app.js"
-                "%kernel.root_dir%/Resources/assets/js/jquery-2.1.4.js"
-                "%kernel.root_dir%/Resources/assets/js/bootstrap-3.3.4.js"
-                "%kernel.root_dir%/Resources/assets/js/highlight.pack.js" %}
-                <script src="{{ asset_url }}"></script>
-            {% endjavascripts %}
-        #}
+            <!-- BEGIN CORE PLUGINS --> 
+            <script src="{{ asset('js/jquery-1.10.1.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/jquery-migrate-1.2.1.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/jquery-ui-1.10.1.custom.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/bootstrap.min.js') }}"type="text/javascript"></script>
+            <script src="{{ asset('js/twitter-bootstrap-hover-dropdown.min.js') }}" type="text/javascript"></script>
+            <!--[if lt IE 9]>
+            <script src="assets/plugins/excanvas.min.js"></script>
+            <script src="assets/plugins/respond.min.js"></script>  
+            <![endif]-->   
+            <script src="{{ asset('js/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/jquery.blockui.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/jquery.cookie.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/jquery.uniform.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/select2.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
+            <!-- END CORE PLUGINS -->
+            <script src="{{ asset('js/jquery.dataTables-1.10.9.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/dataTables.buttons.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/buttons.print.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/jszip.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/pdfmake.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/vfs_fonts.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/buttons.html5.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/DT_bootstrap.js') }}" type="text/javascript" ></script>
+            <!-- GENERAL PAGE SCRIPTS-->
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/fos_js_routes.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
 
-        <!-- BEGIN CORE PLUGINS --> 
-        <script src="{{ asset('js/jquery-1.10.1.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/jquery-migrate-1.2.1.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/jquery-ui-1.10.1.custom.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/bootstrap.min.js') }}"type="text/javascript"></script>
-        <script src="{{ asset('js/twitter-bootstrap-hover-dropdown.min.js') }}" type="text/javascript"></script>
-        <!--[if lt IE 9]>
-        <script src="assets/plugins/excanvas.min.js"></script>
-        <script src="assets/plugins/respond.min.js"></script>  
-        <![endif]-->   
-        <script src="{{ asset('js/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/jquery.blockui.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/jquery.cookie.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/jquery.uniform.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/select2.js') }}" type="text/javascript"></script>
-        
-        <script src="{{ asset('js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
+        {% endblock %}
 
-        <!-- END CORE PLUGINS -->
-        <script src="{{ asset('js/jquery.dataTables-1.10.9.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/dataTables.buttons.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/buttons.print.min.js') }}" type="text/javascript"></script>
-        
-        
-        <script src="{{ asset('js/jszip.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/pdfmake.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/vfs_fonts.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/buttons.html5.min.js') }}" type="text/javascript"></script>
-        
-
-
-        <script src="{{ asset('js/DT_bootstrap.js') }}" type="text/javascript" ></script>
-
-        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/fos_js_routes.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/jQuery.print.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
-
-        <!-- BEGIN PAGE LEVEL SCRIPTS -->
-
-    {% endblock %}
-
-</body>
+    </body>
 </html>
