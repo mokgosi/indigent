@@ -33,7 +33,7 @@ class PaymentController extends Controller
         $entities = $em->getRepository('AppBundle:Payment')->findAll();
 
         return $this->render('payment/index.html.twig', array(
-            'entities' => $entities
+                    'entities' => $entities
         ));
     }
 
@@ -58,18 +58,18 @@ class PaymentController extends Controller
             $em->persist($entity);
             $em->flush();
             $balance = $em->getRepository('AppBundle:Payment')
-                ->updateCurrentBalance($data['erf'], $data['totalOutstanding']);
+                    ->updateCurrentBalance($data['erf'], $data['totalOutstanding']);
 
             return $this->redirect($this->generateUrl('payment_show', array('id' => $entity->getId())));
         }
 
-        $errors = (string)$form->getErrors(true, true);
+        $errors = (string) $form->getErrors(true, true);
 
         return $this->render('payment/new.html.twig', array(
-            'entity' => $entity,
-            'erf' => $erf,
-            'form' => $form->createView(),
-            'errors' => $errors,
+                    'entity' => $entity,
+                    'erf' => $erf,
+                    'form' => $form->createView(),
+                    'errors' => $errors,
         ));
     }
 
@@ -110,10 +110,10 @@ class PaymentController extends Controller
         $form = $this->createCreateForm($entity);
 
         return $this->render('payment/new.html.twig', array(
-            'entity' => $entity,
-            'erf' => array(),
-            'errors' => array(),
-            'form' => $form->createView(),
+                    'entity' => $entity,
+                    'erf' => array(),
+                    'errors' => array(),
+                    'form' => $form->createView(),
         ));
     }
 
@@ -130,10 +130,10 @@ class PaymentController extends Controller
         $em = $this->getDoctrine()->getManager();
         $erf = $em->getRepository('AppBundle:Erf')->find($id);
         $balance = $em->getRepository('AppBundle:Payment')
-            ->getCurrentBalance($id);
-        
+                ->getCurrentBalance($id);
+
         $bal = ($balance) ? $balance->getTotalOutstanding() : $erf->getBalance();
-        
+
         //these should
         $entity->setErf($erf);
         $entity->setStaffEmail($this->getUser()->getEmail());
@@ -143,13 +143,13 @@ class PaymentController extends Controller
 
         $form = $this->createCreateForm($entity);
 
-        $errors = (string)$form->getErrors(true, false);
+        $errors = (string) $form->getErrors(true, false);
 
         return $this->render('payment/new.html.twig', array(
-            'entity' => $entity,
-            'erf' => $erf,
-            'errors' => $errors,
-            'form' => $form->createView(),
+                    'entity' => $entity,
+                    'erf' => $erf,
+                    'errors' => $errors,
+                    'form' => $form->createView(),
         ));
     }
 
@@ -173,8 +173,8 @@ class PaymentController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('payment/show.html.twig', array(
-            'entity' => $entity,
-            'delete_form' => $deleteForm->createView(),
+                    'entity' => $entity,
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -196,10 +196,13 @@ class PaymentController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
+        $errors = (string) $editForm->getErrors(true, false);
+
         return $this->render('payment/edit.html.twig', array(
-            'entity' => $entity,
-            'form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                    'entity' => $entity,
+                    'form' => $editForm->createView(),
+                    'errors' => $errors,
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -292,10 +295,10 @@ class PaymentController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('payment_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm();
+                        ->setAction($this->generateUrl('payment_delete', array('id' => $id)))
+                        ->setMethod('DELETE')
+                        ->add('submit', 'submit', array('label' => 'Delete'))
+                        ->getForm();
     }
 
 }
