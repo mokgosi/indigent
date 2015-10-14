@@ -1,6 +1,6 @@
 {% extends 'erftype/layout.html.twig' %}
 
-{% block title ' | Erf Type' %}
+{% block title %} | Erf Type{% endblock %}
 
 {% block page_title %}Add Erf Type{% endblock %}
 {% block page_title_small %}add erf type{% endblock %}
@@ -12,6 +12,7 @@
 
     {{ include('erftype/_form.html.twig', {
         form: form,
+        errors: errors,
     }, with_context = false) }}
     
 {% endblock %}

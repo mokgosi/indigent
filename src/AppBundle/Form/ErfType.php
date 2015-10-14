@@ -32,7 +32,7 @@ class ErfType extends AbstractType
                 ->add('erfType', 'entity', array(
                     'class' => 'AppBundle:ErfType',
                     'property' => 'name'))
-                ->add('erfNo')
+                ->add('erfNo','text',array('error_bubbling'=>true))
                 ->add('address')
 //                ->add('location', 'entity', array(
 //                    'class' => 'AppBundle:Location',
@@ -56,6 +56,7 @@ class ErfType extends AbstractType
     {
         // Add the province element
         $form->add('location', 'entity', array(
+            'error_bubbling' => true,
             'data' => $location,
             'empty_value' => '-- Choose --',
             'class' => 'AppBundle:Location')
@@ -72,6 +73,7 @@ class ErfType extends AbstractType
 
         // Add the sections element
         $form->add('section', 'entity', array(
+            'error_bubbling' => true,
             'empty_value' => '-- Select location first --',
             'class' => 'AppBundle:Section',
             'choices' => $sections,

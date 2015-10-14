@@ -54,12 +54,13 @@ class ErfTypeController extends Controller
             $em->persist($entity);
             $em->flush();
 
-//            return $this->redirect($this->generateUrl('erftype_show', array('id' => $entity->getId())));
             return $this->redirect($this->generateUrl('erftype'));
         }
+        $errors = $form->getErrors();
 
         return $this->render('erftype/new.html.twig', array(
             'entity' => $entity,
+            'errors' => $errors,
             'form'   => $form->createView(),
         ));
     }
@@ -93,9 +94,11 @@ class ErfTypeController extends Controller
     {
         $entity = new ErfType();
         $form   = $this->createCreateForm($entity);
+        $errors = $form->getErrors();
 
         return $this->render('erftype/new.html.twig', array(
             'entity' => $entity,
+            'errors' => $errors,
             'form'   => $form->createView(),
         ));
     }
@@ -142,9 +145,11 @@ class ErfTypeController extends Controller
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
+        $errors = $editForm->getErrors();
         
         return $this->render('erftype/edit.html.twig', array(
             'entity' => $entity,
+            'errors' => $errors,
             'form'   => $editForm->createView(),
         ));
 
@@ -194,9 +199,11 @@ class ErfTypeController extends Controller
 
             return $this->redirect($this->generateUrl('erftype_edit', array('id' => $id)));
         }
+        $errors = $editForm->getErrors();
 
         return array(
             'entity'      => $entity,
+            'errors'      => $errors,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );

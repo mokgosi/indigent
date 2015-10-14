@@ -33,9 +33,10 @@ class LocationController extends Controller
         $entities = $em->getRepository('AppBundle:Location')->findAll();
 
         return $this->render('location/index.html.twig', array(
-            'entities' => $entities
+                    'entities' => $entities
         ));
     }
+
     /**
      * Creates a new Location entity.
      *
@@ -53,14 +54,15 @@ class LocationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-
-//            return $this->redirect($this->generateUrl('location_show', array('id' => $entity->getId())));
             return $this->redirect($this->generateUrl('location'));
         }
 
+        $errors = $form->getErrors();
+
         return $this->render('location/new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+                    'entity' => $entity,
+                    'form' => $form->createView(),
+                    'errors' => $errors,
         ));
     }
 
@@ -92,11 +94,14 @@ class LocationController extends Controller
     public function newAction()
     {
         $entity = new Location();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
+
+        $errors = $form->getErrors();
 
         return $this->render('location/new.html.twig', array(
-            'entities' => $entity,
-            'form'   => $form->createView(),
+                    'entities' => $entity,
+                    'form' => $form->createView(),
+                    'errors' => $errors,
         ));
     }
 
@@ -119,9 +124,9 @@ class LocationController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-         return $this->render('location/show.html.twig', array(
-            'entity' => $entity,
-            'delete_form'   => $deleteForm->createView(),
+        return $this->render('location/show.html.twig', array(
+                    'entity' => $entity,
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -144,21 +149,23 @@ class LocationController extends Controller
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
+        $errors = $editForm->getErrors();
 
-        return $this->render('location/edit.html.twig',  array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+        return $this->render('location/edit.html.twig', array(
+                    'entity' => $entity,
+                    'form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
+                    'errors' => $errors,
         ));
     }
 
     /**
-    * Creates a form to edit a Location entity.
-    *
-    * @param Location $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Location entity.
+     *
+     * @param Location $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Location $entity)
     {
         $form = $this->createForm(new LocationType(), $entity, array(
@@ -170,6 +177,7 @@ class LocationController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Location entity.
      *
@@ -193,16 +201,19 @@ class LocationController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-//            return $this->redirect($this->generateUrl('location', array('id' => $id)));
             return $this->redirect($this->generateUrl('location'));
         }
 
-         return $this->render('location/edit.html.twig',  array(
-            'entity'      => $entity,
-            'form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+        $errors = $editForm->getErrors();
+
+        return $this->render('location/edit.html.twig', array(
+                    'entity' => $entity,
+                    'form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
+                    'errors' => $errors,
         ));
     }
+
     /**
      * Deletes a Location entity.
      *
@@ -239,10 +250,11 @@ class LocationController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('location_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+                        ->setAction($this->generateUrl('location_delete', array('id' => $id)))
+                        ->setMethod('DELETE')
+                        ->add('submit', 'submit', array('label' => 'Delete'))
+                        ->getForm()
         ;
     }
+
 }

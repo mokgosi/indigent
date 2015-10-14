@@ -54,12 +54,13 @@ class ErfController extends Controller
             $em->persist($entity);
             $em->flush();
 
-//            return $this->redirect($this->generateUrl('erf_show', array('id' => $entity->getId())));
             return $this->redirect($this->generateUrl('erf'));
         }
+        $errors = $form->getErrors();
 
         return $this->render('erf/new.html.twig', array(
                     'entity' => $entity,
+                    'errors' => $errors,
                     'form' => $form->createView(),
         ));
     }
@@ -93,9 +94,11 @@ class ErfController extends Controller
     {
         $entity = new Erf();
         $form = $this->createCreateForm($entity);
+        $errors = $form->getErrors();
 
         return $this->render('erf/new.html.twig', array(
                     'entity' => $entity,
+                    'errors' => $errors,
                     'form' => $form->createView(),
         ));
     }
@@ -142,9 +145,11 @@ class ErfController extends Controller
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
+        $errors = $editForm->getErrors();
 
         return $this->render('erf/edit.html.twig', array(
                     'entity' => $entity,
+                    'errors' => $errors,
                     'form' => $editForm->createView(),
                     'delete_form' => $deleteForm->createView(),
         ));
@@ -188,6 +193,7 @@ class ErfController extends Controller
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
+        $errors = $editForm->getErrors();
 
         if ($editForm->isValid()) {
             $em->flush();
@@ -196,6 +202,7 @@ class ErfController extends Controller
 
         return $this->render('erf/edit.html.twig', array(
                     'entity' => $entity,
+                    'errors' => $errors,
                     'edit_form' => $editForm->createView(),
                     'delete_form' => $deleteForm->createView(),
         ));

@@ -1,6 +1,6 @@
 {% extends 'location/layout.html.twig' %}
 
-{% block title ' | Location' %}
+{% block title %} | Location{% endblock %}
 
 {% block page_title %}Edit Location{% endblock %}
 {% block page_title_small %}edit location{% endblock %}
@@ -13,6 +13,7 @@
 
     {{ include('location/_form.html.twig', {
         form: form,
+        errors: errors
     }, with_context = false) }}
     
 {% endblock %}

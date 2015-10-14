@@ -51,7 +51,7 @@ class PaymentController extends Controller
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
         $erf = null;
-        $errors = null;
+
         if ($form->isValid()) {
             $data = $request->request->get('appbundle_payment');
             $em = $this->getDoctrine()->getManager();
@@ -63,7 +63,7 @@ class PaymentController extends Controller
             return $this->redirect($this->generateUrl('payment_show', array('id' => $entity->getId())));
         }
 
-        $errors = (string) $form->getErrors(true, true);
+        $errors = $form->getErrors();
 
         return $this->render('payment/new.html.twig', array(
                     'entity' => $entity,

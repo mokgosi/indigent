@@ -83,12 +83,14 @@ class SectionController extends Controller
             $em->persist($entity);
             $em->flush();
 
-//            return $this->redirect($this->generateUrl('section_show', array('id' => $entity->getId())));
             return $this->redirect($this->generateUrl('section'));
         }
+        
+        $errors = $form->getErrors();
 
         return $this->render('section/new.html.twig', array(
                     'entity' => $entity,
+                    'errors' => $errors,
                     'form' => $form->createView(),
         ));
     }
@@ -122,9 +124,11 @@ class SectionController extends Controller
     {
         $entity = new Section();
         $form = $this->createCreateForm($entity);
+        $errors = $form->getErrors();
 
         return $this->render('section/new.html.twig', array(
                     'entity' => $entity,
+                    'errors' => $errors,
                     'form' => $form->createView(),
         ));
     }
@@ -171,9 +175,11 @@ class SectionController extends Controller
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
+        $errors = $editForm->getErrors();
 
         return $this->render('section/edit.html.twig', array(
                     'entity' => $entity,
+                    'errors' => $errors,
                     'form' => $editForm->createView(),
                     'delete_form' => $deleteForm->createView(),
         ));
@@ -221,12 +227,14 @@ class SectionController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-//            return $this->redirect($this->generateUrl('section_edit', array('id' => $id)));
             return $this->redirect($this->generateUrl('section'));
         }
+        
+        $errors = $editForm->getErrors();
 
         return $this->render('section/edit.html.twig', array(
                     'entity' => $entity,
+                    'errors' => $errors,
                     'form' => $editForm->createView(),
                     'delete_form' => $deleteForm->createView(),
         ));

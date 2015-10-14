@@ -1,6 +1,6 @@
 {% extends 'section/layout.html.twig' %}
 
-{% block title ' | Section' %}
+{% block title %} | Section{% endblock %}    
 
 {% block page_title %}Edit Section{% endblock %}
 {% block page_title_small %}edit section{% endblock %}
@@ -10,5 +10,6 @@
 {% block main_body %}
     {{ include('section/_form.html.twig', {
         form: form,
+        errors: errors,
     }, with_context = false) }}
 {% endblock %}

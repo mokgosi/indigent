@@ -11,6 +11,7 @@
 
     {{ include('erf/_form.html.twig', {
         form: form,
+        errors:errors,
     }, with_context = false) }}
     
 {% endblock %}

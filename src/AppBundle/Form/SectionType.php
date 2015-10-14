@@ -14,7 +14,7 @@ class SectionType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('name')
+                ->add('name','text',array('error_bubbling'=>true))
                 ->add('location', 'entity', array(
                     'class' => 'AppBundle:Location',
                     'property' => 'name'))

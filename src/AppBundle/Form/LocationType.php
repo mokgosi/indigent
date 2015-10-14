@@ -7,7 +7,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints\Regex;
 
-
 class LocationType extends AbstractType
 {
 
@@ -18,8 +17,8 @@ class LocationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('name')
-                ->add('code', 'text', array('error_bubbling'=>true))
+                ->add('name', 'text', array('error_bubbling' => true))
+                ->add('code', 'text', array('error_bubbling' => true))
                 ->add('xCoord')
                 ->add('yCoord')
         ;

@@ -27,7 +27,7 @@ class Location {
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Please enter location name")
      */
     private $name;
 

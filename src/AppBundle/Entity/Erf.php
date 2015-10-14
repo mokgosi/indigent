@@ -45,7 +45,7 @@ class Erf
      * @var string
      *
      * @ORM\Column(name="erf_no", type="string", length=10, unique=true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Please enter valid Erf No.")
      */
     private $erfNo;
 
@@ -59,7 +59,8 @@ class Erf
     /**
      * @var integer
      *
-     * @ORM\Column(name="section_id", type="integer")
+     * @ORM\Column(name="section_id", type="integer", nullable=false)
+     * @Assert\Regex(pattern="/\d+/")
      */
     private $sectionId;
 
@@ -129,12 +130,14 @@ class Erf
     /**
      * @ORM\ManyToOne(targetEntity="Location", inversedBy="erfs")
      * @ORM\JoinColumn(name="location_id", referencedColumnName="id")
+     * @Assert\NotNull(message="Please select location")
      */
     protected $location;
 
     /**
      * @ORM\ManyToOne(targetEntity="Section", inversedBy="erfs")
      * @ORM\JoinColumn(name="section_id", referencedColumnName="id")
+     * @Assert\NotNull(message="Please select section")
      */
     protected $section;
 

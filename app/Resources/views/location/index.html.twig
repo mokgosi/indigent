@@ -1,6 +1,6 @@
 {% extends 'location/layout.html.twig' %}
 
-{% block title ' | Location' %}
+{% block title %} | Location{% endblock %}
 
 {% block page_title %}Location{% endblock %}
 {% block page_title_small %}location{% endblock %}
@@ -32,7 +32,7 @@
             <tbody>
                 {% for entity in entities %}
                     <tr>
-                        <td><a ref="{{ path('location_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+                        <td><a href="{{ path('location_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
                         <td>{{ entity.code }}</td>
                         <td>{{ entity.xCoord }}</td>
                         <td>{{ entity.yCoord }}</td>
