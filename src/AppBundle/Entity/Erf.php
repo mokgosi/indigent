@@ -80,7 +80,7 @@ class Erf
     /**
      * @var decimal
      *
-     * @ORM\Column(name="previous_balance", type="decimal", precision=8, scale=2, options={"default":0})
+     * @ORM\Column(name="previous_balance", type="decimal", precision=8, scale=2, options={"default":0}, nullable=true)
      */
     private $previousBalance;
 
@@ -94,7 +94,7 @@ class Erf
     /**
      * @var decimal
      *
-     * @ORM\Column(name="balance", type="decimal", precision=8, scale=2, options={"default":0})
+     * @ORM\Column(name="balance", type="decimal", precision=8, scale=2, options={"default":0}, nullable=true)
      */
     private $balance;
 
