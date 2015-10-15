@@ -35,7 +35,7 @@ class Payment
      * @var integer
      *
      * @ORM\Column(name="erf_id", type="integer", nullable=false)
-     * @Assert\NotBlank(message = "Please select erf paying for.")
+     * 
      * 
      */
     private $erfId;
@@ -121,6 +121,7 @@ class Payment
     /**
      * @ORM\ManyToOne(targetEntity="Erf", inversedBy="payments")
      * @ORM\JoinColumn(name="erf_id", referencedColumnName="id")
+     * @Assert\NotBlank(message = "Please select erf paying for.")
      */
     protected $erf;
 
