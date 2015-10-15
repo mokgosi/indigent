@@ -127,7 +127,7 @@ var Payment = function () {
 
     var handlePrint = function () {
         $('#print-slip').on('click', function () {
-            //Print ele2 with default options
+            //Print ele2 with default options http://devzone.co.in/print-page-or-section-of-page-using-jquery/
 //            $.print("#print-div");
             $("#print-div").print({
                 addGlobalStyles: true,
