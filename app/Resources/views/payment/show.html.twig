@@ -1,19 +1,7 @@
-{% extends '::base.html.twig' %}
+{% extends 'payment/layout.html.twig' %}
 
 {% block title %} | Payment{% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('js/form-components.js') }}"></script>
-    <script src="{{ asset('js/payment.js') }}"></script>
-    <script>
-        jQuery(document).ready(function () {
-            App.init();
-            FormComponents.init();
-            Payment.init();
-        });
-    </script>    
-{% endblock %}
 {% block main -%}
     <div class="container-fluid">
         <!-- BEGIN PAGE HEADER-->
@@ -60,7 +48,7 @@
                                 <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
                                 </button>
                                 <ul class="dropdown-menu pull-right">
-                                    <li><a href="#" id="printdetails">Print</a></li>
+                                    <li><a href="#" id="print-slip">Print</a></li>
                                     <li><a href="#">Send by Email</a></li>
                                 </ul>
                             </div>

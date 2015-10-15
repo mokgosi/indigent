@@ -1,8 +1,9 @@
 var Print = function () {
     var handlePrint = function() {
-        $('#printdetails').on('click', function() {
+        $('#print-slip').on('click', function() {
             //Print ele2 with default options
-            $.print("#print-div");
+//            $.print("#print-div");
+            alert('printing');
         });
     };
     return {

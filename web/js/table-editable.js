@@ -368,7 +368,5 @@ var TableEditable = function () {
                 }
             });
         }
-
     };
-
 }();

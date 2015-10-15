@@ -125,12 +125,29 @@ var Payment = function () {
         }); // initialize select2 dropdown
     };
 
+    var handlePrint = function () {
+        $('#print-slip').on('click', function () {
+            //Print ele2 with default options
+//            $.print("#print-div");
+            $("#print-div").print({
+                addGlobalStyles: true,
+                stylesheet: null,
+                rejectWindow: true,
+                noPrintSelector: ".no-print",
+                iframe: true,
+                append: null,
+                prepend: null
+            });
+        });
+    };
+
     return {
         init: function () {
             handleSelect2();
             handlePayment();
             handleSearch();
             handleDataTable();
+            handlePrint();
         }
 
     };
