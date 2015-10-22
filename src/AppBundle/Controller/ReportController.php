@@ -158,7 +158,7 @@ class ReportController extends Controller
             ->add('dateto', 'text', array('required' => false,))
             ->add('submit', 'submit')
             ->getForm();
-
+        
         $form->handleRequest($request);
 
         if ($form->isValid()) {
