@@ -40,6 +40,8 @@ class DefaultController extends Controller
         
         $revenue = $em->getRepository('AppBundle:Payment')
                 ->getRevenue();
+        
+        $locations = $em->getRepository('AppBundle:Location')->findAll();
 
         return $this->render('default/index.html.twig', array(
                     'entities' => json_encode($entities),
@@ -48,7 +50,8 @@ class DefaultController extends Controller
                     'allPayments' => $allPayments,
                     'completed' => $completed,
                     'cancelled' => $cancelled,
-                    'revenue' => $revenue
+                    'revenue' => $revenue,
+                    'locations' => $locations
         ));
     }
 
