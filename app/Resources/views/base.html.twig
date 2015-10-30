@@ -127,13 +127,24 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                                 </form>
                                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
                             </li>
-
+{#{{ dump(app.request.attributes.get('id')) }}#}
                             <li class="start {% if app.request.attributes.get('_route') == 'dashboard' %}active{% endif %}">
                                 <a href="{{ path('dashboard') }}">
                                     <i class="icon-home"></i> 
-                                    <span class="title">Dashboard</span>
+                                    <span class="title">Dashboards</span>
                                     <span class="selected"></span>
                                 </a>
+                                <ul class="sub-menu">
+                                    <li class="" >
+                                        <a href="{{ path('dashboard',{'id':'1'}) }}">Koster Dashboard</a>
+                                    </li>
+                                    <li class="" >
+                                        <a href="{{ path('dashboard',{'id':2}) }}">Derby Dashboard</a>
+                                    </li>
+                                    <li class="" >
+                                        <a href="{{ path('dashboard',{'id':3}) }}">Swart Dashboard</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="{{ app.request.attributes.get('_route') in ['payment','payment_show','payment_edit','payment_new','payment_update'] ? 'active' : '' }}">
                                 <a href="{{ path('payment') }}">

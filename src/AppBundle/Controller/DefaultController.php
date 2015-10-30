@@ -11,12 +11,12 @@ class DefaultController extends Controller
 {
 
     /**
-     * @Route("/", name="dashboard")
+     * @Route("/{id}", name="dashboard")
      * @Security("has_role('ROLE_USER')") 
      * 
      * Roles ROLE_USER, ROLE_ADMIN
      */
-    public function indexAction()
+    public function indexAction($id = 1)
     {
         $em = $this->getDoctrine()->getManager();
 

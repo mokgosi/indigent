@@ -89,6 +89,7 @@ var Index = function () {
             $('#region_statistics_content').show();
         },
         initCalendar: function () {
+            
             if (!jQuery().fullCalendar) {
                 return;
             }
