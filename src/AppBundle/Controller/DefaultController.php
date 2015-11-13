@@ -11,15 +11,15 @@ class DefaultController extends Controller
 {
 
     /**
-     * @Route("/{id}", name="dashboard")
+     * @Route("/", name="dashboard")
      * @Security("has_role('ROLE_USER')") 
      * 
      * Roles ROLE_USER, ROLE_ADMIN
      */
-    public function indexAction($id = 1)
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
+//$id = 1;
         $entities = $em->getRepository('AppBundle:Payment')
                 ->getBarGraphValues();
 
